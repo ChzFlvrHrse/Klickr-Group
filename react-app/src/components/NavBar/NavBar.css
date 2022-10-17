@@ -44,6 +44,9 @@ a i {
     margin-right: 3rem;
 }
 
-.logo {
-    
+.upload-icon {
+    width: 35px;
+    height: 35px;
+    margin-right: 26px;
+    /* border-radius: 25px; */
 }

@@ -5,6 +5,7 @@
     display:flex;
     justify-content: center;
     margin-top:5rem;
+  
 }
 
 .images-container {
@@ -12,23 +13,26 @@
     justify-content: center;
     max-width: 100%;
     flex-direction: column;
+    
 
 }
 
 .images-wrapper {
     display: flex;
     flex-wrap: wrap;
+   
     width: 75rem;
     max-width: 80rem;
     padding: 15px;
-    
     margin-top: -3rem;
+    box-sizing: content-box;
+    width: 100%;
 }
 
 .single-img {
     display: flex;
     max-height:220px;
-    width: auto;
+    width: auto; 
     height: auto;
     margin-right: 5px;
     margin-top: 5px;
@@ -54,4 +58,5 @@
     padding-top: 20px;
     padding-left:20px;
    
-}
+} 
+
