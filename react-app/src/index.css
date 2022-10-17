@@ -1,0 +1,39 @@
+/* TODO Add site wide styles */
+
+
+* {
+    font-family: Proxima Nova,helvetica neue,helvetica,arial,sans-serif;
+}
+
+
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0px;
+}
+
+#root {
+    height: 100%;
+    width: 100%;
+    margin: none;
+}
+
+.footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+
+    background-color: black;
+    color: #fff;
+    font-size: 10pt;
+
+    height: 50px;
+    width: 100%;
+
+    position: fixed;
+    top: 100;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
