@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import LoginForm from "./components/auth/LoginForm";
 import SignUpForm from "./components/auth/SignUpForm";
 import NavBar from "./components/NavBar/NavBar";
@@ -15,7 +15,7 @@ import TestingLikesFunctions from "./components/TestingReduxState/LikesTESTING";
 import CommentsTestingFunction from "./components/TestingReduxState/CommentsTESTING";
 import GetAllImages from "./components/ExplorePage/explore";
 
-import {ImageDetails} from './components/ImageDetailsPage/imageDetails'
+import ImageDetails from './components/ImageDetailsPage/imageDetails'
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -42,11 +42,7 @@ function App() {
         <Route path="/explore" exact={true}>
           <GetAllImages />
           </Route>
-        <Route path="/images/:imageId" exact={true}>
-          <ImageDetails />
-        </Route>
         <Route exact path='/images/:id'>
-          <NavBar />
           <ImageDetails />
         </Route>
         {/* The following routes are for testing only */}
