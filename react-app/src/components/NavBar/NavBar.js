@@ -53,6 +53,11 @@ NavBar = () => {
   return (
     <>
       <nav className="nav-explore">
+      <div>
+          <NavLink to="/explore">
+            <img className="logo" src={klickrImage} />
+          </NavLink>
+        </div>
         <div className="upper-middle">
           {/* search bar functionality */}
           <SearchBar />
@@ -65,12 +70,12 @@ NavBar = () => {
           <NavLink className="sign-up" to="/signup">
             Sign Up
           </NavLink>
-          <NavLink className="upload-icon" to="/upload">
+         {/* <NavLink className="upload-icon" to="/upload">
             <i class="fa-solid fa-cloud-arrow-up"></i>
           </NavLink>
-          <NavLink to="/" className="logout-button">
+          <NavLink to="/" className="logout-button"> 
             <LogoutButton />
-          </NavLink>
+          </NavLink> */}
         </div>
       </nav>
     </>

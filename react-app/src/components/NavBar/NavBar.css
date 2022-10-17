@@ -28,6 +28,7 @@ a i {
     align-items: center;
     flex-wrap: nowrap;
     width: fit-content;
+    margin-left: -5px;
 }
 
 .navbar-explore-container {
@@ -41,4 +42,8 @@ a i {
     justify-content: center;
     align-items: center;
     margin-right: 3rem;
+}
+
+.logo {
+    
 }
