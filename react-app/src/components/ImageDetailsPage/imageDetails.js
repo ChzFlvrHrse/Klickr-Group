@@ -111,4 +111,3 @@ function ImageDetails() {
 }
 
 export default ImageDetails;
-
