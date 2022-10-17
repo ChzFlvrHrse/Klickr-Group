@@ -9,6 +9,7 @@ import { getAllUsersThunk } from "../../store/AllUsers";
 
 import "./SearchBar.css";
 import klickrImage from "../../icons/klickr-logo-title.png";
+import CouragePng from "../../icons/IMG_8935.PNG";
 import { useDispatch, useSelector } from "react-redux";
 
 //if signed in
@@ -119,14 +120,18 @@ const SearchBar = () => {
               ? "Filteredimages-container"
               : "HiddenResult"
           }
-        />
-        {/* search return map */}
-        <div className="FilteredreturnContainer">
-          <div>
+        >
+          {/* search return map */}
+          <div className="FilteredreturnContainer">
             {filteredUsersArray &&
               filteredUsersArray.map((user) => {
                 return (
-                  <div className="SearchImageMappedContainer" key={user.id}>
+                  <div className="SearchUserMappedContainer" key={user.id}>
+                    <img
+                      className="SearchImageIndividual"
+                      src={CouragePng}
+                      // onClick={() => redirect to image page))}
+                    />
                     <NavLink
                       className="SearchImageNavLinkTitle"
                       to={`/users/${user.id}`}
@@ -136,15 +141,15 @@ const SearchBar = () => {
                   </div>
                 );
               })}
-          </div>
-          <div
-            className={
-              !filteredUsersArray.length && searchTitle != ""
-                ? "errorHandlingSongSearch"
-                : "HiddenResult"
-            }
-           >
-            No Users Found
+            <div
+              className={
+                !filteredUsersArray.length && searchTitle != ""
+                  ? "errorHandlingSongSearch"
+                  : "HiddenResult"
+              }
+            >
+              No Users Found
+            </div>
           </div>
         </div>
       </div>
