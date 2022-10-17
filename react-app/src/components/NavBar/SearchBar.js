@@ -102,22 +102,24 @@ const SearchBar = () => {
                 );
               })}
             {/* </div> */}
-            <div
-              className={
-                !filteredImagesArray.length && searchTitle != ""
-                  ? "errorHandlingSongSearch"
-                  : "HiddenResult"
-              }
-            >
-              No Images Found
-            </div>
+          </div>
+        </div>
+        <div
+          className={
+            !filteredImagesArray.length && searchTitle != ""
+              ? "errorHandlingSearchContainer"
+              : "HiddenResult"
+          }
+        >
+          <div className="errorhandlingSearchmessage">
+          No Images Found
           </div>
         </div>
 
         <div
           className={
-            filteredImagesArray.length && searchTitle.length
-              ? "Filteredimages-container"
+            filteredUsersArray.length && searchTitle.length
+              ? "Filtereduser-container"
               : "HiddenResult"
           }
         >
@@ -141,17 +143,19 @@ const SearchBar = () => {
                   </div>
                 );
               })}
-            <div
-              className={
-                !filteredUsersArray.length && searchTitle != ""
-                  ? "errorHandlingSongSearch"
-                  : "HiddenResult"
-              }
-            >
-              No Users Found
-            </div>
           </div>
         </div>
+        <div
+          className={
+            !filteredUsersArray.length && searchTitle != ""
+              ? "errorHandlingSearchContainer"
+              : "HiddenResult"
+          }
+        >
+         <div className="errorhandlingSearchmessage">
+          No Users Found
+          </div>
+          </div>
       </div>
     </>
   );
