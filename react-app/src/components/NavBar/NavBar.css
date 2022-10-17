@@ -29,3 +29,16 @@ a i {
     flex-wrap: nowrap;
     width: fit-content;
 }
+
+.navbar-explore-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.explore-bttn-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 3rem;
+}

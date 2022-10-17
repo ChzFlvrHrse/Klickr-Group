@@ -10,7 +10,8 @@ import { getAllUsersThunk } from "../../store/AllUsers";
 import "./NavBar.css";
 import klickrImage from "../../icons/klickr-logo-title.png";
 import { useDispatch, useSelector } from "react-redux";
-import SearchBar from './SearchBar'
+import SearchBar from "./SearchBar";
+import ProfileButton from "./ProfileButton.js";
 
 //if signed in
 let NavBar;
@@ -32,24 +33,26 @@ NavBar = () => {
 
   if (user) {
     return (
-      <>
-        <NavLink className="upload-icon" to="/upload">
-          <i class="fa-solid fa-cloud-arrow-up"></i>
-        </NavLink>
-        <NavLink to="/" className="logout-button">
-          <LogoutButton />
-        </NavLink>
-      </>
-    );
-  }
-  return (
-    <>
       <nav className="nav-explore">
         <div>
           <NavLink to="/explore">
             <img className="logo" src={klickrImage} />
           </NavLink>
         </div>
+        <div className="navbar-explore-container">
+          <div className="explore-bttn-container">
+            <NavLink className="upload-icon" to="/upload">
+              <i class="fa-solid fa-cloud-arrow-up"></i>
+            </NavLink>
+            <ProfileButton user={user} />
+          </div>
+        </div>
+      </nav>
+    );
+  }
+  return (
+    <>
+      <nav className="nav-explore">
         <div className="upper-middle">
           {/* search bar functionality */}
           <SearchBar />
