@@ -28,7 +28,7 @@ function ImageDetails() {
 
     useEffect(() => {
         dispatch(getAllUsersThunk());
-    }, [dispatch, allImagesFiltered]);
+    }, [dispatch, allImagesFiltered, allImagesArray]);
 
     useEffect(() => {
         dispatch(getImageLikesThunk(id))
