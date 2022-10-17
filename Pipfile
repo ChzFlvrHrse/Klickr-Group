@@ -28,6 +28,7 @@ Mako = "==1.1.4"
 pycodestyle = "*"
 pylint = "*"
 rope = "*"
+pytest = "*"
 
 [dev-packages]
 
