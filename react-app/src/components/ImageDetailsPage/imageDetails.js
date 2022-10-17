@@ -20,14 +20,15 @@ function ImageDetails() {
     //   variables
     let allImagesArray;
     let allImagesFiltered;
+    let imageOwner
     // useEffects
     useEffect(() => {
         dispatch(getImagesThunk());
-    }, [dispatch]);
+    }, [dispatch, allImagesFiltered]);
 
     useEffect(() => {
         dispatch(getAllUsersThunk());
-    }, [dispatch]);
+    }, [dispatch, allImagesFiltered]);
 
     useEffect(() => {
         dispatch(getImageLikesThunk(id))
@@ -69,7 +70,9 @@ function ImageDetails() {
     allImagesFiltered = allImagesArray.filter((filteredImages, index) => filteredImages.id == id)
     // console.log(allImagesFiltered[0])
 
-    let imageOwner = allUsersArray.filter(user => user.id == allImagesFiltered[0].userId)
+if (allUsersArray) {
+  imageOwner = allUsersArray.filter(user => user.id == allImagesFiltered[0].userId)
+}
     let owner = imageOwner[0]
 
     // if image does not exist

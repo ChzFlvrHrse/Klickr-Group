@@ -40,6 +40,11 @@ export function HomePage() {
           </div>
         </div>
       </div>
+      <footer>
+    <div class="footer">
+      Copyright 2022. Klickr. All Rights Reserved or Something.
+    </div>
+  </footer>
     </>
   );
 }
