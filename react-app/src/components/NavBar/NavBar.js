@@ -12,6 +12,7 @@ import klickrImage from "../../icons/klickr-logo-title.png";
 import { useDispatch, useSelector } from "react-redux";
 import SearchBar from "./SearchBar";
 import ProfileButton from "./ProfileButton.js";
+import uploadImage from '../../icons/upload-icon.png'
 
 //if signed in
 let NavBar;
@@ -41,8 +42,8 @@ NavBar = () => {
         </div>
         <div className="navbar-explore-container">
           <div className="explore-bttn-container">
-            <NavLink className="upload-icon" to="/upload">
-              <i class="fa-solid fa-cloud-arrow-up"></i>
+            <NavLink  to="/upload">
+              <img className="upload-icon" src={uploadImage}></img>
             </NavLink>
             <ProfileButton user={user} />
           </div>
