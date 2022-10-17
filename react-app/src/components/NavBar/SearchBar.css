@@ -50,7 +50,7 @@ a i {
 
 .SearchBarContainer {
   position: absolute;
-  height: auto;
+  height: 250px;
   width: 100%;
   z-index: 2;
   background-color: rgba(255, 255, 255, 0.797);
@@ -66,27 +66,32 @@ a i {
   display: none;
 }
 .Filteredimages-container {
+    display: flex;
+  padding-top: 5px;
   width: 100%;
   height: 100%;
-  display: flex;
+}
+
+.FilteredreturnContainer::-webkit-scrollbar {
+    display: none;
+    /* -ms-overflow-style: none */
+    /* does this work at all??? */
 }
 
 .FilteredreturnContainer {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: center;
+  column-gap: 30px;
+  overflow-x: scroll;
+  overflow-y: hidden;
   height: 100%;
   border-bottom: 1px solid black;
   width: 100%;
 }
 .SearchImageMappedContainer {
-height: 50px;
-width: 50px;
-
-}
-
-.SearchImageMappedContainerInner {
-    height: 100%;
+height: 120px;
+width: 120px;
 }
 
 .SearchImageIndividual {
@@ -94,7 +99,14 @@ width: 50px;
  width: 120px;
 }
 .SearchImageNavLinkTitle {
-
+color: red;
+font-weight: bold;
+position: relative;
+display: flex;
+flex-wrap: nowrap;
+overflow: hidden;
+bottom: 5px;
+height: 17px;
 }
 
 
@@ -114,3 +126,25 @@ width: 50px;
 .search-barNav::placeholder {
   padding-left: 3px;
 }
+
+
+
+.SearchUserMappedContainer {
+    height: 120px;
+    width: 120px;
+    }
+
+    .SearchImageIndividual {
+     height: 100px;
+     width: 120px;
+    }
+    .SearchImageNavLinkTitle {
+    color: red;
+    font-weight: bold;
+    position: relative;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow: hidden;
+    bottom: 5px;
+    height: 17px;
+    }
