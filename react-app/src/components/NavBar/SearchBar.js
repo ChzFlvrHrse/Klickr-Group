@@ -7,14 +7,12 @@ import { Dispatch } from "react";
 import { getImagesThunk } from "../../store/image";
 import { getAllUsersThunk } from "../../store/AllUsers";
 
-import "./NavBar.css";
+import "./SearchBar.css";
 import klickrImage from "../../icons/klickr-logo-title.png";
 import { useDispatch, useSelector } from "react-redux";
 
 //if signed in
-let NavBar;
-
-NavBar = () => {
+const SearchBar = () => {
   //state to keep track of search bar
   const [searchTitle, setSearchTitle] = useState("");
 
@@ -59,50 +57,17 @@ NavBar = () => {
     setSearchTitle(e.target.value);
   };
 
-  if (user) {
-    return (
-      <>
-        <NavLink className="upload-icon" to="/upload">
-          <i class="fa-solid fa-cloud-arrow-up"></i>
-        </NavLink>
-        <NavLink to="/" className="logout-button">
-          <LogoutButton />
-        </NavLink>
-      </>
-    );
-  }
   return (
     <>
-      <nav className="nav-explore">
-        <div>
-          <NavLink to="/explore">
-            <img className="logo" src={klickrImage} />
-          </NavLink>
-        </div>
-        <div className="upper-middle">
-          <input
-            className="search-barNav"
-            type="search"
-            value={searchTitle}
-            placeholder={"Search for Images or Users..." || searchTitle}
-            onChange={handleSubmit}
-          />
-        </div>
-        <div className="NavBarRightSide">
-          <NavLink className="log-in" to="/login">
-            Log In
-          </NavLink>
-          <NavLink className="sign-up" to="/signup">
-            Sign Up
-          </NavLink>
-          <NavLink className="upload-icon" to="/upload">
-            <i class="fa-solid fa-cloud-arrow-up"></i>
-          </NavLink>
-          <NavLink to="/" className="logout-button">
-            <LogoutButton />
-          </NavLink>
-        </div>
-      </nav>
+      <div className="upper-middle">
+        <input
+          className="search-barNav"
+          type="search"
+          value={searchTitle}
+          placeholder={"Search for Images or Users..." || searchTitle}
+          onChange={handleSubmit}
+        />
+      </div>
       {/* search bar return container */}
       <div
         className={searchTitle.length ? "SearchBarContainer" : "HiddenResult"}
@@ -116,28 +81,26 @@ NavBar = () => {
         >
           {/* search return map */}
           <div className="FilteredreturnContainer">
-            <div>
-              {filteredImagesArray &&
-                filteredImagesArray.map((image) => {
-                  return (
-                    <div className="TrendingsongCard" key={image.id}>
-                      <div className="PlayButtonContainer">
-                        <img
-                          className="PlayMe"
-                          src={image.previewImageUrl}
-                          // onClick={() => redirect to image page))}
-                        />
-                      </div>
-                      <NavLink
-                        className="TrendingsongLink"
-                        to={`/images/${image.id}`}
-                      >
-                        {image.title}
-                      </NavLink>
-                    </div>
-                  );
-                })}
-            </div>
+            {/* <div > */}
+            {filteredImagesArray &&
+              filteredImagesArray.map((image) => {
+                return (
+                  <div className="SearchImageMappedContainer" key={image.id}>
+                    <img
+                      className="SearchImageIndividual"
+                      src={image.previewImageUrl}
+                      // onClick={() => redirect to image page))}
+                    />
+                    <NavLink
+                      className="SearchImageNavLinkTitle"
+                      to={`/images/${image.id}`}
+                    >
+                      {image.title}
+                    </NavLink>
+                  </div>
+                );
+              })}
+            {/* </div> */}
             <div
               className={
                 !filteredImagesArray.length && searchTitle != ""
@@ -163,9 +126,9 @@ NavBar = () => {
             {filteredUsersArray &&
               filteredUsersArray.map((user) => {
                 return (
-                  <div className="TrendingsongCard" key={user.id}>
+                  <div className="SearchImageMappedContainer" key={user.id}>
                     <NavLink
-                      className="TrendingsongLink"
+                      className="SearchImageNavLinkTitle"
                       to={`/users/${user.id}`}
                     >
                       {user.username}
@@ -180,7 +143,7 @@ NavBar = () => {
                 ? "errorHandlingSongSearch"
                 : "HiddenResult"
             }
-          >
+           >
             No Users Found
           </div>
         </div>
@@ -189,4 +152,4 @@ NavBar = () => {
   );
 };
 
-export default NavBar;
+export default SearchBar;

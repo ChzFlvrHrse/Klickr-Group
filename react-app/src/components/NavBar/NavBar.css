@@ -22,61 +22,10 @@ a i {
     margin-right: 2rem;
     margin-bottom: 7px;
 }
-
-.upper-middle {
-
-}
-.search-barNav {
-    flex: 1;
-    width: 50rem;
-    height: 35px;
-    border-radius: 3px;
-    border: solid white 0;
-    opacity: .8;
-  }
-
- .search-barNav::placeholder {
-    padding-left: 3px;
-  }
-
 .NavBarRightSide {
     display: flex;
     flex-direction: row;
     align-items: center;
     flex-wrap: nowrap;
     width: fit-content;
-}
-
-
-/* Search bar Container */
-
-.SearchBarContainer {
-    position: absolute;
-    height: 100px;
-    width: 100%;
-    z-index: 2;
-    background-color: rgba(255, 255, 255, 0.797);
-    top: 64px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-}
-
-.HiddenResult {
-    display: none;
-}
-.Filteredimages-container {
-    width: 100%;
-}
-
-.FilteredreturnContainer {
-    height: 100%;
-    padding-left: 10px;
-    border-bottom: 1px solid black;
-    width: 100%;
-}
-
-.errorHandlingSongSearch {
-    color: red
 }

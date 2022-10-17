@@ -1,0 +1,116 @@
+.nav-explore {
+  display: flex;
+  justify-content: space-between;
+  column-gap: 50px;
+  align-items: center;
+  font-size: 22px;
+  background-color: #202023;
+  position: relative;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 3;
+  height: 64px;
+}
+
+a i {
+  color: white;
+  margin-right: 2rem;
+}
+
+.logout-button {
+  margin-right: 2rem;
+  margin-bottom: 7px;
+}
+
+.upper-middle {
+}
+.search-barNav {
+  flex: 1;
+  width: 50rem;
+  height: 35px;
+  border-radius: 3px;
+  border: solid white 0;
+  opacity: 0.8;
+}
+
+.search-barNav::placeholder {
+  padding-left: 3px;
+}
+
+.NavBarRightSide {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: nowrap;
+  width: fit-content;
+}
+
+/* Search bar Container */
+
+.SearchBarContainer {
+  position: absolute;
+  height: auto;
+  width: 100%;
+  z-index: 2;
+  background-color: rgba(255, 255, 255, 0.797);
+  top: 64px;
+  left: 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.HiddenResult {
+  display: none;
+}
+.Filteredimages-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+.FilteredreturnContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  height: 100%;
+  border-bottom: 1px solid black;
+  width: 100%;
+}
+.SearchImageMappedContainer {
+height: 50px;
+width: 50px;
+
+}
+
+.SearchImageMappedContainerInner {
+    height: 100%;
+}
+
+.SearchImageIndividual {
+ height: 100px;
+ width: 120px;
+}
+.SearchImageNavLinkTitle {
+
+}
+
+
+.errorHandlingSongSearch {
+  color: red;
+}
+
+.search-barNav {
+  flex: 1;
+  width: 50rem;
+  height: 35px;
+  border-radius: 3px;
+  border: solid white 0;
+  opacity: 0.8;
+}
+
+.search-barNav::placeholder {
+  padding-left: 3px;
+}
