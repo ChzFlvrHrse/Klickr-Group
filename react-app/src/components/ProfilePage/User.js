@@ -31,7 +31,7 @@ function User() {
       <div className='user-title-container'>
         <div className='profile-pic-name'>
           <div>
-            <img className='user-profile-pic' src={profilePic}></img>
+            <img className='user-profile-pic' src={profilePic}  alt="profile preview"></img>
           </div>
           <div className='user-fName-lName-username'>
             <div style={{ fontSize: '36px', color: 'white', fontWeight: '330' }}>FirstName LastName Placeholder</div>

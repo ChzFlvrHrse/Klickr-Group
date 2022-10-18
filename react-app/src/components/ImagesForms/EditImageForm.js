@@ -6,7 +6,6 @@ import { updateImageThunk } from "../../store/image";
 // on useParams for imageId (will help when building a comment section for each photo in explore page)
 function EditImageForm({imageId, setShowModalEdit, oldImage}) {
   const dispatch = useDispatch();
-  const id = oldImage.id
   const userId = oldImage.userId
 
 
@@ -24,7 +23,7 @@ function EditImageForm({imageId, setShowModalEdit, oldImage}) {
 
 
     setErrors(formValidationErrors);
-  }, [title, description, previewImageUrl]);
+  }, [title, description, previewImageUrl, errors]);
 
 
   const handleSubmit = (e) => {

@@ -1,9 +1,6 @@
 import "./HomePage.css";
-import { useState, useEffect } from "react";
 import React from "react";
-import { NavLink, Link } from "react-router-dom";
-import LogoutButton from "../auth/LogoutButton";
-import klickrLogoTitle from "../../icons/klickr-logo-title.png"
+import { Link } from "react-router-dom";
 import { CarouselSplashPage } from "./Carousel";
 import { useSelector } from "react-redux";
 export function HomePage() {

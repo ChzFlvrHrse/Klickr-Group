@@ -105,3 +105,13 @@ div #star-like {
     margin: 1rem 0;
     opacity: .3;
 }
+
+
+/* user image */
+
+#user-image {
+    width: 100%;
+}
+#user-imageDetails {
+    width: 100%;
+}

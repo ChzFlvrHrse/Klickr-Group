@@ -19,12 +19,15 @@ function ImageDetails() {
     const { id } = useParams();
     //   variables
     let allImagesArray;
+    let allUsersArray;
     let allImagesFiltered;
-    let imageOwner
+    let imageOwner;
+    let owner;
+
     // useEffects
     useEffect(() => {
         dispatch(getImagesThunk());
-    }, [dispatch, allImagesFiltered]);
+    }, [dispatch, allImagesFiltered, allUsersArray]);
 
     useEffect(() => {
         dispatch(getAllUsersThunk());
@@ -32,7 +35,7 @@ function ImageDetails() {
 
     useEffect(() => {
         dispatch(getImageLikesThunk(id))
-    }, [dispatch])
+    }, [dispatch, id])
 
     useEffect(() => {
         dispatch(getAllCommentsThunk());
@@ -70,15 +73,19 @@ function ImageDetails() {
 
     // filters
     allImagesArray = Object.values(images);
-    const allUsersArray = Object.values(allusers);
+    allUsersArray = Object.values(allusers);
 
+if (allUsersArray && allImagesArray) {
     allImagesFiltered = allImagesArray.filter((filteredImages, index) => filteredImages.id == id)
+}
     // console.log(allImagesFiltered[0].created_at)
 
-if (allUsersArray) {
+if (allUsersArray.length && allImagesArray.length) {
   imageOwner = allUsersArray.filter(user => user.id == allImagesFiltered[0].userId)
 }
-    let owner = imageOwner[0]
+    if (imageOwner && allImagesFiltered) {
+        owner = imageOwner[0]
+    }
 
     // if image does not exist
     if (!allImagesFiltered.length) {
@@ -102,7 +109,7 @@ if (allUsersArray) {
                     <Link to="/">Back to explore</Link>
                 </div>
                 <div id="user-image">
-                    <img src={allImagesFiltered[0].previewImageUrl} />
+                    <img id="user-imageDetails" src={allImagesFiltered[0].previewImageUrl} alt=""/>
                 </div>
                 <div id="star-like">
                     {filteredLikes.length ? <i class="fa-solid fa-star" onClick={toggleLikes} ></i> : <i class="fa-regular fa-star" onClick={toggleLikes}></i>}

@@ -3,27 +3,19 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { getImagesThunk } from "../../store/image";
-import { getAllUsersThunk } from "../../store/AllUsers";
 import { useDispatch, useSelector } from "react-redux";
-import { Dispatch } from "react";
 
 export function CarouselSplashPage() {
   const dispatch = useDispatch();
   const [backgroundImageNumber, setBackgroundImageNumber] = useState(0);
   let imageArray;
-  let usersArray;
   let imageFiltered;
 
   useEffect(() => {
     dispatch(getImagesThunk());
   }, [dispatch]);
 
-  useEffect(() => {
-    dispatch(getAllUsersThunk());
-  }, [dispatch]);
-
   const imagesState = useSelector((state) => state.image);
-  const allusers = useSelector((state) => state.allUsers);
 
   imageArray = Object.values(imagesState);
 
@@ -100,16 +92,13 @@ export function CarouselSplashPage() {
       // }
     }, 4000);
     return () => clearInterval(backgroundImageTransition);
-  }, []);
+  }, [backgroundImageNumber, images.length]);
 
   if (imageArray.length) {
     imageFiltered = imageArray.filter(
-      (image) => image.title == images[backgroundImageNumber].title
+      (image) => image.title === images[backgroundImageNumber].title
     );
   }
-
-  console.log(imageFiltered);
-
   return (
     <>
       {images.map((image, index) => {
@@ -117,7 +106,7 @@ export function CarouselSplashPage() {
           <>
             <div
               className={
-                index == backgroundImageNumber
+                index === backgroundImageNumber
                   ? "ActiveImageBackgroundCarousel"
                   : "InactiveImageBackgroundCarousel"
               }
@@ -132,7 +121,7 @@ export function CarouselSplashPage() {
             {imageFiltered && (
               <div
                 className={
-                  index == backgroundImageNumber
+                  index === backgroundImageNumber
                     ? "ActiveImageCaptionsCarousel"
                     : "InactiveImageCaptionsCarousel"
                 }

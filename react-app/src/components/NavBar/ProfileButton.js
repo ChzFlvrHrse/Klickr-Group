@@ -38,7 +38,7 @@ export default function ProfileButton({ users }) {
   return (
     <div>
       <div className="profile-button-border" onClick={openMenu}>
-        <img className="profile-icon" src={defaultpic} />
+        <img className="profile-icon" src={defaultpic} alt="default profile pic"/>
       </div>
       {showMenu && (
         <div className="profile-dropdown">

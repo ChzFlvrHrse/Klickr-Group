@@ -7,7 +7,6 @@ import "./createImage.css";
 
 export default function CreateImageForm() {
   const user = useSelector((state) => state.session.user);
-  const [showUpload, setShowUpload] = useState(false);
   const [previewImageUrl, setPreviewImageUrl] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -41,12 +40,6 @@ export default function CreateImageForm() {
         "There was an error with your submit, Please recheck your inputs"
       );
     }
-    const image = {
-      userId,
-      title,
-      description,
-      previewImageUrl,
-    };
 
     function loadImage(previewImageUrl) {
       return previewImageUrl;

@@ -14,12 +14,9 @@ import { getAllUsersThunk } from "../../store/AllUsers";
 export default function TestingImages() {
   const { imageId } = useParams();
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.session.user);
 
   const [showModal, setShowModal] = useState(false);
   const [showModalEdit, setShowModalEdit] = useState(false);
-
-  const userId = user.id;
 
   let allImagesArray;
   const [imageState, setImageState] = useState({});
@@ -93,7 +90,7 @@ export default function TestingImages() {
                     allUsersArray.map((singleUser, index) => {
                       return (
                         <div>
-                          {singleUser.id == image.userId
+                          {singleUser.id === image.userId
                             ? singleUser.username
                             : ""}
                         </div>
