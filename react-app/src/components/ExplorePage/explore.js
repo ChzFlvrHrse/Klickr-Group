@@ -53,6 +53,8 @@ const GetAllImages = () => {
     const user = useSelector((state) => state.session.user);
 
 
+    console.log(images)
+    
     let likesArray = Object.values(likes);
     let filteredLikes;
 
