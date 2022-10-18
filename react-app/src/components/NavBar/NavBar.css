@@ -11,6 +11,7 @@
     right: 0;
     z-index: 3;
     height: 64px;
+    width: 100%;
 }
 
 a i {
@@ -58,9 +59,7 @@ a i {
     cursor: pointer;
 }
 
-.loggedInNav{
-width: 40%;
-}
+
 
 .ExploreButtonNav {
     font-size: 20pt;
@@ -77,4 +76,15 @@ width: 40%;
     flex-wrap: nowrap;
     width: fit-content;
     margin-left: -5px;
+}
+
+.loggedInNav{
+    display: flex;
+width: 100%;
+justify-content: flex-end;
+}
+.loggedOutSearchNav{
+    display: flex;
+width: 100%;
+justify-content: center;
 }

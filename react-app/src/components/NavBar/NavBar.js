@@ -1,8 +1,6 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import {useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import LogoutButton from "../auth/LogoutButton";
-import { Dispatch } from "react";
 
 import { getImagesThunk } from "../../store/image";
 import { getAllUsersThunk } from "../../store/AllUsers";
@@ -29,15 +27,13 @@ NavBar = () => {
   }, [dispatch]);
 
   const user = useSelector((state) => state.session.user);
-  const images = useSelector((state) => state.image);
-  const allusers = useSelector((state) => state.allUsers);
 
   if (user) {
     return (
       <nav className="nav-explore">
         <div className="NavBarLeftSide">
           <NavLink to="/">
-            <img className="logo" src={klickrImage} />
+            <img className="logo" src={klickrImage} alt="logo"/>
           </NavLink>
           <NavLink className="ExploreButtonNav" to={`/users/${user.id}`}>
             You
@@ -46,7 +42,7 @@ NavBar = () => {
             Explore
           </NavLink>
         </div>
-        <div className="nav-logged-in">
+        <div className="loggedInNav">
           {/* search bar functionality */}
           <SearchBar />
           {/* search bar functionality */}
@@ -54,7 +50,7 @@ NavBar = () => {
         <div className="navbar-explore-container">
           <div className="explore-bttn-container">
             <NavLink  to="/upload">
-              <img className="upload-icon" src={uploadImage}></img>
+              <img className="upload-icon" src={uploadImage} alt="upload icon"></img>
             </NavLink>
             <ProfileButton user={user} />
           </div>
@@ -65,12 +61,12 @@ NavBar = () => {
   return (
     <>
       <nav className="nav-explore">
-      <div>
+      <div className="NavBarLeftSide">
           <NavLink to="/">
-            <img className="logo" src={klickrImage} />
+            <img className="logo" src={klickrImage} alt="logo"/>
           </NavLink>
         </div>
-        <div className="loggedInNav">
+        <div className="loggedOutSearchNav">
           {/* search bar functionality */}
           <SearchBar/>
           {/* search bar functionality */}

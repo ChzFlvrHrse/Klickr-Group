@@ -38,13 +38,17 @@ export default function ProfileButton({ users }) {
   return (
     <div>
       <div className="profile-button-border" onClick={openMenu}>
-        <img className="profile-icon" src={defaultpic} />
+        <img className="profile-icon" src={sessionUser.previewImageUrl} alt=""/>
       </div>
       {showMenu && (
         <div className="profile-dropdown">
           {sessionUser && (
             <div className="profile-list">
-              <div className="user-name-li">Bonjour {sessionUser.username}</div>
+              <div className="user-name-li">Bonjour&nbsp;
+              {/* <NavLink to={`/api/users/${sessionUser.id}`}> */}
+                {sessionUser.first_name}
+              {/* </NavLink> */}
+              </div>
               <div className="hover-link logout-li" onClick={logout}>Log Out</div>
             </div>
           )}

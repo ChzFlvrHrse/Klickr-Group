@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
@@ -31,9 +31,9 @@ let filteredLikes;
 
  useEffect(() => {
     dispatch(getImageLikesThunk(imageId))
- }, [dispatch])
+ }, [dispatch, imageId])
 
- filteredLikes = likesArray.filter((filteredLikes, index) => filteredLikes.userId == user.id)
+ filteredLikes = likesArray.filter((filteredLikes, index) => filteredLikes.userId === user.id)
 const userLikeId = filteredLikes[0]
 // console.log(userLikeId)
 // toggle likes on and off (post and delete)
@@ -61,13 +61,7 @@ const styles2 = {
 	backgroundColor:'lavender',
 	fontWeight:'bold'
 };
-const styles3 = {
-    height:"100px",
-    width:"100px",
-	color:'black',
-	backgroundColor:'magenta',
-	fontWeight:'bold'
-};
+
  return (
     <>
     <div>

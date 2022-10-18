@@ -131,7 +131,7 @@ export default function CommentsTestingFunction() {
                     allUsersArray.map((singleUser, index) => {
                       return (
                         <div>
-                          {singleUser.id == comment.userId
+                          {singleUser.id === comment.userId
                             ? singleUser.username
                             : ""}
                         </div>

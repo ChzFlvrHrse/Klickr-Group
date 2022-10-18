@@ -1,9 +1,6 @@
 import "./HomePage.css";
-import { useState, useEffect } from "react";
 import React from "react";
-import { NavLink, Link } from "react-router-dom";
-import LogoutButton from "../auth/LogoutButton";
-import klickrLogoTitle from "../../icons/klickr-logo-title.png"
+import { Link } from "react-router-dom";
 import { CarouselSplashPage } from "./Carousel";
 import { useSelector } from "react-redux";
 export function HomePage() {
@@ -73,7 +70,7 @@ export function HomePage() {
         <CarouselSplashPage />
         <div className="center">
           <div className="main">
-            <h1 className="inspiration">Welcome Back {user.username}</h1>
+            <h1 className="inspiration">Welcome Back {user.first_name}</h1>
 
             <h2 className="first-line">
               The Flickr community is home to tens of billions of photos and

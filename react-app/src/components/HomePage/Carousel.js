@@ -2,10 +2,22 @@ import "./Carousel.css";
 import React from "react";
 import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
+import { getImagesThunk } from "../../store/image";
+import { useDispatch, useSelector } from "react-redux";
 
 export function CarouselSplashPage() {
+  const dispatch = useDispatch();
   const [backgroundImageNumber, setBackgroundImageNumber] = useState(0);
+  let imageArray;
+  let imageFiltered;
 
+  useEffect(() => {
+    dispatch(getImagesThunk());
+  }, [dispatch]);
+
+  const imagesState = useSelector((state) => state.image);
+
+  imageArray = Object.values(imagesState);
 
   const images = [
     {
@@ -68,42 +80,45 @@ export function CarouselSplashPage() {
       title: "Dawn of Another Day",
       author: "Sky Matthews",
     },
-  ]
-
+  ];
 
   // useEffect to map through the length of the imagesArray infinitely while setting an image number
   useEffect(() => {
-        const backgroundImageTransition = setInterval(() => {
-          setBackgroundImageNumber(
-            (previousBackgroundImageNumber) =>
-              (previousBackgroundImageNumber + 1) % images.length
-          );
-          // }
-        }, 4000);
-        return () => clearInterval(backgroundImageTransition);
-  }, []);
+    const backgroundImageTransition = setInterval(() => {
+      setBackgroundImageNumber(
+        (previousBackgroundImageNumber) =>
+          (previousBackgroundImageNumber + 1) % images.length
+      );
+      // }
+    }, 4000);
+    return () => clearInterval(backgroundImageTransition);
+  }, [backgroundImageNumber, images.length]);
 
+  if (imageArray.length) {
+    imageFiltered = imageArray.filter(
+      (image) => image.title == images[backgroundImageNumber].title
+    );
+  }
   return (
     <>
-      {
-        images.map((image, index) => {
-          return (
-            <>
-              <div
-                className={
-                  index == backgroundImageNumber
-                    ? "ActiveImageBackgroundCarousel"
-                    : "InactiveImageBackgroundCarousel"
-                }
-                key={index}
-              >
-
-                  <img
-                  className="imageCarouselArray"
-                    src={image.imageUrl}
-                    alt="CarouselImageBackground"
-                  />
-              </div>
+      {images.map((image, index) => {
+        return (
+          <>
+            <div
+              className={
+                index == backgroundImageNumber
+                  ? "ActiveImageBackgroundCarousel"
+                  : "InactiveImageBackgroundCarousel"
+              }
+              key={index}
+            >
+              <img
+                className="imageCarouselArray"
+                src={image.imageUrl}
+                alt="CarouselImageBackground"
+              />
+            </div>
+            {imageFiltered && (
               <div
                 className={
                   index == backgroundImageNumber
@@ -111,16 +126,21 @@ export function CarouselSplashPage() {
                     : "InactiveImageCaptionsCarousel"
                 }
               >
-                    <div className="BackgroundImageCarouselTitle">
-                      {image.title}
-                    </div>
-                    <div className="BackgroundImageCarouselAuthor">
-                      By {image.author}
-                    </div>
+                <div className="BackgroundImageCarouselTitle">
+                  <NavLink className="BackgroundImageCarouselTitle" to={`/images/${imageFiltered[0].id}`}>
+                    {image.title}
+                  </NavLink>
+                </div>
+                <div className="BackgroundImageCarouselAuthor">
+                  <NavLink className="BackgroundImageCarouselAuthor" to={`/users/${imageFiltered[0].userId}`}>
+                    By {image.author}
+                  </NavLink>
+                </div>
               </div>
-            </>
-          );
-        })}
+            )}
+          </>
+        );
+      })}
     </>
   );
 }
