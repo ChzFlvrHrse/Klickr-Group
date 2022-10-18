@@ -35,9 +35,15 @@ NavBar = () => {
   if (user) {
     return (
       <nav className="nav-explore">
-        <div>
-          <NavLink to="/explore">
+        <div className="NavBarLeftSide">
+          <NavLink to="/">
             <img className="logo" src={klickrImage} />
+          </NavLink>
+          <NavLink className="ExploreButtonNav" to={`/users/${user.id}`}>
+            You
+          </NavLink>
+          <NavLink className="ExploreButtonNav" to="/explore">
+            Explore
           </NavLink>
         </div>
         <div className="nav-logged-in">
@@ -60,7 +66,7 @@ NavBar = () => {
     <>
       <nav className="nav-explore">
       <div>
-          <NavLink to="/explore">
+          <NavLink to="/">
             <img className="logo" src={klickrImage} />
           </NavLink>
         </div>
@@ -69,7 +75,7 @@ NavBar = () => {
           <SearchBar/>
           {/* search bar functionality */}
           </div>
-        
+
         <div className="NavBarRightSide">
           <NavLink className="log-in" to="/login">
             Log In
@@ -77,7 +83,7 @@ NavBar = () => {
           <NavLink className="sign-up" to="/signup">
             Sign Up
           </NavLink>
-    
+
         </div>
       </nav>
     </>

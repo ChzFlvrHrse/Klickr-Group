@@ -3,10 +3,8 @@
     position: absolute;
     width: 100%;
     height: 100%;
-    /* animation: opacitychange 5s infinite ease-in-out; */
     opacity: 1;
     transition: 1000ms opacity ease-in-out;
-    /* transition: 200ms opacitychange ease-in-out; */
 }
 
 .InactiveImageBackgroundCarousel {
@@ -27,21 +25,6 @@
 }
 
 
-/* animation */
-
-/* @keyframes opacitychange {
-    0% {
-      opacity: 0.6;
-    }
-
-    50% {
-      opacity: 1;
-    }
-
-    100% {
-      opacity: 0.6;
-    }
-  } */
 
 /* description section */
 
