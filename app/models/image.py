@@ -28,4 +28,6 @@ class Image(db.Model):
             # timestamps
             'created_at': self.created_at,
             'updated_at': self.updated_at,
+            'comments': [comment.to_dict() for comment in self.comments],
+            'likes': [like.to_dict() for like in self.likes]
         }
