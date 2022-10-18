@@ -96,7 +96,7 @@ export function CarouselSplashPage() {
 
   if (imageArray.length) {
     imageFiltered = imageArray.filter(
-      (image) => image.title === images[backgroundImageNumber].title
+      (image) => image.title == images[backgroundImageNumber].title
     );
   }
   return (
@@ -106,7 +106,7 @@ export function CarouselSplashPage() {
           <>
             <div
               className={
-                index === backgroundImageNumber
+                index == backgroundImageNumber
                   ? "ActiveImageBackgroundCarousel"
                   : "InactiveImageBackgroundCarousel"
               }
@@ -121,7 +121,7 @@ export function CarouselSplashPage() {
             {imageFiltered && (
               <div
                 className={
-                  index === backgroundImageNumber
+                  index == backgroundImageNumber
                     ? "ActiveImageCaptionsCarousel"
                     : "InactiveImageCaptionsCarousel"
                 }
