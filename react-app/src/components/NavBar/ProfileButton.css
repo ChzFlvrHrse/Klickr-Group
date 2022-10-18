@@ -13,11 +13,11 @@
     list-style-type: none;
   }
   
-  .profile-list-item {
+  .profile-list-item logout {
     color: black;
     text-decoration: none;
     padding-top: 2px;
-    padding-bottom: 5px;
+    margin-bottom: 10px;
   }
   
   .profile-dropdown {
@@ -25,7 +25,7 @@
     flex-direction: column;
     position: absolute;
     width: 7em;
-    height: 2em;
+    height: 3em;
     background-color: white;
     border: 1px solid black;
     border-radius: 2px;
@@ -50,21 +50,31 @@
   
 
   .profile-list-item {
-    margin-top: -30px;
+    margin-top: 20px;
     font-size: 16px;
-    margin-left: 8px;
+    text-align: center;
+    margin-left: -48px;
     /* size: 50px; */
+  }
+
+  .user-name-li{
+    font-size: 16px;
+    font-weight: 450;
+    margin-bottom: 20px;
+    padding-bottom:10px;
+    border-bottom: 1px solid rgb(235, 228, 228);
   }
   
   .hover-link {
-    /* margin-left: -2em; */
+    /* padding-left:3px; */
     cursor: pointer;
     /* padding: 2px; */
   }
   
   .hover-link:hover {
-    /* margin-left: -2em; */
+    /* margin-left: -15px; */
     background-color: rgb(216, 207, 207);
+    /* width:20px */
     
     
 
