@@ -15,13 +15,24 @@ def seed_images():
     image_9 = Image(userId=2, title="Visionary Sign", description="This is the sign you've been looking for", previewImageUrl="https://images.unsplash.com/photo-1496449903678-68ddcb189a24?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80")
     image_10 = Image(userId=3, title="Dreams", description="Dreams are made to be reality", previewImageUrl="https://images.unsplash.com/photo-1494633114655-819eb91fde40?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80")
     image_11 = Image(userId=2, title="Snowboard", description="Go Big or Go Home", previewImageUrl="https://images.unsplash.com/photo-1611124600582-c9ef0e977585?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80")
-    image_12 = Image(userId=2, title="Haloween", description="Spooky Vibes", previewImageUrl="https://images.unsplash.com/photo-1541877057445-c90b478d53d5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80")
+    image_12 = Image(userId=2, title="Halloween", description="Spooky Vibes", previewImageUrl="https://images.unsplash.com/photo-1541877057445-c90b478d53d5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80")
     image_13 = Image(userId=3, title="CyberPunk", description="Futurism", previewImageUrl="https://images.unsplash.com/photo-1580428180098-24b353d7e9d9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=464&q=80")
     image_14 = Image(userId=4, title="RoboWisdom", description="Connecting to the future", previewImageUrl="https://images.unsplash.com/photo-1599790772272-d1425cd3242e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=464&q=80")
     image_15 = Image(userId=1, title="Anime", description="Anime Vibes", previewImageUrl="https://images.unsplash.com/photo-1586461715699-1e192dcd04c6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=419&q=80")
     image_16 = Image(userId=1, title="Desert Palace", description="MiddleEast", previewImageUrl="https://images.unsplash.com/photo-1548013146-72479768bada?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=876&q=80")
+# carousel images
+    image_17 = Image(userId=5, title="Fantasy Island", description="The coastline and ship wreck was shot in Mauritius.", previewImageUrl="https://combo.staticflickr.com/ap/build/images/sohp/2020-top-25/Fantasy_Island_Daniel_Cheong.jpg")
+    image_18 = Image(userId=6, title="Secluded", description="An idyllic scene lush with green", previewImageUrl="https://combo.staticflickr.com/ap/build/images/sohp/2020-top-25/Secluded_Pete_Rowbottom.jpg")
+    image_19 = Image(userId=7, title="Albuquerque, New Mexico", description="Waltuh, put the camera away Waltuh... I ain't taking a picture rn Waltuh", previewImageUrl="https://combo.staticflickr.com/ap/build/images/sohp/2020-top-25/Untitled_Jorge_Guadalupe_Lizarraga.jpg")
+    image_20 = Image(userId=8, title="Europe's Best View", description="Snow covered mountain tops", previewImageUrl="https://combo.staticflickr.com/ap/build/images/sohp/2020-top-25/Europes_best_View_Fabian_Fortmann.jpg")
+    image_21 = Image(userId=9, title="Mists of Renfrew", description="Surreal lake shot", previewImageUrl="https://combo.staticflickr.com/ap/build/images/sohp/2020-top-25/Mists_of_renfrew_Adam_Gibbs.jpg")
+    image_22 = Image(userId=10, title="Sunset 1663", description="Crashing Waves", previewImageUrl="https://combo.staticflickr.com/ap/build/images/sohp/2020-top-25/sunset_1663_Junji_Aoyama.jpg")
+    image_23 = Image(userId=11, title="Tree and Morning Mist", description="Vast landscape", previewImageUrl="https://combo.staticflickr.com/ap/build/images/sohp/2020-top-25/Tree_and_Morning_Mist_Jos_Buurmans.jpg")
+    image_24 = Image(userId=12, title="Desert Beauty", description="Desert shot", previewImageUrl="https://combo.staticflickr.com/ap/build/images/sohp/2020-top-25/Desert_Beauty_Christoph_Fischer.jpg")
+    image_25 = Image(userId=13, title="Catwalk am Bahnhof Zürich Oerlikon", description="Where are the cats???", previewImageUrl="https://combo.staticflickr.com/ap/build/images/sohp/2020-top-25/Catwalk_am_Bahnhof_Zurich_Oerlikon_Peter_Arn.jpg")
+    image_26 = Image(userId=14, title="Dawn of Another Day", description="Cool", previewImageUrl="https://combo.staticflickr.com/ap/build/images/sohp/2020-top-25/Dawn_of_Another_Day_Sky_Matthews.jpg")
 
-    images = [image_1, image_2, image_3, image_4, image_5, image_6, image_7,image_8,image_9,image_10,image_11,image_12,image_13,image_14,image_15, image_16]
+    images = [image_1, image_2, image_3, image_4, image_5, image_6, image_7,image_8,image_9,image_10,image_11,image_12,image_13,image_14,image_15, image_16, image_17, image_18, image_19, image_20, image_21, image_22, image_23, image_24, image_25, image_26]
     for image in images:
         db.session.add(image)
         db.session.commit()

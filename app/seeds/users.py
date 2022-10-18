@@ -12,10 +12,42 @@ def seed_users():
     jb = User(
         username='jeebz', email='jb@aa.io', password='password')
 
+    dc = User(
+        username='DanielCheong', email='DanielCheong@aa.io', password='password')
+    pr = User(
+        username='PeteRowbottom', email='PeteRowbottom@aa.io', password='password')
+    jgl = User(
+        username='JorgeGuadalupeLizarrága', email='JorgeGuadalupeLizarrága@aa.io', password='password')
+    ff = User(
+        username='FabianFortmann', email='FabianFortmann@aa.io', password='password')
+    ag = User(
+        username='AdamGibbs', email='AdamGibbs@aa.io', password='password')
+    ja = User(
+        username='JunjiAoyama', email='JunjiAoyama@aa.io', password='password')
+    jbm = User(
+        username='JosBuurmans', email='JosBuurmans@aa.io', password='password')
+    cf = User(
+        username='ChristophFischer', email='ChristophFischer@aa.io', password='password')
+    pa = User(
+        username='PeterArn', email='PeterArn@aa.io', password='password')
+    sm = User(
+        username='SkyMatthews', email='SkyMatthews@aa.io', password='password')
+
+
     db.session.add(demo)
     db.session.add(marnie)
     db.session.add(bobbie)
     db.session.add(jb)
+    db.session.add(dc)
+    db.session.add(pr)
+    db.session.add(jgl)
+    db.session.add(ff)
+    db.session.add(ag)
+    db.session.add(ja)
+    db.session.add(jbm)
+    db.session.add(cf)
+    db.session.add(pa)
+    db.session.add(sm)
 
     db.session.commit()
 
