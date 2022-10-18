@@ -104,3 +104,8 @@ body {
 .button button:hover {
     opacity: .9;
 }
+
+/* name headers displaced */
+#labelInputSignUpName {
+    margin-left: -18px;
+}

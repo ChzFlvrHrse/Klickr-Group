@@ -84,16 +84,7 @@ const SignUpForm = () => {
               ></input>
             </div>
             <div className='label-input'>
-              <label>Email address</label>
-              <input
-                type='text'
-                name='email'
-                onChange={updateEmail}
-                value={email}
-              ></input>
-            </div >
-            <div className='label-input'>
-              <label>First Name</label>
+              <label id='labelInputSignUpName'>First Name</label>
               <input
                 type='text'
                 name='first_name'
@@ -102,12 +93,21 @@ const SignUpForm = () => {
               ></input>
             </div >
             <div className='label-input'>
-              <label>Last Name</label>
+              <label id='labelInputSignUpName'>Last Name</label>
               <input
                 type='text'
                 name='last_name'
                 onChange={updateLastName}
                 value={last_name}
+              ></input>
+            </div >
+            <div className='label-input'>
+              <label>Email address</label>
+              <input
+                type='text'
+                name='email'
+                onChange={updateEmail}
+                value={email}
               ></input>
             </div >
             <div className='label-input'>
