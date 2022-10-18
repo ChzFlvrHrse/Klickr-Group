@@ -73,22 +73,19 @@ export function CarouselSplashPage() {
 
   // useEffect to map through the length of the imagesArray infinitely while setting an image number
   useEffect(() => {
-      if (backgroundImageNumber < images.length) {
         const backgroundImageTransition = setInterval(() => {
           setBackgroundImageNumber(
             (previousBackgroundImageNumber) =>
               (previousBackgroundImageNumber + 1) % images.length
           );
-        }, 5000);
+          // }
+        }, 4000);
         return () => clearInterval(backgroundImageTransition);
-      } else {
-        setBackgroundImageNumber(0);
-      }
-  }, [backgroundImageNumber]);
+  }, []);
 
   return (
     <>
-      {images &&
+      {
         images.map((image, index) => {
           return (
             <>
@@ -100,13 +97,12 @@ export function CarouselSplashPage() {
                 }
                 key={index}
               >
-                {index == backgroundImageNumber && (
+
                   <img
-                  data-active className="imageCarouselArray"
+                  className="imageCarouselArray"
                     src={image.imageUrl}
                     alt="CarouselImageBackground"
                   />
-                )}
               </div>
               <div
                 className={

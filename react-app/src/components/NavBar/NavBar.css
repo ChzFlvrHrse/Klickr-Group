@@ -29,6 +29,8 @@ a i {
     flex-wrap: nowrap;
     width: fit-content;
     margin-left: -5px;
+    column-gap: 20px;
+
 }
 
 .navbar-explore-container {
@@ -53,4 +55,26 @@ a i {
 
 .upload-icon:hover {
     opacity: .8;
+    cursor: pointer;
+}
+
+.loggedInNav{
+width: 40%;
+}
+
+.ExploreButtonNav {
+    font-size: 20pt;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 1px;
+}
+
+.NavBarLeftSide {
+    display: flex;
+    flex-direction: row;
+    column-gap: 40px;
+    align-items: center;
+    flex-wrap: nowrap;
+    width: fit-content;
+    margin-left: -5px;
 }
