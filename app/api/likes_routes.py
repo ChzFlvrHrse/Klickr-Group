@@ -17,6 +17,18 @@ def imageLikes(id):
     return likes
 
 
+
+    # get all likes total
+@Likes_routes.route('/likes/all')
+# @login_required
+def allLikes():
+    all_likes = Like.query.all()
+    likes = {like.id: like.to_dict() for like in all_likes}
+    # likes = {"likes":  [like.to_dict() for like in all_likes]}
+
+    return likes
+
+
 # Make a new Like
 
 @Likes_routes.route('/<int:id>/likes', methods=["POST"])

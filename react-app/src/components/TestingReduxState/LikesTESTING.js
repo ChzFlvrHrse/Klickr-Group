@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
-import { getImageLikesThunk, createLikesThunk, deleteLikesThunk } from "../../store/likes";
+import { getAllLikesThunk, getImageLikesThunk, createLikesThunk, deleteLikesThunk } from "../../store/likes";
 
 export default function TestingLikesFunctions() {
   const {imageId} = useParams()
@@ -65,8 +65,13 @@ const styles2 = {
  return (
     <>
     <div>
-        <button style={styles1}onClick={() => dispatch(getImageLikesThunk(imageId))}>
+        <button style={styles2}onClick={() => dispatch(getImageLikesThunk(imageId))}>
             Get Image likes
+        </button>
+    </div>
+    <div>
+        <button style={styles1}onClick={() => dispatch(getAllLikesThunk())}>
+            Get All likes
         </button>
     </div>
     <div>

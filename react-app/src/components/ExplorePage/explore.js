@@ -10,39 +10,56 @@ import './explore.css';
 
 const GetAllImages = () => {
 
+    const id  = 4
+
+
+    // toggle likes button
+    // likes length
+
+    // comment section
+    // Amount of comments
+
+    const [commentState, setCommentState] = useState(false)
+    const [likeState, setLikesState] = useState(false)
+
+
     const allImages = useSelector(state => state.image);
     const allImagesArr = Object.values(allImages);
 
     const dispatch = useDispatch()
-    const { id } = useParams();
 
     let allImagesArray;
     let allUsersArray;
     let allImagesFiltered;
-    let imageOwner;
-    let owner;
 
 
-    useEffect(() => {
-        dispatch(getImageLikesThunk(id))
-    }, [dispatch, id])
+    // useEffect(() => {
+    //     dispatch(getImageLikesThunk(id))
+    // }, [dispatch, id])
 
     useEffect(() => {
         dispatch(getImagesThunk())
-    }, [dispatch])
+    }, [dispatch, allImagesFiltered, allUsersArray])
+// getting all users
+
+    useEffect(() => {
+        dispatch(getAllUsersThunk())
+    }, [dispatch, allImagesFiltered, allUsersArray])
+
+
     const images = useSelector((state) => state.image);
     const likes = useSelector(state => state.likes);
-    const allusers = useSelector((state) => state.allUsers);
+    // const allusers = useSelector((state) => state.allUsers);
     const user = useSelector((state) => state.session.user);
-    
-    
+
+
     let likesArray = Object.values(likes);
     let filteredLikes;
 
     filteredLikes = likesArray.filter((filteredLikes, index) => filteredLikes.userId == user.id)
     const userLikeId = filteredLikes[0]
-    // console.log(userLikeId)
-    // toggle likes on and off (post and delete)
+
+
     const toggleLikes = (e) => {
         e.preventDefault();
         if (!filteredLikes.length) {
@@ -55,34 +72,7 @@ const GetAllImages = () => {
     };
 
     allImagesArray = Object.values(images);
-    allUsersArray = Object.values(allusers);
-
-    if (allUsersArray && allImagesArray) {
-        allImagesFiltered = allImagesArray.filter((filteredImages, index) => filteredImages.id == id)
-    }
-        // console.log(allImagesFiltered[0].created_at)
-    
-    if (allUsersArray.length && allImagesArray.length) {
-      imageOwner = allUsersArray.filter(user => user.id == allImagesFiltered[0].userId)
-      console.log(allImagesFiltered)
-    }
-        if (imageOwner && allImagesFiltered) {
-            owner = imageOwner[0]
-        }
-    
-        // if image does not exist
-        if (!allImagesFiltered.length) {
-            return (
-                <>
-                    <div>
-                        Sorry this image does not exist!
-                    </div>
-                </>
-            )
-        }
-    
-
-
+    // allUsersArray = Object.values(allusers);
 
     return (
 
