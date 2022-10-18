@@ -6,6 +6,7 @@ import { Dispatch } from "react";
 
 import { getImagesThunk } from "../../store/image";
 import { getAllUsersThunk } from "../../store/AllUsers";
+import SBicon from '../../icons/SB-icon.png'
 
 import "./SearchBar.css";
 import klickrImage from "../../icons/klickr-logo-title.png";
@@ -66,7 +67,7 @@ const SearchBar = () => {
           className="notsignedin-SB"
           type="search"
           value={searchTitle}
-          placeholder={"Search for Images or Users..." || searchTitle}
+          placeholder={"Search for Images or Users..."  || searchTitle}
           onChange={handleSubmit}
         />
       </div>
