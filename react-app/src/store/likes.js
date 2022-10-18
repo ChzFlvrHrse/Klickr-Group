@@ -1,8 +1,12 @@
-
+const GET_ALL_LIKES = 'likes/GET_ALL_LIKES'
 const GETIMAGELIKES = 'likes/GETIMAGELIKES';
 const CREATE_LIKES = 'likes/CREATELIKES';
 const DELETE_LIKES = 'likes/DELETELIKES';
 
+const getAllLikes = (likes) => ({
+    type: GET_ALL_LIKES,
+    likes
+})
 
 const getImageLikes = (imageId) => ({
     type: GETIMAGELIKES,
@@ -20,6 +24,16 @@ const deleteLikes = (id) => ({
     id
 })
 
+export const getAllLikesThunk = () => async (dispatch) => {
+    const response = await fetch('/api/likes');
+
+    if (response.ok) {
+        const likes = await response.json();
+        dispatch(getAllLikes(likes));
+        return likes;
+    }
+}
+
 export const getImageLikesThunk = (imageId) => async (dispatch) => {
     const response = await fetch(`/api/images/${imageId}/likes`, {
     })
@@ -29,7 +43,7 @@ export const getImageLikesThunk = (imageId) => async (dispatch) => {
     }
 }
 
-export const createLikesThunk = (imageId,payload) => async (dispatch) => {
+export const createLikesThunk = (imageId, payload) => async (dispatch) => {
     const response = await fetch(`/api/images/${imageId}/likes/new`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -43,7 +57,7 @@ export const createLikesThunk = (imageId,payload) => async (dispatch) => {
 
 export const deleteLikesThunk = (id) => async (dispatch) => {
     const response = await fetch(`/api/likes/${id}/delete`, {
-    // const response = await fetch(`/api/images/:imageId/likes/${id}/delete`, {
+        // const response = await fetch(`/api/images/:imageId/likes/${id}/delete`, {
         method: "DELETE",
     });
     if (response.ok) {
@@ -55,25 +69,32 @@ export const deleteLikesThunk = (id) => async (dispatch) => {
 const initialState = {}
 export default function reducer(state = initialState, action) {
     switch (action.type) {
-      case GETIMAGELIKES: {
-        // const newState = {}
-        const newState = {...action.imageId}
-        // action.image.likes.forEach((like) => {
-        //     newState[like.id] = like
-        // })
-        return newState
-      }
-      case CREATE_LIKES: {
-        const newState = { ...state }
-        newState[action.payload.id] = action.payload
-        return newState
-      }
-      case DELETE_LIKES: {
-        const newState = { ...state }
-        delete newState[action.id]
-        return newState
-      }
-      default:
-        return state;
+        case GET_ALL_LIKES: {
+            const newState = {}
+            action.likes.likes.forEach((like) => {
+                newState[like.id] = like
+            })
+            return newState;
+        }
+        case GETIMAGELIKES: {
+            // const newState = {}
+            const newState = { ...action.imageId }
+            // action.image.likes.forEach((like) => {
+            //     newState[like.id] = like
+            // })
+            return newState
+        }
+        case CREATE_LIKES: {
+            const newState = { ...state }
+            newState[action.payload.id] = action.payload
+            return newState
+        }
+        case DELETE_LIKES: {
+            const newState = { ...state }
+            delete newState[action.id]
+            return newState
+        }
+        default:
+            return state;
     }
-  }
+}

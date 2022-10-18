@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 
 import { getImagesThunk } from '../../store/image'
+import { getAllLikesThunk } from '../../store/likes';
 
 import { useParams } from 'react-router-dom';
 import coverPhoto from '../../icons/profile-cover-photo.jpeg'
@@ -25,7 +26,33 @@ function User() {
   const allImagesArr = Object.values(allImages);
 
   const userImagesArr = allImagesArr.filter((image) => image.userId == userId)
-  
+
+
+  useEffect(() => {
+    dispatch(getAllLikesThunk())
+  }, [dispatch])
+
+  const allLikes = useSelector(state => state.likes);
+  const allLikesArr = Object.values(allLikes);
+
+  const userImagesIds = userImagesArr.map((image) => image.id)
+  const likedImagesIds = allLikesArr.map((like) => like.imageId)
+
+  console.log('User image Ids----', userImagesIds)
+  // console.log('Liked Images Ids----', likedImagesIds)
+
+  const userLikedImages = []
+
+  likedImagesIds.forEach((like) => {
+    if (userImagesIds.includes(like)) {
+      userLikedImages.push(like)
+    }
+  })
+
+  // console.log('User liked images', userTotalLikes)
+
+  const totalUserFaves = userLikedImages.length
+
 
   useEffect(() => {
     if (!userId) {
@@ -89,7 +116,7 @@ function User() {
                 <div style={{ color: 'grey' }}>images</div>
               </div>
               <div className='user-photo-details-info'>
-                <div style={{ fontSize: '22px' }}>0</div>
+                <div style={{ fontSize: '22px' }}>{totalUserFaves}</div>
                 <div style={{ color: 'grey' }}>faves</div>
               </div>
             </div>

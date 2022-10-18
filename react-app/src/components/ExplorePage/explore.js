@@ -20,8 +20,6 @@ const GetAllImages = () => {
         return null
     }
 
-    // Kevin was here
-
     return (
 
         <div className="explore-container">
