@@ -52,3 +52,16 @@
     padding-left:20px;
 
 }
+
+#star-like i {
+    font-size: 1.5rem;
+    margin: 0 .8rem;
+}
+
+#star-like i:hover {
+    opacity: .8;
+    cursor: pointer;
+}
+#star-like i {
+    color: rgb(18, 16, 16);
+}
