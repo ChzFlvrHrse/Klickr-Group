@@ -118,6 +118,7 @@ if (allUsersArray.length && allImagesArray.length) {
             </div>
             <div id='image-info'>
                 <div>
+                    
                     {owner && (<div id="user">{owner.first_name} {owner.last_name}</div>)}
                     <div id='title'>{allImagesFiltered[0].title}</div>
                     <div id="description">{allImagesFiltered[0].description}</div>
