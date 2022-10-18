@@ -6,7 +6,7 @@ import defaultpic from "../../icons/defaultpic.png";
 import LogoutButton from "../auth/LogoutButton";
 import "./ProfileButton.css";
 
-export default function ProfileButton() {
+export default function ProfileButton({users}) {
   const dispatch = useDispatch();
   const history = useHistory();
   const sessionUser = useSelector((state) => state.session.user);
@@ -43,11 +43,12 @@ export default function ProfileButton() {
       {showMenu && (
         <div className="profile-dropdown">
           { sessionUser && (
-            <ul className="profile-list">
-              <li className="hover-link logout-li" onClick={logout}>
-                <div className="profile-list-item">Log Out</div>
-              </li>
-            </ul>
+            <div className="profile-list">
+               <div className="user-name-li">Bonjour {sessionUser.username}</div>
+              <div className="hover-link logout-li" onClick={logout}>
+                <div className="profile-list-item logout">Log Out</div>
+              </div>
+            </div>
           )}
         </div>
       )}
