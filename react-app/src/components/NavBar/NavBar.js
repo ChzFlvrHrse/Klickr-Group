@@ -42,7 +42,7 @@ NavBar = () => {
             Explore
           </NavLink>
         </div>
-        <div className="nav-logged-in">
+        <div className="loggedInNav">
           {/* search bar functionality */}
           <SearchBar />
           {/* search bar functionality */}
@@ -61,12 +61,12 @@ NavBar = () => {
   return (
     <>
       <nav className="nav-explore">
-      <div>
+      <div className="NavBarLeftSide">
           <NavLink to="/">
             <img className="logo" src={klickrImage} alt="logo"/>
           </NavLink>
         </div>
-        <div className="loggedInNav">
+        <div className="loggedOutSearchNav">
           {/* search bar functionality */}
           <SearchBar/>
           {/* search bar functionality */}

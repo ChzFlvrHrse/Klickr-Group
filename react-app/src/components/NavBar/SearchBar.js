@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
+import { Link } from 'react-router-dom'
 
 import { getImagesThunk } from "../../store/image";
 import { getAllUsersThunk } from "../../store/AllUsers";
@@ -84,12 +85,13 @@ const SearchBar = () => {
               filteredImagesArray.map((image) => {
                 return (
                   <div className="SearchImageMappedContainer" key={image.id}>
+                     <Link to={`/images/${image.id}`}>
                     <img
                       className="SearchImageIndividual"
                       src={image.previewImageUrl}
                       alt="preview"
-                      // onClick={() => redirect to image page))}
                     />
+                    </Link>
                     <NavLink
                       className="SearchImageNavLinkTitle"
                       to={`/images/${image.id}`}
@@ -127,12 +129,14 @@ const SearchBar = () => {
               filteredUsersArray.map((user) => {
                 return (
                   <div className="SearchUserMappedContainer" key={user.id}>
+                    <NavLink
+                        to={`/users/${user.id}`}>
                     <img
                       className="SearchImageIndividual"
                       src={CouragePng}
                       alt="profile pic"
-                      // onClick={() => redirect to image page))}
                     />
+                    </NavLink>
                     <NavLink
                       className="SearchImageNavLinkTitle"
                       to={`/users/${user.id}`}
@@ -188,12 +192,14 @@ const SearchBar = () => {
                 filteredImagesArray.map((image) => {
                   return (
                     <div className="SearchImageMappedContainer" key={image.id}>
+                     <Link to={`/images/${image.id}`}>
                       <img
                         className="SearchImageIndividual"
                         src={image.previewImageUrl}
                         alt="preview"
                         // onClick={() => redirect to image page))}
                       />
+                      </Link>
                       <NavLink
                         className="SearchImageNavLinkTitle"
                         to={`/images/${image.id}`}
@@ -231,12 +237,15 @@ const SearchBar = () => {
                 filteredUsersArray.map((user) => {
                   return (
                     <div className="SearchUserMappedContainer" key={user.id}>
+                       <NavLink
+                        to={`/users/${user.id}`}>
+
                       <img
                         className="SearchImageIndividual"
                         src={CouragePng}
                         alt="profile"
-                        // onClick={() => redirect to image page))}
-                      />
+                        />
+                        </NavLink>
                       <NavLink
                         className="SearchImageNavLinkTitle"
                         to={`/users/${user.id}`}
