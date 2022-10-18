@@ -10,10 +10,14 @@
     justify-content: center;
     max-width: 100%;
 }
-
 .images-wrapper {
     display: flex;
     flex-wrap: wrap;
+    /* new */
+    justify-content: space-between;
+    gap: 10px;
+    /* new */
+
     width: 75rem;
     max-width: 80rem;
     padding: 15px;
@@ -22,11 +26,28 @@
     width: 100%;
 }
 
+    /* new */
+
+.images-wrapper > * {
+    flex: 1 1 auto;
+}
+
+    /* new */
+    /* new */
+
+
+.singleImgContainer {
+    width: auto;
+}
+
+    /* new */
+
+    
 .single-img {
     max-height:220px;
-    width: auto;
+    width: 100%;
     height: auto;
-    max-width:fit-content;
+    /* max-width:fit-content;/ */
     margin-right: 5px;
     margin-top: 5px;
     z-index: 1;
