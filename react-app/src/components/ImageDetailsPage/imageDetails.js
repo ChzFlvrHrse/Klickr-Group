@@ -44,9 +44,12 @@ function ImageDetails() {
     const allusers = useSelector((state) => state.allUsers);
     const user = useSelector((state) => state.session.user);
     const likes = useSelector(state => state.likes);
+    const comment = useSelector(state => state.comments)
 
     let likesArray = Object.values(likes);
     let filteredLikes;
+
+    let commentsArray = Object.values(comment)
 
     filteredLikes = likesArray.filter((filteredLikes, index) => filteredLikes.userId == user.id)
     const userLikeId = filteredLikes[0]
@@ -106,7 +109,15 @@ if (allUsersArray) {
             </div>
             <div id='image-info'>
                 <div>
-                    {owner && (<h1>{owner.username}</h1>)}
+                    {owner && (<div id="username">{owner.username}</div>)}
+                </div>
+                <div id='faves'>
+                  {likesArray.length}
+                  <div className="tag">faves</div>
+                </div>
+                <div id='comment-talley'>
+                  {commentsArray.length}
+                  <div className="tag">comments</div>
                 </div>
             </div>
         </>
