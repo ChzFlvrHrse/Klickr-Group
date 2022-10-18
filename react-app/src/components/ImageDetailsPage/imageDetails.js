@@ -133,7 +133,7 @@ if (allUsersArray.length && allImagesArray.length) {
                   <div className="tag">faves</div>
                 </div>
                 <div id='comment-talley'>
-                  {commentsArray.length}
+                  {filteredComments.length}
                   <div className="tag">comments</div>
                 </div>
                 <div id="date">
