@@ -50,6 +50,8 @@ function ImageDetails() {
     let filteredLikes;
 
     let commentsArray = Object.values(comment)
+    let filteredComments = commentsArray.filter(comments => comments.imageId == id)
+    console.log(filteredComments)
 
     filteredLikes = likesArray.filter((filteredLikes, index) => filteredLikes.userId == user.id)
     const userLikeId = filteredLikes[0]
@@ -71,7 +73,7 @@ function ImageDetails() {
     const allUsersArray = Object.values(allusers);
 
     allImagesFiltered = allImagesArray.filter((filteredImages, index) => filteredImages.id == id)
-    // console.log(allImagesFiltered[0])
+    // console.log(allImagesFiltered[0].created_at)
 
 if (allUsersArray) {
   imageOwner = allUsersArray.filter(user => user.id == allImagesFiltered[0].userId)
@@ -103,14 +105,21 @@ if (allUsersArray) {
                     <img src={allImagesFiltered[0].previewImageUrl} />
                 </div>
                 <div id="star-like">
-                    {filteredLikes.length ? <i class="fa-solid fa-star" onClick={toggleLikes}></i> : <i class="fa-regular fa-star" onClick={toggleLikes}></i>}
+                    {filteredLikes.length ? <i class="fa-solid fa-star" onClick={toggleLikes} ></i> : <i class="fa-regular fa-star" onClick={toggleLikes}></i>}
                     <Link to="/upload"><i class="fa-solid fa-download"></i></Link>
                 </div>
             </div>
             <div id='image-info'>
                 <div>
                     {owner && (<div id="username">{owner.username}</div>)}
-                    <div>{allImagesFiltered[0].title}</div>
+                    <div id='title'>{allImagesFiltered[0].title}</div>
+                    <div id="description">{allImagesFiltered[0].description}</div>
+                    <div id="bottom-border"></div>
+                    {filteredComments.map(comment => (
+                        <div key={comment.id}>
+                            {comment.body}
+                        </div>
+                    ))}
                 </div>
                 <div id='faves'>
                   {likesArray.length}
@@ -119,6 +128,9 @@ if (allUsersArray) {
                 <div id='comment-talley'>
                   {commentsArray.length}
                   <div className="tag">comments</div>
+                </div>
+                <div id="date">
+                  Uploaded on {allImagesFiltered[0].created_at}
                 </div>
             </div>
         </>

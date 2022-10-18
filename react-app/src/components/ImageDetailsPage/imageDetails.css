@@ -5,13 +5,14 @@
     background-color: #212124;
     padding: 6rem 0;
     width: 100%;
-    margin-bottom: -4rem;
+    margin-bottom: -5rem;
 }
 
 #back-explore {
     display: flex;
     justify-content: flex-start;
-    margin-bottom: 5rem;
+    margin-bottom: 2rem;
+    width: fit-content
 }
 
 #back-explore:hover {
@@ -47,6 +48,7 @@ div #star-like {
 
 #star-like i:hover {
     opacity: .8;
+    cursor: pointer;
 }
 
 #image-info {
@@ -54,27 +56,52 @@ div #star-like {
     justify-content: center;
     background-color: #f3f5f6;
     height: 50%;
-    padding: 0 25rem;
     padding-top: 2.5rem;
+    width: 100%;
 }
 
 #username {
-    margin-right: 25rem;
+    margin-right: 15rem;
     font-size: 1.5rem;
+    font-weight: 600;
     padding-bottom: 1rem;
 }
 
+#title {
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+#description {
+    font-size: .9rem;
+    font-weight: 400;
+}
+
 #faves {
-    padding-right: 3rem;
+    margin-left: 3rem;
+    margin-right: 2rem;
     font-size: 1.5rem;
+    font-weight: 400;
 }
 
 #comment-talley {
     font-size: 1.5rem;
+    font-weight: 400;
 }
 
 .tag {
     font-size: .8rem;
     color: gray;
     opacity: .8;
+}
+
+#date {
+    margin-left: 3rem;
+    font-weight: 400;
+}
+
+#bottom-border {
+    border-bottom: solid gray thin;
+    margin: 1rem 0;
+    opacity: .3;
 }

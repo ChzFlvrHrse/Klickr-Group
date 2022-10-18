@@ -4,7 +4,7 @@
     column-gap: 50px;
     align-items: center;
     font-size: 22px;
-    background-color: #202023;
+    background-color: black;
     position: relative;
     top: 0;
     left: 0;
@@ -49,4 +49,8 @@ a i {
     height: 35px;
     margin-right: 26px;
     /* border-radius: 25px; */
+}
+
+.upload-icon:hover {
+    opacity: .8;
 }
