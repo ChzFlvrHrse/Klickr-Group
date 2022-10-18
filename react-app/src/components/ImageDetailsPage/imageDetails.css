@@ -55,7 +55,7 @@ div #star-like {
     display: flex;
     justify-content: center;
     background-color: #f3f5f6;
-    height: 50%;
+    height: 100%;
     padding-top: 2.5rem;
     width: 100%;
 }
@@ -100,14 +100,26 @@ div #star-like {
     font-weight: 400;
 }
 
-#bottom-border {
+.bottom-border {
     border-bottom: solid gray thin;
     margin: 1rem 0;
     opacity: .3;
 }
 
+.comment-box {
+    font-size: .8rem;
+    font-weight: 400;
+    padding-top: 1rem;
+    flex-wrap: wrap;
+}
 
-/* user image */
+.user-name {
+    padding: .02rem;
+}
+
+.body {
+    font-size: .8rem;
+}
 
 #user-image {
     width: 100%;

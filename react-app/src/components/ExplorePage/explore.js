@@ -92,7 +92,7 @@ const GetAllImages = () => {
                 <div className='images-wrapper'>
                     {allImagesArr.map((image) => (
                         <Link to={`/images/${image.id}`}>
-                            <div key={image.id}>
+                            <div className='singleImgContainer' key={image.id}>
                                 <img className='single-img' src={image.previewImageUrl} alt=''></img>
                                 <div className='hide'>
                                     {image.title}
