@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useHistory } from "react-router-dom";
 import { getOneImageThunk, getImagesThunk } from '../../store/image';
 import EditImageForm from "../ImagesForms/EditImageForm";
 import DeleteImageForm from "../ImagesForms/DeleteImageForm";
@@ -8,7 +8,7 @@ import CreateCommentForm from "../Comments/CreateCommentForm";
 import EditCommentForm from "../Comments/EditCommentForm";
 import DeleteCommentForm from "../Comments/DeleteCommentForm";
 import { getAllUsersThunk } from "../../store/AllUsers";
-import { getAllCommentsThunk, getImageCommentsThunk } from "../../store/comments";
+import { createACommentThunk, deleteACommentThunk, getAllCommentsThunk, getImageCommentsThunk } from "../../store/comments";
 import { getImageLikesThunk, createLikesThunk, deleteLikesThunk } from "../../store/likes";
 import { Modal } from "../../context/Modal";
 import "./imageDetails.css"
@@ -17,6 +17,8 @@ function ImageDetails() {
     const [showModal, setShowModal] = useState(false);
     const [showModalEdit, setShowModalEdit] = useState(false);
     const [commentState, setCommentState] = useState({});
+    const [body, setBody] = useState("")
+    let [commDelete, setCommDelete] = useState(1);
 
     const dispatch = useDispatch();
     const { id } = useParams();
@@ -42,7 +44,7 @@ function ImageDetails() {
 
     useEffect(() => {
         dispatch(getAllCommentsThunk());
-    }, [dispatch, showModal, showModalEdit, commentState]);
+    }, [dispatch, showModal, showModalEdit, commentState, commDelete]);
 
 
     // redux states
@@ -74,6 +76,18 @@ function ImageDetails() {
         }
 
     };
+
+    // handle comment submission
+    const submitComment = async (e) => {
+        e.preventDefault()
+
+        if (body.length) {
+            await dispatch(createACommentThunk(userId, id, body))
+            setBody("")
+        } else {
+            return "Bad Data"
+        }
+    }
 
     // filters
     allImagesArray = Object.values(images);
@@ -138,15 +152,20 @@ function ImageDetails() {
                                             allUsersArray.map((singleUser, index) => {
                                                 return (
                                                     <div className="user-name">
-                                                        {singleUser.id === comment.userId
-                                                            ? singleUser.first_name + " " + singleUser.last_name
+                                                        {singleUser.id == comment.userId
+                                                            ? <Link to="#" className="profile-link">{singleUser.first_name + " " + singleUser.last_name}</Link>
                                                             : ""}
+                                                        {singleUser.id == comment.userId ? <div className="comment-date">{comment.updated_at}</div>:<></>}
+                                                        <div className="edit-delete">
+                                                            {singleUser.id == comment.userId && singleUser.id == userId ? <i className="edit-comment" title="edit comment" class="fa-solid fa-pen-to-square"></i> : <></>}
+                                                            {singleUser.id == comment.userId && singleUser.id == userId ? <i onClick={async (e) => {e.preventDefault(); await dispatch(deleteACommentThunk(id, comment.id)); setCommDelete(commDelete+=1)}} className="delete-comment" title='delete' class="fa-solid fa-delete-left"></i> : <></>}
+                                                        </div>
+
                                                     </div>
                                                 );
                                             })}
                                     </div>
                                     <div className="body">{comment.body}</div>
-                                    <div>{comment.updated_at}</div>
                                     {/* edit comment */}
                                     <button
                                         // style={styles3}
@@ -162,7 +181,7 @@ function ImageDetails() {
                                                 setCommentState(comment)
                                             }}
                                         >
-                                            Edit Comment
+                                            <i title="edit comment" class="fa-solid fa-pen-to-square"></i>
                                         </button> : <></>}
                                         {showModalEdit && (
                                             <Modal onClose={() => setShowModalEdit(false)}>
@@ -175,7 +194,7 @@ function ImageDetails() {
                                             </Modal>
                                         )}
                                     </button>
-                                    
+
                                     <button
                                         // // style={styles4}
                                         onClick={() => {
@@ -190,8 +209,8 @@ function ImageDetails() {
                                                 setCommentState(comment)
                                             }}
                                         >
-                                            Delete Comment
-                                        </button>:<></>}
+                                            <i title='delete' class="fa-solid fa-delete-left"></i>
+                                        </button> : <></>}
                                         {showModal && (
                                             <Modal onClose={() => setShowModal(false)}>
                                                 <DeleteCommentForm
@@ -205,6 +224,22 @@ function ImageDetails() {
                                 </div>
                             );
                         })}
+                    <div id="create-comment">
+                        <form
+                            onSubmit={submitComment}
+                        >
+                            <textarea
+                                id="comment-here"
+                                placeholder="Add a comment"
+                                type='text'
+                                onChange={event => setBody(event.target.value)}
+                                value={body}
+                            ></textarea>
+                            <button
+                                type='submit'
+                            >Comment</button>
+                        </form>
+                    </div>
                 </div>
                 <div id='faves'>
                     {likesArray.length}
@@ -217,6 +252,9 @@ function ImageDetails() {
                 <div id="date">
                     Uploaded on {allImagesFiltered[0].created_at}
                 </div>
+                {/* <div className="bottom-border-2">
+
+                </div> */}
             </div>
         </>
     );

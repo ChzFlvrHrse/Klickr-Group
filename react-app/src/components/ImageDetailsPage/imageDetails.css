@@ -109,12 +109,51 @@ div #star-like {
 .comment-box {
     font-size: .8rem;
     font-weight: 400;
-    padding-top: 1rem;
+    padding: .5rem 1rem;
     flex-wrap: wrap;
+}
+
+.comment-box:hover {
+    background-color: white;
 }
 
 .user-name {
     padding: .02rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.user-name a {
+    color: #266dac;
+}
+
+.user-name a:hover {
+    text-decoration: underline;
+}
+
+.comment-date {
+    /* margin-left: .5rem; */
+    color: gray;
+}
+
+.edit-delete {
+    display: flex;
+}
+
+.edit-delete i {
+    padding: 0 .5rem;
+    font-size: 1rem;
+    opacity: .3;
+    z-index: -1;
+}
+
+.edit-delete i:hover {
+    opacity: 1;
+    cursor: pointer;
+}
+
+.comment-box:hover .edit-delete i{
+    z-index: 1;
 }
 
 .body {
@@ -127,3 +166,24 @@ div #star-like {
 #user-imageDetails {
     width: 100%;
 }
+
+#create-comment {
+    display: flex;
+    padding: .5rem 1rem;
+    width: 100%;
+}
+
+textarea {
+    height: 5.5rem;
+    width: 153%;
+    border: solid gray thin;
+}
+
+textarea:focus {
+    border: solid blue thin;
+}
+
+/* .bottome-border-2 {
+    display: grid;
+    border-bottom: solid black;
+} */
