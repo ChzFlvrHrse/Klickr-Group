@@ -23,8 +23,8 @@ const GetAllImages = () => {
     // Kevin was here
 
     return (
-        
-        <div id="explore-container">
+
+        <div className="explore-container">
             <div className='images-container'>
             <h2 className='explore-title'>Explore</h2>
                 <div className='images-wrapper'>
