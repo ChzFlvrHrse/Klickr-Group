@@ -3,7 +3,7 @@
     position: absolute;
     width: 100%;
     height: 100%;
-    animation: opacitychange 5s infinite ease-in-out;
+    /* animation: opacitychange 5s infinite ease-in-out; */
     /* transition: 200ms opacitychange ease-in-out; */
 }
 
@@ -14,7 +14,14 @@
 .imageCarouselArray {
     width: 100%;
     height: 100%;
-    transition: 200ms opacity ease-in-out;
+    /* transition: 200ms opacity ease-in-out; */
+    transition: 300ms opacity ease-in-out;
+    opacity: 0;
+    transition-delay: 0;
+}
+
+.imageCarouselArray[data-active] {
+    opacity: 1;
 }
 
 /* animation */
