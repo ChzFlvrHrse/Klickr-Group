@@ -5,6 +5,17 @@ from app.models import Like, db
 
 Likes_routes = Blueprint('likes', __name__)
 
+# Get total Likes
+@Likes_routes.route('/')
+# @login_required
+def allImageLikes():
+    all_likes = Like.query.all()
+    if all_likes == None:
+        return "there are no likes"
+    likes = {"likes": [like.to_dict() for like in all_likes]}
+    return likes
+
+
 # Get All Likes by image id (move to images routes)
 # image/comments/imageid
 @Likes_routes.route('/<int:id>/likes')
@@ -14,6 +25,18 @@ def imageLikes(id):
     if all_likes == None:
         return "image has no likes"
     likes = {like.id: like.to_dict() for like in all_likes}
+    return likes
+
+
+
+    # get all likes total
+@Likes_routes.route('/likes/all')
+# @login_required
+def allLikes():
+    all_likes = Like.query.all()
+    likes = {like.id: like.to_dict() for like in all_likes}
+    # likes = {"likes":  [like.to_dict() for like in all_likes]}
+
     return likes
 
 

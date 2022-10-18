@@ -124,7 +124,7 @@ const SearchBar = () => {
           }
         >
           {/* search return map */}
-          <div className="FilteredreturnContainer">
+          <div className="FilteredUserReturnContainer">
             {filteredUsersArray &&
               filteredUsersArray.map((user) => {
                 return (
@@ -132,8 +132,8 @@ const SearchBar = () => {
                     <NavLink
                         to={`/users/${user.id}`}>
                     <img
-                      className="SearchImageIndividual"
-                      src={CouragePng}
+                      className="SearchUserImageIndividual"
+                      src={user.previewImageUrl}
                       alt="profile pic"
                     />
                     </NavLink>
@@ -232,7 +232,7 @@ const SearchBar = () => {
             }
           >
             {/* search return map */}
-            <div className="FilteredreturnContainer">
+            <div className="FilteredUserReturnContainer">
               {filteredUsersArray &&
                 filteredUsersArray.map((user) => {
                   return (
@@ -241,8 +241,8 @@ const SearchBar = () => {
                         to={`/users/${user.id}`}>
 
                       <img
-                        className="SearchImageIndividual"
-                        src={CouragePng}
+                        className="SearchUserImageIndividual"
+                        src={user.previewImageUrl}
                         alt="profile"
                         />
                         </NavLink>
