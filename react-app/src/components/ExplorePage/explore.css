@@ -86,3 +86,14 @@
 #star-like i {
     color: rgb(18, 16, 16);
 }
+
+/* .explore-like-container{
+    display: flex;
+    position: absolute;
+    bottom:2px;
+    width:100px;
+    height:30px;
+    background-color: red;
+    z-index: 2;
+    color: black
+} */
