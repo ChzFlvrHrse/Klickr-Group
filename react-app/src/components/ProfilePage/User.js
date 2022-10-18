@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from 'react';
+
 import { useParams } from 'react-router-dom';
 import profilePic from '../../icons/defaultpic.png'
 import coverPhoto from '../../icons/profile-cover-photo.jpeg'
 import './User.css'
 
 function User() {
+let createdAtDate;
   const [user, setUser] = useState({});
   const { userId } = useParams();
+
+
 
   useEffect(() => {
     if (!userId) {
@@ -18,6 +22,13 @@ function User() {
       setUser(user);
     })();
   }, [userId]);
+
+if (user.id == userId){
+  // get a string of the createdat date only
+  const createdAtObject = user.created_at
+  const createdAtString = JSON.stringify(createdAtObject)
+ createdAtDate = createdAtString.slice(1, 17)
+}
 
   if (!user) {
     return null;
@@ -31,13 +42,13 @@ function User() {
       <div className='user-title-container'>
         <div className='profile-pic-name'>
           <div>
-            <img className='user-profile-pic' src={profilePic}  alt="profile preview"></img>
+            <img className='user-profile-pic' src={user.previewImageUrl}  alt="profile preview"></img>
           </div>
           <div className='user-fName-lName-username'>
-            <div style={{ fontSize: '36px', color: 'white', fontWeight: '330' }}>FirstName LastName Placeholder</div>
+            <div style={{ fontSize: '36px', color: 'white', fontWeight: '330' }}>{user.first_name} {user.last_name}</div>
             <div className='username-joined'>
               <div style={{ fontSize: '20px', color: 'white', fontWeight: '330' }}>{user.username}</div>
-              <div className='joined' style={{ fontSize: '20px', color: 'white', fontWeight: '330' }}>Joined Placeholder</div>
+              <div className='joined' style={{ fontSize: '20px', color: 'white', fontWeight: '330' }}>Joined {createdAtDate}</div>
             </div>
           </div>
         </div>
@@ -61,7 +72,7 @@ function User() {
             </div>
           </div>
           <div className='user-info-container'>
-            <div className='user-info'>Joined<div className='user-joined'>Placeholder</div></div>
+            <div className='user-info'>Joined<div className='user-joined'>{createdAtDate}</div></div>
             <div className='user-info'>Email<div className='user-email'>{user.email}</div></div>
           </div>
         </div>

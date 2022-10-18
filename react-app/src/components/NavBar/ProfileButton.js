@@ -46,7 +46,7 @@ export default function ProfileButton({ users }) {
             <div className="profile-list">
               <div className="user-name-li">Bonjour&nbsp;
               {/* <NavLink to={`/api/users/${sessionUser.id}`}> */}
-                {sessionUser.username}
+                {sessionUser.first_name}
               {/* </NavLink> */}
               </div>
               <div className="hover-link logout-li" onClick={logout}>Log Out</div>

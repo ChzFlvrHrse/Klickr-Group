@@ -70,7 +70,7 @@ export function HomePage() {
         <CarouselSplashPage />
         <div className="center">
           <div className="main">
-            <h1 className="inspiration">Welcome Back {user.username}</h1>
+            <h1 className="inspiration">Welcome Back {user.first_name}</h1>
 
             <h2 className="first-line">
               The Flickr community is home to tens of billions of photos and
