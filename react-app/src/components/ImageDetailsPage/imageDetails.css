@@ -61,6 +61,7 @@ div #star-like {
 #username {
     margin-right: 25rem;
     font-size: 1.5rem;
+    padding-bottom: 1rem;
 }
 
 #faves {
