@@ -23,7 +23,14 @@ a i {
   margin-bottom: 7px;
 }
 
-.upper-middle {
+.notsignedin-SB{
+  flex: 1;
+  width: 20rem;
+  height: 35px;
+  border-radius: 3px;
+  border: solid white 0;
+  /* opacity: 0.8; */
+ margin-left: 48rem;
 }
 .search-barNav {
   flex: 1;

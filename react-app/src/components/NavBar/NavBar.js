@@ -40,6 +40,11 @@ NavBar = () => {
             <img className="logo" src={klickrImage} />
           </NavLink>
         </div>
+        <div className="nav-logged-in">
+          {/* search bar functionality */}
+          <SearchBar />
+          {/* search bar functionality */}
+        </div>
         <div className="navbar-explore-container">
           <div className="explore-bttn-container">
             <NavLink  to="/upload">
@@ -50,7 +55,7 @@ NavBar = () => {
         </div>
       </nav>
     );
-  }
+  } if (!user) {
   return (
     <>
       <nav className="nav-explore">
@@ -59,11 +64,12 @@ NavBar = () => {
             <img className="logo" src={klickrImage} />
           </NavLink>
         </div>
-        <div className="upper-middle">
+        <div className="loggedInNav">
           {/* search bar functionality */}
-          <SearchBar />
+          <SearchBar/>
           {/* search bar functionality */}
-        </div>
+          </div>
+        
         <div className="NavBarRightSide">
           <NavLink className="log-in" to="/login">
             Log In
@@ -71,16 +77,11 @@ NavBar = () => {
           <NavLink className="sign-up" to="/signup">
             Sign Up
           </NavLink>
-         {/* <NavLink className="upload-icon" to="/upload">
-            <i class="fa-solid fa-cloud-arrow-up"></i>
-          </NavLink>
-          <NavLink to="/" className="logout-button"> 
-            <LogoutButton />
-          </NavLink> */}
+    
         </div>
       </nav>
     </>
   );
 };
-
+}
 export default NavBar;
