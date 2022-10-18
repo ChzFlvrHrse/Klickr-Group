@@ -241,8 +241,8 @@ const SearchBar = () => {
                         to={`/users/${user.id}`}>
 
                       <img
-                        className="SearchImageIndividual"
-                        src={CouragePng}
+                        className="SearchUserImageIndividual"
+                        src={user.previewImageUrl}
                         alt="profile"
                         />
                         </NavLink>
