@@ -106,7 +106,7 @@ width: 120px;
  width: 120px;
 }
 .SearchImageNavLinkTitle {
-color: red;
+color: black;
 font-weight: bold;
 position: relative;
 display: flex;
@@ -123,7 +123,7 @@ height: 17px;
   border-bottom: 1px solid black;
 }
 .errorhandlingSearchmessage {
-  color: red;
+  color: black;
 }
 
 .search-barNav {
@@ -151,7 +151,7 @@ height: 17px;
      width: 120px;
     }
     .SearchImageNavLinkTitle {
-    color: red;
+    color: black;
     font-weight: bold;
     position: relative;
     display: flex;

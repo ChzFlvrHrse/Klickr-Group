@@ -4,6 +4,7 @@ import React from "react";
 import { NavLink, Link } from "react-router-dom";
 import LogoutButton from "../auth/LogoutButton";
 import klickrLogoTitle from "../../icons/klickr-logo-title.png"
+import { CarouselSplashPage } from "./Carousel";
 
 export function HomePage() {
 
@@ -24,6 +25,7 @@ export function HomePage() {
             <NavLink className="sign-up" to='/signup'>Sign Up</NavLink>
           </div>
         </nav> */}
+        <CarouselSplashPage />
         <div className="center">
           <div className="main">
             <h1 className="inspiration">Find your inspiration.</h1>
