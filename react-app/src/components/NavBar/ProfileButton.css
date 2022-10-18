@@ -61,3 +61,7 @@
   .hover-link:hover {
     background-color: rgb(216, 207, 207);
   }
+
+  .profile-icon:hover {
+    cursor: pointer;
+  }

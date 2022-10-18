@@ -50,6 +50,9 @@ a i {
     margin-right: 26px;
     /* border-radius: 25px; */
 }
+.upload-icon:hover {
+    cursor: pointer;
+}
 
 .loggedInNav{
 width: 40%;
