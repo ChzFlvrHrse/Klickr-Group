@@ -23,7 +23,7 @@ a i {
   margin-bottom: 7px;
 }
 
-.notsignedin-SB{
+.notsignedin-SB {
   flex: 1;
   width: 30rem;
   height: 35px;
@@ -32,6 +32,7 @@ a i {
   /* opacity: 0.8; */
 
 }
+
 .search-barNav {
   flex: 1;
   width: 50rem;
@@ -60,7 +61,7 @@ a i {
   height: fit-content;
   width: 100%;
   z-index: 2;
-  background-color: rgba(255, 255, 255, 0.797);
+  background-color: rgba(255, 255, 255);
   top: 64px;
   left: 0px;
   display: flex;
@@ -72,55 +73,73 @@ a i {
 .HiddenResult {
   display: none;
 }
+
 .Filteredimages-container {
-    display: flex;
-  padding-top: 5px;
+  display: flex;
+  justify-content: right;
+  padding: 8px;
   width: 100%;
   height: fit-content;
-}
-.Filtereduser-container {
-    display: flex;
-  padding-top: 5px;
-  width: 100%;
-  height: fit-content;
-  ;
 }
 
-.FilteredreturnContainer::-webkit-scrollbar {
-    display: none;
-    /* -ms-overflow-style: none */
-    /* does this work at all??? */
+.Filtereduser-container {
+  display: flex;
+  padding: 5px;
+  width: 100%;
+  height: fit-content;
+  border-bottom: 1px solid black;
+  box-shadow: 0px 15px 10px -15px #111;
+}
+
+.FilteredUserReturnContainer {
+  display: flex;
+  flex-direction: row;
+  column-gap: 30px;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  height: fit-content;
+  width: fit-content;
+  width: 100%;
 }
 
 .FilteredreturnContainer {
   display: flex;
   flex-direction: row;
-  justify-content: center;
   column-gap: 30px;
   overflow-x: scroll;
   overflow-y: hidden;
   height: fit-content;
+  width: fit-content;
   border-bottom: 1px solid black;
   width: 100%;
 }
+
 .SearchImageMappedContainer {
-height: 120px;
-width: 120px;
+  height: 120px;
+  width: 120px;
 }
 
 .SearchImageIndividual {
- height: 100px;
- width: 120px;
+  height: 100px;
+  width: 120px;
 }
+
+.SearchUserImageIndividual {
+  height: 100px;
+  width: 120px;
+  border-radius: 100px;
+}
+
 .SearchImageNavLinkTitle {
-color: black;
-font-weight: bold;
-position: relative;
-display: flex;
-flex-wrap: nowrap;
-overflow: hidden;
-bottom: 5px;
-height: 17px;
+  display: flex;
+  flex-wrap: nowrap;
+  position: relative;
+  overflow: hidden;
+  color: black;
+  font-weight: 100;
+  bottom: 5px;
+  height: 17px;
+
 }
 
 .errorHandlingSearchContainer {
@@ -129,8 +148,11 @@ height: 17px;
   width: 100%;
   border-bottom: 1px solid black;
 }
+
 .errorhandlingSearchmessage {
-  color: black;
+  color: red;
+  padding: 8px;
+  font-size: 18px;
 }
 
 .search-barNav {
@@ -149,21 +171,22 @@ height: 17px;
 
 
 .SearchUserMappedContainer {
-    height: 120px;
-    width: 120px;
-    }
+  height: 120px;
+  width: 120px;
+}
 
-    .SearchImageIndividual {
-     height: 100px;
-     width: 120px;
-    }
-    .SearchImageNavLinkTitle {
-    color: black;
-    font-weight: bold;
-    position: relative;
-    display: flex;
-    flex-wrap: nowrap;
-    overflow: hidden;
-    bottom: 5px;
-    height: 17px;
-    }
+.SearchImageIndividual {
+  height: 100px;
+  width: 120px;
+}
+
+.SearchImageNavLinkTitle {
+  color: black;
+  font-weight: bold;
+  position: relative;
+  display: flex;
+  flex-wrap: nowrap;
+  overflow: hidden;
+  bottom: 5px;
+  height: 17px;
+}
