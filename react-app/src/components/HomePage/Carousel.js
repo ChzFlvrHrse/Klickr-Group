@@ -138,12 +138,12 @@ export function CarouselSplashPage() {
                 }
               >
                 <div className="BackgroundImageCarouselTitle">
-                  <NavLink to={`/images/${imageFiltered[0].id}`}>
+                  <NavLink className="BackgroundImageCarouselTitle" to={`/images/${imageFiltered[0].id}`}>
                     {image.title}
                   </NavLink>
                 </div>
                 <div className="BackgroundImageCarouselAuthor">
-                  <NavLink to={`/users/${imageFiltered[0].userId}`}>
+                  <NavLink className="BackgroundImageCarouselAuthor" to={`/users/${imageFiltered[0].userId}`}>
                     By {image.author}
                   </NavLink>
                 </div>
