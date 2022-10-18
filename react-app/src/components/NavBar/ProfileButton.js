@@ -54,7 +54,7 @@ export default function ProfileButton({ users }) {
                   className="profile-page-reroute"
                   to={`/users/${sessionUser.id}`}
                 >
-                  {sessionUser.first_name} {sessionUser.last_name}{" "}
+                  {sessionUser.username}! {" "}
                 </NavLink>
               </div>
               <div className="hover-link logout-li" onClick={logout}>
