@@ -106,7 +106,7 @@ if (allUsersArray) {
                 </div>
                 <div id="star-like">
                     {filteredLikes.length ? <i class="fa-solid fa-star" onClick={toggleLikes} ></i> : <i class="fa-regular fa-star" onClick={toggleLikes}></i>}
-                    <Link to="/upload"><i class="fa-solid fa-download"></i></Link>
+                    <Link to="/upload" ><i class="fa-solid fa-download" title='upload photo'></i></Link>
                 </div>
             </div>
             <div id='image-info'>
@@ -126,7 +126,7 @@ if (allUsersArray) {
                   <div className="tag">faves</div>
                 </div>
                 <div id='comment-talley'>
-                  {commentsArray.length}
+                  {filteredComments.length}
                   <div className="tag">comments</div>
                 </div>
                 <div id="date">
