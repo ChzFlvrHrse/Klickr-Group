@@ -68,23 +68,42 @@
     border: 1px solid rgb(203, 203, 203);
     background-color: white;
     width: 70em;
-    height: 40em;
+    height: 100%;
     margin-top: 30px;
 }
 
 .showcase-title{
-    margin-right: 50em;
+    margin-right: 55em;
 }
 
 .user-photos-container{
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid grey;
-    width: 55em;
-    height: 80em;
-    margin-bottom: 30px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 3px;
+
+    width: 60em;
+    max-width: 60em;
+    padding: 15px;
+    margin-top: -10px;
+    margin-bottom: 20px;
+}
+
+.user-photos-container > * {
+    flex: 1 1 auto;
+}
+.user-singleImgContainer {
+    width: auto;
+}
+
+.user-single-img {
+    max-height:220px;
+    width: 100%;
+    height: auto;
+    max-width:fit-content;
+    margin-right: -50px;
+    margin-top: 5px;
+
 }
 
 .user-photo-details-container{
