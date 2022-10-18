@@ -2,6 +2,8 @@ from email.policy import default
 from .db import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
+from datetime import datetime
+
 
 
 class User(db.Model, UserMixin):
@@ -13,6 +15,7 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(40), nullable=False, unique=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
     previewImageUrl = db.Column(db.String, nullable=True, default="https://creazilla-store.fra1.digitaloceanspaces.com/emojis/55737/grinning-face-with-big-eyes-emoji-clipart-xl.png")
+    created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     # password = db.Column(db.VARCHAR(25), nullable=False)
     hashed_password = db.Column(db.String(255), nullable=False)
 
@@ -39,5 +42,6 @@ class User(db.Model, UserMixin):
             'last_name': self.last_name,
             'username': self.username,
             'email': self.email,
-            'previewImageUrl': self.previewImageUrl
+            'previewImageUrl': self.previewImageUrl,
+            'created_at': self.created_at,
         }
