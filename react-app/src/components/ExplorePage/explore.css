@@ -1,26 +1,19 @@
-#explore-container {
+.explore-container {
     background: #f3f5f6;
-    height: 100%;
-    width: 100%; 
     display:flex;
     justify-content: center;
-    margin-top:5rem;
-  
 }
 
 .images-container {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     max-width: 100%;
-    flex-direction: column;
-    
-
 }
 
 .images-wrapper {
     display: flex;
     flex-wrap: wrap;
-   
     width: 75rem;
     max-width: 80rem;
     padding: 15px;
@@ -30,9 +23,8 @@
 }
 
 .single-img {
-    display: flex;
     max-height:220px;
-    width: auto; 
+    width: auto;
     height: auto;
     max-width:fit-content;
     margin-right: 5px;
@@ -58,6 +50,5 @@
     font-weight: 300;
     padding-top: 20px;
     padding-left:20px;
-   
-} 
 
+}
