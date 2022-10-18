@@ -8,16 +8,10 @@ import {
   getAllCommentsThunk,
   getImageCommentsThunk,
 } from "../../store/comments";
-import {
-  getAllLikesThunk,
-  createLikesThunk,
-  deleteLikesThunk,
-} from "../../store/likes";
+import { createLikesThunk, deleteLikesThunk } from "../../store/likes";
 import "./explore.css";
 
 const GetAllImages = () => {
-  const id = 4;
-
   // toggle likes button
   // likes length
 
@@ -25,7 +19,7 @@ const GetAllImages = () => {
   // Amount of comments
 
   const [commentState, setCommentState] = useState(false);
-  const [likeState, setLikesState] = useState(false);
+  const [imageLikesState, setimageLikesState] = useState(false);
 
   const allImages = useSelector((state) => state.image);
   const allImagesArr = Object.values(allImages);
@@ -50,27 +44,22 @@ const GetAllImages = () => {
     dispatch(getAllUsersThunk());
   }, [dispatch, allUsersArray]);
 
-  useEffect(() => {
-    dispatch(getAllLikesThunk());
-  }, [dispatch]);
-
-  useEffect(() => {
-    dispatch(getAllCommentsThunk());
-  }, [dispatch]);
-
   const images = useSelector((state) => state.image);
-  const likes = useSelector((state) => state.likes);
   const allusers = useSelector((state) => state.allUsers);
   const user = useSelector((state) => state.session.user);
-  const comments = useSelector((state) => state.comments);
 
-  
-  likesArray = Object.values(likes);
   allUsersArray = Object.values(allusers);
   allImagesArray = Object.values(images);
-  commentsArray = Object.values(comments);
 
-  
+  const toggleLikes = (e, image) => {
+    e.preventDefault();
+    console.log(imageLikesState);
+    // if (!imageLikesState.likes.length) {
+    //   dispatch(createLikesThunk(imageLikesState.id));
+    // } else {
+    //   dispatch(deleteLikesThunk(imageLikesState.likes.id));
+    // }
+  };
 
   return (
     <div className="explore-container">
@@ -82,14 +71,29 @@ const GetAllImages = () => {
               <>
                 <Link to={`/images/${image.id}`}>
                   <div className="singleImgContainer" key={image.id}>
-                      <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
                     <img
                       className="single-img"
                       src={image.previewImageUrl}
                       alt=""
                     ></img>
-                    <div className="hide">{image.title}</div>
-                    <div className="hide">{user.first_name}</div>
+                    <div className="explore-image-bttm-section">
+                      <div className="hide">{image.title}</div>
+                      <div className="image-likes-section">
+                        <div
+                          id="star-icon-explore"
+                          onClick={toggleLikes}
+                          // onClick={() => {
+                          //   setimageLikesState(image, () => {
+                          //     toggleLikes();
+                          //   });
+                          // }}
+                          >
+                          <i class="fa-regular fa-star"></i>
+                        </div>
+                        <div> {image.likes.length} </div>
+                      </div>
+                    </div>
                     {/* <div className="likes-star" */}
                   </div>
                 </Link>
@@ -110,7 +114,7 @@ export default GetAllImages;
 //       <>
 //         <div key={like.id} className="explore-like-container">
 //             {like.userId == image.userId ? like.id : ""}
-//             
+//
 //         </div>
 //       </>
 //     );
