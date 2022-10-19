@@ -89,6 +89,8 @@ function ImageDetails() {
         }
     }
 
+    let createdAtDate;
+
     // filters
     allImagesArray = Object.values(images);
     allUsersArray = Object.values(allusers);
@@ -96,7 +98,18 @@ function ImageDetails() {
     if (allUsersArray && allImagesArray) {
         allImagesFiltered = allImagesArray.filter((filteredImages, index) => filteredImages.id == id)
     }
+
     // console.log(allImagesFiltered[0].created_at)
+    // Image created_at Date formatting
+    if (allImagesFiltered[0]) {
+        const createdAtObject = allImagesFiltered[0].created_at
+        const createdAtString = JSON.stringify(createdAtObject)
+        const date = createdAtString.slice(5, 8)
+        const month = createdAtString.slice(9, 12)
+        const year = createdAtString.slice(13, 17)
+        createdAtDate = `${month} ${date}, ${year}`
+        // console.log(createdAtDate)
+    }
 
     if (allUsersArray.length && allImagesArray.length) {
         imageOwner = allUsersArray.filter(user => user.id == allImagesFiltered[0].userId)
@@ -104,6 +117,7 @@ function ImageDetails() {
     if (imageOwner && allImagesFiltered) {
         owner = imageOwner[0]
     }
+
 
     // if image does not exist
     if (!allImagesFiltered.length) {
@@ -136,10 +150,17 @@ function ImageDetails() {
             </div>
             <div id='image-info'>
                 <div>
+                    <div className="owner-info-container">
+                        <div className="owner-profile-img-name">
+                            {owner && (<img className="user-profile-image" src={owner.previewImageUrl}></img>)}
 
-                    {owner && (<div id="user">{owner.first_name} {owner.last_name}</div>)}
-                    <div id='title'>{allImagesFiltered[0].title}</div>
-                    <div id="description">{allImagesFiltered[0].description}</div>
+                        </div>
+                         <div className="owner-image-info-container">
+                                {owner && (<Link className="user" to={`/users/${owner.id}`}>{owner.first_name} {owner.last_name}</Link>)}
+                                <div id='title'>{allImagesFiltered[0].title}</div>
+                                <div id="description">{allImagesFiltered[0].description}</div>
+                            </div>
+                    </div>
                     <div className="bottom-border"></div>
                     {filteredComments &&
                         filteredComments.map(comment => {
@@ -153,22 +174,27 @@ function ImageDetails() {
                                                 return (
                                                     <div className="user-name">
                                                         {singleUser.id == comment.userId
-                                                            ? <Link to="#" className="profile-link">{singleUser.first_name + " " + singleUser.last_name}</Link>
+                                                            ? <img className="comment-profile-img" src={singleUser.previewImageUrl}></img>
                                                             : ""}
-                                                        {singleUser.id == comment.userId ? <div className="comment-date">{comment.updated_at}</div> : <></>}
-                                                        <div className="edit-delete">
-                                                            {singleUser.id == comment.userId && singleUser.id == userId ? <i onClick={() => { setShowModalEdit(true); setCommentState(comment) }} className="edit-comment" title="edit comment" class="fa-solid fa-pen-to-square"></i> : <></>}
-                                                            {singleUser.id == comment.userId && singleUser.id == userId ? <i onClick={async (e) => { e.preventDefault(); await dispatch(deleteACommentThunk(id, comment.id)); setCommDelete(commDelete++) }} className="delete-comment" title='delete' class="fa-solid fa-delete-left"></i> : <></>}
-                                                            {showModalEdit && (
-                                                                <Modal onClose={() => setShowModalEdit(false)}>
-                                                                    <EditCommentForm
-                                                                        imageId={id}
-                                                                        userId={userId}
-                                                                        setShowModalEdit={setShowModalEdit}
-                                                                        oldComment={commentState}
-                                                                    />
-                                                                </Modal>
-                                                            )}
+                                                        <div className="user-name-commentDate-options">
+                                                            {singleUser.id == comment.userId
+                                                                ? <Link to={`/users/${singleUser.id}`} className="profile-link">{singleUser.first_name + " " + singleUser.last_name}</Link>
+                                                                : ""}
+                                                            {singleUser.id == comment.userId ? <div className="comment-date">{comment.updated_at.slice(0, 16)}</div> : <></>}
+                                                            <div className="edit-delete">
+                                                                {singleUser.id == comment.userId && singleUser.id == userId ? <i onClick={() => { setShowModalEdit(true); setCommentState(comment) }} className="edit-comment" title="edit comment" class="fa-solid fa-pen-to-square"></i> : <></>}
+                                                                {singleUser.id == comment.userId && singleUser.id == userId ? <i onClick={async (e) => { e.preventDefault(); await dispatch(deleteACommentThunk(id, comment.id)); setCommDelete(commDelete++) }} className="delete-comment" title='delete' class="fa-solid fa-delete-left"></i> : <></>}
+                                                                {showModalEdit && (
+                                                                    <Modal onClose={() => setShowModalEdit(false)}>
+                                                                        <EditCommentForm
+                                                                            imageId={id}
+                                                                            userId={userId}
+                                                                            setShowModalEdit={setShowModalEdit}
+                                                                            oldComment={commentState}
+                                                                        />
+                                                                    </Modal>
+                                                                )}
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 );
@@ -208,7 +234,7 @@ function ImageDetails() {
                     <div className="tag">comments</div>
                 </div>
                 <div id="date">
-                    Uploaded on {allImagesFiltered[0].created_at}
+                    Taken on {`${createdAtDate}`}
                 </div>
                 {/* <div className="bottom-border-2">
 

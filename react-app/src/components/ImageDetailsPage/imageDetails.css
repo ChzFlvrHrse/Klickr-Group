@@ -19,7 +19,8 @@
     text-decoration-line: underline;
 }
 
-#back-explore i, a {
+#back-explore i,
+a {
     color: white;
     font-size: 1rem;
 }
@@ -29,7 +30,8 @@
 }
 
 .i {
-    margin-right: -2rem; }
+    margin-right: -2rem;
+}
 
 #star-like i {
     color: white;
@@ -60,16 +62,45 @@ div #star-like {
     width: 100%;
 }
 
-#user {
-    margin-right: 15rem;
+.owner-info-container{
+    display: flex;
+    flex-direction: row;
+    margin-top: -3.5rem;
+}
+
+.owner-profile-img-name{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.owner-image-info-container{
+    margin-top: 60px;
+}
+
+.user-profile-image {
+    width: 70px;
+    height: 70px;
+    border-radius: 100px;
+    margin-right: 10px;
+}
+
+.user {
+    color: black;
     font-size: 1.5rem;
     font-weight: 600;
-    padding-bottom: 1rem;
+    margin-right: 15rem;
+}
+
+.user:hover {
+    color: #266dac;
+    text-decoration: underline;
 }
 
 #title {
     font-weight: 600;
     margin-bottom: 1rem;
+    margin-top: 1rem;
 }
 
 #description {
@@ -118,13 +149,31 @@ div #star-like {
     background-color: white;
 }
 
+.comment-profile-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 100px;
+    margin-right: 20px;
+}
+
 .user-name {
-    padding: .02rem;
     display: flex;
+    flex-direction: row;
+    /* justify-content: center; */
+    padding: .02rem;
+}
+
+.user-name-commentDate-options {
+    display: flex;
+    flex-direction: row;
     justify-content: space-between;
+    gap: 20px;
 }
 
 .user-name a {
+    /* display: flex;
+    flex-direction: row;
+    justify-content: center; */
     color: #266dac;
 }
 
@@ -153,24 +202,27 @@ div #star-like {
     cursor: pointer;
 }
 
-.comment-box:hover .edit-delete i{
+.comment-box:hover .edit-delete i {
     z-index: 1;
 }
 
 .body {
     font-size: .8rem;
+    margin-top: -20px;
+    margin-left: 60px;
 }
 
 #user-image {
     width: 100%;
 }
+
 #user-imageDetails {
     width: 100%;
 }
 
 #create-comment {
     display: flex;
-    padding-top: 1rem;
+    padding-top: 2rem;
     width: 100%;
 }
 
@@ -186,7 +238,8 @@ textarea {
     resize: none;
 }
 
-#comment-here:active, #comment-here:focus {
+#comment-here:active,
+#comment-here:focus {
     border: solid #348fdc thin;
 }
 
