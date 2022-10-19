@@ -17,6 +17,8 @@ const GetAllImages = () => {
   // track whether like state has been changed
   const [imageLiked, setImageLiked] = useState(false);
 
+  // track whether image state is changed
+  const [imageState, setImageState] = useState('');
   // track whether comments state is changed
   const [commentsState, setCommentsState] = useState(false);
   // track whether comments section is opened for user
@@ -69,8 +71,8 @@ const GetAllImages = () => {
                         className="image-likes-section"
                         // onClick={() => setCommentsModal(!commentsModal)}
                         >
-                        <div id="star-icon-explore"  onClick={() => {setCommentsModal(!commentsModal); setCommentsState(image)}}>
-                            {commentsModal == true && commentsState.id == image.id ? (
+                        <div id="star-icon-explore"  onClick={() => {setCommentsModal(!commentsModal); setImageState(image)}}>
+                            {commentsModal == true && imageState.id == image.id ? (
                               <i class="fa-solid fa-comment"></i>
                             ) : (
                               <i class="fa-regular fa-comment"></i>
@@ -79,12 +81,13 @@ const GetAllImages = () => {
                           {commentsModal && (
                             <Modal onClose={() => setCommentsModal(false)}>
                               <ExploreImageCommments
-                                image={image}
+                                users={allUsersArray}
+                                image={imageState}
                                 user={user}
                                 setCommentsModal={setCommentsModal}
                                 commentsModal={commentsModal}
-                                setCommentsState={setCommentsState}
-                                commentsState={commentsState}
+                                // setCommentsState={setCommentsState}
+                                // commentsState={commentsState}
                               />
                             </Modal>
                           )}
