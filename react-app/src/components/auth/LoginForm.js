@@ -46,9 +46,7 @@ const LoginForm = () => {
               </h4>
             </div>
             <div className='login-errors'>
-              {errors.map((error, ind) => (
-                <div key={ind}>{error}</div>
-              ))}
+            {errors.length ? "Email or Password is incorrect" : <></>}
             </div>
             <div className='label-input'>
               <label>Email address</label>
