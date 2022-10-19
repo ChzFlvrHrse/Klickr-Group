@@ -111,5 +111,6 @@
     color: black;
     margin-left: 5px;
     margin-top: 20px;
-    padding-bottom:5px
+    padding-bottom:5px;
+    margin-left:-0.2px;
   }
