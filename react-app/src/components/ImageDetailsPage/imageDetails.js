@@ -155,11 +155,11 @@ function ImageDetails() {
                             {owner && (<img className="user-profile-image" src={owner.previewImageUrl}></img>)}
 
                         </div>
-                         <div className="owner-image-info-container">
-                                {owner && (<Link className="user" to={`/users/${owner.id}`}>{owner.first_name} {owner.last_name}</Link>)}
-                                <div id='title'>{allImagesFiltered[0].title}</div>
-                                <div id="description">{allImagesFiltered[0].description}</div>
-                            </div>
+                        <div className="owner-image-info-container">
+                            {owner && (<Link className="user" to={`/users/${owner.id}`}>{owner.first_name} {owner.last_name}</Link>)}
+                            <div id='title'>{allImagesFiltered[0].title}</div>
+                            <div id="description">{allImagesFiltered[0].description}</div>
+                        </div>
                     </div>
                     <div className="bottom-border"></div>
                     {filteredComments &&
