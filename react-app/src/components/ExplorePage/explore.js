@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { getImagesThunk } from "../../store/image";
 import { Link } from "react-router-dom";
 import { getAllUsersThunk } from "../../store/AllUsers";
-import { ModalExplore } from "../../context/ModalExplore";
 import ExploreImageLikes from "./ExploreLikes";
 import ExploreImageCommments from "./ExploreComments";
 import "./explore.css";
@@ -18,7 +17,7 @@ const GetAllImages = () => {
   const [imageLiked, setImageLiked] = useState(false);
 
   // track whether image state is changed
-  const [imageState, setImageState] = useState('');
+  const [imageState, setImageState] = useState("");
   // track whether comments state is changed
   const [commentsState, setCommentsState] = useState(false);
   // track whether comments section is opened for user
@@ -70,16 +69,22 @@ const GetAllImages = () => {
                       <div
                         className="image-likes-section"
                         // onClick={() => setCommentsModal(!commentsModal)}
+                      >
+                        <div
+                          id="star-icon-explore"
+                          onClick={() => {
+                            setCommentsModal(!commentsModal);
+                            setImageState(image);
+                          }}
                         >
-                        <div id="star-icon-explore"  onClick={() => {setCommentsModal(!commentsModal); setImageState(image)}}>
-                            {commentsModal == true && imageState.id == image.id ? (
-                              <i class="fa-solid fa-comment"></i>
-                            ) : (
-                              <i class="fa-regular fa-comment"></i>
-                            )}
-
-                          {commentsModal && (
-                            <ModalExplore onClose={() => setCommentsModal(false)}>
+                          {commentsModal == true &&
+                          imageState.id == image.id ? (
+                            <i class="fa-solid fa-comment"></i>
+                          ) : (
+                            <i class="fa-regular fa-comment"></i>
+                          )}
+                          <div className={commentsModal && image.id == imageState.id ? 'commentBox' : "hiddenComment"}>
+                            {commentsModal && (
                               <ExploreImageCommments
                                 users={allUsersArray}
                                 image={imageState}
@@ -89,8 +94,8 @@ const GetAllImages = () => {
                                 // setCommentsState={setCommentsState}
                                 // commentsState={commentsState}
                               />
-                            </ModalExplore>
-                          )}
+                            )}
+                          </div>
                         </div>
 
                         <div> {image.comments.length} </div>
