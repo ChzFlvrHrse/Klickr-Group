@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getImagesThunk } from "../../store/image";
-
+import { Link } from "react-router-dom";
 import { getAllUsersThunk } from "../../store/AllUsers";
-import { createLikesThunk, deleteLikesThunk } from "../../store/likes";
 
 import ExploreImageLikes from "./ExploreLikes";
 import "./explore.css";
@@ -51,9 +50,8 @@ const GetAllImages = () => {
           {allImagesArr.map((image) => {
             return (
               <>
-                {/* <Link to={`/images/${image.id}`}> */}
+                <Link to={`/images/${image.id}`}>
                 <div className="singleImgContainer" key={image.id}>
-                  {/* <i class="fa-solid fa-star"></i> */}
                   <img
                     className="single-img"
                     src={image.previewImageUrl}
@@ -73,12 +71,11 @@ const GetAllImages = () => {
                         />
                       </div>
                     </div>
-                    {/* likes and comments section */}
                     <div> {image.likes.length} </div>
+                    {/* likes and comments section */}
                   </div>
-                  {/* <div className="likes-star" */}
                 </div>
-                {/* </Link> */}
+                </Link>
               </>
             );
           })}
