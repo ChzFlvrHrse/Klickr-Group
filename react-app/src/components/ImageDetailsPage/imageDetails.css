@@ -110,6 +110,7 @@ div #star-like {
     font-size: .8rem;
     font-weight: 400;
     padding: .5rem 1rem;
+    padding-left: 0rem;
     flex-wrap: wrap;
 }
 
@@ -169,18 +170,46 @@ div #star-like {
 
 #create-comment {
     display: flex;
-    padding: .5rem 1rem;
+    padding-top: 1rem;
     width: 100%;
+}
+
+#create-comment form {
+    width: 100%
 }
 
 textarea {
     height: 5.5rem;
-    width: 153%;
+    width: 99%;
     border: solid gray thin;
+    border-radius: .3rem;
+    resize: none;
 }
 
-textarea:focus {
-    border: solid blue thin;
+#comment-here:active, #comment-here:focus {
+    border: solid #348fdc thin;
+}
+
+#submit-container {
+    display: flex;
+    justify-content: flex-end;
+
+}
+
+#submit-comment {
+    color: white;
+    background-color: #348fdc;
+    padding: .5rem 1rem;
+    margin-top: .5rem;
+    border-radius: .3rem;
+    border: none;
+    font-size: 1rem;
+    width: 7rem
+}
+
+#submit-comment:hover {
+    opacity: .8;
+    cursor: pointer;
 }
 
 /* .bottome-border-2 {

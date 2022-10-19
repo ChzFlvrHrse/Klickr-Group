@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { getImagesThunk } from '../../store/image'
 import { getAllLikesThunk } from '../../store/likes';
 
-import { useParams } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 import coverPhoto from '../../icons/profile-cover-photo.jpeg'
 import './User.css'
 
@@ -105,7 +105,9 @@ function User() {
           <div className='user-photos-container'>
             {userImagesArr.map((image) =>
               <div className='user-singleImgContainer'>
-                <img className='user-single-img' src={image.previewImageUrl}></img>
+                <NavLink to={`/images/${image.id}`}>
+                  <img className='user-single-img' src={image.previewImageUrl}></img>
+                </NavLink>
               </div>
             )}
           </div>
