@@ -28,9 +28,10 @@ a i {
     flex-direction: row;
     align-items: center;
     flex-wrap: nowrap;
-    width: fit-content;
+    /* width: fit-content; */
     margin-left: -5px;
     column-gap: 20px;
+    margin-right:20px;
 
 }
 

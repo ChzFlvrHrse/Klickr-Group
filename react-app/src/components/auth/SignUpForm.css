@@ -7,3 +7,129 @@
 #repeat {
     margin-left: 1rem;
 }
+
+body {
+    background: url(https://media.istockphoto.com/vectors/wonderful-morning-in-the-blue-mountains-vector-id476098860?k=20&m=476098860&s=612x612&w=0&h=It1CiYxQDGlhdrYDXT-4gDwZWwrXjoVwhBe3qVGVZlk=);
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100%;
+}
+
+.signup-container {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    margin-top: 6rem;
+    
+}
+
+.inner-signup {
+    display: flex;
+    align-items: center;
+    border: solid white;
+    border-radius: .3rem;
+    justify-items: center;
+    background-color: white;
+}
+
+.signup-form {
+    display: grid;
+    justify-items: center;
+    width: 22rem;
+
+}
+
+#signup-banner {
+    display: grid;
+    justify-content: space-around;
+}
+
+#circles-container {
+    display: flex;
+    justify-content: center;
+
+}
+
+#circles {
+    height: 1.5rem;
+    width: 1.5rem;
+    margin-top: .8rem;
+    padding-bottom: .7rem;
+}
+
+#to-klickr {
+    font-size: 1.3rem;
+    font-weight: 400;
+    margin: .5rem 0;
+}
+
+.label-input {
+    display: flex;
+    justify-content: center;
+}
+
+.label-input label {
+    font-size: .75rem;
+    position: absolute;
+    margin-top: 1.3rem;
+    margin-right: 13rem;
+    opacity: .6;
+}
+
+#password {
+    margin-right: 14.5rem;
+}
+
+.label-input input {
+    width: 18rem;
+    height: 3.5rem;
+    margin: 1rem;
+    border-radius: .3rem;
+    font-size: 1rem;
+    border: solid .1rem black;
+}
+
+.label-input:focus {
+    border-color: #348fdc;
+    color:#348fdc;
+}
+
+.button {
+    display: flex;
+    margin: .5rem 0;
+    margin-bottom: 1rem;
+}
+
+.button button {
+    height: 2.5rem;
+    width: 18.5rem;
+    color: white;
+    background-color: #348fdc;
+    border-radius: .3rem;
+    border: solid 0;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.button button:hover {
+    opacity: .9;
+}
+
+/* name headers displaced */
+#labelInputSignUpName {
+    margin-left: -18px;
+}
+
+
+.signup-form-errors {
+    color: red;
+    font-size: 1rem;
+    margin-right: 3px;
+   
+}
+
+.signup-errors-wrapper{
+padding: 8px;
+margin-left: 3px;
+}

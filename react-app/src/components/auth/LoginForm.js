@@ -34,11 +34,6 @@ const LoginForm = () => {
 
   return (
     <>
-      <div className='errors'>
-        {errors.map((error, ind) => (
-          <div key={ind}>{error}</div>
-        ))}
-      </div>
       <div className='login-container'>
         <div className='inner-login'>
           <form className='login-form' onSubmit={onLogin}>
@@ -49,6 +44,11 @@ const LoginForm = () => {
               <h4 id="to-klickr">
                 Log in to Klickr
               </h4>
+            </div>
+            <div className='login-errors'>
+              {errors.map((error, ind) => (
+                <div key={ind}>{error}</div>
+              ))}
             </div>
             <div className='label-input'>
               <label>Email address</label>
