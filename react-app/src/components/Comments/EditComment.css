@@ -1,22 +1,55 @@
-.CreateComment-outer {
-    display: grid;
-    justify-content: flex-start;
+.create-comment-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100px;
 }
 
-/* .CreateComment-inner {
-    width: 20rem
-} */
+.create-comment-container{
+    width: 30rem;
+    height: 25rem;
+    background-color: white;
+}
+
+.create-comment-wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+}
+
+.edit-comment-title{
+    padding: 0;
+    margin: 0;
+}
+
+.errorHandlingContainer{
+    display: flex;
+    justify-content: center;
+    margin-right: 30px;
+}
+
+.UlBulletErrorStyling{
+    list-style-type: none;
+    margin: 0;
+    margin-bottom: 20px;
+}
+
+.ErrorPoints{
+    color: red;
+
+}
 
 .edit-comment-box {
-    width: 99%;
-    height: 200%;
+    width: 25rem;
+    height: 10rem;
     border-radius: .3rem;
     resize: none;
 }
 
 .done-edit-container {
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
 }
 
 .done-edit {
@@ -33,10 +66,11 @@
 }
 
 .done-edit:hover {
-    opacity: .2;
+    opacity: .8;
     cursor: pointer;
 }
 
 #cancel {
     margin-left: 8rem;
+    background-color: #979ea2;;
 }

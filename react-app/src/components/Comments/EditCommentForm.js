@@ -47,39 +47,43 @@ function EditCommentForm({ imageId, setShowModalEdit, oldComment }) {
   };
 
   return (
-    <div className="CreateComment-outer">
-      <form
-        className="CreateComment-inner"
-        onSubmit={handleSubmit2}
-        autoComplete="off"
-      >
-        <div className="errorHandlingContainer">
-          {errors.length > 0 && (
-            <div className="HeaderErrorStyling">
-              <ul className="UlBulletErrorStyling">
-                {errors.map((error, idx) => (
-                  <li className="ErrorPoints" key={idx}>
-                    {error}
-                  </li>
-                ))}
-              </ul>
+    <div className="create-comment-container">
+      <div className="create-comment-wrapper">
+        <h3 className="edit-comment-title">Edit Comment here:</h3>
+        <div>
+          <form
+            onSubmit={handleSubmit2}
+            autoComplete="off"
+          >
+            <div className="errorHandlingContainer">
+              {errors.length > 0 && (
+                <div className="HeaderErrorStyling">
+                  <ul className="UlBulletErrorStyling">
+                    {errors.map((error, idx) => (
+                      <li className="ErrorPoints" key={idx}>
+                        {error}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </div>
-          )}
+            <textarea
+              className="edit-comment-box"
+              onChange={event => setComment(event.target.value)}
+              value={comment}
+            >{comment}</textarea>
+            <div className="done-edit-container">
+              <button className="done-edit" onClick={handleSubmit} type="submit">
+                Done
+              </button>
+              <button id="cancel" className="done-edit" onClick={() => setShowModalEdit(false)} type="submit">
+                Cancel
+              </button>
+            </div>
+          </form>
         </div>
-        <textarea
-          className="edit-comment-box"
-          onChange={event => setComment(event.target.value)}
-          value={comment}
-        >{comment}</textarea>
-        <div className="done-edit-container">
-          <button className="done-edit" onClick={handleSubmit} type="submit">
-            Done
-          </button>
-          <button id="cancel" className="done-edit" onClick={() => setShowModalEdit(false)} type="submit">
-            Cancel
-          </button>
-        </div>
-      </form>
+      </div>
     </div>
   );
 }
