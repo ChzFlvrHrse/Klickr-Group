@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, useHistory } from "react-router-dom";
+import { NavLink, useHistory, useParams } from "react-router-dom";
 import * as sessionActions from "../../store/session";
 import defaultpic from "../../icons/defaultpic.png";
 import LogoutButton from "../auth/LogoutButton";
@@ -11,6 +11,10 @@ export default function ProfileButton({ users }) {
   const history = useHistory();
   const sessionUser = useSelector((state) => state.session.user);
   const [showMenu, setShowMenu] = useState(false);
+  const allImages = useSelector(state => state.image);
+  const allImagesArr = Object.values(allImages);
+
+  const { userId } = useParams();
 
   const openMenu = () => {
     if (showMenu) return;
@@ -34,6 +38,13 @@ export default function ProfileButton({ users }) {
     dispatch(sessionActions.logout());
     history.push("/");
   };
+
+  const userImagesArr = allImagesArr.filter((image) => image.userId == sessionUser.id)
+
+  // const userImagesArr = allImagesArr.filter((image) => image.userId == userId)
+ 
+
+
 
   return (
     <div>
@@ -59,9 +70,14 @@ export default function ProfileButton({ users }) {
 
               </div>
               <div upload-photo-dropdown>
+                <div className="numOfImages">
+              {userImagesArr.length} of 1,000 items
+              </div>
                 <NavLink className="profile-page-reroute-upload"
-                to={"/upload"}> Upload your Photos &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </NavLink>
+                
+                to={"/upload"}> Upload your Photos &nbsp;  </NavLink>
                 </div>
+                
               <div className="hover-link logout-li" onClick={logout}>
                 Log Out
               </div>

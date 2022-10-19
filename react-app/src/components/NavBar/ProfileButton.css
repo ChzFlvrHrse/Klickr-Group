@@ -25,7 +25,7 @@
     flex-direction: column;
     position: absolute;
     width: 8em;
-    height: 6em;
+    height: 7em;
     background-color: white;
     border: 1px solid black;
     border-radius: 2px;
@@ -36,7 +36,7 @@
 
   .logout-li {
     padding-top:10px;
-    margin-top: 24px;
+    margin-top: 14px;
     font-size: 16px;
     border-top: 1px solid rgb(235, 228, 228);
   }
@@ -90,15 +90,26 @@
     align-items: center;
     text-decoration: none;
     color: rgb(100, 100, 182);
-    margin-top: 20px;
+    /* margin-top: 20px; */
    
   }
 
-  .upload-photo-dropdown{
+ .profile-page-reroute-upload:hover{
+    text-decoration: underline;
+    color: rgb(100, 100, 182);
+  
+  }
+   .upload-photo-dropdown{
     margin-top:20px;
   }
-  .profile-page-reroute-upload:hover{
-    border-bottom: 2px solid rgb(76, 104, 182);
 
-    
+
+ 
+
+  .numOfImages {
+    font-size: 14px;
+    color: black;
+    margin-left: 5px;
+    margin-top: 20px;
+    padding-bottom:5px
   }
