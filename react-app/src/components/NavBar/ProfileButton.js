@@ -4,6 +4,7 @@ import { NavLink, useHistory, useParams } from "react-router-dom";
 import * as sessionActions from "../../store/session";
 import defaultpic from "../../icons/defaultpic.png";
 import LogoutButton from "../auth/LogoutButton";
+import circle from "../../icons/circle.png";
 import "./ProfileButton.css";
 
 export default function ProfileButton({ users }) {
@@ -70,14 +71,14 @@ export default function ProfileButton({ users }) {
 
               </div>
               <div upload-photo-dropdown>
+                <div className="three-item-container">
                 <div className="numOfImages">
               {userImagesArr.length} of 1,000 items
               </div>
-                <NavLink className="profile-page-reroute-upload"
-                
-                to={"/upload"}> Upload your Photos &nbsp;  </NavLink>
+                <NavLink className="profile-page-reroute-upload"              
+                to={"/upload"}> <img className="circle-nav" src={circle}></img> Upload your Photos &nbsp;  </NavLink>
                 </div>
-                
+                </div>
               <div className="hover-link logout-li" onClick={logout}>
                 Log Out
               </div>

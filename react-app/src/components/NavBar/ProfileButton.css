@@ -24,8 +24,8 @@
     display: flex;
     flex-direction: column;
     position: absolute;
-    width: 8em;
-    height: 7em;
+    width: 11em;
+    height: 8.7em;
     background-color: white;
     border: 1px solid black;
     border-radius: 2px;
@@ -36,7 +36,7 @@
 
   .logout-li {
     padding-top:10px;
-    margin-top: 14px;
+    margin-top: 49px;
     font-size: 16px;
     border-top: 1px solid rgb(235, 228, 228);
   }
@@ -102,15 +102,24 @@
    .upload-photo-dropdown{
     margin-top:20px;
   }
-
-
- 
-
   .numOfImages {
     font-size: 14px;
     color: black;
     margin-left: 5px;
     margin-top: 20px;
-    padding-bottom:5px;
-    margin-left:-0.2px;
+   
+    /* margin-left:-0.2px; */
+    padding-left:70px;
+    
+  }
+
+  .circle-nav{
+    width: 65px;
+    height: 65px;
+    padding-right:5px;
+    margin-top:-30px;
+  }
+
+  .three-item-container {
+    padding-top: 10px
   }
