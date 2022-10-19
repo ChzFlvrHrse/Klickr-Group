@@ -246,7 +246,6 @@ textarea {
 #submit-container {
     display: flex;
     justify-content: flex-end;
-
 }
 
 #submit-comment {
@@ -257,7 +256,7 @@ textarea {
     border-radius: .3rem;
     border: none;
     font-size: 1rem;
-    width: 7rem
+    width: 7rem;
 }
 
 #submit-comment:hover {
