@@ -25,7 +25,7 @@
     flex-direction: column;
     position: absolute;
     width: 8em;
-    height: 5em;
+    height: 6em;
     background-color: white;
     border: 1px solid black;
     border-radius: 2px;
@@ -51,7 +51,7 @@
   .user-name-li{
     font-size: 16px;
     font-weight: 450;
-    padding-bottom:10px;
+    padding-bottom:16px;
     border-bottom: 1px solid rgb(235, 228, 228);
   }
 
@@ -64,6 +64,7 @@
 
   .hover-link:hover {
     background-color: rgb(216, 207, 207);
+    margin-bottom:3px 
   }
 
   .profile-icon:hover {
@@ -85,6 +86,8 @@
   }
 
   .profile-page-reroute-upload{
+    display:flex;
+    align-items: center;
     text-decoration: none;
     color: rgb(100, 100, 182);
     margin-top: 20px;
