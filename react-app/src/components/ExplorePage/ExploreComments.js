@@ -106,14 +106,41 @@ function ExploreImageCommments({
                                 ""
                               )}
                               {showModalEdit && (
-                                // <Modal onClose={() => setShowModalEdit(false)}>
+                                <Modal onClose={() => setShowModalEdit(false)}>
                                 <EditCommentForm
                                   imageId={image.id}
                                   userId={user.id}
                                   setShowModalEdit={setShowModalEdit}
                                   oldComment={comment}
+                                  setSubmitted={setSubmitted}
+                                  submitted={submitted}
                                 />
-                                // </Modal>
+                                </Modal>
+                              )}
+                              {/* delete modal */}
+                              {comment.userId == oneUser.id &&
+                              comment.userId == user.id ? (
+                                <i
+                                  onClick={() => {
+                                    setShowModalDelete(true);
+                                  }}
+                                  className="delete-comment"
+                                  title="delete comment"
+                                  class="fa-solid fa-delete-left"
+                                ></i>
+                              ) : (
+                                ""
+                              )}
+                              {showModalDelete && (
+                                <Modal onClose={() => setShowModalDelete(false)}>
+                                <DeleteCommentForm
+                                  imageId={image.id}
+                                  setShowModal={setShowModalDelete}
+                                  comment={comment}
+                                  setSubmitted={setSubmitted}
+                                  submitted={submitted}
+                                />
+                                </Modal>
                               )}
                             </div>
                           </div>
@@ -133,7 +160,7 @@ function ExploreImageCommments({
         <div className="BottomPartExplorePageCommentBox">
           <div id="create-comment">
             <form onSubmit={submitComment}>
-              <textarea
+              <textarea className="textareacommentbox"
                 id="comment-here"
                 placeholder="Add a comment"
                 tabIndex="0"

@@ -16,16 +16,16 @@ const SignUpForm = () => {
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
   const user = useSelector((state) => state.session.user);
-  
+
   const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (
       previewImageUrl == null ||
-      !previewImageUrl.endsWith(".jpg") ||
-      !previewImageUrl.endsWith(".png") ||
-      !previewImageUrl.endsWith(".jpeg")
+      !previewImageUrl.endsWith("jpg") ||
+      !previewImageUrl.endsWith("png") ||
+      !previewImageUrl.endsWith("jpeg")
     ) {
       setPreviewImageUrl(
         "https://creazilla-store.fra1.digitaloceanspaces.com/emojis/55737/grinning-face-with-big-eyes-emoji-clipart-xl.png"
@@ -172,7 +172,7 @@ const SignUpForm = () => {
                 required
               ></input>
                 </div>
-              
+
             <div className="button">
               <button type="submit">Sign Up</button>
             </div>

@@ -3,12 +3,12 @@ import { useDispatch } from "react-redux";
 import { deleteACommentThunk } from "../../store/comments";
 
 //  Be sure to import the modal contents
-function DeleteCommentForm({ imageId, setShowModal, comment }) {
+function DeleteCommentForm({ imageId, setShowModal, comment, submitted, setSubmitted }) {
   const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await dispatch(deleteACommentThunk(imageId, comment.id));
+    await dispatch(deleteACommentThunk(imageId, comment.id)).then(()=> setSubmitted(!submitted));
     setShowModal(false);
   };
   const handleSubmit2 = async (e) => {

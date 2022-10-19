@@ -85,4 +85,6 @@ overflow-x: hidden;
 }
 
 
-
+.textareacommentbox{
+    height: 3rem;
+}
