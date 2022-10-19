@@ -97,7 +97,7 @@
     position: absolute;
     margin-top: -4rem;
     z-index: 2;
-    background: linear-gradient(to top, rgba(0, 0, 0), rgb(255,0,0,0));
+    background: linear-gradient(to top, rgba(0, 0, 0), rgba(255, 255, 255, 0));
     flex-wrap: nowrap;
 }
 
