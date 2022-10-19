@@ -10,8 +10,8 @@ body {
     display: grid;
     justify-content: center;
     align-items: center;
-    margin-top: 18rem;
-    margin-bottom: 18rem;
+    margin-top: 6rem;
+    
 }
 
 .inner-login {
@@ -27,6 +27,7 @@ body {
     display: grid;
     justify-items: center;
     width: 22rem;
+
 }
 
 #login-banner {
