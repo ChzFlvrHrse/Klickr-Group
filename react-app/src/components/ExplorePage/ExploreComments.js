@@ -4,7 +4,7 @@ import { createLikesThunk, deleteLikesThunk } from "../../store/likes";
 import { getImagesThunk } from "../../store/image";
 
 import './ExploreComments.css'
-
+import { Link } from "react-router-dom";
 import { Modal } from "../../context/Modal";
 
 import EditCommentForm from "../Comments/EditCommentForm";
@@ -43,7 +43,7 @@ function ExploreImageCommments({
               <div> {users.map((oneUser) => {
                 return (
                   <div className="userContainerforExploreModal" id={oneUser.id}>
-                    <div className="userfullnameExploreCommentsModal">{oneUser.id == comment.userId ? `${oneUser.first_name}  ${oneUser.last_name}` : ""}</div>
+                    <Link to={`/users/${oneUser.id}`} className="userfullnameExploreCommentsModal">{oneUser.id == comment.userId ? `${oneUser.first_name}  ${oneUser.last_name}` : ""}</Link>
 
                   </div>
                 )
