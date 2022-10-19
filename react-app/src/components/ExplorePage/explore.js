@@ -25,7 +25,7 @@ const GetAllImages = () => {
   const allImagesArr = Object.values(allImages);
 
   const dispatch = useDispatch();
-
+  let forceRerender = 0
   let allImagesArray;
   let allUsersArray;
   let commentsArray;
@@ -37,7 +37,7 @@ const GetAllImages = () => {
 
   useEffect(() => {
     dispatch(getImagesThunk());
-  }, [dispatch, allUsersArray, imageLikesState, allImagesArray]);
+  }, [dispatch, allUsersArray, imageLikesState, allImagesArray, forceRerender]);
   // getting all users
 
   useEffect(() => {
@@ -53,13 +53,20 @@ const GetAllImages = () => {
 
   const toggleLikes = () => {
     console.log(imageLikesState)
-    if (imageLikesState != undefined || imageLikesState != false) {
-    if (imageLikesState.likes == null && imageLikesState.id) {
+    if (imageLikesState != undefined && imageLikesState != false) {
+        let imageLikesByUser = imageLikesState.likes.filter((filteredLikes, index) => filteredLikes.userId == user.id)
+        console.log(imageLikesByUser)
+        forceRerender +=1
+    if (imageLikesByUser.length == 0) {
       dispatch(createLikesThunk(imageLikesState.id));
-    } else if (imageLikesState.likes != null && imageLikesState.likes[0]){
-      dispatch(deleteLikesThunk(imageLikesState.likes[0].id));
+      forceRerender +=1
+    } else if (imageLikesByUser.length >= 1){
+      dispatch(deleteLikesThunk(imageLikesByUser[0].id));
+      forceRerender +=1
     }
   }
+  console.log(forceRerender)
+  forceRerender +=1
   };
 
 
@@ -85,7 +92,7 @@ const GetAllImages = () => {
                         <div
                           id="star-icon-explore"
                           // onClick={() => {setImageLikesState(image)}}
-                          onClick={async (e) => {e.preventDefault(); setImageLikesState(image); toggleLikes()}} className="delete-comment"
+                          onClick={async (e) => {e.preventDefault(); forceRerender+=1; setImageLikesState(image); toggleLikes();forceRerender+=1;}} className="delete-comment"
                           >
                           <i class="fa-regular fa-star"></i>
                         </div>
