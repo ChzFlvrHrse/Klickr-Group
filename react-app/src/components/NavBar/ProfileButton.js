@@ -56,7 +56,12 @@ export default function ProfileButton({ users }) {
                 >
                   {sessionUser.username}! {" "}
                 </NavLink>
+
               </div>
+              <div upload-photo-dropdown>
+                <NavLink className="profile-page-reroute-upload"
+                to={"/upload"}> Upload your Photos &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </NavLink>
+                </div>
               <div className="hover-link logout-li" onClick={logout}>
                 Log Out
               </div>

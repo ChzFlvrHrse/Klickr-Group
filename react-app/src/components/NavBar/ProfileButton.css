@@ -17,14 +17,15 @@
     text-decoration: none;
     padding-top: 2px;
     margin-bottom: 10px;
+  
   }
 
   .profile-dropdown {
     display: flex;
     flex-direction: column;
     position: absolute;
-    width: 7em;
-    height: 3em;
+    width: 8em;
+    height: 6em;
     background-color: white;
     border: 1px solid black;
     border-radius: 2px;
@@ -34,8 +35,10 @@
   }
 
   .logout-li {
-    margin-top: 15px;
+    padding-top:10px;
+    margin-top: 24px;
     font-size: 16px;
+    border-top: 1px solid rgb(235, 228, 228);
   }
 
 
@@ -48,7 +51,7 @@
   .user-name-li{
     font-size: 16px;
     font-weight: 450;
-    padding-bottom:10px;
+    padding-bottom:16px;
     border-bottom: 1px solid rgb(235, 228, 228);
   }
 
@@ -61,6 +64,7 @@
 
   .hover-link:hover {
     background-color: rgb(216, 207, 207);
+    margin-bottom:3px 
   }
 
   .profile-icon:hover {
@@ -69,11 +73,32 @@
 
 
   .profile-page-reroute{
+
     text-decoration: none;
     color: black;
+    padding-bottom: 5px;
+    padding-top: 5px;
    
   }
 
   .profile-page-reroute:hover{
     border-bottom: 2px solid rgb(6, 6, 6);
+  }
+
+  .profile-page-reroute-upload{
+    display:flex;
+    align-items: center;
+    text-decoration: none;
+    color: rgb(100, 100, 182);
+    margin-top: 20px;
+   
+  }
+
+  .upload-photo-dropdown{
+    margin-top:20px;
+  }
+  .profile-page-reroute-upload:hover{
+    border-bottom: 2px solid rgb(76, 104, 182);
+
+    
   }
