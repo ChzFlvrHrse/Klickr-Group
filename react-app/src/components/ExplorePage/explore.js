@@ -9,6 +9,8 @@ import {
   getImageCommentsThunk,
 } from "../../store/comments";
 import { createLikesThunk, deleteLikesThunk } from "../../store/likes";
+
+import ExploreImageLikesComments from "./ExploreLikes";
 import "./explore.css";
 
 const GetAllImages = () => {
@@ -19,13 +21,17 @@ const GetAllImages = () => {
   // Amount of comments
 
   const [commentState, setCommentState] = useState(false);
-  const [imageLikesState, setImageLikesState] = useState(false);
+
+// track whether like state has been changed
+  const [imageLiked, setImageLiked] = useState(false)
+
+
 
   const allImages = useSelector((state) => state.image);
   const allImagesArr = Object.values(allImages);
 
   const dispatch = useDispatch();
-  let forceRerender = 0
+  let forceRerender = 0;
   let allImagesArray;
   let allUsersArray;
   let commentsArray;
@@ -37,7 +43,7 @@ const GetAllImages = () => {
 
   useEffect(() => {
     dispatch(getImagesThunk());
-  }, [dispatch, allUsersArray, imageLikesState, allImagesArray, forceRerender]);
+  }, [dispatch, allUsersArray, allImagesArray, imageLiked]);
   // getting all users
 
   useEffect(() => {
@@ -51,25 +57,6 @@ const GetAllImages = () => {
   allUsersArray = Object.values(allusers);
   allImagesArray = Object.values(images);
 
-  const toggleLikes = () => {
-    console.log(imageLikesState)
-    if (imageLikesState != undefined && imageLikesState != false) {
-        let imageLikesByUser = imageLikesState.likes.filter((filteredLikes, index) => filteredLikes.userId == user.id)
-        console.log(imageLikesByUser)
-        forceRerender +=1
-    if (imageLikesByUser.length == 0) {
-      dispatch(createLikesThunk(imageLikesState.id));
-      forceRerender +=1
-    } else if (imageLikesByUser.length >= 1){
-      dispatch(deleteLikesThunk(imageLikesByUser[0].id));
-      forceRerender +=1
-    }
-  }
-  console.log(forceRerender)
-  forceRerender +=1
-  };
-
-
   return (
     <div className="explore-container">
       <div className="images-container">
@@ -78,31 +65,32 @@ const GetAllImages = () => {
           {allImagesArr.map((image) => {
             return (
               <>
-                <Link to={`/images/${image.id}`}>
-                  <div className="singleImgContainer" key={image.id}>
-                    <i class="fa-solid fa-star"></i>
-                    <img
-                      className="single-img"
-                      src={image.previewImageUrl}
-                      alt=""
-                    ></img>
-                    <div className="explore-image-bttm-section">
-                      <div className="hide">{image.title}</div>
-                      <div className="image-likes-section">
+                {/* <Link to={`/images/${image.id}`}> */}
+                <div className="singleImgContainer" key={image.id}>
+                  {/* <i class="fa-solid fa-star"></i> */}
+                  <img
+                    className="single-img"
+                    src={image.previewImageUrl}
+                    alt=""
+                  ></img>
+                  <div className="explore-image-bttm-section">
+                    <div className="hide">{image.title}</div>
 
-                        <div
-                          id="star-icon-explore"
-                          // onClick={() => {setImageLikesState(image)}}
-                          onClick={async (e) => {e.preventDefault(); forceRerender+=1; setImageLikesState(image); toggleLikes();forceRerender+=1;}} className="delete-comment"
-                          >
-                          <i class="fa-regular fa-star"></i>
-                        </div>
-                        <div> {image.likes.length} </div>
+                    {/* likes and comments section */}
+                    <div className="image-likes-section">
+                      <div
+                        id="star-icon-explore"
+                      >
+                        
+                        <ExploreImageLikesComments image={image} user={user} setImageLiked={setImageLiked} imageLiked={imageLiked}/>
                       </div>
                     </div>
-                    {/* <div className="likes-star" */}
+                    {/* likes and comments section */}
+                    <div> {image.likes.length} </div>
                   </div>
-                </Link>
+                  {/* <div className="likes-star" */}
+                </div>
+                {/* </Link> */}
               </>
             );
           })}
