@@ -17,8 +17,8 @@
   right: 0;
   left: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0);
-  opacity: .1;
+  background-color: black;
+  opacity: .01;
 }
 
 #modal-content {
