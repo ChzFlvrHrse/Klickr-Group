@@ -89,6 +89,7 @@ const GetAllImages = () => {
                     <div className="explore-image-bttm-section">
                       <div className="hide">{image.title}</div>
                       <div className="image-likes-section">
+
                         <div
                           id="star-icon-explore"
                           // onClick={() => {setImageLikesState(image)}}

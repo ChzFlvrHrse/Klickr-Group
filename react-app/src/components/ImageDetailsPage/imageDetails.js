@@ -123,8 +123,8 @@ function ImageDetails() {
         <>
             <div id="details-image">
                 <div id="back-explore">
-                    <Link to="/" className='i'><i class="fa-solid fa-arrow-left"></i></Link>
-                    <Link to="/">Back to explore</Link>
+                    <Link to="/explore" className='i'><i class="fa-solid fa-arrow-left"></i></Link>
+                    <Link to="/explore">Back to explore</Link>
                 </div>
                 <div id="user-image">
                     <img id="user-imageDetails" src={allImagesFiltered[0].previewImageUrl} alt="" />
