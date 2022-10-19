@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getImagesThunk } from "../../store/image";
 import { Link } from "react-router-dom";
 import { getAllUsersThunk } from "../../store/AllUsers";
-import { Modal } from "../../context/Modal";
+import { ModalExplore } from "../../context/ModalExplore";
 import ExploreImageLikes from "./ExploreLikes";
 import ExploreImageCommments from "./ExploreComments";
 import "./explore.css";
@@ -79,7 +79,7 @@ const GetAllImages = () => {
                             )}
 
                           {commentsModal && (
-                            <Modal onClose={() => setCommentsModal(false)}>
+                            <ModalExplore onClose={() => setCommentsModal(false)}>
                               <ExploreImageCommments
                                 users={allUsersArray}
                                 image={imageState}
@@ -89,7 +89,7 @@ const GetAllImages = () => {
                                 // setCommentsState={setCommentsState}
                                 // commentsState={commentsState}
                               />
-                            </Modal>
+                            </ModalExplore>
                           )}
                         </div>
 

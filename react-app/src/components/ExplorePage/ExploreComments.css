@@ -3,10 +3,22 @@
 }
 
 .userContainerforExploreModal {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
 
 }
 
 .userfullnameExploreCommentsModal {
     font-weight: bold;
     color: purple;
+}
+
+.userContainerExploreEditDelete {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    column-gap: 5px;
+    width: fit-content;
 }
