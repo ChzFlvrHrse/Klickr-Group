@@ -127,3 +127,11 @@ body {
 #labelInputSignUpName {
     margin-left: -18px;
 }
+
+.login-errors{
+    color: red;
+    font-size: 1rem;
+    margin: 0;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}

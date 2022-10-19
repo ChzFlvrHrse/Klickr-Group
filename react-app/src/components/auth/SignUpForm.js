@@ -19,7 +19,7 @@ const SignUpForm = () => {
   
   const dispatch = useDispatch();
 
-  const handleSubmit = async (e) => {
+  const onSignUp = async (e) => {
     e.preventDefault();
     if (
       previewImageUrl == null ||
@@ -31,26 +31,19 @@ const SignUpForm = () => {
         "https://creazilla-store.fra1.digitaloceanspaces.com/emojis/55737/grinning-face-with-big-eyes-emoji-clipart-xl.png"
       );
     }
-    if (password === repeatPassword) {
-      setErrors([]);
-      return dispatch(sessionActions.signUp({
-          username,
-          email,
-          first_name,
-          last_name,
-          previewImageUrl,
-          password,
-        })
-      )
-        .catch(async (res) => {
-          const data = await res.json();
-          if (data && data.errors) setErrors(data.errors);
-        });
+   
+    if (!email.includes("@")) {
+      return setErrors(["Please enter a valid email address"])
     }
-    return setErrors([
-      "Password fields needs to be the same",
-    ]);
-  };
+   
+      if (password === repeatPassword) {
+        const data = await dispatch(signUp(username,first_name,last_name, email, password, previewImageUrl));
+        if (data) {
+          setErrors(data)
+        }
+      }
+    };
+    
 
   const updateUsername = (e) => {
     setUsername(e.target.value);
@@ -88,7 +81,7 @@ const SignUpForm = () => {
 
       <div className="signup-container">
         <div className="inner-signup">
-          <form className="signup-form" onSubmit={handleSubmit}>
+          <form className="signup-form" onSubmit={onSignUp}>
             <div id="circles-container">
               <img src={klickrLogo} alt="" id="circles"></img>
             </div>
