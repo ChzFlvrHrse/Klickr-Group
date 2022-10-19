@@ -155,10 +155,10 @@ function ImageDetails() {
                                                         {singleUser.id == comment.userId
                                                             ? <Link to="#" className="profile-link">{singleUser.first_name + " " + singleUser.last_name}</Link>
                                                             : ""}
-                                                        {singleUser.id == comment.userId ? <div className="comment-date">{comment.updated_at}</div>:<></>}
+                                                        {singleUser.id == comment.userId ? <div className="comment-date">{comment.updated_at}</div> : <></>}
                                                         <div className="edit-delete">
                                                             {singleUser.id == comment.userId && singleUser.id == userId ? <i className="edit-comment" title="edit comment" class="fa-solid fa-pen-to-square"></i> : <></>}
-                                                            {singleUser.id == comment.userId && singleUser.id == userId ? <i onClick={async (e) => {e.preventDefault(); await dispatch(deleteACommentThunk(id, comment.id)); setCommDelete(commDelete+=1)}} className="delete-comment" title='delete' class="fa-solid fa-delete-left"></i> : <></>}
+                                                            {singleUser.id == comment.userId && singleUser.id == userId ? <i onClick={async (e) => { e.preventDefault(); await dispatch(deleteACommentThunk(id, comment.id)); setCommDelete(commDelete += 1) }} className="delete-comment" title='delete' class="fa-solid fa-delete-left"></i> : <></>}
                                                         </div>
 
                                                     </div>
@@ -231,13 +231,17 @@ function ImageDetails() {
                             <textarea
                                 id="comment-here"
                                 placeholder="Add a comment"
+                                tabIndex='0'
                                 type='text'
                                 onChange={event => setBody(event.target.value)}
                                 value={body}
                             ></textarea>
-                            <button
-                                type='submit'
-                            >Comment</button>
+                            <div id="submit-container">
+                                <button
+                                    type='submit'
+                                    id="submit-comment"
+                                >Comment</button>
+                            </div>
                         </form>
                     </div>
                 </div>
