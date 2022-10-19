@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { deleteACommentThunk } from "../../store/comments";
+import "./DeleteComment.css"
 
 //  Be sure to import the modal contents
 function DeleteCommentForm({ imageId, setShowModal, comment }) {
@@ -19,16 +20,16 @@ function DeleteCommentForm({ imageId, setShowModal, comment }) {
   return (
     <div className="DeleteComment-outer">
       <form className="DeleteComment-inner" onSubmit={handleSubmit2} autoComplete="off">
-        <h1>Warning! This will permanently remove the comment.</h1>
+        <h4 id="statement">Delete Comment</h4>
         <div></div>
-        <h2>Are you sure you want to delete?</h2>
+        <h5 id="assurance">Are you sure you want to delete this comment?</h5>
         <div className="deleteSongButtons">
           <button
             className="submitDeleteComment"
             onClick={handleSubmit}
             type="submit"
           >
-            Delete comment
+            Delete
           </button>
           <button
             className="cancelDeleteComment"

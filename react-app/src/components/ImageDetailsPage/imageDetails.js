@@ -182,8 +182,9 @@ function ImageDetails() {
                                                                 : ""}
                                                             {singleUser.id == comment.userId ? <div className="comment-date">{comment.updated_at.slice(0, 16)}</div> : <></>}
                                                             <div className="edit-delete">
-                                                                {singleUser.id == comment.userId && singleUser.id == userId ? <i onClick={() => { setShowModalEdit(true); setCommentState(comment) }} className="edit-comment" title="edit comment" class="fa-solid fa-pen-to-square"></i> : <></>}
-                                                                {singleUser.id == comment.userId && singleUser.id == userId ? <i onClick={async (e) => { e.preventDefault(); await dispatch(deleteACommentThunk(id, comment.id)); setCommDelete(commDelete++) }} className="delete-comment" title='delete' class="fa-solid fa-delete-left"></i> : <></>}
+                                                                {singleUser.id == comment.userId && singleUser.id == userId ? <i onClick={() => {setShowModalEdit(true); setCommentState(comment) }} className="edit-comment" title="edit comment" class="fa-solid fa-pen-to-square"></i> : <></>}
+                                                                {/* {singleUser.id == comment.userId && singleUser.id == userId ? <i onClick={async (e) => { e.preventDefault(); await dispatch(deleteACommentThunk(id, comment.id)); setCommDelete(commDelete++) }} className="delete-comment" title='delete' class="fa-solid fa-delete-left"></i> : <></>} */}
+                                                                {singleUser.id == comment.userId && singleUser.id == userId ? <i onClick={() => {setShowModal(true); setCommentState(comment)}} className="delete-comment" title='delete' class="fa-solid fa-delete-left"></i> : <></>}
                                                                 {showModalEdit && (
                                                                     <Modal onClose={() => setShowModalEdit(false)}>
                                                                         <EditCommentForm
@@ -191,6 +192,15 @@ function ImageDetails() {
                                                                             userId={userId}
                                                                             setShowModalEdit={setShowModalEdit}
                                                                             oldComment={commentState}
+                                                                        />
+                                                                    </Modal>
+                                                                )}
+                                                                {showModal && (
+                                                                    <Modal onClose={() => setShowModal(false)}>
+                                                                        <DeleteCommentForm
+                                                                            imageId={id}
+                                                                            setShowModal={setShowModal}
+                                                                            comment={commentState}
                                                                         />
                                                                     </Modal>
                                                                 )}
