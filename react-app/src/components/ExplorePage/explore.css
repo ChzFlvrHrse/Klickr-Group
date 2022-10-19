@@ -53,13 +53,9 @@
     z-index: 1;
 }
 
-.single-img:hover + .hide {
-    display: flex;
-    position: absolute;
-    z-index: 2;
-    color: white;
-    margin-top: -30px;
-    margin-left: 10px;
+.singleImgContainer:hover {
+    transform: scale(1.1);
+    transition: all .3s ease-in-out;
 }
 
 .hide {
@@ -88,16 +84,25 @@
     color: rgb(18, 16, 16);
 }
 
-.explore-image-bttm-section{
+.explore-image-bttm-section {
+    display: none;
+}
+
+.singleImgContainer:hover .explore-image-bttm-section {
     display:flex;
     flex-direction: row;
     justify-content: space-between;
     width: 100%;
-    height: 20px;
-    /* background-color: rgba(255, 0, 0, 0.562); */
-    background-color: rgb(38, 109, 171, .562);
+    height: 4rem;
+    position: absolute;
+    margin-top: -4rem;
+    z-index: 2;
+    background: linear-gradient(to top, rgba(0, 0, 0), rgb(255,0,0,0));
     flex-wrap: nowrap;
-    z-index: 4;
+}
+
+.hide, .image-likes-section {
+    margin-top: 2rem;
 }
 
 #star-like i {
