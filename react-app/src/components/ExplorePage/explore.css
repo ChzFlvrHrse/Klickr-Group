@@ -28,7 +28,7 @@
 
     /* new */
 
-.images-wrapper > * {
+.singleImgContainer {
     flex: 1 1 auto;
 }
 
