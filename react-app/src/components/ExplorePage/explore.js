@@ -22,6 +22,7 @@ const GetAllImages = () => {
   const [commentsState, setCommentsState] = useState(false);
   // track whether comments section is opened for user
   const [commentsModal, setCommentsModal] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
   const allImages = useSelector((state) => state.image);
   const allImagesArr = Object.values(allImages);
@@ -32,7 +33,7 @@ const GetAllImages = () => {
 
   useEffect(() => {
     dispatch(getImagesThunk());
-  }, [dispatch, allUsersArray, allImagesArray, imageLiked]);
+  }, [dispatch, allUsersArray, allImagesArray, imageLiked, submitted]);
   // getting all users
 
   useEffect(() => {
@@ -73,7 +74,8 @@ const GetAllImages = () => {
                         <div
                           id="star-icon-explore"
                           onClick={() => {
-                            setCommentsModal(!commentsModal);
+                            // setCommentsModal(!commentsModal);
+                            setCommentsModal(true)
                             setImageState(image);
                           }}
                         >
@@ -87,10 +89,12 @@ const GetAllImages = () => {
                             {commentsModal && (
                               <ExploreImageCommments
                                 users={allUsersArray}
-                                image={imageState}
+                                image={image}
                                 user={user}
                                 setCommentsModal={setCommentsModal}
                                 commentsModal={commentsModal}
+                                setSubmitted={setSubmitted}
+                                submitted={submitted}
                                 // setCommentsState={setCommentsState}
                                 // commentsState={commentsState}
                               />

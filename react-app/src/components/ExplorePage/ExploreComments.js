@@ -9,6 +9,7 @@ import { Modal } from "../../context/Modal";
 
 import EditCommentForm from "../Comments/EditCommentForm";
 import DeleteCommentForm from "../Comments/DeleteCommentForm";
+import { createACommentThunk } from "../../store/comments";
 
 function ExploreImageCommments({
   users,
@@ -16,6 +17,8 @@ function ExploreImageCommments({
   user,
   setCommentsModal,
   commentsModal,
+  setSubmitted,
+  submitted
   // setCommentsState,
   // commentsState,
 }) {
@@ -23,6 +26,7 @@ function ExploreImageCommments({
   const [ownComment, setOwnComment] = useState(false);
   const [showModalDelete, setShowModalDelete] = useState(false);
   const [showModalEdit, setShowModalEdit] = useState(false);
+  const [body, setBody] = useState("");
 
   // useEffect(() => {
   //   dispatch(getImagesThunk());
@@ -34,9 +38,21 @@ function ExploreImageCommments({
     // setCommentsModal(!commentsModal);
   };
 
+  // handle comment submission
+  const submitComment = async (e) => {
+    e.preventDefault();
+
+    if (body.length) {
+      await dispatch(createACommentThunk(user.id, image.id, body)).then(()=> setSubmitted(!submitted))
+      setBody("");
+    } else {
+      return "Bad Data";
+    }
+  };
+
   return (
     <>
-      <div onClick={toggleLikes} className="CommentsBoxExploreContents">
+      <div className="CommentsBoxExploreContents">
         <div className="ExplorePageTopHalfCommentsBox">
           {image.comments.map((comment, index) => {
             return (
@@ -47,15 +63,14 @@ function ExploreImageCommments({
                       <>
                         {oneUser.id == comment.userId && (
                           <div className="ProfilePictureCommentsContainerExplore">
-                            <Link
-                              to={`/users/${oneUser.id}`}>
-                          <img
-                            className="CommentsContainerUserProfilePicture"
-                            src={oneUser.previewImageUrl}
-                            alt="userprofile"
-                            />
+                            <Link to={`/users/${oneUser.id}`}>
+                              <img
+                                className="CommentsContainerUserProfilePicture"
+                                src={oneUser.previewImageUrl}
+                                alt="userprofile"
+                              />
                             </Link>
-                            </div>
+                          </div>
                         )}
                       </>
                     );
@@ -115,7 +130,25 @@ function ExploreImageCommments({
             );
           })}
         </div>
-        <div className="BottomPartExplorePageCommentBox"></div>
+        <div className="BottomPartExplorePageCommentBox">
+          <div id="create-comment">
+            <form onSubmit={submitComment}>
+              <textarea
+                id="comment-here"
+                placeholder="Add a comment"
+                tabIndex="0"
+                type="text"
+                onChange={(event) => setBody(event.target.value)}
+                value={body}
+              ></textarea>
+              <div id="submit-container">
+                <button type="submit" id="submit-comment">
+                  Comment
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
     </>
   );

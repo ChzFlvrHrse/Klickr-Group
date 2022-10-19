@@ -30,20 +30,6 @@
     /* padding: 10px; */
 }
 
-
-.BottomPartExplorePageCommentBox:active {
-    background-color: red;
-    width: 100%;
-    height: 180px;
-}
-.BottomPartExplorePageCommentBox {
-    background-color: red;
-    width: 100%;
-    height: 80px;
-    /* padding: 10px; */
-
-}
-
 .CommentsBoxExploreContents {
     width: 240px;
     height: 300px;
@@ -86,6 +72,7 @@
 }
 
 .CommentOverallExploreContainer {
+    padding-right: 10px;
     /* display: flex;
     flex-direction: row;
     width: 100%; */
@@ -94,9 +81,8 @@
 
 .TextBoxContainerinExploreUpper {
 width: 100%;
+overflow-x: hidden;
 }
 
-.ExplorePageTopHalfCommentsBox::-webkit-scrollbar{
-    display: none;
-    -ms-overflow-style: none
-  }
+
+
