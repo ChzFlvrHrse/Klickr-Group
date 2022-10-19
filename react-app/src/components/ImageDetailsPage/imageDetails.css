@@ -183,6 +183,7 @@ textarea {
     width: 99%;
     border: solid gray thin;
     border-radius: .3rem;
+    resize: none;
 }
 
 #comment-here:active, #comment-here:focus {

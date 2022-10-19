@@ -1,0 +1,42 @@
+.CreateComment-outer {
+    display: grid;
+    justify-content: flex-start;
+}
+
+/* .CreateComment-inner {
+    width: 20rem
+} */
+
+.edit-comment-box {
+    width: 99%;
+    height: 200%;
+    border-radius: .3rem;
+    resize: none;
+}
+
+.done-edit-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.done-edit {
+    display: flex;
+    justify-content: center;
+    color: white;
+    background-color: #348fdc;
+    padding: .5rem 1rem;
+    margin-top: .5rem;
+    border-radius: .3rem;
+    border: none;
+    font-size: 1rem;
+    width: 7rem;
+}
+
+.done-edit:hover {
+    opacity: .2;
+    cursor: pointer;
+}
+
+#cancel {
+    margin-left: 8rem;
+}
