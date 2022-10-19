@@ -53,7 +53,7 @@ const GetAllImages = () => {
           {allImagesArr.map((image) => {
             return (
               <>
-                <Link to={`/images/${image.id}`}>
+                {/* <Link to={`/images/${image.id}`}> */}
                 <div className="singleImgContainer" key={image.id}>
                   <img
                     className="single-img"
@@ -65,17 +65,16 @@ const GetAllImages = () => {
 
                     {/* likes and comments section */}
                     <div className="image-likes-container">
-                      <div className="image-likes-section"
-                      //  onClick={() => setCommentsModal(true)}
-                       >
-                        <div
-                          id="star-icon-explore"
+                      <div
+                        className="image-likes-section"
+                        // onClick={() => setCommentsModal(!commentsModal)}
                         >
-                          {commentsModal == true ? (
-                            <i class="fa-solid fa-comment"></i>
-                          ) : (
-                            <i class="fa-regular fa-comment"></i>
-                          )}
+                        <div id="star-icon-explore"  onClick={() => {setCommentsModal(!commentsModal); setCommentsState(image)}}>
+                            {commentsModal == true && commentsState.id == image.id ? (
+                              <i class="fa-solid fa-comment"></i>
+                            ) : (
+                              <i class="fa-regular fa-comment"></i>
+                            )}
 
                           {commentsModal && (
                             <Modal onClose={() => setCommentsModal(false)}>
@@ -108,7 +107,7 @@ const GetAllImages = () => {
                     {/* likes and comments section */}
                   </div>
                 </div>
-                </Link>
+                {/* </Link> */}
               </>
             );
           })}
