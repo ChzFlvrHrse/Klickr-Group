@@ -112,7 +112,7 @@
     width:20px;
 }
 
-.image-likes-section{
+.image-likes-container{
     display: flex;
     column-gap: 10px;
     justify-content: flex-end;
@@ -120,6 +120,12 @@
     width:100%;
     height:100%;
     margin-right: 5px;
-
-
+}
+.image-likes-section{
+    display: flex;
+    column-gap: 2px;
+    justify-content: flex-end;
+    flex-direction: row;
+    width:fit-content;
+    height:100%;
 }

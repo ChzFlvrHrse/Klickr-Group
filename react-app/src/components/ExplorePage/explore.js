@@ -3,21 +3,24 @@ import { useSelector, useDispatch } from "react-redux";
 import { getImagesThunk } from "../../store/image";
 import { Link } from "react-router-dom";
 import { getAllUsersThunk } from "../../store/AllUsers";
-
+import { Modal } from "../../context/Modal";
 import ExploreImageLikes from "./ExploreLikes";
+import ExploreImageCommments from "./ExploreComments";
 import "./explore.css";
 
 const GetAllImages = () => {
-  // toggle likes button
-  // likes length
+  // fix delay on liking image, fix bug where spamming creates more likes (bypasses frontend validation)
 
   // comment section
   // Amount of comments
 
-  const [commentState, setCommentState] = useState(false);
-
   // track whether like state has been changed
   const [imageLiked, setImageLiked] = useState(false);
+
+  // track whether comments state is changed
+  const [commentsState, setCommentsState] = useState(false);
+  // track whether comments section is opened for user
+  const [commentsModal, setCommentsModal] = useState(false);
 
   const allImages = useSelector((state) => state.image);
   const allImagesArr = Object.values(allImages);
@@ -61,17 +64,47 @@ const GetAllImages = () => {
                     <div className="hide">{image.title}</div>
 
                     {/* likes and comments section */}
-                    <div className="image-likes-section">
-                      <div id="star-icon-explore">
-                        <ExploreImageLikes
-                          image={image}
-                          user={user}
-                          setImageLiked={setImageLiked}
-                          imageLiked={imageLiked}
-                        />
+                    <div className="image-likes-container">
+                      <div className="image-likes-section"
+                      //  onClick={() => setCommentsModal(true)}
+                       >
+                        <div
+                          id="star-icon-explore"
+                        >
+                          {commentsModal == true ? (
+                            <i class="fa-solid fa-comment"></i>
+                          ) : (
+                            <i class="fa-regular fa-comment"></i>
+                          )}
+
+                          {commentsModal && (
+                            <Modal onClose={() => setCommentsModal(false)}>
+                              <ExploreImageCommments
+                                image={image}
+                                user={user}
+                                setCommentsModal={setCommentsModal}
+                                commentsModal={commentsModal}
+                                setCommentsState={setCommentsState}
+                                commentsState={commentsState}
+                              />
+                            </Modal>
+                          )}
+                        </div>
+
+                        <div> {image.comments.length} </div>
+                      </div>
+                      <div className="image-likes-section">
+                        <div id="star-icon-explore">
+                          <ExploreImageLikes
+                            image={image}
+                            user={user}
+                            setImageLiked={setImageLiked}
+                            imageLiked={imageLiked}
+                          />
+                        </div>
+                        <div> {image.likes.length} </div>
                       </div>
                     </div>
-                    <div> {image.likes.length} </div>
                     {/* likes and comments section */}
                   </div>
                 </div>
