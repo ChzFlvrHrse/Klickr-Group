@@ -50,7 +50,7 @@
     flex-direction: column;
     row-gap: 5px;
     align-items: center;
-    position: sticky;
+    position: absolute;
     bottom: 130px;
     transition: 1000ms opacity ease-in-out;
     opacity: 0;
