@@ -78,7 +78,7 @@ const SignUpForm = () => {
               Sign up for Klickr
             </h4>
             <div className='label-input'>
-              <label id="user">User Name</label>
+              <label id="labelInputSignUpName">User Name</label>
               <input
                 type='text'
                 name='username'
