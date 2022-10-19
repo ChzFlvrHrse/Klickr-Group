@@ -5,7 +5,7 @@
     align-items: center;
     font-size: 22px;
     background-color: black;
-    position: relative;
+    position: sticky;
     top: 0;
     left: 0;
     right: 0;

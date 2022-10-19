@@ -19,7 +19,7 @@ const GetAllImages = () => {
   // Amount of comments
 
   const [commentState, setCommentState] = useState(false);
-  const [imageLikesState, setimageLikesState] = useState(false);
+  const [imageLikesState, setImageLikesState] = useState(false);
 
   const allImages = useSelector((state) => state.image);
   const allImagesArr = Object.values(allImages);
@@ -37,7 +37,7 @@ const GetAllImages = () => {
 
   useEffect(() => {
     dispatch(getImagesThunk());
-  }, [dispatch, allUsersArray]);
+  }, [dispatch, allUsersArray, imageLikesState, allImagesArray]);
   // getting all users
 
   useEffect(() => {
@@ -51,15 +51,17 @@ const GetAllImages = () => {
   allUsersArray = Object.values(allusers);
   allImagesArray = Object.values(images);
 
-  const toggleLikes = (e, image) => {
-    e.preventDefault();
-    console.log(imageLikesState);
-    // if (!imageLikesState.likes.length) {
-    //   dispatch(createLikesThunk(imageLikesState.id));
-    // } else {
-    //   dispatch(deleteLikesThunk(imageLikesState.likes.id));
-    // }
+  const toggleLikes = () => {
+    console.log(imageLikesState)
+    if (imageLikesState != undefined || imageLikesState != false) {
+    if (imageLikesState.likes == null && imageLikesState.id) {
+      dispatch(createLikesThunk(imageLikesState.id));
+    } else if (imageLikesState.likes != null && imageLikesState.likes[0]){
+      dispatch(deleteLikesThunk(imageLikesState.likes[0].id));
+    }
+  }
   };
+
 
   return (
     <div className="explore-container">
@@ -82,12 +84,8 @@ const GetAllImages = () => {
                       <div className="image-likes-section">
                         <div
                           id="star-icon-explore"
-                          onClick={toggleLikes}
-                          // onClick={() => {
-                          //   setimageLikesState(image, () => {
-                          //     toggleLikes();
-                          //   });
-                          // }}
+                          // onClick={() => {setImageLikesState(image)}}
+                          onClick={async (e) => {e.preventDefault(); setImageLikesState(image); toggleLikes()}} className="delete-comment"
                           >
                           <i class="fa-regular fa-star"></i>
                         </div>
