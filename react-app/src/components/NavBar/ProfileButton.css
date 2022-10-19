@@ -65,3 +65,10 @@
   .profile-icon:hover {
     cursor: pointer;
   }
+
+
+  .profile-page-reroute{
+    text-decoration: none;
+    color: black;
+    border-bottom: 2px solid rgb(6, 6, 6);
+  }
