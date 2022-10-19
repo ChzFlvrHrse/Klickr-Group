@@ -7,9 +7,8 @@
 } */
 
 body {
-    /* background: url(https://images.unsplash.com/photo-1541417904950-b855846fe074?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1141&q=80); */
     background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-    background-size: 200% 200%;
+    background-size: 300% 300%;
     animation: gradient 15s ease infinite;
 }
 
