@@ -34,7 +34,7 @@ function ExploreImageCommments({
 
   const toggleLikes = (e) => {
     e.preventDefault();
-    console.log(users);
+    setCommentsModal(true)
     // setCommentsModal(!commentsModal);
   };
 
@@ -52,7 +52,7 @@ function ExploreImageCommments({
 
   return (
     <>
-      <div className="CommentsBoxExploreContents">
+      <div className="CommentsBoxExploreContents" onClick={toggleLikes}>
         <div className="ExplorePageTopHalfCommentsBox">
           {image.comments.map((comment, index) => {
             return (
