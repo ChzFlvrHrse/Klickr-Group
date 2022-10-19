@@ -1,16 +1,11 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getImagesThunk } from "../../store/image";
-import { Link, useParams } from "react-router-dom";
-import LogoutButton from "../auth/LogoutButton";
+
 import { getAllUsersThunk } from "../../store/AllUsers";
-import {
-  getAllCommentsThunk,
-  getImageCommentsThunk,
-} from "../../store/comments";
 import { createLikesThunk, deleteLikesThunk } from "../../store/likes";
 
-import ExploreImageLikesComments from "./ExploreLikes";
+import ExploreImageLikes from "./ExploreLikes";
 import "./explore.css";
 
 const GetAllImages = () => {
@@ -22,24 +17,15 @@ const GetAllImages = () => {
 
   const [commentState, setCommentState] = useState(false);
 
-// track whether like state has been changed
-  const [imageLiked, setImageLiked] = useState(false)
-
-
+  // track whether like state has been changed
+  const [imageLiked, setImageLiked] = useState(false);
 
   const allImages = useSelector((state) => state.image);
   const allImagesArr = Object.values(allImages);
 
   const dispatch = useDispatch();
-  let forceRerender = 0;
   let allImagesArray;
   let allUsersArray;
-  let commentsArray;
-  let likesArray;
-
-  // useEffect(() => {
-  //     dispatch(getImageLikesThunk(id))
-  // }, [dispatch, id])
 
   useEffect(() => {
     dispatch(getImagesThunk());
@@ -78,11 +64,13 @@ const GetAllImages = () => {
 
                     {/* likes and comments section */}
                     <div className="image-likes-section">
-                      <div
-                        id="star-icon-explore"
-                      >
-                        
-                        <ExploreImageLikesComments image={image} user={user} setImageLiked={setImageLiked} imageLiked={imageLiked}/>
+                      <div id="star-icon-explore">
+                        <ExploreImageLikes
+                          image={image}
+                          user={user}
+                          setImageLiked={setImageLiked}
+                          imageLiked={imageLiked}
+                        />
                       </div>
                     </div>
                     {/* likes and comments section */}
@@ -101,15 +89,3 @@ const GetAllImages = () => {
 };
 
 export default GetAllImages;
-
-// {likesArray &&
-//   likesArray.map((like) => {
-//     return (
-//       <>
-//         <div key={like.id} className="explore-like-container">
-//             {like.userId == image.userId ? like.id : ""}
-//
-//         </div>
-//       </>
-//     );
-//   })}‹
