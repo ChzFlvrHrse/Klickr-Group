@@ -154,13 +154,13 @@ a {
   text-align: center;
 }
 
-.footer {
+.footer-home {
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
 
-  background-color: black;
+  background-color: rgb(0, 0, 0);
   color: #fff;
   font-size: 10pt;
 
@@ -174,7 +174,23 @@ a {
   right: 0;
 }
 
+.ourRepo{
+  background-color: black;
+  height:16px;
+  width:16px;
+  float:right;
+  color:white;
+  text-decoration: underline;
+  padding-right: 4px;
 
+}
+
+.text-for-github{
+  
+  font-size: 10pt;
+  text-decoration: underline;
+  color: white;
+}
 
 .inspiration {
   color: white;

@@ -134,8 +134,10 @@ const GetAllImages = () => {
           })}
         </div>
       </div>
+           
     </div>
   );
 };
+
 
 export default GetAllImages;
