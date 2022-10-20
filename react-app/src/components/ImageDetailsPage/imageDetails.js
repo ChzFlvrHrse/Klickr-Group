@@ -42,6 +42,10 @@ function ImageDetails() {
 
   let [commDelete, setCommDelete] = useState(1);
 
+  const [showModalImageDelete, setShowModalImageDelete] = useState(false);
+  const [showModalImageEdit, setShowModalImageEdit] = useState(false);
+
+
   const [showModalTagsDelete, setShowModalTagsDelete] = useState(false);
   const [showModalTagsEdit, setShowModalTagsEdit] = useState(false);
   // to keep track of individual tags

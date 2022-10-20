@@ -38,7 +38,7 @@ function User() {
   const userImagesIds = userImagesArr.map((image) => image.id)
   const likedImagesIds = allLikesArr.map((like) => like.imageId)
 
-  console.log('User image Ids----', userImagesIds)
+  // console.log('User image Ids----', userImagesIds)
   // console.log('Liked Images Ids----', likedImagesIds)
 
   const userLikedImages = []
