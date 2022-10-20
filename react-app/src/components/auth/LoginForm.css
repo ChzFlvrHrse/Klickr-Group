@@ -121,6 +121,7 @@ body {
 
 .button button:hover {
     opacity: .9;
+    cursor: pointer;
 }
 
 /* name headers displaced */

@@ -87,6 +87,8 @@ function ImageDetails() {
   const tags = useSelector((state) => state.tags);
   const userId = user.id;
 
+  console.log(likes)
+
   // filters
   allImagesArray = Object.values(images);
   allUsersArray = Object.values(allusers);

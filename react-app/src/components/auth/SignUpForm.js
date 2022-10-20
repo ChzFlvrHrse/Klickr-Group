@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { signUp } from "../../store/session";
@@ -15,9 +15,24 @@ const SignUpForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
+  const [errorValidations, setErrorValidations] = useState([]);
   const user = useSelector((state) => state.session.user);
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    let errors = [];
+
+    if (!username.length) errors.push("Username is required");
+    if (!first_name.length) errors.push("First name is required");
+    if (!last_name.length) errors.push("Last name is required");
+    if (!email.includes("@")) errors.push("Please enter a valid email address");
+    if (!password.length) errors.push("Password is required");
+    if (!repeatPassword.length) errors.push("Repeated password is required")
+
+    setErrorValidations(errors)
+
+  }, [username, first_name, last_name, email, password, repeatPassword])
 
   const onSignUp = async (e) => {
     e.preventDefault();
@@ -30,12 +45,13 @@ const SignUpForm = () => {
       setPreviewImageUrl(
         "https://creazilla-store.fra1.digitaloceanspaces.com/emojis/55737/grinning-face-with-big-eyes-emoji-clipart-xl.png"
       );
+
     }
-   
+
     if (!email.includes("@")) {
       return setErrors(["Please enter a valid email address"])
     }
-   
+
       if (password === repeatPassword) {
         const data = await dispatch(signUp(username,first_name,last_name, email, password, previewImageUrl));
         if (data) {
@@ -43,7 +59,7 @@ const SignUpForm = () => {
         }
       }
     };
-    
+
 
   const updateUsername = (e) => {
     setUsername(e.target.value);
@@ -87,9 +103,9 @@ const SignUpForm = () => {
             </div>
             <h4 id="to-klickr">Sign up for Klickr</h4>
             <div className="signup-form-errors">
-                {errors.length > 0 && (
+                {errorValidations.length > 0 && (
                   <div className="signup-errors-wrapper" >
-                    {errors.map((error, idx) => (
+                    {errorValidations.map((error, idx) => (
                       <div  key={idx}>{error}</div>
                     ))}
                   </div>
