@@ -8,11 +8,11 @@ function EditImageForm({imageId, setShowModalEdit, oldImage}) {
   const dispatch = useDispatch();
   const userId = oldImage.userId
 
-
   const [previewImageUrl, setPreviewImageUrl] = useState(oldImage.previewImageUrl);
   const [title, setTitle] = useState(oldImage.title);
   const [description, setDescription] = useState(oldImage.description);
   const [errors, setErrors] = useState([]);
+
   useEffect(() => {
     const formValidationErrors = [];
 
@@ -23,7 +23,7 @@ function EditImageForm({imageId, setShowModalEdit, oldImage}) {
 
 
     setErrors(formValidationErrors);
-  }, [title, description, previewImageUrl, errors]);
+  }, [title, description, previewImageUrl]);
 
 
   const handleSubmit = (e) => {
@@ -94,7 +94,7 @@ function EditImageForm({imageId, setShowModalEdit, oldImage}) {
           <button className="submitCreateComment" onClick={handleSubmit} type="submit">
             Submit Image
           </button>
-          <button className="submitCreateComment" onClick={() => setShowModalEdit(false)} type="submit">
+          <button className="submitCreateComment" onClick={handleSubmit2} type="submit">
             Cancel Edit
           </button>
         </div>

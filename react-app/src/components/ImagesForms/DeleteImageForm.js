@@ -1,15 +1,18 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { deleteImageThunk } from "../../store/image";
+import { useHistory } from "react-router-dom";
 
 //  Be sure to import the modal contents
 function DeleteImageForm({setShowModal, image }) {
   const dispatch = useDispatch();
+  const history = useHistory()
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     await dispatch(deleteImageThunk(image.id));
     setShowModal(false);
+    history.push('/explore')
   };
   const handleSubmit2 = async (e) => {
     e.preventDefault();

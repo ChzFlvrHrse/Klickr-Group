@@ -46,8 +46,6 @@ const GetAllImages = () => {
   allUsersArray = Object.values(allusers);
   allImagesArray = Object.values(images);
 
-  console.log(commentsModal);
-
   return (
     <div className="explore-container">
       <div className="images-container">

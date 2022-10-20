@@ -1,19 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
 import { useParams, Link, useHistory } from "react-router-dom";
-import { getOneImageThunk, getImagesThunk } from "../../store/image";
+import { getImagesThunk } from "../../store/image";
 import EditImageForm from "../ImagesForms/EditImageForm";
 import DeleteImageForm from "../ImagesForms/DeleteImageForm";
-import CreateCommentForm from "../Comments/CreateCommentForm";
 import EditCommentForm from "../Comments/EditCommentForm";
 import DeleteCommentForm from "../Comments/DeleteCommentForm";
 import { getAllUsersThunk } from "../../store/AllUsers";
 import {
   createACommentThunk,
-  deleteACommentThunk,
   getAllCommentsThunk,
-  getImageCommentsThunk,
 } from "../../store/comments";
 import {
   getImageLikesThunk,
@@ -39,17 +35,17 @@ function ImageDetails() {
   const [previousImage, setPreviousImage] = useState(false);
   // keep track of next image
   const [nextImage, setNextImage] = useState(false);
+  const [imageState, setImageState] = useState(false)
 
   let [commDelete, setCommDelete] = useState(1);
 
   const [showModalImageDelete, setShowModalImageDelete] = useState(false);
   const [showModalImageEdit, setShowModalImageEdit] = useState(false);
 
-
   const [showModalTagsDelete, setShowModalTagsDelete] = useState(false);
   const [showModalTagsEdit, setShowModalTagsEdit] = useState(false);
   // to keep track of individual tags
-  const [tagState, setTagState] = useState({});
+  const [tagState, setTagState] = useState(false);
 
   const dispatch = useDispatch();
   const { id } = useParams();
@@ -82,15 +78,12 @@ function ImageDetails() {
   // useEffects
   useEffect(() => {
     dispatch(getImagesThunk());
-  }, [dispatch, allImagesFiltered, allUsersArray]);
+  }, [dispatch, allUsersArray, allImagesArray, showModalImageEdit, showModalImageDelete]);
 
   useEffect(() => {
     dispatch(getAllUsersThunk());
   }, [dispatch, allImagesFiltered, allImagesArray]);
 
-  useEffect(() => {
-    dispatch(getImageLikesThunk(id));
-  }, [dispatch, id]);
 
   useEffect(() => {
     dispatch(getAllCommentsThunk());
@@ -111,7 +104,6 @@ function ImageDetails() {
 
   const tagsArray = Object.values(tags);
 
-  console.log(tagsArray);
   let likesArray = Object.values(likes);
   let filteredLikes;
 
@@ -221,11 +213,62 @@ function ImageDetails() {
     <>
       <div id="details-image">
         <div id="back-explore">
-          <Link to="/explore" className="i">
-            <i class="fa-solid fa-arrow-left"></i>
-          </Link>
-          <Link to="/explore">Back to explore</Link>
+          <div className="LinktoHomeImageDetails">
+            <Link to="/explore" className="i">
+              <i class="fa-solid fa-arrow-left"></i>
+            </Link>
+            <Link to="/explore">Back to explore</Link>
+          </div>
+          <div className="EditDeleteImageSection">
+            {/* edit modal */}
+            {allImagesFiltered[0].userId == user.id ? (
+              <i
+                onClick={() => {
+                  setShowModalImageEdit(true);
+                  setImageState(allImagesFiltered[0])
+                }}
+                className="edit-comment"
+                title="edit image"
+                class="fa-solid fa-pen-to-square"
+              ></i>
+            ) : (
+              <></>
+            )}
+            {showModalImageEdit && (
+              <Modal onClose={() => setShowModalImageEdit(false)}>
+                <EditImageForm
+                  imageId={id}
+                  setShowModalEdit={setShowModalImageEdit}
+                  oldImage={imageState}
+                />
+              </Modal>
+            )}
+            {allImagesFiltered[0].userId == user.id ? (
+              <i
+                onClick={() => {
+                  setShowModalImageDelete(true);
+                }}
+                className="delete-comment"
+                title="delete image"
+                class="fa-solid fa-delete-left"
+              ></i>
+            ) : (
+              <></>
+            )}
+            {showModalImageDelete && (
+              <Modal onClose={() => setShowModalImageDelete(false)}>
+                <DeleteImageForm
+                  imageId={id}
+                  setShowModal={setShowModalImageDelete}
+                  image={allImagesFiltered[0]}
+                />
+              </Modal>
+            )}
+
+            {/* delete modal */}
+          </div>
         </div>
+
         <div className="imageContainerImageDetails">
           {previousImage == true ? (
             <Link
@@ -476,7 +519,7 @@ function ImageDetails() {
                       )}
 
                       <div>{tag.body}</div>
-                      {allImagesFiltered[0].userId == user.id? (
+                      {allImagesFiltered[0].userId == user.id ? (
                         <i
                           onClick={() => {
                             setShowModalTagsDelete(true);

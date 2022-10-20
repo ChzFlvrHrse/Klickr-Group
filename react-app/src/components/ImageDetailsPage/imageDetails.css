@@ -10,9 +10,10 @@
 
 #back-explore {
     display: flex;
-    justify-content: flex-start;
+    align-items: center;
+    justify-content: space-between;
     margin-bottom: 2rem;
-    width: fit-content
+    width: 100%
 }
 
 #back-explore:hover {
@@ -463,4 +464,22 @@ textarea {
 
 .TagSectionCreateSection {
     margin-top: 10px;
+}
+
+
+
+/* top bar edit and delete album */
+
+
+.LinktoHomeImageDetails {
+    display: flex;
+    width: fit-content;
+    column-gap: 10px;
+}
+
+.EditDeleteImageSection {
+    display: flex;
+    width: fit-content;
+    column-gap: 50px;
+    color: white;
 }
