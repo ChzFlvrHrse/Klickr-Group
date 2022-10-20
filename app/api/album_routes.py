@@ -6,7 +6,7 @@ from app.forms.image_form import UploadForm
 from app.models import Image, Comment, Like, db, Tag, Album
 from app.forms import AlbumForm
 
-album_routes = Blueprint('images', __name__)
+album_routes = Blueprint('albums', __name__)
 
 # all albums
 @album_routes.route('/all')
