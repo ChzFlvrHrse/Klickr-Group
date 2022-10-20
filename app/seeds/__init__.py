@@ -4,6 +4,7 @@ from .images import seed_images, undo_images
 from .comments import seed_comments, undo_comments
 from .likes import seed_likes, undo_likes
 from .tags import seed_tags, undo_tags
+from .albums import seed_albums, undo_albums
 
 # Creates a seed group to hold our commands
 # So we can type `flask seed --help`
@@ -18,6 +19,7 @@ def seed():
     seed_comments()
     seed_likes()
     seed_tags()
+    seed_albums()
     # Add other seed functions here
 
 
@@ -29,4 +31,5 @@ def undo():
     undo_comments()
     undo_likes()
     undo_tags()
+    undo_albums()
     # Add other undo functions here

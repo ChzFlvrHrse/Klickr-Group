@@ -20,6 +20,7 @@ class User(db.Model, UserMixin):
     hashed_password = db.Column(db.String(255), nullable=False)
 
     # one-to-many; user has many images
+    albums = db.relationship('Album', backref='user', cascade="all, delete-orphan")
     images = db.relationship('Image', backref='user', cascade="all, delete-orphan")
     comments = db.relationship("Comment", backref='user', cascade="all, delete-orphan")
     likes = db.relationship("Like", backref='user', cascade="all, delete-orphan")
