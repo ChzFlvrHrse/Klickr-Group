@@ -23,7 +23,7 @@ function DeleteTagForm({ imageId, setShowModal, tag, submitted, setSubmitted }) 
         <h4 id="statement">Delete Tag</h4>
         <div></div>
         <h5 id="assurance">Are you sure you want to delete this Tag?</h5>
-        <div className="deleteSongButtons">
+        <div className="deleteTagButtons">
           <button
             className="submitDeleteComment"
             onClick={handleSubmit}
