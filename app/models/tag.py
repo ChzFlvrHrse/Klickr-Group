@@ -21,4 +21,5 @@ class Tag(db.Model):
             'body': self.body,
             'created_at': self.created_at,
             'updated_at': self.updated_at,
+            'images': [image.to_dict() for image in self.images]
         }
