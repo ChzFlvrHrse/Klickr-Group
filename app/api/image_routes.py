@@ -53,6 +53,7 @@ def edit_image(id):
         old_image.title = data["title"]
         old_image.description = data["description"]
         old_image.previewImageUrl = data["previewImageUrl"]
+        old_image.albumId = data["albumId"]
 
         db.session.commit()
 

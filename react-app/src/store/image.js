@@ -71,11 +71,11 @@ export const newImageThunk = (userId, title, description, previewImageUrl, album
   }
 };
 
-export const updateImageThunk = (userId, title, description, previewImageUrl, imageId) => async (dispatch) => {
+export const updateImageThunk = (userId, title, description, previewImageUrl, imageId, albumId) => async (dispatch) => {
   const response = await fetch(`/api/images/${imageId}/edit`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({userId, title, description, previewImageUrl}),
+    body: JSON.stringify({userId, title, description, previewImageUrl, albumId}),
   });
   if (response.ok) {
     const updatedImage = await response.json();
