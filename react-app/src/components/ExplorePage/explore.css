@@ -64,7 +64,7 @@
 }
 
 .explore-title {
-    margin-top: 100px;
+    margin-top: 150px;
     font-size: 22px;
     font-weight: 300;
     padding-top: 20px;
@@ -104,6 +104,8 @@
 
 .hide, .image-likes-section {
     margin-top: 2rem;
+    color: white;
+    width: 100%;
 }
 
 #star-like i {
@@ -146,4 +148,17 @@
 
 .hiddenComment {
     display: none;
+}
+
+
+.ExitCommentsSection{
+    display: flex;
+    column-gap: 2px;
+    justify-content: flex-end;
+    flex-direction: row;
+    width:fit-content;
+    height:100%;
+    margin-top: 2rem;
+    color: tomato;
+    width: 100%;
 }

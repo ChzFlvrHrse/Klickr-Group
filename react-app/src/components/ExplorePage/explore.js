@@ -69,7 +69,7 @@ const GetAllImages = () => {
 
                     {/* likes and comments section */}
                     <div className="image-likes-container">
-                    <span onClick={() => setCommentsModal(false)}>
+                    <span className="ExitCommentsSection" onClick={() => setCommentsModal(false)}>
                             {commentsModal == true &&
                             imageState.id == image.id ? (
                               <i class="fa-solid fa-rectangle-xmark"></i>
