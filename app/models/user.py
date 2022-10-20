@@ -23,6 +23,7 @@ class User(db.Model, UserMixin):
     images = db.relationship('Image', backref='user', cascade="all, delete-orphan")
     comments = db.relationship("Comment", backref='user', cascade="all, delete-orphan")
     likes = db.relationship("Like", backref='user', cascade="all, delete-orphan")
+    tags = db.relationship("Tag", backref='user', cascade="all, delete-orphan")
 
     @property
     def password(self):

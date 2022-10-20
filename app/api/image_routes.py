@@ -4,7 +4,8 @@ from .auth_routes import validation_errors_to_error_messages
 
 from app.forms.image_form import UploadForm
 from app.forms.comment_form import CommentForm
-from app.models import Image, Comment, Like, db
+from app.models import Image, Comment, Like, db, Tag
+from app.forms.tag_form import TagForm
 
 image_routes = Blueprint('images', __name__)
 
@@ -70,6 +71,10 @@ def delete_image(id):
     "statusCode": "200"
     }
 
+
+# comments
+
+
 # all Comments by imageId
 @image_routes.route('/<int:imageId>/comment', methods=["GET"])
 @login_required
@@ -123,7 +128,6 @@ def edit_Comment(imageId, id):
         db.session.commit()
         return editedComment.to_dict()
     if form.errors:
-        return form.data
         return {'errors': validation_errors_to_error_messages(form.errors)}, 400
     return render_template("test.html", form=form)
 
@@ -138,6 +142,11 @@ def delete_comment(imageId, id):
     "Message": "like successfully deleted",
     "statusCode": "200"
     }
+
+
+
+# likes
+
 
 
 # Get All Likes by image id (move to images routes)
@@ -172,4 +181,70 @@ def delete_likes(id):
     # likes = Like.query.get(id)
     db.session.delete(likes)
     db.session.commit()
-    return "Successfully Deleted Like"
+    return "Successfully Deleted Comment"
+
+
+
+# tags
+
+
+# all tags by imageId
+@image_routes.route('/<int:imageId>/tag', methods=["GET"])
+@login_required
+def get_tagsbyImage(imageId):
+    tags = Tag.query.filter_by(imageId=imageId).all()
+    if tags == None:
+        return "Image has no tags"
+    return {tag.id: tag.to_dict() for tag in tags}
+
+#Post a tag
+@image_routes.route('/<int:imageId>/tag/new', methods=['POST'])
+@login_required
+def new_Comment(imageId):
+    form = TagForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        data = form.data
+        new_tag = Tag(
+            userId=data['userId'],
+            imageId=data['imageId'],
+            body=data['body'],
+        )
+        db.session.add(new_tag)
+        db.session.commit()
+        return new_tag.to_dict()
+    if form.errors:
+        return {'errors': validation_errors_to_error_messages(form.errors)}, 400
+    return render_template("test.html", form=form)
+
+
+
+#Edit a tag
+@image_routes.route('/<int:imageId>/tag/<int:id>/edit', methods=['GET','PUT'])
+@login_required
+def edit_Tag(imageId, id):
+    form = TagForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        editedTag = Tag.query.get(id)
+        data = form.data
+        editedTag.userId = data['userId']
+        # # might only need body tag
+        editedTag.body = data['body']
+        db.session.commit()
+        return editedTag.to_dict()
+    if form.errors:
+        return {'errors': validation_errors_to_error_messages(form.errors)}, 400
+    return render_template("test.html", form=form)
+
+#Delete a tag
+@image_routes.route('/<int:imageId>/tag/<int:id>/delete', methods=['GET', 'DELETE'])
+@login_required
+def delete_Tag(imageId, id):
+    tag = Tag.query.get(id)
+    db.session.delete(tag)
+    db.session.commit()
+    return {
+    "Message": "Tag successfully deleted",
+    "statusCode": "200"
+    }

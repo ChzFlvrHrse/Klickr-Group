@@ -13,6 +13,7 @@ class Image(db.Model):
 
     comments = db.relationship("Comment", backref='image', cascade="all, delete-orphan")
     likes = db.relationship("Like", backref='image', cascade="all, delete-orphan")
+    tags = db.relationship("Tag", backref='image', cascade="all, delete-orphan")
     # timestamps
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
@@ -29,5 +30,7 @@ class Image(db.Model):
             'created_at': self.created_at,
             'updated_at': self.updated_at,
             'comments': [comment.to_dict() for comment in self.comments],
-            'likes': [like.to_dict() for like in self.likes]
+            'likes': [like.to_dict() for like in self.likes],
+            'tags': [tag.to_dict() for tag in self.tags]
+
         }
