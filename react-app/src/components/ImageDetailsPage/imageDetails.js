@@ -230,14 +230,40 @@ function ImageDetails() {
           )}
         </div>
         <div id="star-like">
-          {filteredLikes.length ? (
-            <i class="fa-solid fa-star" onClick={toggleLikes}></i>
-          ) : (
-            <i class="fa-regular fa-star" onClick={toggleLikes}></i>
-          )}
-          <Link to="/upload">
-            <i class="fa-solid fa-download" title="upload photo"></i>
-          </Link>
+          {/* use this div to center next images */}
+          <div className="leftMostDivImageArrayDetails"></div>
+          {/* use this div to center next images */}
+          <div
+            className={
+              allImagesArray.length ? "Filteredsong-container" : "HiddenResult"
+            }
+          >
+            <div className="PhotoArrayImageDetails">
+              {allImagesArray &&
+                allImagesArray.map((image) => {
+                  return (
+                    <div className="TrendingsongCard" key={image.id}>
+                      <Link to={`/images/${image.id}`}>
+                        <img
+                          className="TrendingsongImage"
+                          src={image.previewImageUrl}
+                        ></img>
+                      </Link>
+                    </div>
+                  );
+                })}
+            </div>
+          </div>
+          <div className='rightMostDivImageArrayDetails'>
+            {filteredLikes.length ? (
+              <i class="fa-solid fa-star" onClick={toggleLikes}></i>
+            ) : (
+              <i class="fa-regular fa-star" onClick={toggleLikes}></i>
+            )}
+            <Link to="/upload">
+              <i class="fa-solid fa-download" title="upload photo"></i>
+            </Link>
+          </div>
         </div>
       </div>
       <div id="image-info">
