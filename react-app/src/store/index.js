@@ -6,13 +6,15 @@ import likes from './likes'
 import comments from './comments'
 import tags from './tags'
 import allUsers from './AllUsers'
+import album from './album'
 
 const rootReducer = combineReducers({
   session,
-  image,
-  likes,
-  comments,
   allUsers,
+  album,
+  image,
+  comments,
+  likes,
   tags
 });
 

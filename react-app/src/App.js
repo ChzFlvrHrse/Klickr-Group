@@ -10,6 +10,7 @@ import User from "./components//ProfilePage/User";
 import { HomePage } from "./components/HomePage/HomePage";
 import { authenticate } from "./store/session";
 import TestingImages from "./components/TestingReduxState/imageTESTING";
+import TestingAlbums from "./components/TestingReduxState/albumTESTING";
 import CreateImageForm from "./components/Images/createImage";
 import TestingLikesFunctions from "./components/TestingReduxState/LikesTESTING";
 import TagsTestingFunction from "./components/TestingReduxState/TagsTESTING";
@@ -49,6 +50,9 @@ function App() {
           <ImageDetails />
         </Route>
         {/* The following routes are for testing only */}
+        <Route path="/:albumId/albums" exact={true}>
+          <TestingAlbums />
+        </Route>
         <Route path="/:imageId/images" exact={true}>
           <TestingImages />
         </Route>
