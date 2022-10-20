@@ -15,6 +15,7 @@ from .api.explore_route import explore_route
 from .api.image_routes import image_routes
 from .api.likes_routes import Likes_routes
 from .api.comments_routes import Comments_routes
+from .api.tags_routes import Tags_routes
 
 
 from .seeds import seed_commands
@@ -48,6 +49,7 @@ app.register_blueprint(Comments_routes, url_prefix='/api/comments')
 # images
 app.register_blueprint(explore_route, url_prefix='/api/explore')
 app.register_blueprint(image_routes, url_prefix="/api/images")
+app.register_blueprint(Tags_routes, url_prefix="/api/tags")
 
 db.init_app(app)
 Migrate(app, db)

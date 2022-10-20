@@ -64,6 +64,7 @@
 }
 
 .explore-title {
+    margin-top: 150px;
     font-size: 22px;
     font-weight: 300;
     padding-top: 20px;
@@ -103,6 +104,8 @@
 
 .hide, .image-likes-section {
     margin-top: 2rem;
+    color: white;
+    width: 100%;
 }
 
 #star-like i {
@@ -112,7 +115,7 @@
 
 #star-icon-explore{
 
-    z-index: 2;
+    /* z-index: 2; */
     height:10px;
     width:20px;
 }
@@ -133,4 +136,29 @@
     flex-direction: row;
     width:fit-content;
     height:100%;
+}
+
+
+/* comments modal */
+
+.commentBox {
+
+
+}
+
+.hiddenComment {
+    display: none;
+}
+
+
+.ExitCommentsSection{
+    display: flex;
+    column-gap: 2px;
+    justify-content: flex-end;
+    flex-direction: row;
+    width:fit-content;
+    height:100%;
+    margin-top: 2rem;
+    color: tomato;
+    width: 100%;
 }

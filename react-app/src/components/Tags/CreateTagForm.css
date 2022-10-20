@@ -1,0 +1,20 @@
+#create-tags {
+    display: flex;
+    width: 90%;
+    justify-content: flex-end;
+    margin-left: 10px;
+}
+
+.CreateTag-inner {
+    width: 100%;
+}
+
+#tagAdd-here {
+    height: 3em;
+}
+
+.createTagButton {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}

@@ -69,6 +69,10 @@ a i {
     margin-bottom: 1px;
 }
 
+.ExploreButtonNav:hover {
+    opacity: .8;
+}
+
 .NavBarLeftSide {
     display: flex;
     flex-direction: row;

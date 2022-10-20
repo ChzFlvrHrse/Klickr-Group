@@ -1,38 +1,38 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { updateACommentThunk } from "../../store/comments";
+import { updateATagThunk } from "../../store/tags";
 import "./EditComment.css"
 
 // pass in userId and imageId into createComment form so we aren't relying
 // on useParams for imageId (will help when building a comment section for each photo in explore page)
-function EditCommentForm({ imageId, setShowModalEdit, oldComment, submitted, setSubmitted }) {
+function EditTagForm({ imageId, setShowModalEdit, oldTag, submitted, setSubmitted }) {
   const dispatch = useDispatch();
-  const id = oldComment.id
-  const userId = oldComment.userId
+  const id = oldTag.id
+  const userId = oldTag.userId
 
 
-  const [comment, setComment] = useState(oldComment.body);
+  const [tag, setTag] = useState(oldTag.body);
   const [errors, setErrors] = useState([]);
   useEffect(() => {
     const formValidationErrors = [];
 
-    if (comment.length > 500) {
-      formValidationErrors.push("Comment body must be no more than 500 characters");
+    if (tag.length > 500) {
+      formValidationErrors.push("Tag body must be no more than 500 characters");
     }
-    if (comment.length < 1) {
-      formValidationErrors.push("Comment body must be more than 1 character");
+    if (tag.length < 1) {
+      formValidationErrors.push("Tag body must be more than 1 character");
     }
 
 
     setErrors(formValidationErrors);
-  }, [comment]);
+  }, [tag]);
 
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (errors.length <= 0) {
       return dispatch(
-        updateACommentThunk(imageId, id, userId, comment)
+        updateATagThunk(imageId, id, userId, tag)
       ).then(() => setShowModalEdit(false)).catch(async (res) => {
         const data = await res.json();
         if (data && data.errors) setErrors(data.errors);
@@ -49,7 +49,7 @@ function EditCommentForm({ imageId, setShowModalEdit, oldComment, submitted, set
   return (
     <div className="create-comment-container">
       <div className="create-comment-wrapper">
-        <h3 className="edit-comment-title">Edit Comment here:</h3>
+        <h3 className="edit-comment-title">Edit Tag here:</h3>
         <div>
           <form
             onSubmit={handleSubmit2}
@@ -70,9 +70,9 @@ function EditCommentForm({ imageId, setShowModalEdit, oldComment, submitted, set
             </div>
             <textarea
               className="edit-comment-box"
-              onChange={event => setComment(event.target.value)}
-              value={comment}
-            >{comment}</textarea>
+              onChange={event => setTag(event.target.value)}
+              value={tag}
+            >{tag}</textarea>
             <div className="done-edit-container">
               <button className="done-edit" onClick={handleSubmit} type="submit">
                 Done
@@ -88,4 +88,4 @@ function EditCommentForm({ imageId, setShowModalEdit, oldComment, submitted, set
   );
 }
 
-export default EditCommentForm;
+export default EditTagForm;
