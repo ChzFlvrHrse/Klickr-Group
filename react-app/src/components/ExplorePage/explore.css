@@ -28,7 +28,7 @@
 
     /* new */
 
-.singleImgContainer {
+.images-wrapper > * {
     flex: 1 1 auto;
 }
 
@@ -142,5 +142,3 @@
 .hiddenComment {
     display: none;
 }
-
-

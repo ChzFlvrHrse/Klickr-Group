@@ -60,7 +60,7 @@ const GetAllImages = () => {
           {allImagesArr.map((image) => {
             return (
               <>
-                {/* <Link to={`/images/${image.id}`}> */}
+                <Link to={`/images/${image.id}`}>
                   <div className="singleImgContainer" key={image.id}>
                     <img
                       className="single-img"
@@ -130,7 +130,7 @@ const GetAllImages = () => {
                       {/* likes and comments section */}
                     </div>
                   </div>
-                {/* </Link> */}
+                </Link>
               </>
             );
           })}
