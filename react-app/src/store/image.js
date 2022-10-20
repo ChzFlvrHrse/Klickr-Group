@@ -58,11 +58,11 @@ export const getOneImageThunk = (imageId) => async (dispatch) => {
   }
 };
 
-export const newImageThunk = (userId, title, description, previewImageUrl) => async (dispatch) => {
+export const newImageThunk = (userId, title, description, previewImageUrl, albumId) => async (dispatch) => {
   const response = await fetch("/api/images/upload", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({userId, title, description, previewImageUrl})
+    body: JSON.stringify({userId, title, description, previewImageUrl, albumId})
   });
   if (response.ok) {
     const createImage = await response.json();

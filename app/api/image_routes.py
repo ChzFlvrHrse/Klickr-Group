@@ -29,6 +29,7 @@ def create_data():
         data = form.data
         new_image = Image(
             userId=data["userId"],
+            albumId=data['albumId'],
             title=data["title"],
             description=data["description"],
             previewImageUrl=data["previewImageUrl"]

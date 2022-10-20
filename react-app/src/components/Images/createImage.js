@@ -3,10 +3,15 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, Redirect } from "react-router-dom";
 
+import { getAlbumsThunk } from "../../store/album";
+import { newAlbumThunk } from "../../store/album";
+
 import "./createImage.css";
 
 export default function CreateImageForm() {
   const user = useSelector((state) => state.session.user);
+  const albums = useSelector((state) => state.album);
+  const AlbumsArray = Object.values(albums);
   const [previewImageUrl, setPreviewImageUrl] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -17,6 +22,27 @@ export default function CreateImageForm() {
   const dispatch = useDispatch();
   const history = useHistory();
 
+// filter all albums so user can choose between them in drop down
+  useEffect(() => {
+    dispatch(getAlbumsThunk());
+  }, [dispatch]);
+
+  let myAlbumsFilter = AlbumsArray.filter(
+    (filteredAlbums, index) => filteredAlbums.userId == user.id
+  );
+
+// create new album if user does not have one already
+
+useEffect(() => {
+  if (user && !myAlbumsFilter.length && AlbumsArray.length) {
+    //get all songs
+    const albumTitle = 'Default Album'
+    const albumDescription = 'New album made for new accounts'
+    const albumImageUrl ='https://www.shareicon.net/data/2015/10/01/110175_media_512x512.png'
+
+    dispatch(newAlbumThunk(userId, albumTitle, albumDescription, albumImageUrl));
+  }
+}, [dispatch, user, AlbumsArray]);
   useEffect(() => {
     const errors = [];
 
@@ -47,7 +73,7 @@ export default function CreateImageForm() {
     }
 
     if (loadImage(previewImageUrl)) {
-      dispatch(newImageThunk(userId, title, description, previewImageUrl)).then(
+      dispatch(newImageThunk(userId, title, description, previewImageUrl, albumId)).then(
         () => dispatch(getImagesThunk())
       );
       history.push("/explore");
@@ -100,8 +126,7 @@ export default function CreateImageForm() {
                   required
                 />
                   <select
-                    className="albumIdInputCreateSong"
-                    id="albumSelectCreateSong"
+                    className="preview-image-input"
                     value={albumId}
                     onChange={(e) => setAlbumId(e.target.value)}
                     required
