@@ -120,6 +120,8 @@ function ImageDetails() {
   let currentImageIndex = filteredIndex
   let previousImageIndex = filteredIndex - 1;
 
+  console.log(allImagesArray[currentImageIndex])
+
   const userLikeId = filteredLikes[0];
   // console.log(userLikeId)
   // toggle likes on and off (post and delete)
@@ -319,9 +321,10 @@ function ImageDetails() {
             ) : (
               <i class="fa-regular fa-star" onClick={toggleLikes}></i>
             )}
-            <Link to="/upload">
-              <i class="fa-solid fa-download" title="upload photo"></i>
-            </Link>
+            <a href={allImagesArray[currentImageIndex].previewImageUrl} target="_blank" rel="noopener noreferrer" download><i class="fa-solid fa-download" title="download photo"></i></a>
+            {/* <Link href={allImagesArray[currentImageIndex].previewImageUrl} download>
+              <i class="fa-solid fa-download" title="download photo"></i>
+            </Link> */}
           </div>
         </div>
       </div>
