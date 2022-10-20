@@ -2,10 +2,19 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { updateACommentThunk } from "../../store/comments";
 import "./EditComment.css"
+/*
 
+
+
+!!!!this form is for the explore page comments section
+
+
+
+
+*/
 // pass in userId and imageId into createComment form so we aren't relying
 // on useParams for imageId (will help when building a comment section for each photo in explore page)
-function EditCommentForm({ imageId, setShowModalEdit, oldComment, submitted, setSubmitted }) {
+function EditCommentFormExplore({ imageId, setShowModalEdit, oldComment, submitted, setSubmitted }) {
   const dispatch = useDispatch();
   const id = oldComment.id
   const userId = oldComment.userId
@@ -33,7 +42,7 @@ function EditCommentForm({ imageId, setShowModalEdit, oldComment, submitted, set
     if (errors.length <= 0) {
       return dispatch(
         updateACommentThunk(imageId, id, userId, comment)
-      ).then(() => setShowModalEdit(false)).catch(async (res) => {
+      ).then(() => setShowModalEdit(false)).then(()=> setSubmitted(!submitted)).catch(async (res) => {
         const data = await res.json();
         if (data && data.errors) setErrors(data.errors);
       });
@@ -84,4 +93,4 @@ function EditCommentForm({ imageId, setShowModalEdit, oldComment, submitted, set
   );
 }
 
-export default EditCommentForm;
+export default EditCommentFormExplore;

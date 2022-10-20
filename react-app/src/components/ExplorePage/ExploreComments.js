@@ -7,9 +7,10 @@ import "./ExploreComments.css";
 import { Link } from "react-router-dom";
 import { Modal } from "../../context/Modal";
 
-import EditCommentForm from "../Comments/EditCommentForm";
-import DeleteCommentForm from "../Comments/DeleteCommentForm";
+import EditCommentFormExplore from "../Comments/EditCommentFormExplore";
+// import DeleteCommentFormExplore from "../Comments/DeleteCommentFormExplore";
 import { createACommentThunk } from "../../store/comments";
+import DeleteCommentFormExplore from "../Comments/DeleteCommentFormExplore";
 
 function ExploreImageCommments({
   users,
@@ -109,7 +110,7 @@ function ExploreImageCommments({
                               )}
                               {showModalEdit && (
                                 <Modal onClose={() => setShowModalEdit(false)}>
-                                  <EditCommentForm
+                                  <EditCommentFormExplore
                                     imageId={image.id}
                                     userId={user.id}
                                     setShowModalEdit={setShowModalEdit}
@@ -137,7 +138,7 @@ function ExploreImageCommments({
                                 <Modal
                                   onClose={() => setShowModalDelete(false)}
                                 >
-                                  <DeleteCommentForm
+                                  <DeleteCommentFormExplore
                                     imageId={image.id}
                                     setShowModal={setShowModalDelete}
                                     comment={comment}

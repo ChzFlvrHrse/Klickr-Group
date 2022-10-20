@@ -2,13 +2,24 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { deleteACommentThunk } from "../../store/comments";
 
+/*
+
+
+
+!!!!this form is for the explore page comments section
+
+
+
+
+*/
+
 //  Be sure to import the modal contents
-function DeleteCommentForm({ imageId, setShowModal, comment, submitted, setSubmitted }) {
+function DeleteCommentFormExplore({ imageId, setShowModal, comment, submitted, setSubmitted }) {
   const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await dispatch(deleteACommentThunk(imageId, comment.id));
+    await dispatch(deleteACommentThunk(imageId, comment.id)).then(()=> setSubmitted(!submitted));
     setShowModal(false);
   };
   const handleSubmit2 = async (e) => {
@@ -42,4 +53,4 @@ function DeleteCommentForm({ imageId, setShowModal, comment, submitted, setSubmi
   );
 }
 
-export default DeleteCommentForm;
+export default DeleteCommentFormExplore;
