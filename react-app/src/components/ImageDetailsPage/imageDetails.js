@@ -97,7 +97,7 @@ function ImageDetails() {
     );
   }
 
-//   find index
+  //   find index
   if (allUsersArray && allImagesArray) {
     filteredIndex = allImagesArray.findIndex(image => image.id == id)
   }
@@ -264,7 +264,7 @@ function ImageDetails() {
         </div>
 
         <div className="imageContainerImageDetails">
-          {previousImage == true && allImagesArray[previousImageIndex] != undefined? (
+          {previousImage == true && allImagesArray[previousImageIndex] != undefined ? (
             <Link
               to={`/images/${allImagesArray[previousImageIndex].id}`}
               className="previousImageClick"
@@ -274,14 +274,13 @@ function ImageDetails() {
           ) : (
             <i class=""></i>
           )}
-          <div id="user-image">
+          <div id="user-image-details-container">
             <img
-              id="user-imageDetails"
               src={allImagesFiltered[0].previewImageUrl}
               alt=""
             />
           </div>
-          {nextImage == true && allImagesArray[nextImageIndex] != undefined? (
+          {nextImage == true && allImagesArray[nextImageIndex] != undefined ? (
             <Link to={`/images/${allImagesArray[nextImageIndex].id}`} className="nextImageClick">
               <i class="fa-solid fa-circle-arrow-right"></i>
             </Link>
@@ -289,7 +288,7 @@ function ImageDetails() {
             <i class=""></i>
           )}
         </div>
-        <div id="star-like">
+        <div className="img-scoll-like-container" id="star-like">
           {/* use this div to center next images */}
           <div className="leftMostDivImageArrayDetails"></div>
           {/* use this div to center next images */}
@@ -327,7 +326,7 @@ function ImageDetails() {
         </div>
       </div>
       <div id="image-info">
-        <div>
+        <div className="LeftSideContainerDetails">
           <div className="owner-info-container">
             <div className="owner-profile-img-name">
               {owner && (
@@ -389,7 +388,7 @@ function ImageDetails() {
                               )}
                               <div className="edit-delete">
                                 {singleUser.id == comment.userId &&
-                                singleUser.id == userId ? (
+                                  singleUser.id == userId ? (
                                   <i
                                     onClick={() => {
                                       setShowModalEdit(true);
@@ -404,7 +403,7 @@ function ImageDetails() {
                                 )}
                                 {/* {singleUser.id == comment.userId && singleUser.id == userId ? <i onClick={async (e) => { e.preventDefault(); await dispatch(deleteACommentThunk(id, comment.id)); setCommDelete(commDelete++) }} className="delete-comment" title='delete' class="fa-solid fa-delete-left"></i> : <></>} */}
                                 {singleUser.id == comment.userId &&
-                                singleUser.id == userId ? (
+                                  singleUser.id == userId ? (
                                   <i
                                     onClick={() => {
                                       setShowModal(true);
@@ -479,68 +478,69 @@ function ImageDetails() {
             <div id="date">Taken on {`${createdAtDate}`}</div>
           </div>
           <div className="bottom-border"></div>
+          <h4 className="TagsHeader">Tags</h4>
           <div className="bottomRightSideContainerDetails">
-            <h4 className="TagsHeader">Tags</h4>
+            <div className="TagsContainer">
+              {tagsArray &&
+                tagsArray.map((tag, index) => {
+                  return (
+                    <div key={tag.id}>
+                      <div className="tagSingleContainer">
+                        {/* {allImagesFiltered[0].userId == user.id ? (
+                          <i
+                            onClick={() => {
+                              setShowModalTagsEdit(true);
+                              setTagState(tag);
+                            }}
+                            className="edit-comment"
+                            title="edit tag"
+                            class="fa-solid fa-pen-to-square"
+                          ></i>
+                        ) : (
+                          <></>
+                        )}
+                        {showModalTagsEdit && (
+                          <Modal onClose={() => setShowModalTagsEdit(false)}>
+                            <EditTagForm
+                              imageId={id}
+                              userId={userId}
+                              setShowModalEdit={setShowModalTagsEdit}
+                              oldTag={tagState}
+                            />
+                          </Modal>
+                        )} */}
 
-            {tagsArray &&
-              tagsArray.map((tag, index) => {
-                return (
-                  <div key={tag.id} className="TagsContainer">
-                    <div className="tagSingleContainer">
-                      {/* edit modal */}
-                      {allImagesFiltered[0].userId == user.id ? (
-                        <i
-                          onClick={() => {
-                            setShowModalTagsEdit(true);
-                            setTagState(tag);
-                          }}
-                          className="edit-comment"
-                          title="edit tag"
-                          class="fa-solid fa-pen-to-square"
-                        ></i>
-                      ) : (
-                        <></>
-                      )}
-                      {showModalTagsEdit && (
-                        <Modal onClose={() => setShowModalTagsEdit(false)}>
-                          <EditTagForm
-                            imageId={id}
-                            userId={userId}
-                            setShowModalEdit={setShowModalTagsEdit}
-                            oldTag={tagState}
-                          />
-                        </Modal>
-                      )}
+                        <div>{tag.body}</div>
+                        {allImagesFiltered[0].userId == user.id ? (
+                          <i
+                            onClick={() => {
+                              setShowModalTagsDelete(true);
+                              setTagState(tag);
+                            }}
+                            className="delete-comment"
+                            title="delete tag"
+                            class="fa-solid fa-delete-left"
+                          ></i>
+                        ) : (
+                          <></>
+                        )}
+                        {showModalTagsDelete && (
+                          <Modal onClose={() => setShowModalTagsDelete(false)}>
+                            <DeleteTagForm
+                              imageId={id}
+                              setShowModal={setShowModalTagsDelete}
+                              tag={tagState}
+                            />
+                          </Modal>
+                        )}
 
-                      <div>{tag.body}</div>
-                      {allImagesFiltered[0].userId == user.id ? (
-                        <i
-                          onClick={() => {
-                            setShowModalTagsDelete(true);
-                            setTagState(tag);
-                          }}
-                          className="delete-comment"
-                          title="delete tag"
-                          class="fa-solid fa-delete-left"
-                        ></i>
-                      ) : (
-                        <></>
-                      )}
-                      {showModalTagsDelete && (
-                        <Modal onClose={() => setShowModalTagsDelete(false)}>
-                          <DeleteTagForm
-                            imageId={id}
-                            setShowModal={setShowModalTagsDelete}
-                            tag={tagState}
-                          />
-                        </Modal>
-                      )}
-
-                      {/* delete modal */}
+                        {/* delete modal */}
+                      </div>
                     </div>
-                  </div>
-                );
-              })}
+                  );
+                })}
+            </div>
+
             {allImagesFiltered[0].userId == user.id && (
               <CreateTagForm userId={userId} imageId={id} />
             )}
