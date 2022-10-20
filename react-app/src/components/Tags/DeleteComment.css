@@ -1,0 +1,42 @@
+.DeleteComment-outer {
+    display: flex;
+    justify-content: center;
+    height: 10rem;
+    width: 24rem;
+}
+
+#statement, #assurance {
+    font-weight: 300;
+}
+
+.deleteSongButtons {
+    display: flex;
+    justify-content: space-around;
+}
+
+.deleteSongButtons button.submitDeleteComment {
+    color: white;
+    background-color: #348fdc;
+    padding: .5rem 1rem;
+    margin-top: .5rem;
+    border-radius: .3rem;
+    border: none;
+    font-size: 1rem;
+    width: 7rem
+}
+
+.deleteSongButtons button.cancelDeleteComment {
+    color: white;
+    background-color: #979ea2;
+    padding: .5rem 1rem;
+    margin-top: .5rem;
+    border-radius: .3rem;
+    border: none;
+    font-size: 1rem;
+    width: 7rem
+}
+
+.deleteSongButtons button:hover {
+    opacity: .8;
+    cursor: pointer;
+}

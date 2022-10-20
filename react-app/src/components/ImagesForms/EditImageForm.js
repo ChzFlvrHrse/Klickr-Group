@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch} from "react-redux";
 import { updateImageThunk } from "../../store/image";
+import './EditImageForm.css'
 
 // pass in userId and imageId into createComment form so we aren't relying
 // on useParams for imageId (will help when building a comment section for each photo in explore page)
@@ -8,11 +9,11 @@ function EditImageForm({imageId, setShowModalEdit, oldImage}) {
   const dispatch = useDispatch();
   const userId = oldImage.userId
 
-
   const [previewImageUrl, setPreviewImageUrl] = useState(oldImage.previewImageUrl);
   const [title, setTitle] = useState(oldImage.title);
   const [description, setDescription] = useState(oldImage.description);
   const [errors, setErrors] = useState([]);
+
   useEffect(() => {
     const formValidationErrors = [];
 
@@ -23,7 +24,7 @@ function EditImageForm({imageId, setShowModalEdit, oldImage}) {
 
 
     setErrors(formValidationErrors);
-  }, [title, description, previewImageUrl, errors]);
+  }, [title, description, previewImageUrl]);
 
 
   const handleSubmit = (e) => {
@@ -45,9 +46,9 @@ function EditImageForm({imageId, setShowModalEdit, oldImage}) {
   };
 
   return (
-    <div className="CreateComment-outer">
+    <div className="edit-image-container">
       <form
-        className="CreateComment-inner"
+        className="Edit-image-inner"
         onSubmit={handleSubmit2}
         autoComplete="off"
       >
@@ -64,7 +65,8 @@ function EditImageForm({imageId, setShowModalEdit, oldImage}) {
             </div>
           )}
         </div>
-        <h1 className="CreateCommentHeader">Edit an Image</h1>
+        <h2 className="CreateCommentHeader">Edit an Image</h2>
+        <div className="edit-comment-title">Edit Image Url:</div>
         <input
             className="preview-image-input"
             type="url"
@@ -74,6 +76,7 @@ function EditImageForm({imageId, setShowModalEdit, oldImage}) {
             onChange={(e) => setPreviewImageUrl(e.target.value)}
             required
           />
+        <div className="edit-comment-title">Image Title</div>
           <input
             className="preview-image-input"
             type="text"
@@ -82,6 +85,8 @@ function EditImageForm({imageId, setShowModalEdit, oldImage}) {
             onChange={(e) => setTitle(e.target.value)}
             required
           />
+        <div className="edit-comment-title">Image Description</div>
+
           <input
             className="preview-image-input"
             type="text"
@@ -90,11 +95,11 @@ function EditImageForm({imageId, setShowModalEdit, oldImage}) {
             onChange={(e) => setDescription(e.target.value)}
             required
         />
-        <div className="createCommentButton">
-          <button className="submitCreateComment" onClick={handleSubmit} type="submit">
+        <div className="done-edit-container">
+          <button className="done-edit" onClick={handleSubmit} type="submit">
             Submit Image
           </button>
-          <button className="submitCreateComment" onClick={() => setShowModalEdit(false)} type="submit">
+          <button className="done-edit" onClick={handleSubmit2} type="submit">
             Cancel Edit
           </button>
         </div>

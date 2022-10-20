@@ -26,8 +26,7 @@ const deleteLikes = (id) => ({
 // thunks
 
 export const getAllLikesThunk = () => async (dispatch) => {
-    const response = await fetch('/api/likes');
-
+    const response = await fetch('/api/likes/');
     if (response.ok) {
         const likes = await response.json();
         dispatch(getAllLikes(likes));

@@ -1,15 +1,15 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { deleteACommentThunk } from "../../store/comments";
+import { deleteATagThunk } from "../../store/tags";
 import "./DeleteComment.css"
 
 //  Be sure to import the modal contents
-function DeleteCommentForm({ imageId, setShowModal, comment, submitted, setSubmitted }) {
+function DeleteTagForm({ imageId, setShowModal, tag, submitted, setSubmitted }) {
   const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await dispatch(deleteACommentThunk(imageId, comment.id));
+    await dispatch(deleteATagThunk(imageId, tag.id));
     setShowModal(false);
   };
   const handleSubmit2 = async (e) => {
@@ -20,9 +20,9 @@ function DeleteCommentForm({ imageId, setShowModal, comment, submitted, setSubmi
   return (
     <div className="DeleteComment-outer">
       <form className="DeleteComment-inner" onSubmit={handleSubmit2} autoComplete="off">
-        <h4 id="statement">Delete Comment</h4>
+        <h4 id="statement">Delete Tag</h4>
         <div></div>
-        <h5 id="assurance">Are you sure you want to delete this comment?</h5>
+        <h5 id="assurance">Are you sure you want to delete this Tag?</h5>
         <div className="deleteSongButtons">
           <button
             className="submitDeleteComment"
@@ -43,4 +43,4 @@ function DeleteCommentForm({ imageId, setShowModal, comment, submitted, setSubmi
   );
 }
 
-export default DeleteCommentForm;
+export default DeleteTagForm;

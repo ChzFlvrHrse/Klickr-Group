@@ -10,9 +10,10 @@
 
 #back-explore {
     display: flex;
-    justify-content: flex-start;
+    align-items: center;
+    justify-content: space-between;
     margin-bottom: 2rem;
-    width: fit-content
+    width: 100%
 }
 
 #back-explore:hover {
@@ -39,7 +40,7 @@ a {
 
 div #star-like {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     padding-top: 2rem;
 }
 
@@ -268,3 +269,217 @@ textarea {
     display: grid;
     border-bottom: solid black;
 } */
+
+
+.imageContainerImageDetails {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    column-gap: 10px;
+    width: 100%;
+}
+
+/* Previous Photo */
+.previousImageClick {
+    opacity: 0;
+    transition: 1000ms opacity ease-in-out;
+    display: flex;
+    position: absolute;
+    font-size: 15vmin;
+    left: 60px;
+    z-index: 3;
+    color: white;
+}
+#details-image:hover .previousImageClick {
+    opacity: 1;
+    transition: 1000ms opacity ease-in-out;
+    display: flex;
+    position: absolute;
+    font-size: 15vmin;
+    left: 60px;
+    z-index: 3;
+    color: white;
+}
+
+/* Next Photo */
+.nextImageClick {
+    display: flex;
+    opacity: 0;
+    transition: 1000ms opacity ease-in-out;
+    position: absolute;
+    font-size: 15vmin;
+    right: 40px;
+    z-index: 3;
+    color: white;
+}
+#details-image:hover .nextImageClick {
+    opacity: 1;
+    transition: 1000ms opacity ease-in-out;
+    display: flex;
+    position: absolute;
+    font-size: 15vmin;
+    right: 40px;
+    z-index: 3;
+    color: white;
+}
+
+/* photo array */
+.leftMostDivImageArrayDetails {
+    width: 10%;
+}
+
+.rightMostDivImageArrayDetails {
+    display: flex;
+    justify-content: flex-end;
+    width: fit-content
+}
+.HiddenResult {
+    visibility: hidden;
+}
+
+
+.Filteredsong-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 70%;
+    height: 6em;
+    text-align: left;
+    overflow-y: hidden;
+  }
+
+.PhotoArrayImageDetails {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: fit-content;
+    width: 100%;
+    column-gap: 2em;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    flex-wrap: wrap;
+    border-bottom: 0.1em solid #dbdada;
+}
+
+.PhotoArrayImageDetails:hover {
+    overflow-x: auto;
+  }
+.TrendingsongCard {
+    width: 5em;
+    height: 6em;
+    margin-bottom: 20px;
+  position: relative;
+}
+
+.TrendingsongImage {
+    width: 5em;
+    height: 5em;
+  }
+
+
+  /* on hover  */
+
+.Filteredsong-container:hover {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 80%;
+    height: 9em;
+    text-align: left;
+    overflow-y: hidden;
+  }
+
+.Filteredsong-container:hover .TrendingsongCard{
+     width: 7em;
+    height: 8em;
+  position: relative;
+  }
+.Filteredsong-container:hover .TrendingsongImage{
+    width: 7em;
+    height: 7em;
+  } */
+
+
+
+
+  /* starting tags */
+
+  .RightSideContainerDetails {
+    display: flex;
+    flex-direction: column;
+  }
+  .topRightSideContainerDetails {
+    display: flex;
+    flex-direction: row;
+    /* height: 102px; */
+  }
+
+  .bottomRightSideContainerDetails {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    row-gap: 10px;
+    align-items: center;
+    border-left: solid rgba(128, 128, 128, 0.308) thin;
+    color: black;
+    margin: 1rem 0;
+    margin-left: 10px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    height: fit-content;
+  }
+
+  .TagsHeader {
+    font-weight: 600;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+  }
+
+  .bottom-border2 {
+    display: flex;
+    flex-direction: center;
+    border-bottom: solid gray thin;
+    margin: 1rem 0;
+    margin-left: 50px;
+    width: 80%;
+    opacity: .3;
+}
+
+
+/* single tag */
+
+.tagSingleContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    column-gap: 10px;
+    border-radius: 50px;
+    padding: 10px;
+    background-color: rgba(202, 202, 202, 0.548);
+    width: fit-content;
+    height: fit-content;
+}
+
+.TagSectionCreateSection {
+    margin-top: 10px;
+}
+
+
+
+/* top bar edit and delete album */
+
+
+.LinktoHomeImageDetails {
+    display: flex;
+    width: fit-content;
+    column-gap: 10px;
+}
+
+.EditDeleteImageSection {
+    display: flex;
+    width: fit-content;
+    column-gap: 50px;
+    color: white;
+}

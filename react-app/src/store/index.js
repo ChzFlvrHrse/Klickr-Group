@@ -4,6 +4,7 @@ import session from './session'
 import image from './image';
 import likes from './likes'
 import comments from './comments'
+import tags from './tags'
 import allUsers from './AllUsers'
 
 const rootReducer = combineReducers({
@@ -11,7 +12,8 @@ const rootReducer = combineReducers({
   image,
   likes,
   comments,
-  allUsers
+  allUsers,
+  tags
 });
 
 
