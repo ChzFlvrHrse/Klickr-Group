@@ -268,3 +268,58 @@ textarea {
     display: grid;
     border-bottom: solid black;
 } */
+
+
+.imageContainerImageDetails {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    column-gap: 10px;
+    width: 100%;
+}
+
+/* Previous Photo */
+.previousImageClick {
+    opacity: 0;
+    transition: 1000ms opacity ease-in-out;
+    display: flex;
+    position: absolute;
+    font-size: 120px;
+    left: 40px;
+    z-index: 3;
+    color: white;
+}
+#details-image:hover .previousImageClick {
+    opacity: 1;
+    transition: 1000ms opacity ease-in-out;
+    display: flex;
+    position: absolute;
+    font-size: 120px;
+    left: 40px;
+    z-index: 3;
+    color: white;
+}
+
+/* Next Photo */
+.nextImageClick {
+    display: flex;
+    opacity: 0;
+    transition: 1000ms opacity ease-in-out;
+    position: absolute;
+    font-size: 120px;
+    right: 40px;
+    z-index: 3;
+    color: white;
+}
+#details-image:hover .nextImageClick {
+    opacity: 1;
+    transition: 1000ms opacity ease-in-out;
+    display: flex;
+    position: absolute;
+    font-size: 120px;
+    right: 40px;
+    z-index: 3;
+    color: white;
+}
+
+/* Upcoming Photos */

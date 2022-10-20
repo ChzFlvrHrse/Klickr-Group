@@ -1,257 +1,400 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Redirect } from "react-router-dom";
 import { useParams, Link, useHistory } from "react-router-dom";
-import { getOneImageThunk, getImagesThunk } from '../../store/image';
+import { getOneImageThunk, getImagesThunk } from "../../store/image";
 import EditImageForm from "../ImagesForms/EditImageForm";
 import DeleteImageForm from "../ImagesForms/DeleteImageForm";
 import CreateCommentForm from "../Comments/CreateCommentForm";
 import EditCommentForm from "../Comments/EditCommentForm";
 import DeleteCommentForm from "../Comments/DeleteCommentForm";
 import { getAllUsersThunk } from "../../store/AllUsers";
-import { createACommentThunk, deleteACommentThunk, getAllCommentsThunk, getImageCommentsThunk } from "../../store/comments";
-import { getImageLikesThunk, createLikesThunk, deleteLikesThunk } from "../../store/likes";
+import {
+  createACommentThunk,
+  deleteACommentThunk,
+  getAllCommentsThunk,
+  getImageCommentsThunk,
+} from "../../store/comments";
+import {
+  getImageLikesThunk,
+  createLikesThunk,
+  deleteLikesThunk,
+} from "../../store/likes";
 import { Modal } from "../../context/Modal";
-import "./imageDetails.css"
+import "./imageDetails.css";
 
 function ImageDetails() {
-    const [showModal, setShowModal] = useState(false);
-    const [showModalEdit, setShowModalEdit] = useState(false);
-    const [commentState, setCommentState] = useState({});
-    const [body, setBody] = useState("")
-    let [commDelete, setCommDelete] = useState(1);
+  const history = useHistory();
+  const [showModal, setShowModal] = useState(false);
+  const [showModalEdit, setShowModalEdit] = useState(false);
+  const [commentState, setCommentState] = useState({});
+  const [body, setBody] = useState("");
+  // keep track of previous image
+  const [previousImage, setPreviousImage] = useState(false);
+  // keep track of next image
+  const [nextImage, setNextImage] = useState(false);
 
-    const dispatch = useDispatch();
-    const { id } = useParams();
-    //   variables
-    let allImagesArray;
-    let allUsersArray;
-    let allImagesFiltered;
-    let imageOwner;
-    let owner;
+  let [commDelete, setCommDelete] = useState(1);
 
-    // useEffects
-    useEffect(() => {
-        dispatch(getImagesThunk());
-    }, [dispatch, allImagesFiltered, allUsersArray]);
+  const dispatch = useDispatch();
+  const { id } = useParams();
 
-    useEffect(() => {
-        dispatch(getAllUsersThunk());
-    }, [dispatch, allImagesFiltered, allImagesArray]);
+  //   variables
+  let allImagesArray;
+  let allUsersArray;
+  let allImagesFiltered;
+  let imageOwner;
+  let owner;
+  //   keep track of imageNumber in array (zero indexed)
+  let nextImageIndex = Number(id);
+  let currentImageIndex = nextImageIndex - 1;
+  let previousImageIndex = nextImageIndex - 2;
+  let currentImageNumber = Number(id);
+  let nextImageNumber = currentImageNumber + 1;
+  let previousImageNumber = currentImageNumber - 1;
 
-    useEffect(() => {
-        dispatch(getImageLikesThunk(id))
-    }, [dispatch, id])
+  if (nextImageIndex != id) {
+    nextImageIndex = Number(id);
+    currentImageIndex = nextImageIndex - 1;
+    previousImageIndex = nextImageIndex - 2;
+  }
+  if (currentImageNumber != id) {
+    currentImageNumber = Number(id);
+    previousImageNumber = currentImageNumber - 1;
+    nextImageNumber = currentImageNumber + 1;
+  }
 
-    useEffect(() => {
-        dispatch(getAllCommentsThunk());
-    }, [dispatch, showModal, showModalEdit, commentState, commDelete]);
+  // useEffects
+  useEffect(() => {
+    dispatch(getImagesThunk());
+  }, [dispatch, allImagesFiltered, allUsersArray]);
 
+  useEffect(() => {
+    dispatch(getAllUsersThunk());
+  }, [dispatch, allImagesFiltered, allImagesArray]);
 
-    // redux states
-    const images = useSelector((state) => state.image);
-    const allusers = useSelector((state) => state.allUsers);
-    const user = useSelector((state) => state.session.user);
-    const likes = useSelector(state => state.likes);
-    const comment = useSelector(state => state.comments)
-    const userId = user.id;
+  useEffect(() => {
+    dispatch(getImageLikesThunk(id));
+  }, [dispatch, id]);
 
-    let likesArray = Object.values(likes);
-    let filteredLikes;
+  useEffect(() => {
+    dispatch(getAllCommentsThunk());
+  }, [dispatch, showModal, showModalEdit, commentState, commDelete]);
 
-    let commentsArray = Object.values(comment)
-    let filteredComments = commentsArray.filter(comments => comments.imageId == id)
-    // console.log(filteredComments)
+  // redux states
+  const images = useSelector((state) => state.image);
+  const allusers = useSelector((state) => state.allUsers);
+  const user = useSelector((state) => state.session.user);
+  const likes = useSelector((state) => state.likes);
+  const comment = useSelector((state) => state.comments);
+  const userId = user.id;
 
-    filteredLikes = likesArray.filter((filteredLikes, index) => filteredLikes.userId == user.id)
-    const userLikeId = filteredLikes[0]
-    // console.log(userLikeId)
-    // toggle likes on and off (post and delete)
-    const toggleLikes = (e) => {
-        e.preventDefault();
-        if (!filteredLikes.length) {
-            dispatch(createLikesThunk(id))
-        }
-        else {
-            dispatch(deleteLikesThunk(userLikeId.id))
-        }
+  let likesArray = Object.values(likes);
+  let filteredLikes;
 
-    };
+  let commentsArray = Object.values(comment);
+  let filteredComments = commentsArray.filter(
+    (comments) => comments.imageId == id
+  );
+  // console.log(filteredComments)
 
-    // handle comment submission
-    const submitComment = async (e) => {
-        e.preventDefault()
-
-        if (body.length) {
-            await dispatch(createACommentThunk(userId, id, body))
-            setBody("")
-        } else {
-            return "Bad Data"
-        }
+  filteredLikes = likesArray.filter(
+    (filteredLikes, index) => filteredLikes.userId == user.id
+  );
+  const userLikeId = filteredLikes[0];
+  // console.log(userLikeId)
+  // toggle likes on and off (post and delete)
+  const toggleLikes = (e) => {
+    e.preventDefault();
+    if (!filteredLikes.length) {
+      dispatch(createLikesThunk(id));
+    } else {
+      dispatch(deleteLikesThunk(userLikeId.id));
     }
+  };
 
-    let createdAtDate;
+  // handle comment submission
+  const submitComment = async (e) => {
+    e.preventDefault();
 
-    // filters
-    allImagesArray = Object.values(images);
-    allUsersArray = Object.values(allusers);
-
-    if (allUsersArray && allImagesArray) {
-        allImagesFiltered = allImagesArray.filter((filteredImages, index) => filteredImages.id == id)
+    if (body.length) {
+      await dispatch(createACommentThunk(userId, id, body));
+      setBody("");
+    } else {
+      return "Bad Data";
     }
+  };
 
-    // console.log(allImagesFiltered[0].created_at)
-    // Image created_at Date formatting
-    if (allImagesFiltered[0]) {
-        const createdAtObject = allImagesFiltered[0].created_at
-        const createdAtString = JSON.stringify(createdAtObject)
-        const date = createdAtString.slice(5, 8)
-        const month = createdAtString.slice(9, 12)
-        const year = createdAtString.slice(13, 17)
-        createdAtDate = `${month} ${date}, ${year}`
-        // console.log(createdAtDate)
-    }
+  let createdAtDate;
 
-    if (allUsersArray.length && allImagesArray.length) {
-        imageOwner = allUsersArray.filter(user => user.id == allImagesFiltered[0].userId)
-    }
-    if (imageOwner && allImagesFiltered) {
-        owner = imageOwner[0]
-    }
+  // filters
+  allImagesArray = Object.values(images);
+  allUsersArray = Object.values(allusers);
 
+  if (allUsersArray && allImagesArray) {
+    allImagesFiltered = allImagesArray.filter(
+      (filteredImages, index) => filteredImages.id == id
+    );
+  }
 
-    // if image does not exist
-    if (!allImagesFiltered.length) {
-        return (
-            <>
-                <div>
-                    Sorry this image does not exist!
-                </div>
-            </>
-        )
-    }
+  // console.log(allImagesFiltered[0].created_at)
+  // Image created_at Date formatting
+  if (allImagesFiltered[0]) {
+    const createdAtObject = allImagesFiltered[0].created_at;
+    const createdAtString = JSON.stringify(createdAtObject);
+    const date = createdAtString.slice(5, 8);
+    const month = createdAtString.slice(9, 12);
+    const year = createdAtString.slice(13, 17);
+    createdAtDate = `${month} ${date}, ${year}`;
+    // console.log(createdAtDate)
+  }
 
+  if (allUsersArray.length && allImagesArray.length) {
+    imageOwner = allUsersArray.filter(
+      (user) => user.id == allImagesFiltered[0].userId
+    );
+  }
+  if (imageOwner && allImagesFiltered) {
+    owner = imageOwner[0];
+  }
 
+  //   console.log(allImagesArray[previousImageNumber])
+  // check to see if current photo has previous images and upcoming images, if so display arrows
+  useEffect(() => {
+    if (
+      allImagesArray[nextImageIndex] != undefined &&
+      allImagesArray[nextImageIndex] != null
+    ) {
+      setNextImage(true);
+    } else setNextImage(false);
 
-    //   else return everything
+    if (
+      allImagesArray[previousImageIndex] != undefined &&
+      allImagesArray[previousImageIndex] != null
+    ) {
+      setPreviousImage(true);
+    } else setPreviousImage(false);
+  }, [
+    dispatch,
+    previousImage,
+    nextImage,
+    allImagesArray,
+    id,
+    currentImageIndex,
+    currentImageNumber,
+  ]);
+
+  // if image does not exist
+  if (!allImagesFiltered.length) {
     return (
-        <>
-            <div id="details-image">
-                <div id="back-explore">
-                    <Link to="/explore" className='i'><i class="fa-solid fa-arrow-left"></i></Link>
-                    <Link to="/explore">Back to explore</Link>
-                </div>
-                <div id="user-image">
-                    <img id="user-imageDetails" src={allImagesFiltered[0].previewImageUrl} alt="" />
-                </div>
-                <div id="star-like">
-                    {filteredLikes.length ? <i class="fa-solid fa-star" onClick={toggleLikes} ></i> : <i class="fa-regular fa-star" onClick={toggleLikes}></i>}
-                    <Link to="/upload" ><i class="fa-solid fa-download" title='upload photo'></i></Link>
-                </div>
-            </div>
-            <div id='image-info'>
-                <div>
-                    <div className="owner-info-container">
-                        <div className="owner-profile-img-name">
-                            {owner && (<img className="user-profile-image" src={owner.previewImageUrl}></img>)}
+      <>
+        <div>Sorry this image does not exist!</div>
+      </>
+    );
+  }
 
-                        </div>
-                        <div className="owner-image-info-container">
-                            {owner && (<Link className="user" to={`/users/${owner.id}`}>{owner.first_name} {owner.last_name}</Link>)}
-                            <div id='title'>{allImagesFiltered[0].title}</div>
-                            <div id="description">{allImagesFiltered[0].description}</div>
-                        </div>
-                    </div>
-                    <div className="bottom-border"></div>
-                    {filteredComments &&
-                        filteredComments.map(comment => {
-                            return (
-                                <div key={comment.id} className="comment-box">
-                                    <br />
-                                    {/* map through users array and display username if id matches userId */}
-                                    <div>
-                                        {allUsersArray &&
-                                            allUsersArray.map((singleUser) => {
-                                                return (
-                                                    <div className="user-name">
-                                                        {singleUser.id == comment.userId
-                                                            ? <img className="comment-profile-img" src={singleUser.previewImageUrl}></img>
-                                                            : ""}
-                                                        <div className="user-name-commentDate-options">
-                                                            {singleUser.id == comment.userId
-                                                                ? <Link to={`/users/${singleUser.id}`} className="profile-link">{singleUser.first_name + " " + singleUser.last_name}</Link>
-                                                                : ""}
-                                                            {singleUser.id == comment.userId ? <div className="comment-date">{comment.updated_at.slice(0, 16)}</div> : <></>}
-                                                            <div className="edit-delete">
-                                                                {singleUser.id == comment.userId && singleUser.id == userId ? <i onClick={() => {setShowModalEdit(true); setCommentState(comment) }} className="edit-comment" title="edit comment" class="fa-solid fa-pen-to-square"></i> : <></>}
-                                                                {/* {singleUser.id == comment.userId && singleUser.id == userId ? <i onClick={async (e) => { e.preventDefault(); await dispatch(deleteACommentThunk(id, comment.id)); setCommDelete(commDelete++) }} className="delete-comment" title='delete' class="fa-solid fa-delete-left"></i> : <></>} */}
-                                                                {singleUser.id == comment.userId && singleUser.id == userId ? <i onClick={() => {setShowModal(true); setCommentState(comment)}} className="delete-comment" title='delete' class="fa-solid fa-delete-left"></i> : <></>}
-                                                                {showModalEdit && (
-                                                                    <Modal onClose={() => setShowModalEdit(false)}>
-                                                                        <EditCommentForm
-                                                                            imageId={id}
-                                                                            userId={userId}
-                                                                            setShowModalEdit={setShowModalEdit}
-                                                                            oldComment={commentState}
-                                                                        />
-                                                                    </Modal>
-                                                                )}
-                                                                {showModal && (
-                                                                    <Modal onClose={() => setShowModal(false)}>
-                                                                        <DeleteCommentForm
-                                                                            imageId={id}
-                                                                            setShowModal={setShowModal}
-                                                                            comment={commentState}
-                                                                        />
-                                                                    </Modal>
-                                                                )}
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                );
-                                            })}
-                                    </div>
-                                    <div className="body">{comment.body}</div>
+  //   else return everything
+  return (
+    <>
+      <div id="details-image">
+        <div id="back-explore">
+          <Link to="/explore" className="i">
+            <i class="fa-solid fa-arrow-left"></i>
+          </Link>
+          <Link to="/explore">Back to explore</Link>
+        </div>
+        <div className="imageContainerImageDetails">
+          {previousImage == true ? (
+            <Link
+              to={`/images/${previousImageNumber}`}
+              className="previousImageClick"
+            >
+              <i class="fa-solid fa-circle-arrow-left"></i>
+            </Link>
+          ) : (
+            <i class=""></i>
+          )}
+          <div id="user-image">
+            <img
+              id="user-imageDetails"
+              src={allImagesFiltered[0].previewImageUrl}
+              alt=""
+            />
+          </div>
+          {nextImage == true ? (
+            <Link to={`/images/${nextImageNumber}`} className="nextImageClick">
+              <i class="fa-solid fa-circle-arrow-right"></i>
+            </Link>
+          ) : (
+            <i class=""></i>
+          )}
+        </div>
+        <div id="star-like">
+          {filteredLikes.length ? (
+            <i class="fa-solid fa-star" onClick={toggleLikes}></i>
+          ) : (
+            <i class="fa-regular fa-star" onClick={toggleLikes}></i>
+          )}
+          <Link to="/upload">
+            <i class="fa-solid fa-download" title="upload photo"></i>
+          </Link>
+        </div>
+      </div>
+      <div id="image-info">
+        <div>
+          <div className="owner-info-container">
+            <div className="owner-profile-img-name">
+              {owner && (
+                <img
+                  className="user-profile-image"
+                  src={owner.previewImageUrl}
+                ></img>
+              )}
+            </div>
+            <div className="owner-image-info-container">
+              {owner && (
+                <Link className="user" to={`/users/${owner.id}`}>
+                  {owner.first_name} {owner.last_name}
+                </Link>
+              )}
+              <div id="title">{allImagesFiltered[0].title}</div>
+              <div id="description">{allImagesFiltered[0].description}</div>
+            </div>
+          </div>
+          <div className="bottom-border"></div>
+          {filteredComments &&
+            filteredComments.map((comment) => {
+              return (
+                <div key={comment.id} className="comment-box">
+                  <br />
+                  {/* map through users array and display username if id matches userId */}
+                  <div>
+                    {allUsersArray &&
+                      allUsersArray.map((singleUser) => {
+                        return (
+                          <div className="user-name">
+                            {singleUser.id == comment.userId ? (
+                              <img
+                                className="comment-profile-img"
+                                src={singleUser.previewImageUrl}
+                              ></img>
+                            ) : (
+                              ""
+                            )}
+                            <div className="user-name-commentDate-options">
+                              {singleUser.id == comment.userId ? (
+                                <Link
+                                  to={`/users/${singleUser.id}`}
+                                  className="profile-link"
+                                >
+                                  {singleUser.first_name +
+                                    " " +
+                                    singleUser.last_name}
+                                </Link>
+                              ) : (
+                                ""
+                              )}
+                              {singleUser.id == comment.userId ? (
+                                <div className="comment-date">
+                                  {comment.updated_at.slice(0, 16)}
                                 </div>
-                            );
-                        })}
-                    <div id="create-comment">
-                        <form
-                            onSubmit={submitComment}
-                        >
-                            <textarea
-                                id="comment-here"
-                                placeholder="Add a comment"
-                                tabIndex='0'
-                                type='text'
-                                onChange={event => setBody(event.target.value)}
-                                value={body}
-                            ></textarea>
-                            <div id="submit-container">
-                                <button
-                                    type='submit'
-                                    id="submit-comment"
-                                >Comment</button>
+                              ) : (
+                                <></>
+                              )}
+                              <div className="edit-delete">
+                                {singleUser.id == comment.userId &&
+                                singleUser.id == userId ? (
+                                  <i
+                                    onClick={() => {
+                                      setShowModalEdit(true);
+                                      setCommentState(comment);
+                                    }}
+                                    className="edit-comment"
+                                    title="edit comment"
+                                    class="fa-solid fa-pen-to-square"
+                                  ></i>
+                                ) : (
+                                  <></>
+                                )}
+                                {/* {singleUser.id == comment.userId && singleUser.id == userId ? <i onClick={async (e) => { e.preventDefault(); await dispatch(deleteACommentThunk(id, comment.id)); setCommDelete(commDelete++) }} className="delete-comment" title='delete' class="fa-solid fa-delete-left"></i> : <></>} */}
+                                {singleUser.id == comment.userId &&
+                                singleUser.id == userId ? (
+                                  <i
+                                    onClick={() => {
+                                      setShowModal(true);
+                                      setCommentState(comment);
+                                    }}
+                                    className="delete-comment"
+                                    title="delete"
+                                    class="fa-solid fa-delete-left"
+                                  ></i>
+                                ) : (
+                                  <></>
+                                )}
+                                {showModalEdit && (
+                                  <Modal
+                                    onClose={() => setShowModalEdit(false)}
+                                  >
+                                    <EditCommentForm
+                                      imageId={id}
+                                      userId={userId}
+                                      setShowModalEdit={setShowModalEdit}
+                                      oldComment={commentState}
+                                    />
+                                  </Modal>
+                                )}
+                                {showModal && (
+                                  <Modal onClose={() => setShowModal(false)}>
+                                    <DeleteCommentForm
+                                      imageId={id}
+                                      setShowModal={setShowModal}
+                                      comment={commentState}
+                                    />
+                                  </Modal>
+                                )}
+                              </div>
                             </div>
-                        </form>
-                    </div>
+                          </div>
+                        );
+                      })}
+                  </div>
+                  <div className="body">{comment.body}</div>
                 </div>
-                <div id='faves'>
-                    {likesArray.length}
-                    <div className="tag">faves</div>
-                </div>
-                <div id='comment-talley'>
-                    {filteredComments.length}
-                    <div className="tag">comments</div>
-                </div>
-                <div id="date">
-                    Taken on {`${createdAtDate}`}
-                </div>
-                {/* <div className="bottom-border-2">
+              );
+            })}
+          <div id="create-comment">
+            <form onSubmit={submitComment}>
+              <textarea
+                id="comment-here"
+                placeholder="Add a comment"
+                tabIndex="0"
+                type="text"
+                onChange={(event) => setBody(event.target.value)}
+                value={body}
+              ></textarea>
+              <div id="submit-container">
+                <button type="submit" id="submit-comment">
+                  Comment
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div id="faves">
+          {likesArray.length}
+          <div className="tag">faves</div>
+        </div>
+        <div id="comment-talley">
+          {filteredComments.length}
+          <div className="tag">comments</div>
+        </div>
+        <div id="date">Taken on {`${createdAtDate}`}</div>
+        {/* <div className="bottom-border-2">
 
                 </div> */}
-            </div>
-        </>
-    );
+      </div>
+    </>
+  );
 }
 
 export default ImageDetails;
