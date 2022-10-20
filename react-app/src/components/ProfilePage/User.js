@@ -108,6 +108,9 @@ function User() {
                 <NavLink to={`/images/${image.id}`}>
                   <img className='user-single-img' src={image.previewImageUrl}></img>
                 </NavLink>
+                <div className='explore-image-bttm-section'>
+                    <div className="hide" style={{color: 'white'}}>{image.title}</div>
+                </div>
               </div>
             )}
           </div>
