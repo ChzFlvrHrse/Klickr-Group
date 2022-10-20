@@ -473,12 +473,12 @@ textarea {
     cursor: pointer;
 }
 
-.tagSingleContainer:hover {
+/* .tagSingleContainer:hover {
     color: white;
     background-color: gray;
     transform: scale(1.2);
     transition: all .1s ease-in-out;
-}
+} */
 
 .TagsContainer{
     display: flex;
@@ -498,7 +498,7 @@ textarea {
     justify-content: left;
 }
 
-#delete-tag {
+/* #delete-tag {
     display: none;
 }
 
@@ -507,7 +507,7 @@ textarea {
     color: white;
     background-color: gray;
     cursor: pointer;
-}
+} */
 
 /* top bar edit and delete album */
 

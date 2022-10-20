@@ -519,7 +519,7 @@ function ImageDetails() {
                             }}
                             className="delete-comment"
                             id="delete-tag"
-                            title="delete-tag"
+                            title="delete tag"
                             class="fa-solid fa-xmark"
                           ></i>
                         ) : (
