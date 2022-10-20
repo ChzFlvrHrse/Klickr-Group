@@ -48,7 +48,7 @@
     max-height:220px;
     width: 100%;
     height: auto;
-    /* max-width:fit-content;/ */
+    object-fit: cover;
     margin-right: 5px;
     margin-top: 5px;
     z-index: 1;
