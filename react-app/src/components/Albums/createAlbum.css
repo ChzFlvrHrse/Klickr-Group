@@ -1,0 +1,76 @@
+.Whole-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 10%; 
+}
+.Image-Container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* background-color: black; */
+
+}
+
+
+.create-image-button {
+    color: white;
+    background-color: rgb(36, 98, 204);
+    border-radius: .4em;
+    height: 35px;
+    width: 98%;
+    margin-left: 20px
+}
+
+.image-input {
+    display:flex;
+    flex-direction: column;
+    padding: 10px;
+    color: black;
+    width: 500px;
+    border-color: black;
+}
+
+.preview-image-input {
+    border-color: black;
+    color:black;
+    width: 500px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    padding-left: 5px;
+    margin: 10px;
+    
+}
+.header-message { 
+    margin-left: 3rem;
+    color: white;
+    font-weight: 400;
+    padding-top: 20px;
+    margin-bottom: -5px;;
+}
+
+.header-message3{
+    font-weight: 200;
+    font-size: 20px;
+    border: 2px solid rgb(251, 77, 106);
+    background-color: rgb(41, 40, 40);
+    color: white;
+    margin-left: 65px;
+    width:35rem;
+    display:flex;
+    justify-content: center;
+}
+
+.image-bttn{
+    padding-top: 20px;
+}
+
+.EntireContainerForUploadForm {
+    height: 100%;
+    width: 100%;
+    background-color: rgb(41, 40, 40);
+}
+
+
+
+

@@ -10,6 +10,7 @@ export default function CreateImageForm() {
   const [previewImageUrl, setPreviewImageUrl] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [albumId, setAlbumId] = useState("");
   const [errors, setErrors] = useState([]);
   const [hasSubmitted, setHasSubmitted] = useState(false);
   const userId = user.id;
@@ -46,66 +47,91 @@ export default function CreateImageForm() {
     }
 
     if (loadImage(previewImageUrl)) {
-      dispatch(newImageThunk(userId, title, description, previewImageUrl)).then(() => dispatch(getImagesThunk()));
+      dispatch(newImageThunk(userId, title, description, previewImageUrl)).then(
+        () => dispatch(getImagesThunk())
+      );
       history.push("/explore");
     }
   }
 
   return (
     <div className="EntireContainerForUploadForm">
-    <div className="background-image">
-    <div className="Whole-container">
-      <div className="Image-Container">
-        <h2 className="header-message">You can upload 1000 more photos.</h2>
-        <h3 className="header-message3">
-          Get automatic photo backup on all your devices with Klickr.
-        </h3>
-        <div className="show-errors">
-          {hasSubmitted && errors.length > 0 && (
-            <ul className="errors-list">
-              {errors.map((error) => (
-                <li key={error}>{error}</li>
-              ))}
-            </ul>
-          )}
+      <div className="background-image">
+        <div className="Whole-container">
+          <div className="Image-Container">
+            <h2 className="header-message">You can upload 1000 more photos.</h2>
+            <h3 className="header-message3">
+              Get automatic photo backup on all your devices with Klickr.
+            </h3>
+            <div className="show-errors">
+              {hasSubmitted && errors.length > 0 && (
+                <ul className="errors-list">
+                  {errors.map((error) => (
+                    <li key={error}>{error}</li>
+                  ))}
+                </ul>
+              )}
+            </div>
+            <form onSubmit={onSubmit} className="create-image-form">
+              <div className="image-input">
+                <input
+                  className="preview-image-input"
+                  type="url"
+                  name="preview-image"
+                  placeholder="Image URL"
+                  value={previewImageUrl}
+                  onChange={(e) => setPreviewImageUrl(e.target.value)}
+                  required
+                />
+                <input
+                  className="preview-image-input"
+                  type="text"
+                  placeholder="Title of Image"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                  required
+                />
+                <input
+                  className="preview-image-input"
+                  type="text"
+                  placeholder="Description"
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                  required
+                />
+                  <select
+                    className="albumIdInputCreateSong"
+                    id="albumSelectCreateSong"
+                    value={albumId}
+                    onChange={(e) => setAlbumId(e.target.value)}
+                    required
+                  >
+                    <option selected disabled value="">
+                      Select an Album...
+                    </option>
+                    {myAlbumsFilter &&
+                      myAlbumsFilter.map((album) => {
+                        return (
+                          <option
+                            className="OptionsAlbumsDropdown"
+                            value={album.id}
+                            key={album.id}
+                          >
+                            {album.title}
+                          </option>
+                        );
+                      })}
+                  </select>
+              </div>
+              <div className="image-bttn">
+                <button className="create-image-button" type="submit">
+                  Upload Photo
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
-        <form onSubmit={onSubmit} className="create-image-form">
-          <div className="image-input">
-            <input
-              className="preview-image-input"
-              type="url"
-              name="preview-image"
-              placeholder="Image URL"
-              value={previewImageUrl}
-              onChange={(e) => setPreviewImageUrl(e.target.value)}
-              required
-            />
-            <input
-              className="preview-image-input"
-              type="text"
-              placeholder="Title of Image"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              required
-            />
-            <input
-              className="preview-image-input"
-              type="text"
-              placeholder="Description"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              required
-            />
-          </div>
-          <div className="image-bttn">
-            <button className="create-image-button" type="submit">
-              Upload Photo
-            </button>
-          </div>
-        </form>
       </div>
-    </div>
-    </div>
     </div>
   );
 }

@@ -2,36 +2,36 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
-import EditImageForm from '../ImagesForms/EditImageForm'
-import DeleteImageForm from '../ImagesForms/DeleteImageForm'
-
 import { Modal } from "../../context/Modal";
 
-import { getImagesThunk, getOneImageThunk } from "../../store/image";
-import CreateImageForm from "../Images/createImage";
+import { getAlbumsThunk } from "../../store/album";
+import { getOneAlbumThunk } from "../../store/album";
+import EditAlbumForm from "../Albums/EditAlbumForm";
+import DeleteAlbumForm from "../Albums/DeleteAlbumForm";
+import CreateAlbumForm from "../Albums/createAlbum";
 import { getAllUsersThunk } from "../../store/AllUsers";
 
 export default function TestingAlbums() {
-  const { imageId } = useParams();
+  const { albumId } = useParams();
   const dispatch = useDispatch();
 
   const [showModal, setShowModal] = useState(false);
   const [showModalEdit, setShowModalEdit] = useState(false);
 
-  let allImagesArray;
-  const [imageState, setImageState] = useState({});
+  let allAlbumsArray;
+  const [albumState, setAlbumState] = useState({});
 
 
   useEffect(() => {
-    dispatch(getImagesThunk());
-  }, [dispatch, imageState, showModal, showModalEdit, allImagesArray]);
+    dispatch(getAlbumsThunk());
+  }, [dispatch, albumState, showModal, showModalEdit, allAlbumsArray]);
 
   useEffect(() => {
     dispatch(getAllUsersThunk());
   }, [dispatch]);
 
-  const images = useSelector((state) => state.image);
-    allImagesArray = Object.values(images)
+  const albums = useSelector((state) => state.album);
+    allAlbumsArray = Object.values(albums)
   const allusers = useSelector((state) => state.allUsers);
   const allUsersArray = Object.values(allusers);
 
@@ -61,28 +61,28 @@ export default function TestingAlbums() {
 
   return (
     <>
-      <div className="ImageTESTINGCONTAINER" style={containerStyle}>
+      <div className="CommentTESTINGCONTAINER" style={containerStyle}>
         <div>
-          <button style={styles1} onClick={() => dispatch(getImagesThunk())}>
-            Get all Images
+          <button style={styles1} onClick={() => dispatch(getAlbumsThunk())}>
+            Get all Albums
           </button>
         </div>
         <div>
           <button
             style={styles3}
-            onClick={() => dispatch(getOneImageThunk(imageId))}
+            onClick={() => dispatch(getOneAlbumThunk(albumId))}
           >
-            Get One Image
+            Get One Album
           </button>
         </div>
         <div>
-          <CreateImageForm />
+          <CreateAlbumForm />
         </div>
         <div className="CommentsArraymapped">
-        {allImagesArray &&
-          allImagesArray.map((image, index) => {
+        {allAlbumsArray &&
+          allAlbumsArray.map((album, index) => {
             return (
-              <div key={image.id} className="CommentContainer">
+              <div key={album.id} className="CommentContainer">
                 <br />
                 {/* map through users array and display username if id matches userId */}
                 <div>
@@ -90,17 +90,17 @@ export default function TestingAlbums() {
                     allUsersArray.map((singleUser, index) => {
                       return (
                         <div>
-                          {singleUser.id === image.userId
+                          {singleUser.id === album.userId
                             ? singleUser.username
                             : ""}
                         </div>
                       );
                     })}
                 </div>
-                <div>{image.title}</div>
-                <div>{image.description}</div>
-                <div>{image.previewImageUrl}</div>
-                <div>{image.updated_at}</div>
+                <div>{album.title}</div>
+                <div>{album.description}</div>
+                <div>{album.previewImageUrl}</div>
+                <div>{album.updated_at}</div>
                 {/* edit image */}
                 <button
                   style={styles3}
@@ -113,17 +113,17 @@ export default function TestingAlbums() {
                     id="DeleteCommentButton"
                     onClick={() => {
                         setShowModalEdit(true);
-                      setImageState(image)
+                      setAlbumState(album)
                     }}
                   >
-                    Edit image
+                    Edit Album
                   </button>
                   {showModalEdit && (
                   <Modal onClose={() => setShowModalEdit(false)}>
-                    <EditImageForm
-                      imageId={imageState.id}
+                    <EditAlbumForm
+                      albumId={albumState.id}
                       setShowModalEdit={setShowModalEdit}
-                      oldImage={imageState}
+                      oldAlbum={albumState}
                     />
                   </Modal>
                   )}
@@ -142,16 +142,16 @@ export default function TestingAlbums() {
                     id="DeleteCommentButton"
                     onClick={() => {
                       setShowModal(true);
-                      setImageState(image)
+                      setAlbumState(album)
                     }}
                   >
-                    Delete Comment
+                    Delete Album
                   </button>
                   {showModal && (
                   <Modal onClose={() => setShowModal(false)}>
-                    <DeleteImageForm
+                    <DeleteAlbumForm
                       setShowModal={setShowModal}
-                      image={imageState}
+                      album={albumState}
                     />
                   </Modal>
                   )}
