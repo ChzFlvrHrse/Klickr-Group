@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import EditCommentForm from "../Comments/EditCommentForm";
-import CreateCommentForm from "../Comments/CreateCommentForm";
-
+import EditTagForm from "../Tags/EditTagForm";
+import DeleteTagForm from "../Tags/DeleteTagForm";
+import CreateTagForm from "../Tags/CreateTagForm";
 import { getAllTagsThunk, getImageTagsThunk } from "../../store/tags";
 
 import { getAllUsersThunk } from "../../store/AllUsers";
 
 import { Modal } from "../../context/Modal";
-import DeleteCommentForm from "../Comments/DeleteCommentForm";
+
 export default function TagsTestingFunction() {
   const dispatch = useDispatch();
 
@@ -22,26 +22,26 @@ export default function TagsTestingFunction() {
   const { imageId } = useParams();
 //
   const user = useSelector((state) => state.session.user);
-  const comments = useSelector((state) => state.comments);
+  const tags = useSelector((state) => state.tags);
   const allusers = useSelector((state) => state.allUsers);
   const [showModal, setShowModal] = useState(false);
   const [showModalEdit, setShowModalEdit] = useState(false);
   const userId = user.id;
 
    // to keep track of individual comments
-   const [commentState, setCommentState] = useState({});
+   const [tagState, setTagState] = useState({});
 
   //   map through users array and display username if id matches userId
   const allUsersArray = Object.values(allusers);
 
-  const commentsArray = Object.values(comments);
+  const tagsArray = Object.values(tags);
 
   useEffect(() => {
     dispatch(getAllUsersThunk());
   }, [dispatch]);
   useEffect(() => {
     dispatch(getAllTagsThunk());
-  }, [dispatch, commentState, showModal, showModalEdit]);
+  }, [dispatch, tagState, showModal, showModalEdit]);
   //   make comments array for mapping (possibly sort from newest to oldest?)
 
   /*
@@ -101,27 +101,21 @@ export default function TagsTestingFunction() {
       <div>
         {/* You will need to define imageId in 2 places**
             1. in the explore page map through all images
-            and pass in each imageId instance into the createcomment form
+            and pass in each imageId instance into the createTag form
 
             2. in the image details page just grab imageId from the params
         */}
-        <CreateCommentForm userId={userId} imageId={imageId} />
+        <CreateTagForm userId={userId} imageId={imageId} />
       </div>
-      {/* <div>
-        <button style={styles2}onClick={() => dispatch(updateACommentThunk(imageId))}>
-            Update Comment
-        </button>
-    </div>
-    */}
       <br />
       <br />
       <br />
 
       <div className="CommentsArraymapped">
-        {commentsArray &&
-          commentsArray.map((comment, index) => {
+        {tagsArray &&
+          tagsArray.map((tag, index) => {
             return (
-              <div key={comment.id} className="CommentContainer">
+              <div key={tag.id} className="CommentContainer">
                 <br />
                 {/* map through users array and display username if id matches userId */}
                 <div>
@@ -129,15 +123,15 @@ export default function TagsTestingFunction() {
                     allUsersArray.map((singleUser, index) => {
                       return (
                         <div>
-                          {singleUser.id === comment.userId
+                          {singleUser.id === tag.userId
                             ? singleUser.username
                             : ""}
                         </div>
                       );
                     })}
                 </div>
-                <div>{comment.body}</div>
-                <div>{comment.updated_at}</div>
+                <div>{tag.body}</div>
+                <div>{tag.updated_at}</div>
                 {/* edit comment */}
                 <button
                   style={styles3}
@@ -150,18 +144,18 @@ export default function TagsTestingFunction() {
                     id="DeleteCommentButton"
                     onClick={() => {
                         setShowModalEdit(true);
-                      setCommentState(comment)
+                      setTagState(tag)
                     }}
                   >
-                    Edit Comment
+                    Edit Tag
                   </button>
                   {showModalEdit && (
                   <Modal onClose={() => setShowModalEdit(false)}>
-                    <EditCommentForm
+                    <EditTagForm
                       imageId={imageId}
                       userId={userId}
                       setShowModalEdit={setShowModalEdit}
-                      oldComment={commentState}
+                      oldTag={tagState}
                     />
                   </Modal>
                   )}
@@ -180,17 +174,17 @@ export default function TagsTestingFunction() {
                     id="DeleteCommentButton"
                     onClick={() => {
                       setShowModal(true);
-                      setCommentState(comment)
+                      setTagState(tag)
                     }}
                   >
-                    Delete Comment
+                    Delete Tag
                   </button>
                   {showModal && (
                   <Modal onClose={() => setShowModal(false)}>
-                    <DeleteCommentForm
+                    <DeleteTagForm
                     imageId={imageId}
                       setShowModal={setShowModal}
-                      comment={commentState}
+                      tag={tagState}
                     />
                   </Modal>
                   )}

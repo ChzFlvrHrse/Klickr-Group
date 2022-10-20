@@ -200,7 +200,7 @@ def get_tagsbyImage(imageId):
 #Post a tag
 @image_routes.route('/<int:imageId>/tag/new', methods=['POST'])
 @login_required
-def new_Comment(imageId):
+def new_Tag(imageId):
     form = TagForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():

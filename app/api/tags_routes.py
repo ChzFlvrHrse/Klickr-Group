@@ -24,11 +24,3 @@ def get_tag(id):
     return tags.to_dict()
 
 
-# all Comments by imageId
-@image_routes.route('/<int:imageId>/comment', methods=["GET"])
-@login_required
-def get_commentbyImage(imageId):
-    comments = Comment.query.filter_by(imageId=imageId).all()
-    if comments == None:
-        return "Image has no comments"
-    return {comment.id: comment.to_dict() for comment in comments}
