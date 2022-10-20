@@ -38,8 +38,9 @@
   }
 
   .logout-li {
+   
     padding-top:10px;
-    margin-top: 30px;
+    margin-top: 35px;
     font-size: 16px;
     border-top: 1px solid rgb(235, 228, 228);
     
@@ -68,7 +69,10 @@
 
   .hover-link:hover {
     background-color: rgb(216, 207, 207);
-    margin-bottom:3px ;
+    margin-bottom:20px ;
+    padding-bottom:5px;
+    
+    width:100%;
     opacity: 0.8;
   }
 
