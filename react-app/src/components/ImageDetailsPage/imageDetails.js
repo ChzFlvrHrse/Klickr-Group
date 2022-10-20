@@ -28,6 +28,7 @@ import "./imageDetails.css";
 function ImageDetails() {
   const history = useHistory();
   const [showModal, setShowModal] = useState(false);
+  const [imageLiked, setImageLiked] = useState(false);
   const [showModalEdit, setShowModalEdit] = useState(false);
   const [commentState, setCommentState] = useState({});
   const [body, setBody] = useState("");
@@ -58,12 +59,13 @@ function ImageDetails() {
   let owner;
   //   keep track of imageNumber in array (zero indexed)
   let filteredIndex;
+  let imageLikedByUser
 
 
   // useEffects
   useEffect(() => {
     dispatch(getImagesThunk());
-  }, [dispatch, allUsersArray, allImagesArray, showModalImageEdit, showModalImageDelete]);
+}, [dispatch, allUsersArray, allImagesArray, showModalImageEdit, showModalImageDelete, allImagesFiltered, imageLiked]);
 
   useEffect(() => {
     dispatch(getAllUsersThunk());
@@ -95,6 +97,9 @@ function ImageDetails() {
     allImagesFiltered = allImagesArray.filter(
       (filteredImages, index) => filteredImages.id == id
     );
+
+    imageLikedByUser = allImagesFiltered[0].likes.filter((filteredLikes, index) => filteredLikes.userId == user.id)
+
   }
 
   //   find index
@@ -120,17 +125,16 @@ function ImageDetails() {
   let currentImageIndex = filteredIndex
   let previousImageIndex = filteredIndex - 1;
 
-  console.log(allImagesArray[currentImageIndex])
 
   const userLikeId = filteredLikes[0];
   // console.log(userLikeId)
   // toggle likes on and off (post and delete)
   const toggleLikes = (e) => {
     e.preventDefault();
-    if (!filteredLikes.length) {
-      dispatch(createLikesThunk(id));
-    } else {
-      dispatch(deleteLikesThunk(userLikeId.id));
+    if (imageLikedByUser.length == 0) {
+      dispatch(createLikesThunk(id)).then(() => setImageLiked(!imageLiked))
+    } else if (imageLikedByUser.length >= 1){
+      dispatch(deleteLikesThunk(imageLikedByUser[0].id)).then(() => setImageLiked(!imageLiked))
     }
   };
 
@@ -194,6 +198,7 @@ function ImageDetails() {
     id,
     filteredIndex,
   ]);
+
 
   // if image does not exist
   if (!allImagesFiltered.length) {
@@ -316,7 +321,8 @@ function ImageDetails() {
             </div>
           </div>
           <div className="rightMostDivImageArrayDetails">
-            {filteredLikes.length ? (
+          {/* allImagesFiltered */}
+            {imageLikedByUser.length > 0 ? (
               <i class="fa-solid fa-star" onClick={toggleLikes}></i>
             ) : (
               <i class="fa-regular fa-star" onClick={toggleLikes}></i>
@@ -471,7 +477,7 @@ function ImageDetails() {
         <div className="RightSideContainerDetails">
           <div className="topRightSideContainerDetails">
             <div id="faves">
-              {likesArray.length}
+              {allImagesFiltered[0].likes.length}
               <div className="tag">faves</div>
             </div>
             <div id="comment-talley">
