@@ -1,125 +1,125 @@
-const GET_IMAGE = "image/getImage";
-const GET_ONE_IMAGE = "image/getOneImage";
-const NEW_IMAGE = "image/newImage";
-const UPDATE_IMAGE = "image/update";
-const DELETE_IMAGE = "image/delete";
+const GET_ALBUM = "album/getAlbum";
+const GET_ONE_ALBUM = "album/getOneAlbum";
+const NEW_ALBUM = "album/newAlbum";
+const UPDATE_ALBUM = "album/update";
+const DELETE_ALBUM = "album/delete";
 
-const getAllImages = (images) => {
+const getAllAlbums = (albums) => {
   return {
-    type: GET_IMAGE,
-    images,
+    type: GET_ALBUM,
+    albums,
   };
 };
 
-const getOneImage = (imageId) => {
+const getOneAlbum = (albumId) => {
   return {
-    type: GET_ONE_IMAGE,
-    imageId,
+    type: GET_ONE_ALBUM,
+    albumId,
   };
 };
 
-const newImage = (image) => {
+const newAlbum = (album) => {
   return {
-    type: NEW_IMAGE,
-    image,
+    type: NEW_ALBUM,
+    album,
   };
 };
 
-const updateImage = (updated) => {
+const updateAlbum = (updated) => {
   return {
-    type: UPDATE_IMAGE,
+    type: UPDATE_ALBUM,
     updated,
   };
 };
 
-const deleteImage = (imageId) => {
+const deleteAlbum = (albumId) => {
   return {
-    type: DELETE_IMAGE,
-    imageId,
+    type: DELETE_ALBUM,
+    albumId,
   };
 };
 
-export const getImagesThunk = () => async (dispatch) => {
-  const response = await fetch("/api/explore/");
+export const getAlbumsThunk = () => async (dispatch) => {
+  const response = await fetch("/api/albums/all");
 
   if (response.ok) {
-    const images = await response.json();
-    dispatch(getAllImages(images));
-    return images;
+    const albums = await response.json();
+    dispatch(getAllAlbums(albums));
+    return albums;
   }
 };
-export const getOneImageThunk = (imageId) => async (dispatch) => {
-  const response = await fetch(`/api/images/${imageId}`);
+export const getOneAlbumThunk = (albumId) => async (dispatch) => {
+  const response = await fetch(`/api/albums/${albumId}`);
 
   if (response.ok) {
-    const image = await response.json();
-    dispatch(getOneImage(image));
-    return image;
+    const album = await response.json();
+    dispatch(getOneAlbum(album));
+    return album;
   }
 };
 
-export const newImageThunk = (userId, title, description, previewImageUrl) => async (dispatch) => {
-  const response = await fetch("/api/images/upload", {
+export const newAlbumThunk = (userId, title, description, previewImageUrl) => async (dispatch) => {
+  const response = await fetch("/api/albums/upload", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({userId, title, description, previewImageUrl})
   });
   if (response.ok) {
-    const createImage = await response.json();
-    dispatch(newImage(createImage))
-    return createImage;
+    const createAlbum = await response.json();
+    dispatch(newAlbum(createAlbum))
+    return createAlbum;
   }
 };
 
-export const updateImageThunk = (userId, title, description, previewImageUrl, imageId) => async (dispatch) => {
-  const response = await fetch(`/api/images/${imageId}/edit`, {
+export const updateAlbumThunk = (userId, title, description, previewImageUrl, albumId) => async (dispatch) => {
+  const response = await fetch(`/api/albums/${albumId}/edit`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({userId, title, description, previewImageUrl}),
   });
   if (response.ok) {
-    const updatedImage = await response.json();
-    dispatch(updateImage(updatedImage));
+    const updatedAlbum = await response.json();
+    dispatch(updateAlbum(updatedAlbum));
   }
 };
 
-export const deleteImageThunk = (imageId) => async (dispatch) => {
-  const response = await fetch(`/api/images/${imageId}/delete`, {
+export const deleteAlbumThunk = (albumId) => async (dispatch) => {
+  const response = await fetch(`/api/albums/${albumId}/delete`, {
     method: "DELETE",
   });
   if (response.ok) {
     const deleted = await response.json();
-    dispatch(deleteImage(deleted));
+    dispatch(deleteAlbum(deleted));
   }
 };
 const initialState = {};
-const imageReducer = (state = initialState, action) => {
+const albumReducer = (state = initialState, action) => {
   switch (action.type) {
-    case GET_IMAGE: {
+    case GET_ALBUM: {
       const newState = {}
-      action.images.images.forEach((image)=> {
-        newState[image.id] = image
+      action.albums.albums.forEach((album)=> {
+        newState[album.id] = album
       })
     // const newState = {...action.images}
       return newState;
     }
-    case GET_ONE_IMAGE: {
-      const newState = { ...action.imageId};
+    case GET_ONE_ALBUM: {
+      const newState = { ...action.albumId};
       return newState;
     }
-    case NEW_IMAGE: {
+    case NEW_ALBUM: {
       const newState = { ...state };
-      newState[action.image.id] = action.image;
+      newState[action.album.id] = action.album;
       return newState;
     }
-    case UPDATE_IMAGE: {
+    case UPDATE_ALBUM: {
       const newState = { ...state };
       newState[action.updated.id] = action.updated
       return newState;
     }
-    case DELETE_IMAGE: {
+    case DELETE_ALBUM: {
       const newState = { ...state };
-      delete newState[action.imageId]
+      delete newState[action.albumId]
       return newState;
     }
     default:
@@ -127,4 +127,4 @@ const imageReducer = (state = initialState, action) => {
   }
 };
 
-export default imageReducer;
+export default albumReducer;
