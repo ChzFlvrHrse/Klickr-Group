@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { signUp } from "../../store/session";
@@ -15,50 +15,43 @@ const SignUpForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
-  const [errorValidations, setErrorValidations] = useState([]);
   const user = useSelector((state) => state.session.user);
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    let errors = [];
-
-    if (!username.length) errors.push("Username is required");
-    if (!first_name.length) errors.push("First name is required");
-    if (!last_name.length) errors.push("Last name is required");
-    if (!email.includes("@")) errors.push("Please enter a valid email address");
-    if (!password.length) errors.push("Password is required");
-    if (!repeatPassword.length) errors.push("Repeated password is required")
-
-    setErrorValidations(errors)
-
-  }, [username, first_name, last_name, email, password, repeatPassword])
-
   const onSignUp = async (e) => {
     e.preventDefault();
-    // if (
-    //   previewImageUrl == null ||
-    //   !previewImageUrl.endsWith("jpg") ||
-    //   !previewImageUrl.endsWith("png") ||
-    //   !previewImageUrl.endsWith("jpeg")
-    // ) {
-    //   setPreviewImageUrl(
-    //     "https://creazilla-store.fra1.digitaloceanspaces.com/emojis/55737/grinning-face-with-big-eyes-emoji-clipart-xl.png"
-    //   );
-    // }
-
-    if (!email.includes("@")) {
-      return setErrors(["Please enter a valid email address"])
+    if (
+      previewImageUrl == null ||
+      !previewImageUrl.endsWith("jpg") ||
+      !previewImageUrl.endsWith("png") ||
+      !previewImageUrl.endsWith("jpeg")
+    ) {
+      setPreviewImageUrl(
+        "https://creazilla-store.fra1.digitaloceanspaces.com/emojis/55737/grinning-face-with-big-eyes-emoji-clipart-xl.png"
+      );
     }
 
-      if (password === repeatPassword) {
-        const data = await dispatch(signUp(username,first_name,last_name, email, password, previewImageUrl));
-        if (data) {
-          setErrors(data)
-        }
-      }
-    };
+    if (!email.includes("@")) {
+      return setErrors(["Please enter a valid email address"]);
+    }
 
+    if (password === repeatPassword) {
+      const data = await dispatch(
+        signUp(
+          username,
+          first_name,
+          last_name,
+          email,
+          previewImageUrl,
+          password
+        )
+      );
+      if (data) {
+        setErrors(data);
+      }
+    }
+  };
 
   const updateUsername = (e) => {
     setUsername(e.target.value);
@@ -93,7 +86,6 @@ const SignUpForm = () => {
 
   return (
     <>
-
       <div className="signup-container">
         <div className="inner-signup">
           <form className="signup-form" onSubmit={onSignUp}>
@@ -102,14 +94,14 @@ const SignUpForm = () => {
             </div>
             <h4 id="to-klickr">Sign up for Klickr</h4>
             <div className="signup-form-errors">
-                {errorValidations.length > 0 && (
-                  <div className="signup-errors-wrapper" >
-                    {errorValidations.map((error, idx) => (
-                      <div  key={idx}>{error}</div>
-                    ))}
-                  </div>
-                )}
-              </div>
+              {errors.length > 0 && (
+                <div className="signup-errors-wrapper">
+                  {errors.map((error, idx) => (
+                    <div key={idx}>{error}</div>
+                  ))}
+                </div>
+              )}
+            </div>
             <div className="label-input">
               <label id="labelInputSignUpName">User Name</label>
               <input
@@ -117,7 +109,6 @@ const SignUpForm = () => {
                 name="username"
                 onChange={updateUsername}
                 value={username}
-                required
               ></input>
             </div>
             <div className="label-input">
@@ -127,7 +118,6 @@ const SignUpForm = () => {
                 name="first_name"
                 onChange={updateFirstName}
                 value={first_name}
-                required
               ></input>
             </div>
             <div className="label-input">
@@ -137,7 +127,6 @@ const SignUpForm = () => {
                 name="last_name"
                 onChange={updateLastName}
                 value={last_name}
-                required
               ></input>
             </div>
             <div className="label-input">
@@ -147,7 +136,6 @@ const SignUpForm = () => {
                 name="email"
                 onChange={updateEmail}
                 value={email}
-                required
               ></input>
             </div>
             <div className="label-input">
@@ -157,7 +145,6 @@ const SignUpForm = () => {
                 name="previewImageUrl"
                 onChange={updatePreviewImageUrl}
                 value={previewImageUrl}
-                required={false}
               ></input>
             </div>
             <div className="label-input">
@@ -167,7 +154,6 @@ const SignUpForm = () => {
                 name="password"
                 onChange={updatePassword}
                 value={password}
-                required
               ></input>
             </div>
             <div className="label-input">
@@ -177,9 +163,9 @@ const SignUpForm = () => {
                 name="repeat_password"
                 onChange={updateRepeatPassword}
                 value={repeatPassword}
-                required
+                required={true}
               ></input>
-                </div>
+            </div>
 
             <div className="button">
               <button type="submit">Sign Up</button>
