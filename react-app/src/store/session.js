@@ -81,8 +81,8 @@ export const signUp = (username, first_name, last_name, email, previewImageUrl, 
       first_name,
       last_name,
       email,
-      previewImageUrl,
-      password
+      password,
+      previewImageUrl
     }),
   });
 
