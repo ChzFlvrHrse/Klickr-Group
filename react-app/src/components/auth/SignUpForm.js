@@ -21,21 +21,21 @@ const SignUpForm = () => {
 
   const onSignUp = async (e) => {
     e.preventDefault();
-    if (
-      previewImageUrl == null ||
-      !previewImageUrl.endsWith("jpg") ||
-      !previewImageUrl.endsWith("png") ||
-      !previewImageUrl.endsWith("jpeg")
-    ) {
-      setPreviewImageUrl(
-        "https://creazilla-store.fra1.digitaloceanspaces.com/emojis/55737/grinning-face-with-big-eyes-emoji-clipart-xl.png"
-      );
-    }
-   
+    // if (
+    //   previewImageUrl == null ||
+    //   !previewImageUrl.endsWith("jpg") ||
+    //   !previewImageUrl.endsWith("png") ||
+    //   !previewImageUrl.endsWith("jpeg")
+    // ) {
+    //   setPreviewImageUrl(
+    //     "https://creazilla-store.fra1.digitaloceanspaces.com/emojis/55737/grinning-face-with-big-eyes-emoji-clipart-xl.png"
+    //   );
+    // }
+
     if (!email.includes("@")) {
       return setErrors(["Please enter a valid email address"])
     }
-   
+
       if (password === repeatPassword) {
         const data = await dispatch(signUp(username,first_name,last_name, email, password, previewImageUrl));
         if (data) {
@@ -43,7 +43,7 @@ const SignUpForm = () => {
         }
       }
     };
-    
+
 
   const updateUsername = (e) => {
     setUsername(e.target.value);
