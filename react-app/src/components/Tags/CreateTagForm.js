@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch} from "react-redux";
 import { createATagThunk } from "../../store/tags";
+import './CreateTagForm.css'
 // pass in userId and imageId into createComment form so we aren't relying
 // on useParams for imageId (will help when building a comment section for each photo in explore page)
 function CreateTagForm({userId, imageId}) {
@@ -13,14 +14,6 @@ function CreateTagForm({userId, imageId}) {
   const [errors, setErrors] = useState([]);
   useEffect(() => {
     const formValidationErrors = [];
-
-    if (comment.length > 500) {
-      formValidationErrors.push("Comment body must be no more than 500 characters");
-    }
-    if (comment.length < 1) {
-      formValidationErrors.push("Comment body must be more than 1 character");
-    }
-
 
     setErrors(formValidationErrors);
   }, [comment]);
@@ -39,9 +32,9 @@ function CreateTagForm({userId, imageId}) {
   };
 
   return (
-    <div className="CreateComment-outer">
+    <div id="create-tags">
       <form
-        className="CreateComment-inner"
+        className="CreateTag-inner"
         onSubmit={handleSubmit}
         autoComplete="off"
       >
@@ -58,18 +51,18 @@ function CreateTagForm({userId, imageId}) {
             </div>
           )}
         </div>
-        <h1 className="CreateCommentHeader">Create a Tag</h1>
-        <input
-          className="descriptionCreateComment"
-          placeholder="tag..."
+        {/* <h1 className="CreateCommentHeader">Create a Tag</h1> */}
+        <textarea
+          id="tagAdd-here"
+          placeholder="Add a tag"
           type="text"
           autoComplete="off"
           value={comment}
           onChange={(e) => setComment(e.target.value)}
           required
         />
-        <div className="createCommentButton">
-          <button className="submitCreateComment" type="submit">
+        <div className="createTagButton">
+          <button id="submit-comment" type="submit">
             Submit new Tag
           </button>
         </div>

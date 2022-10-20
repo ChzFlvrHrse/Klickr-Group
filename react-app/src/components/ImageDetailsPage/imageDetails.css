@@ -285,7 +285,7 @@ textarea {
     display: flex;
     position: absolute;
     font-size: 15vmin;
-    left: 40px;
+    left: 60px;
     z-index: 3;
     color: white;
 }
@@ -295,7 +295,7 @@ textarea {
     display: flex;
     position: absolute;
     font-size: 15vmin;
-    left: 40px;
+    left: 60px;
     z-index: 3;
     color: white;
 }
@@ -355,19 +355,19 @@ textarea {
     height: fit-content;
     width: 100%;
     column-gap: 2em;
-    overflow-x: auto;
+    overflow-x: hidden;
     overflow-y: hidden;
     flex-wrap: wrap;
     border-bottom: 0.1em solid #dbdada;
 }
 
-/* .PhotoArrayImageDetails::-webkit-scrollbar {
-    display: none;
-    -ms-overflow-style: none
-  } */
+.PhotoArrayImageDetails:hover {
+    overflow-x: auto;
+  }
 .TrendingsongCard {
     width: 5em;
     height: 6em;
+    margin-bottom: 20px;
   position: relative;
 }
 
@@ -379,25 +379,88 @@ textarea {
 
   /* on hover  */
 
-/* .Filteredsong-container:hover {
+.Filteredsong-container:hover {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     width: 80%;
-    height: 6em;
+    height: 9em;
     text-align: left;
     overflow-y: hidden;
   }
 
 .Filteredsong-container:hover .TrendingsongCard{
-     width: 5em;
-    height: 6em;
+     width: 7em;
+    height: 8em;
   position: relative;
   }
 .Filteredsong-container:hover .TrendingsongImage{
-    width: 5em;
-    height: 5em;
+    width: 7em;
+    height: 7em;
   } */
-/* .Filteredsong-container:hover .PhotoArrayImageDetails::-webkit-scrollbar {
+
+
+
+
+  /* starting tags */
+
+  .RightSideContainerDetails {
     display: flex;
-  } */
+    flex-direction: column;
+  }
+  .topRightSideContainerDetails {
+    display: flex;
+    flex-direction: row;
+    /* height: 102px; */
+  }
+
+  .bottomRightSideContainerDetails {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    row-gap: 10px;
+    align-items: center;
+    border-left: solid rgba(128, 128, 128, 0.308) thin;
+    color: black;
+    margin: 1rem 0;
+    margin-left: 10px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    height: fit-content;
+  }
+
+  .TagsHeader {
+    font-weight: 600;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+  }
+
+  .bottom-border2 {
+    display: flex;
+    flex-direction: center;
+    border-bottom: solid gray thin;
+    margin: 1rem 0;
+    margin-left: 50px;
+    width: 80%;
+    opacity: .3;
+}
+
+
+/* single tag */
+
+.tagSingleContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    column-gap: 10px;
+    border-radius: 50px;
+    padding: 10px;
+    background-color: rgba(202, 202, 202, 0.548);
+    width: fit-content;
+    height: fit-content;
+}
+
+.TagSectionCreateSection {
+    margin-top: 10px;
+}

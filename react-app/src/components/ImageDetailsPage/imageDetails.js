@@ -21,6 +21,12 @@ import {
   deleteLikesThunk,
 } from "../../store/likes";
 import { Modal } from "../../context/Modal";
+
+import { getImageTagsThunk } from "../../store/tags";
+import CreateTagForm from "../Tags/CreateTagForm";
+import EditTagForm from "../Tags/EditTagForm";
+import DeleteTagForm from "../Tags/DeleteTagForm";
+
 import "./imageDetails.css";
 
 function ImageDetails() {
@@ -35,6 +41,11 @@ function ImageDetails() {
   const [nextImage, setNextImage] = useState(false);
 
   let [commDelete, setCommDelete] = useState(1);
+
+  const [showModalTagsDelete, setShowModalTagsDelete] = useState(false);
+  const [showModalTagsEdit, setShowModalTagsEdit] = useState(false);
+  // to keep track of individual tags
+  const [tagState, setTagState] = useState({});
 
   const dispatch = useDispatch();
   const { id } = useParams();
@@ -81,14 +92,22 @@ function ImageDetails() {
     dispatch(getAllCommentsThunk());
   }, [dispatch, showModal, showModalEdit, commentState, commDelete]);
 
+  useEffect(() => {
+    dispatch(getImageTagsThunk(id));
+  }, [dispatch, tagState, showModalTagsDelete, showModalTagsEdit, id]);
+
   // redux states
   const images = useSelector((state) => state.image);
   const allusers = useSelector((state) => state.allUsers);
   const user = useSelector((state) => state.session.user);
   const likes = useSelector((state) => state.likes);
   const comment = useSelector((state) => state.comments);
+  const tags = useSelector((state) => state.tags);
   const userId = user.id;
 
+  const tagsArray = Object.values(tags);
+
+  console.log(tagsArray);
   let likesArray = Object.values(likes);
   let filteredLikes;
 
@@ -254,7 +273,7 @@ function ImageDetails() {
                 })}
             </div>
           </div>
-          <div className='rightMostDivImageArrayDetails'>
+          <div className="rightMostDivImageArrayDetails">
             {filteredLikes.length ? (
               <i class="fa-solid fa-star" onClick={toggleLikes}></i>
             ) : (
@@ -406,18 +425,87 @@ function ImageDetails() {
             </form>
           </div>
         </div>
-        <div id="faves">
-          {likesArray.length}
-          <div className="tag">faves</div>
-        </div>
-        <div id="comment-talley">
-          {filteredComments.length}
-          <div className="tag">comments</div>
-        </div>
-        <div id="date">Taken on {`${createdAtDate}`}</div>
-        {/* <div className="bottom-border-2">
+        <div className="RightSideContainerDetails">
+          <div className="topRightSideContainerDetails">
+            <div id="faves">
+              {likesArray.length}
+              <div className="tag">faves</div>
+            </div>
+            <div id="comment-talley">
+              {filteredComments.length}
+              <div className="tag">comments</div>
+            </div>
+            <div id="date">Taken on {`${createdAtDate}`}</div>
+          </div>
+          <div className="bottom-border"></div>
+          <div className="bottomRightSideContainerDetails">
+            <h4 className="TagsHeader">Tags</h4>
 
-                </div> */}
+            {tagsArray &&
+              tagsArray.map((tag, index) => {
+                return (
+                  <div key={tag.id} className="TagsContainer">
+                    <div className="tagSingleContainer">
+                      {/* edit modal */}
+                      {allImagesFiltered[0].userId == user.id ? (
+                        <i
+                          onClick={() => {
+                            setShowModalTagsEdit(true);
+                            setTagState(tag);
+                          }}
+                          className="edit-comment"
+                          title="edit tag"
+                          class="fa-solid fa-pen-to-square"
+                        ></i>
+                      ) : (
+                        <></>
+                      )}
+                      {showModalTagsEdit && (
+                        <Modal onClose={() => setShowModalTagsEdit(false)}>
+                          <EditTagForm
+                            imageId={id}
+                            userId={userId}
+                            setShowModalEdit={setShowModalTagsEdit}
+                            oldTag={tagState}
+                          />
+                        </Modal>
+                      )}
+
+                      <div>{tag.body}</div>
+                      {allImagesFiltered[0].userId == user.id? (
+                        <i
+                          onClick={() => {
+                            setShowModalTagsDelete(true);
+                            setTagState(tag);
+                          }}
+                          className="delete-comment"
+                          title="delete tag"
+                          class="fa-solid fa-delete-left"
+                        ></i>
+                      ) : (
+                        <></>
+                      )}
+                      {showModalTagsDelete && (
+                        <Modal onClose={() => setShowModalTagsDelete(false)}>
+                          <DeleteTagForm
+                            imageId={id}
+                            setShowModal={setShowModalTagsDelete}
+                            tag={tagState}
+                          />
+                        </Modal>
+                      )}
+
+                      {/* delete modal */}
+                    </div>
+                  </div>
+                );
+              })}
+            {allImagesFiltered[0].userId == user.id && (
+              <CreateTagForm userId={userId} imageId={id} />
+            )}
+          </div>
+          <div className="bottom-border2"></div>
+        </div>
       </div>
     </>
   );
