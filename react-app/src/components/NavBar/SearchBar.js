@@ -15,10 +15,10 @@ const SearchBar = () => {
   const [searchTitle, setSearchTitle] = useState("");
 
   // create states to hide and unhide search results container
-  const [imageResults, setImageResults] = useState(true)
-  const [albumResults, setAlbumResults] = useState(true)
-  const [userResults, setUserResults] = useState(false)
-  const [tagResults, setTagResults] = useState(false)
+  const [imageResults, setImageResults] = useState(true);
+  const [albumResults, setAlbumResults] = useState(true);
+  const [userResults, setUserResults] = useState(false);
+  const [tagResults, setTagResults] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -93,23 +93,38 @@ const SearchBar = () => {
             className="notsignedin-SB"
             type="search"
             value={searchTitle}
-            placeholder={"Search for Images, Users, Albums, or Tags" || searchTitle}
+            placeholder={
+              "Search for Images, Users, Albums, or Tags" || searchTitle
+            }
             onChange={handleSubmit}
           />
         </div>
         {/* search bar return container entire*/}
         <div
           className={searchTitle.length ? "SearchBarContainer" : "HiddenResult"}
-         >
+        >
           {/* search by images begins */}
-          <button className="toggleResultsSearch" onClick={() => {setImageResults(!imageResults)}}>{imageResults == true ? <div>Hide Image Results</div> : <div>Show Image Results</div>}</button>
+          <button
+            className="toggleResultsSearch"
+            onClick={() => {
+              setImageResults(!imageResults);
+            }}
+          >
+            {imageResults == true ? (
+              <div>Hide Image Results</div>
+            ) : (
+              <div>Show Image Results</div>
+            )}
+          </button>
           <div
             className={
-              filteredImagesArray.length && searchTitle.length && imageResults == true
+              filteredImagesArray.length &&
+              searchTitle.length &&
+              imageResults == true
                 ? "Filteredimages-container"
                 : "HiddenResult"
             }
-            >
+          >
             {/* search return map */}
             <div className="FilteredreturnContainer">
               {filteredImagesArray &&
@@ -144,15 +159,28 @@ const SearchBar = () => {
             <div className="errorhandlingSearchmessage">No Images Found</div>
           </div>
 
-            {/* search by Albums begins */}
-          <button className="toggleResultsSearch" onClick={() => {setAlbumResults(!albumResults)}}>{albumResults == true ? <div>Hide Album Results</div> : <div>Show Album Results</div>}</button>
+          {/* search by Albums begins */}
+          <button
+            className="toggleResultsSearch"
+            onClick={() => {
+              setAlbumResults(!albumResults);
+            }}
+          >
+            {albumResults == true ? (
+              <div>Hide Album Results</div>
+            ) : (
+              <div>Show Album Results</div>
+            )}
+          </button>
           <div
             className={
-              filteredAlbumsArray.length && searchTitle.length && albumResults == true
+              filteredAlbumsArray.length &&
+              searchTitle.length &&
+              albumResults == true
                 ? "Filteredimages-container"
                 : "HiddenResult"
             }
-            >
+          >
             {/* search return map */}
             <div className="FilteredreturnContainer">
               {filteredAlbumsArray &&
@@ -187,15 +215,28 @@ const SearchBar = () => {
             <div className="errorhandlingSearchmessage">No Albums Found</div>
           </div>
 
-           {/* search by images begins */}
-           <button className="toggleResultsSearch" onClick={() => {setUserResults(!userResults)}}>{userResults == true ? <div>Hide User Results</div> : <div>Show User Results</div>}</button>
+          {/* search by user begins */}
+          <button
+            className="toggleResultsSearch"
+            onClick={() => {
+              setUserResults(!userResults);
+            }}
+          >
+            {userResults == true ? (
+              <div>Hide User Results</div>
+            ) : (
+              <div>Show User Results</div>
+            )}
+          </button>
           <div
             className={
-              filteredUsersArray.length && searchTitle.length && userResults == true
+              filteredUsersArray.length &&
+              searchTitle.length &&
+              userResults == true
                 ? "Filteredimages-container"
                 : "HiddenResult"
             }
-            >
+          >
             {/* search return map */}
             <div className="FilteredreturnContainer">
               {filteredUsersArray &&
@@ -228,6 +269,63 @@ const SearchBar = () => {
             }
           >
             <div className="errorhandlingSearchmessage">No Users Found</div>
+          </div>
+          {/* search by tags begins */}
+          <button
+            className="toggleResultsSearch"
+            onClick={() => {
+              setTagResults(!tagResults);
+            }}
+          >
+            {tagResults == true ? (
+              <div>Hide Tag Results</div>
+            ) : (
+              <div>Show Tag Results</div>
+            )}
+          </button>
+          <div
+            className={
+              filteredImagesArray.length &&
+              searchTitle.length &&
+              tagResults == true
+                ? "Filteredimages-container"
+                : "HiddenResult"
+            }
+          >
+            {/* search return map */}
+            <div className="FilteredreturnContainer">
+              {filteredImagesArray &&
+                filteredImagesArray.map((image) => {
+                  return filteredTagsArray.map((tag) => {
+                    return (
+                      <div className="SearchImageMappedContainer" key={tag.id}>
+
+                        <Link to={image.id == tag.imageId ? `/images/${image.id}` : ""}>
+                          <img
+                            className="SearchImageIndividual"
+                            src={image.id == tag.imageId ? image.previewImageUrl : ""}
+                            alt="preview"
+                          />
+                        </Link>
+                        <NavLink
+                          className="SearchImageNavLinkTitle"
+                          to={image.id == tag.imageId ? `/images/${image.id}` : ""}>
+                          {tag.body}
+                        </NavLink>
+                      </div>
+                    );
+                  });
+                })}
+            </div>
+          </div>
+          <div
+            className={
+              !filteredUsersArray.length && searchTitle !== ""
+                ? "errorHandlingSearchContainer"
+                : "HiddenResult"
+            }
+          >
+            <div className="errorhandlingSearchmessage">No Tags Found</div>
           </div>
         </div>
       </>
