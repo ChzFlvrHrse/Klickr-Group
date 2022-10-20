@@ -14,6 +14,8 @@ import CreateImageForm from "./components/Images/createImage";
 import TestingLikesFunctions from "./components/TestingReduxState/LikesTESTING";
 import CommentsTestingFunction from "./components/TestingReduxState/CommentsTESTING";
 import GetAllImages from "./components/ExplorePage/explore";
+import { PageNotFound } from "./components/UnknownPage/PageNotFound";
+
 
 import ImageDetails from './components/ImageDetailsPage/imageDetails'
 
@@ -74,6 +76,9 @@ function App() {
         <ProtectedRoute path="/" exact={true}>
           <h1>My Home Page</h1>
         </ProtectedRoute>
+        <Route>
+            <PageNotFound />
+          </Route>
       </Switch>
     </BrowserRouter>
   );
