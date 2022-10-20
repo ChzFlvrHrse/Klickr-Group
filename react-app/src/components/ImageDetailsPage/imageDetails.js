@@ -518,8 +518,9 @@ function ImageDetails() {
                               setTagState(tag);
                             }}
                             className="delete-comment"
-                            title="delete tag"
-                            class="fa-solid fa-delete-left"
+                            id="delete-tag"
+                            title="delete-tag"
+                            class="fa-solid fa-xmark"
                           ></i>
                         ) : (
                           <></>

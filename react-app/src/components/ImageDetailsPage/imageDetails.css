@@ -469,8 +469,17 @@ textarea {
     background-color: rgba(202, 202, 202, 0.548);
     width: fit-content;
     height: fit-content;
-    padding: 5px;
+    padding: .5rem;
+    cursor: pointer;
 }
+
+.tagSingleContainer:hover {
+    color: white;
+    background-color: gray;
+    transform: scale(1.2);
+    transition: all .1s ease-in-out;
+}
+
 .TagsContainer{
     display: flex;
     flex-wrap: wrap;
@@ -489,7 +498,16 @@ textarea {
     justify-content: left;
 }
 
+#delete-tag {
+    display: none;
+}
 
+.tagSingleContainer:hover #delete-tag {
+    display: flex;
+    color: white;
+    background-color: gray;
+    cursor: pointer;
+}
 
 /* top bar edit and delete album */
 
