@@ -57,23 +57,8 @@ function ImageDetails() {
   let imageOwner;
   let owner;
   //   keep track of imageNumber in array (zero indexed)
-  let nextImageIndex = Number(id);
-  let currentImageIndex = nextImageIndex - 1;
-  let previousImageIndex = nextImageIndex - 2;
-  let currentImageNumber = Number(id);
-  let nextImageNumber = currentImageNumber + 1;
-  let previousImageNumber = currentImageNumber - 1;
+  let filteredIndex;
 
-  if (nextImageIndex != id) {
-    nextImageIndex = Number(id);
-    currentImageIndex = nextImageIndex - 1;
-    previousImageIndex = nextImageIndex - 2;
-  }
-  if (currentImageNumber != id) {
-    currentImageNumber = Number(id);
-    previousImageNumber = currentImageNumber - 1;
-    nextImageNumber = currentImageNumber + 1;
-  }
 
   // useEffects
   useEffect(() => {
@@ -102,6 +87,20 @@ function ImageDetails() {
   const tags = useSelector((state) => state.tags);
   const userId = user.id;
 
+  // filters
+  allImagesArray = Object.values(images);
+  allUsersArray = Object.values(allusers);
+
+  if (allUsersArray && allImagesArray) {
+    allImagesFiltered = allImagesArray.filter(
+      (filteredImages, index) => filteredImages.id == id
+    );
+  }
+
+//   find index
+  if (allUsersArray && allImagesArray) {
+    filteredIndex = allImagesArray.findIndex(image => image.id == id)
+  }
   const tagsArray = Object.values(tags);
 
   let likesArray = Object.values(likes);
@@ -116,6 +115,11 @@ function ImageDetails() {
   filteredLikes = likesArray.filter(
     (filteredLikes, index) => filteredLikes.userId == user.id
   );
+
+  let nextImageIndex = filteredIndex + 1;
+  let currentImageIndex = filteredIndex
+  let previousImageIndex = filteredIndex - 1;
+
   const userLikeId = filteredLikes[0];
   // console.log(userLikeId)
   // toggle likes on and off (post and delete)
@@ -142,15 +146,6 @@ function ImageDetails() {
 
   let createdAtDate;
 
-  // filters
-  allImagesArray = Object.values(images);
-  allUsersArray = Object.values(allusers);
-
-  if (allUsersArray && allImagesArray) {
-    allImagesFiltered = allImagesArray.filter(
-      (filteredImages, index) => filteredImages.id == id
-    );
-  }
 
   // console.log(allImagesFiltered[0].created_at)
   // Image created_at Date formatting
@@ -195,8 +190,7 @@ function ImageDetails() {
     nextImage,
     allImagesArray,
     id,
-    currentImageIndex,
-    currentImageNumber,
+    filteredIndex,
   ]);
 
   // if image does not exist
@@ -270,9 +264,9 @@ function ImageDetails() {
         </div>
 
         <div className="imageContainerImageDetails">
-          {previousImage == true ? (
+          {previousImage == true && allImagesArray[previousImageIndex] != undefined? (
             <Link
-              to={`/images/${previousImageNumber}`}
+              to={`/images/${allImagesArray[previousImageIndex].id}`}
               className="previousImageClick"
             >
               <i class="fa-solid fa-circle-arrow-left"></i>
@@ -287,8 +281,8 @@ function ImageDetails() {
               alt=""
             />
           </div>
-          {nextImage == true ? (
-            <Link to={`/images/${nextImageNumber}`} className="nextImageClick">
+          {nextImage == true && allImagesArray[nextImageIndex] != undefined? (
+            <Link to={`/images/${allImagesArray[nextImageIndex].id}`} className="nextImageClick">
               <i class="fa-solid fa-circle-arrow-right"></i>
             </Link>
           ) : (
