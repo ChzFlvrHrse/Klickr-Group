@@ -88,3 +88,30 @@ overflow-x: hidden;
 .textareacommentbox{
     height: 3rem;
 }
+
+
+.BottomPartExplorePageCommentBox {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    column-gap: 10px;
+    width: 100%;
+    height: 100%;
+
+}
+
+.ProfilePictureCommentsContainerExploreBottom {
+    width: 30px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.CommentsContainerUserProfilePictureBottom {
+    height: 30px;
+    width: 30px;
+    border-radius: 100px;
+    position: relative;
+    bottom: 20px;
+   }

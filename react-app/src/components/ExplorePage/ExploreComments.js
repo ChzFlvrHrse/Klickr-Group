@@ -18,7 +18,7 @@ function ExploreImageCommments({
   setCommentsModal,
   commentsModal,
   setSubmitted,
-  submitted
+  submitted,
   // setCommentsState,
   // commentsState,
 }) {
@@ -34,7 +34,7 @@ function ExploreImageCommments({
 
   const toggleLikes = (e) => {
     e.preventDefault();
-    setCommentsModal(true)
+    setCommentsModal(true);
     // setCommentsModal(!commentsModal);
   };
 
@@ -43,7 +43,9 @@ function ExploreImageCommments({
     e.preventDefault();
 
     if (body.length) {
-      await dispatch(createACommentThunk(user.id, image.id, body)).then(()=> setSubmitted(!submitted))
+      await dispatch(createACommentThunk(user.id, image.id, body)).then(() =>
+        setSubmitted(!submitted)
+      );
       setBody("");
     } else {
       return "Bad Data";
@@ -107,14 +109,14 @@ function ExploreImageCommments({
                               )}
                               {showModalEdit && (
                                 <Modal onClose={() => setShowModalEdit(false)}>
-                                <EditCommentForm
-                                  imageId={image.id}
-                                  userId={user.id}
-                                  setShowModalEdit={setShowModalEdit}
-                                  oldComment={comment}
-                                  setSubmitted={setSubmitted}
-                                  submitted={submitted}
-                                />
+                                  <EditCommentForm
+                                    imageId={image.id}
+                                    userId={user.id}
+                                    setShowModalEdit={setShowModalEdit}
+                                    oldComment={comment}
+                                    setSubmitted={setSubmitted}
+                                    submitted={submitted}
+                                  />
                                 </Modal>
                               )}
                               {/* delete modal */}
@@ -132,14 +134,16 @@ function ExploreImageCommments({
                                 ""
                               )}
                               {showModalDelete && (
-                                <Modal onClose={() => setShowModalDelete(false)}>
-                                <DeleteCommentForm
-                                  imageId={image.id}
-                                  setShowModal={setShowModalDelete}
-                                  comment={comment}
-                                  setSubmitted={setSubmitted}
-                                  submitted={submitted}
-                                />
+                                <Modal
+                                  onClose={() => setShowModalDelete(false)}
+                                >
+                                  <DeleteCommentForm
+                                    imageId={image.id}
+                                    setShowModal={setShowModalDelete}
+                                    comment={comment}
+                                    setSubmitted={setSubmitted}
+                                    submitted={submitted}
+                                  />
                                 </Modal>
                               )}
                             </div>
@@ -158,9 +162,19 @@ function ExploreImageCommments({
           })}
         </div>
         <div className="BottomPartExplorePageCommentBox">
+          <div className="ProfilePictureCommentsContainerExploreBottom">
+            <Link to={`/users/${user.id}`}>
+              <img
+                className="CommentsContainerUserProfilePictureBottom"
+                src={user.previewImageUrl}
+                alt="userprofile"
+              />
+            </Link>
+          </div>
           <div id="create-comment">
             <form onSubmit={submitComment}>
-              <textarea className="textareacommentbox"
+              <textarea
+                className="textareacommentbox"
                 id="comment-here"
                 placeholder="Add a comment"
                 tabIndex="0"
