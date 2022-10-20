@@ -1,7 +1,7 @@
 from app.models import db, Tag
 
 # Adds a demo user, you can add other users here if you want
-def seed_comments():
+def seed_tags():
 
     tag_1 = Tag(userId=1, imageId=1, body="Wow so cool")
     tag_2 = Tag(userId=2, imageId=1, body="I am the master of my universe")
@@ -36,6 +36,6 @@ def seed_comments():
 # TRUNCATE Removes all the data from the table, and RESET IDENTITY
 # resets the auto incrementing primary key, CASCADE deletes any
 # dependent entities
-def undo_comments():
+def undo_tags():
     db.session.execute('TRUNCATE comments RESTART IDENTITY CASCADE;')
     db.session.commit()
