@@ -12,6 +12,8 @@ export default function CreateImageForm() {
   const user = useSelector((state) => state.session.user);
   const albums = useSelector((state) => state.album);
   const AlbumsArray = Object.values(albums);
+  const images = useSelector((state) => state.image);
+  const allImagesArray = Object.values(images)
   const [previewImageUrl, setPreviewImageUrl] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -24,9 +26,18 @@ export default function CreateImageForm() {
 
 // filter all albums so user can choose between them in drop down
   useEffect(() => {
+    dispatch(getImagesThunk());
+  }, [dispatch, user, newAlbumThunk ]);
+  useEffect(() => {
     dispatch(getAlbumsThunk());
+  }, [dispatch, user, newAlbumThunk ]);
+  useEffect(() => {
+    dispatch(getImagesThunk());
   }, [dispatch]);
 
+
+
+  let myImagesFilter = allImagesArray.filter((filteredImages, index) => filteredImages.userId == user.id)
   let myAlbumsFilter = AlbumsArray.filter(
     (filteredAlbums, index) => filteredAlbums.userId == user.id
   );
@@ -34,15 +45,17 @@ export default function CreateImageForm() {
 // create new album if user does not have one already
 
 useEffect(() => {
-  if (user && !myAlbumsFilter.length && AlbumsArray.length) {
+  if (user && !myAlbumsFilter.length && AlbumsArray.length && !myImagesFilter.length && AlbumsArray[AlbumsArray.length - 1].userId !=user.id) {
     //get all songs
     const albumTitle = 'Default Album'
     const albumDescription = 'New album made for new accounts'
     const albumImageUrl ='https://www.shareicon.net/data/2015/10/01/110175_media_512x512.png'
 
-    dispatch(newAlbumThunk(userId, albumTitle, albumDescription, albumImageUrl));
+    dispatch(newAlbumThunk(userId, albumTitle, albumDescription, albumImageUrl)).then(
+      () => dispatch(getAlbumsThunk())
+    );;
   }
-}, [dispatch, user, AlbumsArray]);
+}, [dispatch, user]);
   useEffect(() => {
     const errors = [];
 

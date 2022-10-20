@@ -99,7 +99,7 @@ function EditAlbumForm({albumId, setShowModalEdit, oldAlbum}) {
           <button className="done-edit" onClick={handleSubmit} type="submit">
             Submit Album
           </button>
-          <button className="done-edit" onClick={handleSubmit2} type="submit">
+          <button className="done-edit" onClick={() => setShowModalEdit(false)} type="submit">
             Cancel Edit
           </button>
         </div>
