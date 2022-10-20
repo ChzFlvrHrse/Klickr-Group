@@ -55,12 +55,12 @@ export function HomePage() {
 
           </div>
         </div>
-      </div>
-      <footer>
+  <footer className="parentFooter">
     <div class="footer">
       Copyright 2022. Klickr. All Rights Reserved.
     </div>
   </footer>
+      </div>
     </>
   );
       }
