@@ -17,10 +17,10 @@ function EditCommentForm({ imageId, setShowModalEdit, oldComment, submitted, set
     const formValidationErrors = [];
 
     if (comment.length > 500) {
-      formValidationErrors.push("Comment body must be no more than 500 characters");
+      formValidationErrors.push("Comments must be no more than 500 characters");
     }
     if (comment.length < 1) {
-      formValidationErrors.push("Comment body must be more than 1 character");
+      formValidationErrors.push("Comments must be more than 1 character");
     }
 
 
@@ -49,7 +49,7 @@ function EditCommentForm({ imageId, setShowModalEdit, oldComment, submitted, set
   return (
     <div className="create-comment-container">
       <div className="create-comment-wrapper">
-        <h3 className="edit-comment-title">Edit Comment here:</h3>
+        <h3 className="edit-comment-title" style={{fontWeight: "300"}}>Edit Comment here:</h3>
         <div>
           <form
             onSubmit={handleSubmit2}
@@ -75,9 +75,9 @@ function EditCommentForm({ imageId, setShowModalEdit, oldComment, submitted, set
             >{comment}</textarea>
             <div className="done-edit-container">
               <button className="done-edit" onClick={handleSubmit} type="submit">
-                Done
+                Submit
               </button>
-              <button id="cancel" className="done-edit" onClick={() => setShowModalEdit(false)} type="submit">
+              <button id="edit-comment-cancel" className="done-edit" onClick={() => setShowModalEdit(false)} type="submit">
                 Cancel
               </button>
             </div>

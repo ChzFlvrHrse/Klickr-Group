@@ -36,6 +36,7 @@ const SignUpForm = () => {
 
   const onSignUp = async (e) => {
     e.preventDefault();
+<<<<<<< HEAD
     if (
       previewImageUrl == null ||
       !previewImageUrl.endsWith("jpg") ||
@@ -47,6 +48,18 @@ const SignUpForm = () => {
       );
 
     }
+=======
+    // if (
+    //   previewImageUrl == null ||
+    //   !previewImageUrl.endsWith("jpg") ||
+    //   !previewImageUrl.endsWith("png") ||
+    //   !previewImageUrl.endsWith("jpeg")
+    // ) {
+    //   setPreviewImageUrl(
+    //     "https://creazilla-store.fra1.digitaloceanspaces.com/emojis/55737/grinning-face-with-big-eyes-emoji-clipart-xl.png"
+    //   );
+    // }
+>>>>>>> a76b416b5fafeccfb6ad36f49b50162f8569192b
 
     if (!email.includes("@")) {
       return setErrors(["Please enter a valid email address"])

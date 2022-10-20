@@ -9,12 +9,14 @@
     font-weight: 300;
 }
 
-.deleteSongButtons {
+.deleteTagButtons {
     display: flex;
-    justify-content: space-around;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
 }
 
-.deleteSongButtons button.submitDeleteComment {
+.deleteTagButtons button.submitDeleteComment {
     color: white;
     background-color: #348fdc;
     padding: .5rem 1rem;
@@ -25,7 +27,7 @@
     width: 7rem
 }
 
-.deleteSongButtons button.cancelDeleteComment {
+.deleteTagButtons button.cancelDeleteComment {
     color: white;
     background-color: #979ea2;
     padding: .5rem 1rem;
@@ -36,7 +38,7 @@
     width: 7rem
 }
 
-.deleteSongButtons button:hover {
+.deleteTagButtons button:hover {
     opacity: .8;
     cursor: pointer;
 }
