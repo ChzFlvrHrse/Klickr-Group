@@ -12,7 +12,7 @@ import EditCommentFormExplore from "../Comments/EditCommentFormExplore";
 import { createACommentThunk } from "../../store/comments";
 import DeleteCommentFormExplore from "../Comments/DeleteCommentFormExplore";
 
-function ExploreImageCommments({
+function ExploreImageComments({
   users,
   image,
   user,
@@ -32,12 +32,7 @@ function ExploreImageCommments({
   // useEffect(() => {
   //   dispatch(getImagesThunk());
   // }, [dispatch, showModalDelete, showModalEdit]);
-
-  const toggleLikes = (e) => {
-    e.preventDefault();
-    setCommentsModal(true);
-    // setCommentsModal(!commentsModal);
-  };
+  console.log(commentsModal)
 
   // handle comment submission
   const submitComment = async (e) => {
@@ -55,7 +50,9 @@ function ExploreImageCommments({
 
   return (
     <>
-      <div className="CommentsBoxExploreContents" onClick={toggleLikes}>
+      <div
+        className="CommentsBoxExploreContents"
+      >
         <div className="ExplorePageTopHalfCommentsBox">
           {image.comments.map((comment, index) => {
             return (
@@ -162,6 +159,10 @@ function ExploreImageCommments({
             );
           })}
         </div>
+
+
+        <div className="BottomPartExplorePageCommentBoxContainer">
+
         <div className="BottomPartExplorePageCommentBox">
           <div className="ProfilePictureCommentsContainerExploreBottom">
             <Link to={`/users/${user.id}`}>
@@ -191,9 +192,13 @@ function ExploreImageCommments({
             </form>
           </div>
         </div>
+        {/* <span onClick={toggleComments} id="closeCommentSectionButton">
+        <i class="fa-solid fa-rectangle-xmark"></i>
+        </span> */}
+        </div>
       </div>
     </>
   );
 }
 
-export default ExploreImageCommments;
+export default ExploreImageComments;

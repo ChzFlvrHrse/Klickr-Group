@@ -4,7 +4,7 @@ import { getImagesThunk } from "../../store/image";
 import { Link } from "react-router-dom";
 import { getAllUsersThunk } from "../../store/AllUsers";
 import ExploreImageLikes from "./ExploreLikes";
-import ExploreImageCommments from "./ExploreComments";
+import ExploreImageComments from "./ExploreComments";
 import "./explore.css";
 
 const GetAllImages = () => {
@@ -20,7 +20,7 @@ const GetAllImages = () => {
   // track whether comments state is changed
   const [commentsState, setCommentsState] = useState(false);
   // track whether comments section is opened for user
-  const [commentsModal, setCommentsModal] = useState(false);
+  let [commentsModal, setCommentsModal] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
   const allImages = useSelector((state) => state.image);
@@ -46,91 +46,91 @@ const GetAllImages = () => {
   allUsersArray = Object.values(allusers);
   allImagesArray = Object.values(images);
 
-  const turnOffModal = () => {
-    if (commentsModal == "e") {
-      setCommentsModal(false)
-    }
-  }
+  console.log(commentsModal);
 
   return (
-    <div className="explore-container" onClick={turnOffModal}>
+    <div className="explore-container">
       <div className="images-container">
         <h2 className="explore-title">Explore</h2>
         <div className="images-wrapper">
           {allImagesArr.map((image) => {
             return (
               <>
-                <Link to={`/images/${image.id}`}>
-                  <div className="singleImgContainer" key={image.id}>
+                <div className="singleImgContainer" key={image.id}>
+                  <Link to={`/images/${image.id}`}>
                     <img
                       className="single-img"
                       src={image.previewImageUrl}
                       alt=""
                     ></img>
-                    <div className="explore-image-bttm-section">
-                      <div className="hide">{image.title}</div>
+                  </Link>
+                  <div className="explore-image-bttm-section">
+                    <div className="hide">{image.title}</div>
 
-                      {/* likes and comments section */}
-                      <div className="image-likes-container">
-                        <div
-                          className="image-likes-section"
-                          // onClick={() => setCommentsModal(!commentsModal)}
-                        >
-                          <div
-                            id="star-icon-explore"
-                            onClick={() => {
-                              // setCommentsModal(!commentsModal);
-                              setCommentsModal(true);
-                              setImageState(image);
-                            }}
-                          >
-                            {commentsModal &&
+                    {/* likes and comments section */}
+                    <div className="image-likes-container">
+                    <span onClick={() => setCommentsModal(false)}>
+                            {commentsModal == true &&
                             imageState.id == image.id ? (
-                              <i class="fa-solid fa-comment"></i>
+                              <i class="fa-solid fa-rectangle-xmark"></i>
                             ) : (
-                              <i class="fa-regular fa-comment"></i>
+                              <i class=""></i>
                             )}
-                            <div
-                              className={
-                                commentsModal && image.id == imageState.id
-                                  ? "commentBox"
-                                  : "hiddenComment"
-                              }
-                            >
-                              {commentsModal && (
-                                <ExploreImageCommments
-                                  users={allUsersArray}
-                                  image={image}
-                                  user={user}
-                                  setCommentsModal={setCommentsModal}
-                                  commentsModal={commentsModal}
-                                  setSubmitted={setSubmitted}
-                                  submitted={submitted}
-                                  // setCommentsState={setCommentsState}
-                                  // commentsState={commentsState}
-                                />
-                              )}
-                            </div>
+                          </span>
+                      <div className="image-likes-section">
+                        <div
+                          id="star-icon-explore"
+                          onClick={() => {
+                            setCommentsModal(true);
+                            setImageState(image);
+                          }}
+                        >
+                          {commentsModal == true &&
+                          imageState.id == image.id ? (
+                            <i class="fa-solid fa-comment"></i>
+                          ) : (
+                            <i class="fa-regular fa-comment"></i>
+                          )}
+                          <div
+                            className={
+                              commentsModal && image.id == imageState.id
+                                ? "commentBox"
+                                : "hiddenComment"
+                            }
+                          >
+                            {commentsModal == true && (
+                              <ExploreImageComments
+                                users={allUsersArray}
+                                image={image}
+                                user={user}
+                                setCommentsModal={setCommentsModal}
+                                commentsModal={commentsModal}
+                                setSubmitted={setSubmitted}
+                                submitted={submitted}
+                                // setCommentsState={setCommentsState}
+                                // commentsState={commentsState}
+                              />
+                            )}
                           </div>
+                        </div>
 
-                          <div> {image.comments.length} </div>
-                        </div>
-                        <div className="image-likes-section">
-                          <div id="star-icon-explore">
-                            <ExploreImageLikes
-                              image={image}
-                              user={user}
-                              setImageLiked={setImageLiked}
-                              imageLiked={imageLiked}
-                            />
-                          </div>
-                          <div> {image.likes.length} </div>
-                        </div>
+                        <div> {image.comments.length} </div>
                       </div>
-                      {/* likes and comments section */}
+                      <div className="image-likes-section">
+                        <div id="star-icon-explore">
+                          <ExploreImageLikes
+                            image={image}
+                            user={user}
+                            setImageLiked={setImageLiked}
+                            imageLiked={imageLiked}
+                          />
+                        </div>
+                        <div> {image.likes.length} </div>
+                      </div>
                     </div>
+                    {/* likes and comments section */}
                   </div>
-                </Link>
+                </div>
               </>
             );
           })}
