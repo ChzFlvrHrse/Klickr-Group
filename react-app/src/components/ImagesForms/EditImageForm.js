@@ -100,10 +100,10 @@ function EditImageForm({ imageId, setShowModalEdit, oldImage }) {
           />
           <div className="done-edit-container">
             <button className="done-edit-bttn" onClick={handleSubmit} type="submit">
-              Submit Image
+              Submit
             </button>
-            <button className="done-edit-bttn" onClick={handleSubmit2} type="submit">
-              Cancel Edit
+            <button id='done-edit-cancel-bttn' className="done-edit-bttn" onClick={handleSubmit2} type="submit">
+              Cancel
             </button>
           </div>
         </form>

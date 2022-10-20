@@ -29,8 +29,8 @@
 
 .done-edit-container {
     display: flex;
-    justify-content: center;
-    column-gap: 20px;
+    justify-content: row;
+    gap: 50px;
 }
 
 #edit-image-input{
@@ -54,4 +54,8 @@
 .done-edit-bttn:hover {
     opacity: .8;
     cursor: pointer;
+}
+
+#done-edit-cancel-bttn {
+    background-color: #979ea2;
 }
