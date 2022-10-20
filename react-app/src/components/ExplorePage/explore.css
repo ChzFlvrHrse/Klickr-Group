@@ -64,6 +64,7 @@
 }
 
 .explore-title {
+    margin-top: 100px;
     font-size: 22px;
     font-weight: 300;
     padding-top: 20px;
@@ -112,7 +113,7 @@
 
 #star-icon-explore{
 
-    z-index: 2;
+    /* z-index: 2; */
     height:10px;
     width:20px;
 }
@@ -133,4 +134,16 @@
     flex-direction: row;
     width:fit-content;
     height:100%;
+}
+
+
+/* comments modal */
+
+.commentBox {
+
+
+}
+
+.hiddenComment {
+    display: none;
 }

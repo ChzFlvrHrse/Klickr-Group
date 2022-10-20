@@ -3,24 +3,25 @@ import { useSelector, useDispatch } from "react-redux";
 import { getImagesThunk } from "../../store/image";
 import { Link } from "react-router-dom";
 import { getAllUsersThunk } from "../../store/AllUsers";
-import { Modal } from "../../context/Modal";
 import ExploreImageLikes from "./ExploreLikes";
-import ExploreImageCommments from "./ExploreComments";
+import ExploreImageComments from "./ExploreComments";
 import "./explore.css";
 
 const GetAllImages = () => {
   // fix delay on liking image, fix bug where spamming creates more likes (bypasses frontend validation)
-
-  // comment section
-  // Amount of comments
+  // allow user to exit modal when clicking elsewhere, but user also needs to stay on modal if interacting with it.
+  //on click access modal with link active
 
   // track whether like state has been changed
   const [imageLiked, setImageLiked] = useState(false);
 
+  // track whether image state is changed
+  const [imageState, setImageState] = useState("");
   // track whether comments state is changed
   const [commentsState, setCommentsState] = useState(false);
   // track whether comments section is opened for user
-  const [commentsModal, setCommentsModal] = useState(false);
+  let [commentsModal, setCommentsModal] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
   const allImages = useSelector((state) => state.image);
   const allImagesArr = Object.values(allImages);
@@ -31,7 +32,7 @@ const GetAllImages = () => {
 
   useEffect(() => {
     dispatch(getImagesThunk());
-  }, [dispatch, allUsersArray, allImagesArray, imageLiked]);
+  }, [dispatch, allUsersArray, allImagesArray, imageLiked, submitted]);
   // getting all users
 
   useEffect(() => {
@@ -45,6 +46,8 @@ const GetAllImages = () => {
   allUsersArray = Object.values(allusers);
   allImagesArray = Object.values(images);
 
+  console.log(commentsModal);
+
   return (
     <div className="explore-container">
       <div className="images-container">
@@ -53,42 +56,62 @@ const GetAllImages = () => {
           {allImagesArr.map((image) => {
             return (
               <>
-                <Link to={`/images/${image.id}`}>
                 <div className="singleImgContainer" key={image.id}>
-                  <img
-                    className="single-img"
-                    src={image.previewImageUrl}
-                    alt=""
-                  ></img>
+                  <Link to={`/images/${image.id}`}>
+                    <img
+                      className="single-img"
+                      src={image.previewImageUrl}
+                      alt=""
+                    ></img>
+                  </Link>
                   <div className="explore-image-bttm-section">
                     <div className="hide">{image.title}</div>
 
                     {/* likes and comments section */}
                     <div className="image-likes-container">
-                      <div className="image-likes-section"
-                      //  onClick={() => setCommentsModal(true)}
-                       >
+                    <span onClick={() => setCommentsModal(false)}>
+                            {commentsModal == true &&
+                            imageState.id == image.id ? (
+                              <i class="fa-solid fa-rectangle-xmark"></i>
+                            ) : (
+                              <i class=""></i>
+                            )}
+                          </span>
+                      <div className="image-likes-section">
                         <div
                           id="star-icon-explore"
+                          onClick={() => {
+                            setCommentsModal(true);
+                            setImageState(image);
+                          }}
                         >
-                          {commentsModal == true ? (
+                          {commentsModal == true &&
+                          imageState.id == image.id ? (
                             <i class="fa-solid fa-comment"></i>
                           ) : (
                             <i class="fa-regular fa-comment"></i>
                           )}
-
-                          {commentsModal && (
-                            <Modal onClose={() => setCommentsModal(false)}>
-                              <ExploreImageCommments
+                          <div
+                            className={
+                              commentsModal && image.id == imageState.id
+                                ? "commentBox"
+                                : "hiddenComment"
+                            }
+                          >
+                            {commentsModal == true && (
+                              <ExploreImageComments
+                                users={allUsersArray}
                                 image={image}
                                 user={user}
                                 setCommentsModal={setCommentsModal}
                                 commentsModal={commentsModal}
-                                setCommentsState={setCommentsState}
-                                commentsState={commentsState}
+                                setSubmitted={setSubmitted}
+                                submitted={submitted}
+                                // setCommentsState={setCommentsState}
+                                // commentsState={commentsState}
                               />
-                            </Modal>
-                          )}
+                            )}
+                          </div>
                         </div>
 
                         <div> {image.comments.length} </div>
@@ -108,7 +131,6 @@ const GetAllImages = () => {
                     {/* likes and comments section */}
                   </div>
                 </div>
-                </Link>
               </>
             );
           })}
