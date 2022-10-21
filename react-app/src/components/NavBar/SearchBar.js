@@ -2,12 +2,12 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { login } from '../../store/session';
 
 import { getImagesThunk } from "../../store/image";
 import { getAllUsersThunk } from "../../store/AllUsers";
 
 import "./SearchBar.css";
-import CouragePng from "../../icons/IMG_8935.PNG";
 import { useDispatch, useSelector } from "react-redux";
 
 //if signed in
@@ -57,6 +57,11 @@ const SearchBar = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setSearchTitle(e.target.value);
+  };
+
+  const onLogin = async (e) => {
+    e.preventDefault();
+    await dispatch(login('demo@aa.io', 'password'));
   };
 
   if (user) {
@@ -210,90 +215,15 @@ const SearchBar = () => {
         <div
           className={searchTitle.length ? "SearchBarContainer" : "HiddenResult"}
         >
-          <div
-            className={
-              filteredImagesArray.length && searchTitle.length
-                ? "Filteredimages-container"
-                : "HiddenResult"
-            }
-          >
             {/* search return map */}
-            <div className="FilteredreturnContainer">
-              {/* <div > */}
-              {filteredImagesArray &&
-                filteredImagesArray.map((image) => {
-                  return (
-                    <div className="SearchImageMappedContainer" key={image.id}>
-                      <Link to={`/images/${image.id}`}>
-                        <img
-                          className="SearchImageIndividual"
-                          src={image.previewImageUrl}
-                          alt="preview"
-                          // onClick={() => redirect to image page))}
-                        />
-                      </Link>
-                      <NavLink
-                        className="SearchImageNavLinkTitle"
-                        to={`/images/${image.id}`}
-                      >
-                        {image.title}
-                      </NavLink>
-                    </div>
-                  );
-                })}
-              {/* </div> */}
-            </div>
-          </div>
-          <div
-            className={
-              !filteredImagesArray.length && searchTitle !== ""
-                ? "errorHandlingSearchContainer"
-                : "HiddenResult"
-            }
-          >
-            <div className="errorhandlingSearchmessage">No Images Found</div>
-          </div>
+            <div className="FilteredreturnContainerDemo">
 
-          <div
-            className={
-              filteredUsersArray.length && searchTitle.length
-                ? "Filtereduser-container"
-                : "HiddenResult"
-            }
-          >
-            {/* search return map */}
-            <div className="FilteredUserReturnContainer">
-              {filteredUsersArray &&
-                filteredUsersArray.map((user) => {
-                  return (
-                    <div className="SearchUserMappedContainer" key={user.id}>
-                      <NavLink to={`/users/${user.id}`}>
-                        <img
-                          className="SearchUserImageIndividual"
-                          src={user.previewImageUrl}
-                          alt="profile"
-                        />
-                      </NavLink>
-                      <NavLink
-                        className="SearchImageNavLinkTitle"
-                        to={`/users/${user.id}`}
-                      >
-                        {user.username}
-                      </NavLink>
-                    </div>
-                  );
-                })}
+             <div className="button">
+              <button className='loginform-bttns' onClick={onLogin}>Click here to login as Demo User
+              </button>
             </div>
-          </div>
-          <div
-            className={
-              !filteredUsersArray.length && searchTitle !== ""
-                ? "errorHandlingSearchContainer"
-                : "HiddenResult"
-            }
-          >
-            <div className="errorhandlingSearchmessage">No Users Found</div>
-          </div>
+            </div>
+
         </div>
       </>
     );

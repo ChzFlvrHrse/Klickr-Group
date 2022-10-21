@@ -192,3 +192,17 @@ a i {
   font-size: 1rem;
   width: fit-content;
 }
+.toggleResultsSearch:hover {
+  cursor: pointer;
+}
+
+.FilteredreturnContainerDemo {
+  display: flex;
+  flex-direction: row;
+  column-gap: 30px;
+  padding-left: 5px;
+  height: fit-content;
+  width: fit-content;
+  border-bottom: 1px solid black;
+  width: 100%;
+}
