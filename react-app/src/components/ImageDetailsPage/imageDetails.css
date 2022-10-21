@@ -16,10 +16,13 @@
     width: 100%
 }
 
-#back-explore:hover {
+.LinktoHomeImageDetails:hover {
     text-decoration-line: underline;
 }
 
+/* .edit-comment:hover {
+    cursor: pointer;
+} */
 #back-explore i,
 a {
     color: white;
