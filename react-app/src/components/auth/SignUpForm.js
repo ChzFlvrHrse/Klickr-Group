@@ -19,8 +19,6 @@ const SignUpForm = () => {
 
   const dispatch = useDispatch();
 
-  console.log(typeof previewImageUrl)
-
   const onSignUp = async (e) => {
     e.preventDefault();
     if (previewImageUrl == null || !previewImageUrl.startsWith("http://") || !previewImageUrl.startsWith("https://")) {
@@ -34,7 +32,7 @@ const SignUpForm = () => {
     }
 
     if (password === repeatPassword) {
-      console.log(previewImageUrl)
+      
       const data = await dispatch(
         signUp(
           username,
