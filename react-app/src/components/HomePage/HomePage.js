@@ -29,7 +29,7 @@ export function HomePage() {
         </div>
       </div>
       <footer>
-    <div class="footer">
+    <div class="footer-home">
       Copyright 2022. Klickr. All Rights Reserved.
     </div>
   </footer>
@@ -58,8 +58,8 @@ export function HomePage() {
         </div>
   <footer className="parentFooter">
     <div class="footer-home">
-    Copyright 2022. Klickr. All Rights Reserved.  &nbsp; &nbsp; &nbsp; 
-    <img className="ourRepo" src={githubIcon} alt="ourRepo"/> 
+    Copyright 2022. Klickr. All Rights Reserved.  &nbsp; &nbsp; &nbsp;
+    <img className="ourRepo" src={githubIcon} alt="ourRepo"/>
     <div className="footer-home-wrap-containers">
       <a className="text-for-github" href="https://github.com/ChzFlvrHrse/Klickr-Group"> https://github.com/ChzFlvrHrse/Klickr-Group</a>
     </div>
