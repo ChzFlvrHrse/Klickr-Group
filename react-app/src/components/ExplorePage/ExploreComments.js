@@ -32,7 +32,7 @@ function ExploreImageComments({
   // useEffect(() => {
   //   dispatch(getImagesThunk());
   // }, [dispatch, showModalDelete, showModalEdit]);
-  console.log(commentsModal)
+
 
   // handle comment submission
   const submitComment = async (e) => {
