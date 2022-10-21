@@ -341,21 +341,32 @@ textarea {
     animation-duration: 4s;
     animation-iteration-count: infinite;
     animation-timing-function: ease-in-out;
+    /* background-color: none;
+    box-shadow: 2px 4px 4px 4px rgb(213, 215, 190);
+    border-radius: 4rem; */
 }
 
 @keyframes floating {
-    0% { transform: translate(0,  0px); }
-    50%  { transform: translate(0, 15px); }
-    100%   { transform: translate(0, -0px); }
+    0% {
+        transform: translate(0, 0px);
+    }
+
+    50% {
+        transform: translate(0, 15px);
+    }
+
+    100% {
+        transform: translate(0, -0px);
+    }
 }
 
-#star:hover {
+/* #star:hover {
     transform: scale(1.3);
 }
 
 #star:active {
     transform: scale(.98);
-}
+} */
 
 .HiddenResult {
     visibility: hidden;

@@ -89,7 +89,6 @@ function ImageDetails() {
   const tags = useSelector((state) => state.tags);
   const userId = user.id;
 
-  console.log(likes)
 
   // filters
   allImagesArray = Object.values(images);
@@ -99,8 +98,9 @@ function ImageDetails() {
     allImagesFiltered = allImagesArray.filter(
       (filteredImages, index) => filteredImages.id == id
     );
-
-    imageLikedByUser = allImagesFiltered[0].likes.filter((filteredLikes, index) => filteredLikes.userId == user.id)
+if (allImagesArray && allImagesFiltered.length > 0) {
+  imageLikedByUser = allImagesFiltered[0].likes.filter((filteredLikes, index) => filteredLikes.userId == user.id)
+}
 
   }
 
