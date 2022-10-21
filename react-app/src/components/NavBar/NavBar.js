@@ -60,7 +60,7 @@ NavBar = () => {
   } if (!user) {
   return (
     <>
-      <nav className="nav-explore">
+      <nav className="nav-explore-userless">
       <div className="NavBarLeftSide">
           <NavLink to="/">
             <img className="logo" src={klickrImage} alt="logo"/>
