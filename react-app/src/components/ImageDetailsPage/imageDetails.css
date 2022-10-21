@@ -20,9 +20,10 @@
     text-decoration-line: underline;
 }
 
-/* .edit-comment:hover {
+.editArrowComment:hover {
     cursor: pointer;
-} */
+}
+
 #back-explore i,
 a {
     color: white;
@@ -505,15 +506,17 @@ textarea {
     width: fit-content;
     height: fit-content;
     padding: .5rem;
-    cursor: pointer;
 }
 
-/* .tagSingleContainer:hover {
+.DeleteTagButton {
+    cursor: pointer;
+}
+.tagSingleContainer:hover {
     color: white;
     background-color: gray;
     transform: scale(1.2);
     transition: all .1s ease-in-out;
-} */
+}
 
 .TagsContainer {
     display: flex;

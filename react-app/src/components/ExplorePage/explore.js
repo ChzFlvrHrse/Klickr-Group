@@ -85,6 +85,7 @@ const GetAllImages = () => {
                         >
                           {commentsModal == true &&
                           imageState.id == image.id ? (
+                            
                             <i class="fa-solid fa-comment"></i>
                           ) : (
                             <i class="fa-regular fa-comment"></i>
@@ -134,7 +135,7 @@ const GetAllImages = () => {
           })}
         </div>
       </div>
-           
+
     </div>
   );
 };

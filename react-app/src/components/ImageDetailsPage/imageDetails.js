@@ -12,7 +12,6 @@ import {
   getAllCommentsThunk,
 } from "../../store/comments";
 import {
-  getImageLikesThunk,
   createLikesThunk,
   deleteLikesThunk,
 } from "../../store/likes";
@@ -26,7 +25,6 @@ import DeleteTagForm from "../Tags/DeleteTagForm";
 import "./imageDetails.css";
 
 function ImageDetails() {
-  const history = useHistory();
   const [showModal, setShowModal] = useState(false);
   const [imageLiked, setImageLiked] = useState(false);
   const [showModalEdit, setShowModalEdit] = useState(false);
@@ -225,6 +223,7 @@ if (allImagesArray && allImagesFiltered.length > 0) {
           <div className="EditDeleteImageSection">
             {/* edit modal */}
             {allImagesFiltered[0].userId == user.id ? (
+              <div className="editArrowComment">
               <i
                 onClick={() => {
                   setShowModalImageEdit(true);
@@ -234,6 +233,7 @@ if (allImagesArray && allImagesFiltered.length > 0) {
                 title="edit image"
                 class="fa-solid fa-pen-to-square"
               ></i>
+              </div>
             ) : (
               <></>
             )}
@@ -247,6 +247,7 @@ if (allImagesArray && allImagesFiltered.length > 0) {
               </Modal>
             )}
             {allImagesFiltered[0].userId == user.id ? (
+              <div className="editArrowComment">
               <i
                 onClick={() => {
                   setShowModalImageDelete(true);
@@ -255,6 +256,7 @@ if (allImagesArray && allImagesFiltered.length > 0) {
                 title="delete image"
                 class="fa-solid fa-delete-left"
               ></i>
+              </div>
             ) : (
               <></>
             )}
@@ -277,7 +279,7 @@ if (allImagesArray && allImagesFiltered.length > 0) {
             <Link
               to={`/images/${allImagesArray[previousImageIndex].id}`}
               className="previousImageClick"
-            >
+             >
               <i class="fa-solid fa-circle-arrow-left"></i>
             </Link>
           ) : (
@@ -523,6 +525,7 @@ if (allImagesArray && allImagesFiltered.length > 0) {
 
                         <div>{tag.body}</div>
                         {allImagesFiltered[0].userId == user.id ? (
+                          <div className="DeleteTagButton">
                           <i
                             onClick={() => {
                               setShowModalTagsDelete(true);
@@ -532,8 +535,8 @@ if (allImagesArray && allImagesFiltered.length > 0) {
                             id="delete-tag"
                             title="delete tag"
                             class="fa-solid fa-xmark"
-                          ></i>
-                        ) : (
+                          ></i></div>
+                        ) : ( 
                           <></>
                         )}
                         {showModalTagsDelete && (
