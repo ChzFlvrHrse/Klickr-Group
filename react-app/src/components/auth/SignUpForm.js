@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { signUp } from "../../store/session";
@@ -15,19 +15,27 @@ const SignUpForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
+  const [errorValidation, setErrorValidation] = useState([]);
   const user = useSelector((state) => state.session.user);
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    let errors = [];
+
+    if (username.length > 40 || username.length < 4) errors.push("Username must be between 4 and 40 characters");
+    if (first_name.length > 25 || first_name.length < 2) errors.push("First name must be between 4 and 25 characters");
+    if (last_name.length > 25 || last_name.length < 2) errors.push("Last name must be between 4 and 25 characters");
+    if (!password.length) errors.push("Password is required");
+
+    setErrorValidation(errors)
+
+  }, [username, first_name, last_name, password])
 
   console.log(typeof previewImageUrl)
 
   const onSignUp = async (e) => {
     e.preventDefault();
-    if (previewImageUrl == null || !previewImageUrl.startsWith("http://") || !previewImageUrl.startsWith("https://")) {
-      setPreviewImageUrl(
-        "https://creazilla-store.fra1.digitaloceanspaces.com/emojis/55737/grinning-face-with-big-eyes-emoji-clipart-xl.png"
-      );
-    }
 
     if (!email.includes("@")) {
       return setErrors(["Please enter a valid email address"]);
@@ -35,6 +43,8 @@ const SignUpForm = () => {
 
     if (password === repeatPassword) {
       console.log(previewImageUrl)
+      if (previewImageUrl == null || !previewImageUrl.startsWith("http://") || !previewImageUrl.startsWith("https://")) {
+      }
       const data = await dispatch(
         signUp(
           username,
@@ -92,9 +102,9 @@ const SignUpForm = () => {
             </div>
             <h4 id="to-klickr">Sign up for Klickr</h4>
             <div className="signup-form-errors">
-              {errors.length > 0 && (
+              {errorValidation.length > 0 && (
                 <div className="signup-errors-wrapper">
-                  {errors.map((error, idx) => (
+                  {errorValidation.map((error, idx) => (
                     <div key={idx}>{error}</div>
                   ))}
                 </div>
@@ -137,7 +147,7 @@ const SignUpForm = () => {
               ></input>
             </div>
             <div className="label-input">
-              <label>Profile Picture</label>
+              <label id="profile-pic">Profile Picture (Optional)</label>
               <input
                 type="text"
                 name="previewImageUrl"
@@ -166,7 +176,7 @@ const SignUpForm = () => {
             </div>
 
             <div className="button">
-              <button type="submit">Sign Up</button>
+              <button type="submit" disabled={errorValidation.length}>Sign Up</button>
             </div>
           </form>
         </div>
