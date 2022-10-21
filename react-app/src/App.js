@@ -40,7 +40,7 @@ function App() {
         </Route>
         <Route path="/explore" exact={true}>
           <GetAllImages />
-          </Route>
+        </Route>
         <Route exact path='/images/:id'>
           <ImageDetails />
         </Route>
@@ -63,8 +63,8 @@ function App() {
           <h1>My Home Page</h1>
         </ProtectedRoute>
         <Route>
-            <PageNotFound />
-          </Route>
+          <PageNotFound />
+        </Route>
       </Switch>
     </BrowserRouter>
   );
