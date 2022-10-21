@@ -91,7 +91,7 @@ const SignUpForm = () => {
     <>
       <div className="signup-container">
         <div className="inner-signup">
-          <form className="signup-form" onSubmit={onSignUp}>
+          <form autoComplete="off" className="signup-form" onSubmit={onSignUp}>
             <div id="circles-container">
               <img src={klickrLogo} alt="" id="circles"></img>
             </div>
@@ -112,6 +112,7 @@ const SignUpForm = () => {
                 name="username"
                 onChange={updateUsername}
                 value={username}
+                autoComplete="username"
               ></input>
             </div>
             <div className="label-input">
@@ -157,6 +158,7 @@ const SignUpForm = () => {
                 name="password"
                 onChange={updatePassword}
                 value={password}
+                autoComplete="off"
               ></input>
             </div>
             <div className="label-input">
