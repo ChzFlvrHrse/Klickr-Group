@@ -57,9 +57,9 @@ export default function CreateImageForm() {
     <div className="Whole-container">
       <div className="Image-Container">
         <h2 className="header-message">You can upload 1000 more photos.</h2>
-        <h3 className="header-message3">
+        <div className="message-upload">
           Get automatic photo backup on all your devices with Klickr.
-        </h3>
+        </div>
         <div className="show-errors">
           {hasSubmitted && errors.length > 0 && (
             <ul className="errors-list">

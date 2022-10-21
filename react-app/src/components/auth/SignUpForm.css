@@ -20,6 +20,10 @@ body {
     margin-right: 14rem;
 }
 
+#profile-pic {
+    margin-left: 3.5rem;
+}
+
 #repeat {
     margin-left: 1rem;
 }
