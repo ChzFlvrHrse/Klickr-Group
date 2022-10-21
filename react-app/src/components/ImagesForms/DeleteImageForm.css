@@ -40,7 +40,7 @@
     width: 8rem
 }
 
-.deleteSongButtons button:hover {
+.deleteImageButtons button:hover {
     opacity: .8;
     cursor: pointer;
 }
