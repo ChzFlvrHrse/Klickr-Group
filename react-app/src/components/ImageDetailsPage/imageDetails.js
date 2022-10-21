@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams, Link, useHistory } from "react-router-dom";
+import { useParams, Link, } from "react-router-dom";
 import { getImagesThunk } from "../../store/image";
 import EditImageForm from "../ImagesForms/EditImageForm";
 import DeleteImageForm from "../ImagesForms/DeleteImageForm";
@@ -13,7 +13,6 @@ import { Modal } from "../../context/Modal";
 
 import { getImageTagsThunk } from "../../store/tags";
 import CreateTagForm from "../Tags/CreateTagForm";
-import EditTagForm from "../Tags/EditTagForm";
 import DeleteTagForm from "../Tags/DeleteTagForm";
 
 import "./imageDetails.css";
@@ -30,13 +29,13 @@ function ImageDetails() {
   const [nextImage, setNextImage] = useState(false);
   const [imageState, setImageState] = useState(false);
 
-  let [commDelete, setCommDelete] = useState(1);
+  let [commDelete] = useState(1);
 
   const [showModalImageDelete, setShowModalImageDelete] = useState(false);
   const [showModalImageEdit, setShowModalImageEdit] = useState(false);
 
   const [showModalTagsDelete, setShowModalTagsDelete] = useState(false);
-  const [showModalTagsEdit, setShowModalTagsEdit] = useState(false);
+  const [showModalTagsEdit] = useState(false);
   // to keep track of individual tags
   const [tagState, setTagState] = useState(false);
 
