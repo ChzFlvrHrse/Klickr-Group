@@ -81,7 +81,7 @@ export default function ProfileButton({ users }) {
                 </div>
                 </div>
               <div className="hover-link logout-li" onClick={logout}>
-                Log Out
+               Log Out &nbsp; &nbsp; &nbsp; &nbsp;
               </div>
             </div>
           )}
