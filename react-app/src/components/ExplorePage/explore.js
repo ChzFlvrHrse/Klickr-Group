@@ -70,7 +70,8 @@ const GetAllImages = () => {
                     <span className="ExitCommentsSection" onClick={() => setCommentsModal(false)}>
                             {commentsModal == true &&
                             imageState.id == image.id ? (
-                              <i class="fa-solid fa-rectangle-xmark"></i>
+                              <div className="editArrowComment">
+                              <i class="fa-solid fa-rectangle-xmark"></i> </div>
                             ) : (
                               <i class=""></i>
                             )}
@@ -79,17 +80,17 @@ const GetAllImages = () => {
                         <div
                           id="star-icon-explore"
                           onClick={() => {
-                            setCommentsModal(true);
+                            setCommentsModal(!commentsModal);
                             setImageState(image);
                           }}
-                        >
+                        ><div className="editArrowComment">
                           {commentsModal == true &&
                           imageState.id == image.id ? (
-                            
+
                             <i class="fa-solid fa-comment"></i>
                           ) : (
                             <i class="fa-regular fa-comment"></i>
-                          )}
+                          )} </div>
                           <div
                             className={
                               commentsModal && image.id == imageState.id
