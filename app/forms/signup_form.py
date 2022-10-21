@@ -23,8 +23,8 @@ def username_exists(form, field):
 def valid_image(form, field):
     previewImageUrl = field.data
     if previewImageUrl == None or not previewImageUrl.startswith("https://") or not previewImageUrl.startswith("http://"):
-        previewImageUrl = "https://creazilla-store.fra1.digitaloceanspaces.com/emojis/55737/grinning-face-with-big-eyes-emoji-clipart-xl.png"
-        # raise ValidationError("Invalid url")
+        field.data = "https://creazilla-store.fra1.digitaloceanspaces.com/emojis/55737/grinning-face-with-big-eyes-emoji-clipart-xl.png"
+        
 
 class SignUpForm(FlaskForm):
     username = StringField('username', validators=[DataRequired(), username_exists])
