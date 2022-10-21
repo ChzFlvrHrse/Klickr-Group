@@ -75,8 +75,9 @@ export default function ProfileButton({ users }) {
                 <div className="numOfImages">
               {userImagesArr.length} of 1,000 items
               </div>
-                <NavLink className="profile-page-reroute-upload"              
-                to={"/upload"}> Upload your Photos  </NavLink>
+                <NavLink className="profile-page-reroute-upload"
+                id="drop-nav-link"              
+                to={"/upload"}>  Upload your Photos  </NavLink> 
                 </div>
                 </div>
               <div className="hover-link logout-li" onClick={logout}>

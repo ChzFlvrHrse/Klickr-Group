@@ -9,6 +9,7 @@ img.profile-icon {
 
 ul.profile-list {
   list-style-type: none;
+  
 }
 
 .profile-list-item logout {
@@ -24,6 +25,7 @@ ul.profile-list {
 .profile-dropdown {
   display: flex;
   flex-direction: column;
+
   position: absolute;
   width: 11em;
   height: 8.3em;
@@ -31,7 +33,7 @@ ul.profile-list {
   border: 1px solid black;
   border-radius: 2px;
   right: 3.5%;
-  padding: 8px;
+  padding: 15px;
   padding-right: -3px;
   border-radius: .3rem;
 }
@@ -94,7 +96,12 @@ ul.profile-list {
   color: black;
 }
 
- .profile-page-reroute-upload:hover{
+.profile-page-reroute-upload{
+  color: rgb(100, 100, 182);
+
+
+}
+ .profile-page-reroute-upload:hover #drop-nav-link{
     text-decoration: underline;
     color: rgb(100, 100, 182);
   
@@ -103,14 +110,15 @@ ul.profile-list {
     margin-top:20px;
   }
   .numOfImages {
-    font-size: 15px;
-    color: black;
-    margin-left: -69px;
     padding-bottom: 10px;
     margin-top: 20px;
    
-    /* margin-left:-0.2px; */
-    padding-left:70px;
+    font-size: 14px;
+    color: black;
+    margin-left: -80px;
+    margin-top: 20px;
+    padding-left: 70px;
+  
     
   }
 
@@ -129,8 +137,9 @@ ul.profile-list {
 .numOfImages {
   font-size: 14px;
   color: black;
-  margin-left: 5px;
+  margin-left: -69px;
   margin-top: 20px;
+
 
   /* margin-left:-0.2px; */
   padding-left: 70px;
@@ -145,5 +154,7 @@ ul.profile-list {
 }
 
 .three-item-container {
-  padding-top: 10px
+  display:flex;
+  flex-direction: column;
+  align-items: left;
 }
