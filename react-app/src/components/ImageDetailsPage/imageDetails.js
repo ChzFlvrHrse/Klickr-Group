@@ -10,6 +10,7 @@ import { getAllUsersThunk } from "../../store/AllUsers";
 import { createACommentThunk, getAllCommentsThunk } from "../../store/comments";
 import { createLikesThunk, deleteLikesThunk } from "../../store/likes";
 import { Modal } from "../../context/Modal";
+import { ImageModal } from "../../context/Modal copy";
 
 import { getImageTagsThunk } from "../../store/tags";
 import CreateTagForm from "../Tags/CreateTagForm";
@@ -229,13 +230,13 @@ function ImageDetails() {
               <></>
             )}
             {showModalImageEdit && (
-              <Modal onClose={() => setShowModalImageEdit(false)}>
+              <ImageModal onClose={() => setShowModalImageEdit(false)}>
                 <EditImageForm
                   imageId={id}
                   setShowModalEdit={setShowModalImageEdit}
                   oldImage={imageState}
                 />
-              </Modal>
+              </ImageModal>
             )}
             {allImagesFiltered[0].userId == user.id ? (
               <div className="editArrowComment">
@@ -252,13 +253,13 @@ function ImageDetails() {
               <></>
             )}
             {showModalImageDelete && (
-              <Modal onClose={() => setShowModalImageDelete(false)}>
+              <ImageModal onClose={() => setShowModalImageDelete(false)}>
                 <DeleteImageForm
                   imageId={id}
                   setShowModal={setShowModalImageDelete}
                   image={allImagesFiltered[0]}
                 />
-              </Modal>
+              </ImageModal>
             )}
 
             {/* delete modal */}

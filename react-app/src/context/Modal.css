@@ -20,6 +20,15 @@
   background-color: black;
   opacity: .01;
 }
+#modal-background2 {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: black;
+  opacity: .4;
+}
 
 #modal-content {
   position: absolute;
