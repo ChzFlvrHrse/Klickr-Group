@@ -27,17 +27,18 @@ const SignUpForm = () => {
     if (first_name.length > 25 || first_name.length < 2) errors.push("First name must be between 4 and 25 characters");
     if (last_name.length > 25 || last_name.length < 2) errors.push("Last name must be between 4 and 25 characters");
     if (!password.length) errors.push("Password is required");
-    if (password !== repeatPassword) errors.push("Passwords must match");
+    if (!repeatPassword.length) errors.push("Please repeat the password")
+    // if (password !== repeatPassword) errors.push("Passwords do not match");
 
     setErrorValidation(errors)
 
-  }, [username, first_name, last_name, password])
+  }, [username, first_name, last_name, password, repeatPassword, email])
 
   const onSignUp = async (e) => {
     e.preventDefault();
 
     if (!email.includes("@")) {
-      return setErrors(["Please enter a valid email address"]);
+      return setErrorValidation(["Please enter a valid email address"]);
     }
 
     if (password === repeatPassword) {
@@ -52,8 +53,10 @@ const SignUpForm = () => {
         )
       );
       if (data) {
-        setErrors(data);
+        setErrorValidation(data);
       }
+    } else {
+      return setErrorValidation(["Passwords do not match"])
     }
   };
 

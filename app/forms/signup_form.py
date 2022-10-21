@@ -20,11 +20,16 @@ def username_exists(form, field):
     if user:
         raise ValidationError('Username is already in use.')
 
+def valid_image(form, field):
+    previewImageUrl = field.data
+    if not previewImageUrl.startswith("https://") or not previewImageUrl.startswith("http://"):
+        previewImageUrl = "https://creazilla-store.fra1.digitaloceanspaces.com/emojis/55737/grinning-face-with-big-eyes-emoji-clipart-xl.png"
+        # raise ValidationError("Invalid url")
 
 class SignUpForm(FlaskForm):
     username = StringField('username', validators=[DataRequired(), username_exists])
     first_name = StringField('first_name', validators=[DataRequired()])
     last_name = StringField('last_name', validators=[DataRequired()])
     email = StringField('email', validators=[DataRequired(), user_exists])
-    previewImageUrl = StringField('previewImageUrl')
+    previewImageUrl = StringField('previewImageUrl', validators=[valid_image])
     password = StringField('password', validators=[DataRequired()])
