@@ -29,25 +29,25 @@ function DeleteCommentFormExplore({ imageId, setShowModal, comment, submitted, s
 
   return (
     <div className="DeleteComment-outer">
-      <form className="DeleteComment-inner" onSubmit={handleSubmit2} autoComplete="off">
-        <h1>Warning! This will permanently remove the comment.</h1>
-        <div></div>
-        <h2>Are you sure you want to delete?</h2>
-        <div className="deleteSongButtons">
-          <button
-            className="submitDeleteComment"
-            onClick={handleSubmit}
-            type="submit"
-          >
-            Delete comment
-          </button>
-          <button
-            className="cancelDeleteComment"
-            onClick={() => setShowModal(false)}
-          >
-            Cancel
-          </button>
-        </div>
+    <form className="DeleteComment-inner" onSubmit={handleSubmit2} autoComplete="off">
+      <h4 id="statement">Delete Comment</h4>
+      <div></div>
+      <h5 id="assurance">Are you sure you want to delete this comment?</h5>
+      <div className="deleteSongButtons">
+        <button
+          className="submitDeleteComment"
+          onClick={handleSubmit}
+          type="submit"
+        >
+          Delete
+        </button>
+        <button
+          className="cancelDeleteComment"
+          onClick={() => setShowModal(false)}
+        >
+          Cancel
+        </button>
+      </div>
       </form>
     </div>
   );
