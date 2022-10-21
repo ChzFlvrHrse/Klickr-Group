@@ -28,7 +28,7 @@ ul.profile-list {
 
   position: absolute;
   width: 11.5em;
-  height: 8.3em;
+  height: 7.0em;
   background-color: white;
   border: 1px solid black;
   right: 3.5%;
@@ -37,9 +37,10 @@ ul.profile-list {
 }
 
 .logout-li {
+  display: flex;
 
   padding-top: 10px;
-  margin-top: 50px;
+  margin-top: 20px;
   font-size: 16px;
   border-top: 1px solid rgb(235, 228, 228);
 
