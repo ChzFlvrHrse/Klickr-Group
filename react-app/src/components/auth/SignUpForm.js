@@ -158,7 +158,7 @@ const SignUpForm = () => {
                 name="password"
                 onChange={updatePassword}
                 value={password}
-                autoComplete="off"
+                autoComplete="new-password"
               ></input>
             </div>
             <div className="label-input">
