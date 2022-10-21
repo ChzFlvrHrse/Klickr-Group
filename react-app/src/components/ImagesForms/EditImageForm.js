@@ -17,10 +17,9 @@ function EditImageForm({ imageId, setShowModalEdit, oldImage }) {
   useEffect(() => {
     const formValidationErrors = [];
 
-    if (title.length < 1 || title.length > 49)
-    formValidationErrors.push("Name must be between 1 and 49 characters");
+    if (!title) formValidationErrors.push("Please provide a image");
     if (!description) formValidationErrors.push("Please provide a description");
-    if (!previewImageUrl) formValidationErrors.push("Please provide a previewImage");
+    if (!previewImageUrl) formValidationErrors.push("Please provide a image");
 
 
     setErrors(formValidationErrors);
