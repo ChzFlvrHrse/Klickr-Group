@@ -19,14 +19,11 @@ const SignUpForm = () => {
 
   const dispatch = useDispatch();
 
+  console.log(typeof previewImageUrl)
+
   const onSignUp = async (e) => {
     e.preventDefault();
-    if (
-      previewImageUrl == null ||
-      !(JSON.stringify(previewImageUrl).endsWith("jpg")) ||
-      !(JSON.stringify(previewImageUrl).endsWith("png"))  ||
-      !(JSON.stringify(previewImageUrl).endsWith("jpeg"))
-    ) {
+    if (previewImageUrl == null || !previewImageUrl.startsWith("http://") || !previewImageUrl.startsWith("https://")) {
       setPreviewImageUrl(
         "https://creazilla-store.fra1.digitaloceanspaces.com/emojis/55737/grinning-face-with-big-eyes-emoji-clipart-xl.png"
       );
