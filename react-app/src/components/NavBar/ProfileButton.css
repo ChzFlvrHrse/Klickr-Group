@@ -19,6 +19,7 @@
     text-decoration: none;
     padding-top: 2px;
     margin-bottom: 10px;
+    
   
   }
 
@@ -32,7 +33,7 @@
     border: 1px solid black;
     border-radius: 2px;
     right: 3.5%;
-    padding: 8px;
+    padding: 15px;
     padding-right:-3px;
     border-radius: .3rem;
   }
