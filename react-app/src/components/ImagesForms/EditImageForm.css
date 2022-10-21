@@ -29,7 +29,7 @@
 
 .done-edit-container {
     display: flex;
-    justify-content: row;
+    justify-content: center;
     gap: 50px;
 }
 
