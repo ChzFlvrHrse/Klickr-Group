@@ -19,6 +19,7 @@ ul.profile-list {
   padding-top: 2px;
   margin-bottom: 10px;
 
+<<<<<<< HEAD
 }
 
 .profile-dropdown {
@@ -35,6 +36,33 @@ ul.profile-list {
   padding-right: -3px;
   border-radius: .3rem;
 }
+=======
+  .profile-list-item logout {
+    display:flex;
+    justify-content: center;
+    color: black;
+    text-decoration: none;
+    padding-top: 2px;
+    margin-bottom: 10px;
+    
+  
+  }
+
+  .profile-dropdown {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    width: 11em;
+    height: 8.3em;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 2px;
+    right: 3.5%;
+    padding: 15px;
+    padding-right:-3px;
+    border-radius: .3rem;
+  }
+>>>>>>> f6823124857c1bb145cec8bd1cde648f6aba760d
 
 .logout-li {
 
