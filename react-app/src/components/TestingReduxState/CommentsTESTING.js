@@ -22,7 +22,7 @@ export default function CommentsTestingFunction() {
 
     2. in the image details page just grab imageId from the params */
   const { imageId } = useParams();
-//
+  //
   const user = useSelector((state) => state.session.user);
   const comments = useSelector((state) => state.comments);
   const allusers = useSelector((state) => state.allUsers);
@@ -30,8 +30,8 @@ export default function CommentsTestingFunction() {
   const [showModalEdit, setShowModalEdit] = useState(false);
   const userId = user.id;
 
-   // to keep track of individual comments
-   const [commentState, setCommentState] = useState({});
+  // to keep track of individual comments
+  const [commentState, setCommentState] = useState({});
 
   //   map through users array and display username if id matches userId
   const allUsersArray = Object.values(allusers);
@@ -146,26 +146,26 @@ export default function CommentsTestingFunction() {
                   onClick={() => {
                     setShowModalEdit(true);
                   }}
-                    >
+                >
                   <button
                     className="DeleteAlbumButton"
                     id="DeleteCommentButton"
                     onClick={() => {
-                        setShowModalEdit(true);
-                      setCommentState(comment)
+                      setShowModalEdit(true);
+                      setCommentState(comment);
                     }}
                   >
                     Edit Comment
                   </button>
                   {showModalEdit && (
-                  <Modal onClose={() => setShowModalEdit(false)}>
-                    <EditCommentForm
-                      imageId={imageId}
-                      userId={userId}
-                      setShowModalEdit={setShowModalEdit}
-                      oldComment={commentState}
-                    />
-                  </Modal>
+                    <Modal onClose={() => setShowModalEdit(false)}>
+                      <EditCommentForm
+                        imageId={imageId}
+                        userId={userId}
+                        setShowModalEdit={setShowModalEdit}
+                        oldComment={commentState}
+                      />
+                    </Modal>
                   )}
                 </button>
                 {/* edit comment */}
@@ -176,25 +176,25 @@ export default function CommentsTestingFunction() {
                   onClick={() => {
                     setShowModal(true);
                   }}
-                    >
+                >
                   <button
                     className="DeleteAlbumButton"
                     id="DeleteCommentButton"
                     onClick={() => {
                       setShowModal(true);
-                      setCommentState(comment)
+                      setCommentState(comment);
                     }}
                   >
                     Delete Comment
                   </button>
                   {showModal && (
-                  <Modal onClose={() => setShowModal(false)}>
-                    <DeleteCommentForm
-                    imageId={imageId}
-                      setShowModal={setShowModal}
-                      comment={commentState}
-                    />
-                  </Modal>
+                    <Modal onClose={() => setShowModal(false)}>
+                      <DeleteCommentForm
+                        imageId={imageId}
+                        setShowModal={setShowModal}
+                        comment={commentState}
+                      />
+                    </Modal>
                   )}
                 </button>
               </div>

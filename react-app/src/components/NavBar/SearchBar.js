@@ -84,7 +84,6 @@ const SearchBar = () => {
     e.preventDefault();
     setSearchTitle(e.target.value);
   };
-
   if (user) {
     return (
       <>
@@ -293,28 +292,68 @@ const SearchBar = () => {
             }
           >
             {/* search return map */}
-            <div className="FilteredreturnContainer">
+            {/* <div className="FilteredreturnContainer">
               {filteredImagesArray &&
                 filteredImagesArray.map((image) => {
-                  return filteredTagsArray.map((tag) => {
-                    return (
-                      <div className="SearchImageMappedContainer" key={tag.id}>
+                  return (
+                    <div key={image.id}>
+                      {" "}
+                      {filteredTagsArray && filteredTagsArray.map((tag) => {
+                        return (
+                          <div className="SearchImageMappedContainer" key={tag.id}>
 
-                        <Link to={image.id == tag.imageId ? `/images/${image.id}` : ""}>
-                          <img
-                            className="SearchImageIndividual"
-                            src={image.id == tag.imageId ? image.previewImageUrl : ""}
-                            alt="preview"
-                          />
-                        </Link>
-                        <NavLink
-                          className="SearchImageNavLinkTitle"
-                          to={image.id == tag.imageId ? `/images/${image.id}` : ""}>
-                          {tag.body}
-                        </NavLink>
-                      </div>
-                    );
-                  });
+                            <Link to={image.id == tag.imageId && tag ? `/images/${image.id}` : ""}>
+                              <img
+                                className="SearchImageIndividual"
+                                src={image.previewImageUrl}
+                                // src={image.id == tag.imageId ? image.previewImageUrl : ""}
+                                alt="preview"
+                              />
+                            </Link>
+                            <NavLink
+                              className="SearchImageNavLinkTitle"
+                              to={image.id == tag.imageId ? `/images/${image.id}` : ""}>
+                              {tag.body}
+                            </NavLink>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  );
+                })}
+            </div> */}
+
+
+
+
+            <div className="FilteredreturnContainer">
+              {allImagesArray &&
+                allImagesArray.map((image) => {
+                  return (
+                    <div key={image.id}>
+                      {" "}
+                      {image.tags && image.tags.map((tag) => {
+                        return (
+                          <div className="SearchImageMappedContainer" key={tag.id}>
+                            <div>{console.log(tag.body)}</div>
+                            <Link to={tag.body.toLowerCase().includes(searchTitle.toLowerCase()) ? `/images/${image.id}` : ""}>
+                              <img
+                                className="SearchImageIndividual"
+                                src={image.previewImageUrl}
+                                // src={image.id == tag.imageId ? image.previewImageUrl : ""}
+                                alt="preview"
+                              />
+                            </Link>
+                            <NavLink
+                              className="SearchImageNavLinkTitle"
+                              to={searchTitle.toLowerCase() == tag.body.toLowerCase() ? `/images/${image.id}` : ""}>
+                              {tag.body}
+                            </NavLink>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  );
                 })}
             </div>
           </div>
