@@ -23,7 +23,7 @@ function EditCommentForm({ imageId, setShowModalEdit, oldComment, submitted, set
       formValidationErrors.push("Comments must be more than 1 character");
     }
 
-
+  //
     setErrors(formValidationErrors);
   }, [comment]);
 
