@@ -524,12 +524,12 @@ textarea {
 .DeleteTagButton {
     cursor: pointer;
 }
-.tagSingleContainer:hover {
+/* .tagSingleContainer:hover {
     color: white;
     background-color: gray;
     transform: scale(1.2);
     transition: all .1s ease-in-out;
-}
+} */
 
 .TagsContainer {
     display: flex;

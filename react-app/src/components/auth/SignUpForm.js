@@ -27,6 +27,7 @@ const SignUpForm = () => {
     if (first_name.length > 25 || first_name.length < 2) errors.push("First name must be between 4 and 25 characters");
     if (last_name.length > 25 || last_name.length < 2) errors.push("Last name must be between 4 and 25 characters");
     if (!password.length) errors.push("Password is required");
+    if (password !== repeatPassword) errors.push("Passwords must match");
 
     setErrorValidation(errors)
 
@@ -112,6 +113,7 @@ const SignUpForm = () => {
                 name="username"
                 onChange={updateUsername}
                 value={username}
+                required={true}
                 autoComplete="username"
               ></input>
             </div>
@@ -122,6 +124,8 @@ const SignUpForm = () => {
                 name="first_name"
                 onChange={updateFirstName}
                 value={first_name}
+                autoComplete="first_name"
+                required={true}
               ></input>
             </div>
             <div className="label-input">
@@ -129,8 +133,10 @@ const SignUpForm = () => {
               <input
                 type="text"
                 name="last_name"
+                autoComplete="last_name"
                 onChange={updateLastName}
                 value={last_name}
+                required={true}
               ></input>
             </div>
             <div className="label-input">
@@ -138,8 +144,10 @@ const SignUpForm = () => {
               <input
                 type="text"
                 name="email"
+                autoComplete="email"
                 onChange={updateEmail}
                 value={email}
+                required={true}
               ></input>
             </div>
             <div className="label-input">
@@ -147,6 +155,7 @@ const SignUpForm = () => {
               <input
                 type="text"
                 name="previewImageUrl"
+                autoComplete="previewImageUrl"
                 onChange={updatePreviewImageUrl}
                 value={previewImageUrl}
               ></input>
@@ -159,6 +168,7 @@ const SignUpForm = () => {
                 onChange={updatePassword}
                 value={password}
                 autoComplete="new-password"
+                required={true}
               ></input>
             </div>
             <div className="label-input">
@@ -168,6 +178,7 @@ const SignUpForm = () => {
                 name="repeat_password"
                 onChange={updateRepeatPassword}
                 value={repeatPassword}
+                autoComplete="off"
                 required={true}
               ></input>
             </div>
