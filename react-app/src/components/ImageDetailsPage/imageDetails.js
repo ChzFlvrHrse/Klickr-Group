@@ -325,9 +325,9 @@ function ImageDetails() {
           <div className="rightMostDivImageArrayDetails">
           {/* allImagesFiltered */}
             {imageLikedByUser.length > 0 ? (
-              <i class="fa-solid fa-star" onClick={toggleLikes}></i>
+              <i class="fa-solid fa-star" id="star" onClick={toggleLikes}></i>
             ) : (
-              <i class="fa-regular fa-star" onClick={toggleLikes}></i>
+              <i class="fa-regular fa-star" id="star" onClick={toggleLikes}></i>
             )}
             <a href={allImagesArray[currentImageIndex].previewImageUrl} target="_blank" rel="noopener noreferrer" download><i class="fa-solid fa-download" title="download photo"></i></a>
             {/* <Link href={allImagesArray[currentImageIndex].previewImageUrl} download>
