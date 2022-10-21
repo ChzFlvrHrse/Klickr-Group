@@ -247,9 +247,14 @@ textarea {
     border: solid #348fdc thin;
 }
 
-#submit-container {
+.submit-containerParent {
     display: flex;
     justify-content: flex-end;
+}
+#submit-container {
+    display: flex;
+    justify-content: center;
+
 }
 
 #submit-comment {
@@ -266,6 +271,14 @@ textarea {
 #submit-comment:hover {
     opacity: .8;
     cursor: pointer;
+}
+
+#submit-container:hover {
+    transform: scale(1.1);
+}
+
+#submit-container:active {
+    transform: scale(.98);
 }
 
 /* .bottome-border-2 {

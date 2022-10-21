@@ -7,14 +7,8 @@ import DeleteImageForm from "../ImagesForms/DeleteImageForm";
 import EditCommentForm from "../Comments/EditCommentForm";
 import DeleteCommentForm from "../Comments/DeleteCommentForm";
 import { getAllUsersThunk } from "../../store/AllUsers";
-import {
-  createACommentThunk,
-  getAllCommentsThunk,
-} from "../../store/comments";
-import {
-  createLikesThunk,
-  deleteLikesThunk,
-} from "../../store/likes";
+import { createACommentThunk, getAllCommentsThunk } from "../../store/comments";
+import { createLikesThunk, deleteLikesThunk } from "../../store/likes";
 import { Modal } from "../../context/Modal";
 
 import { getImageTagsThunk } from "../../store/tags";
@@ -34,7 +28,7 @@ function ImageDetails() {
   const [previousImage, setPreviousImage] = useState(false);
   // keep track of next image
   const [nextImage, setNextImage] = useState(false);
-  const [imageState, setImageState] = useState(false)
+  const [imageState, setImageState] = useState(false);
 
   let [commDelete, setCommDelete] = useState(1);
 
@@ -57,18 +51,24 @@ function ImageDetails() {
   let owner;
   //   keep track of imageNumber in array (zero indexed)
   let filteredIndex;
-  let imageLikedByUser
-
+  let imageLikedByUser;
 
   // useEffects
   useEffect(() => {
     dispatch(getImagesThunk());
-}, [dispatch, allUsersArray, allImagesArray, showModalImageEdit, showModalImageDelete, allImagesFiltered, imageLiked]);
+  }, [
+    dispatch,
+    allUsersArray,
+    allImagesArray,
+    showModalImageEdit,
+    showModalImageDelete,
+    allImagesFiltered,
+    imageLiked,
+  ]);
 
   useEffect(() => {
     dispatch(getAllUsersThunk());
   }, [dispatch, allImagesFiltered, allImagesArray]);
-
 
   useEffect(() => {
     dispatch(getAllCommentsThunk());
@@ -87,7 +87,6 @@ function ImageDetails() {
   const tags = useSelector((state) => state.tags);
   const userId = user.id;
 
-
   // filters
   allImagesArray = Object.values(images);
   allUsersArray = Object.values(allusers);
@@ -96,15 +95,16 @@ function ImageDetails() {
     allImagesFiltered = allImagesArray.filter(
       (filteredImages, index) => filteredImages.id == id
     );
-if (allImagesArray && allImagesFiltered.length > 0) {
-  imageLikedByUser = allImagesFiltered[0].likes.filter((filteredLikes, index) => filteredLikes.userId == user.id)
-}
-
+    if (allImagesArray && allImagesFiltered.length > 0) {
+      imageLikedByUser = allImagesFiltered[0].likes.filter(
+        (filteredLikes, index) => filteredLikes.userId == user.id
+      );
+    }
   }
 
   //   find index
   if (allUsersArray && allImagesArray) {
-    filteredIndex = allImagesArray.findIndex(image => image.id == id)
+    filteredIndex = allImagesArray.findIndex((image) => image.id == id);
   }
   const tagsArray = Object.values(tags);
 
@@ -122,9 +122,8 @@ if (allImagesArray && allImagesFiltered.length > 0) {
   );
 
   let nextImageIndex = filteredIndex + 1;
-  let currentImageIndex = filteredIndex
+  let currentImageIndex = filteredIndex;
   let previousImageIndex = filteredIndex - 1;
-
 
   const userLikeId = filteredLikes[0];
   // console.log(userLikeId)
@@ -132,9 +131,11 @@ if (allImagesArray && allImagesFiltered.length > 0) {
   const toggleLikes = (e) => {
     e.preventDefault();
     if (imageLikedByUser.length == 0) {
-      dispatch(createLikesThunk(id)).then(() => setImageLiked(!imageLiked))
-    } else if (imageLikedByUser.length >= 1){
-      dispatch(deleteLikesThunk(imageLikedByUser[0].id)).then(() => setImageLiked(!imageLiked))
+      dispatch(createLikesThunk(id)).then(() => setImageLiked(!imageLiked));
+    } else if (imageLikedByUser.length >= 1) {
+      dispatch(deleteLikesThunk(imageLikedByUser[0].id)).then(() =>
+        setImageLiked(!imageLiked)
+      );
     }
   };
 
@@ -151,7 +152,6 @@ if (allImagesArray && allImagesFiltered.length > 0) {
   };
 
   let createdAtDate;
-
 
   // console.log(allImagesFiltered[0].created_at)
   // Image created_at Date formatting
@@ -190,15 +190,7 @@ if (allImagesArray && allImagesFiltered.length > 0) {
     ) {
       setPreviousImage(true);
     } else setPreviousImage(false);
-  }, [
-    dispatch,
-    previousImage,
-    nextImage,
-    allImagesArray,
-    id,
-    filteredIndex,
-  ]);
-
+  }, [dispatch, previousImage, nextImage, allImagesArray, id, filteredIndex]);
 
   // if image does not exist
   if (!allImagesFiltered.length) {
@@ -224,15 +216,15 @@ if (allImagesArray && allImagesFiltered.length > 0) {
             {/* edit modal */}
             {allImagesFiltered[0].userId == user.id ? (
               <div className="editArrowComment">
-              <i
-                onClick={() => {
-                  setShowModalImageEdit(true);
-                  setImageState(allImagesFiltered[0])
-                }}
-                className="edit-comment"
-                title="edit image"
-                class="fa-solid fa-pen-to-square"
-              ></i>
+                <i
+                  onClick={() => {
+                    setShowModalImageEdit(true);
+                    setImageState(allImagesFiltered[0]);
+                  }}
+                  className="edit-comment"
+                  title="edit image"
+                  class="fa-solid fa-pen-to-square"
+                ></i>
               </div>
             ) : (
               <></>
@@ -248,14 +240,14 @@ if (allImagesArray && allImagesFiltered.length > 0) {
             )}
             {allImagesFiltered[0].userId == user.id ? (
               <div className="editArrowComment">
-              <i
-                onClick={() => {
-                  setShowModalImageDelete(true);
-                }}
-                className="delete-comment"
-                title="delete image"
-                class="fa-solid fa-delete-left"
-              ></i>
+                <i
+                  onClick={() => {
+                    setShowModalImageDelete(true);
+                  }}
+                  className="delete-comment"
+                  title="delete image"
+                  class="fa-solid fa-delete-left"
+                ></i>
               </div>
             ) : (
               <></>
@@ -275,24 +267,25 @@ if (allImagesArray && allImagesFiltered.length > 0) {
         </div>
 
         <div className="imageContainerImageDetails">
-          {previousImage == true && allImagesArray[previousImageIndex] != undefined ? (
+          {previousImage == true &&
+          allImagesArray[previousImageIndex] != undefined ? (
             <Link
               to={`/images/${allImagesArray[previousImageIndex].id}`}
               className="previousImageClick"
-             >
+            >
               <i class="fa-solid fa-circle-arrow-left"></i>
             </Link>
           ) : (
             <i class=""></i>
           )}
           <div id="user-image-details-container">
-            <img
-              src={allImagesFiltered[0].previewImageUrl}
-              alt=""
-            />
+            <img src={allImagesFiltered[0].previewImageUrl} alt="" />
           </div>
           {nextImage == true && allImagesArray[nextImageIndex] != undefined ? (
-            <Link to={`/images/${allImagesArray[nextImageIndex].id}`} className="nextImageClick">
+            <Link
+              to={`/images/${allImagesArray[nextImageIndex].id}`}
+              className="nextImageClick"
+            >
               <i class="fa-solid fa-circle-arrow-right"></i>
             </Link>
           ) : (
@@ -325,13 +318,20 @@ if (allImagesArray && allImagesFiltered.length > 0) {
             </div>
           </div>
           <div className="rightMostDivImageArrayDetails">
-          {/* allImagesFiltered */}
+            {/* allImagesFiltered */}
             {imageLikedByUser.length > 0 ? (
               <i class="fa-solid fa-star" id="star" onClick={toggleLikes}></i>
             ) : (
               <i class="fa-regular fa-star" id="star" onClick={toggleLikes}></i>
             )}
-            <a href={allImagesArray[currentImageIndex].previewImageUrl} target="_blank" rel="noopener noreferrer" download><i class="fa-solid fa-download" title="download photo"></i></a>
+            <a
+              href={allImagesArray[currentImageIndex].previewImageUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              download
+            >
+              <i class="fa-solid fa-download" title="download photo"></i>
+            </a>
             {/* <Link href={allImagesArray[currentImageIndex].previewImageUrl} download>
               <i class="fa-solid fa-download" title="download photo"></i>
             </Link> */}
@@ -401,7 +401,7 @@ if (allImagesArray && allImagesFiltered.length > 0) {
                               )}
                               <div className="edit-delete">
                                 {singleUser.id == comment.userId &&
-                                  singleUser.id == userId ? (
+                                singleUser.id == userId ? (
                                   <i
                                     onClick={() => {
                                       setShowModalEdit(true);
@@ -416,7 +416,7 @@ if (allImagesArray && allImagesFiltered.length > 0) {
                                 )}
                                 {/* {singleUser.id == comment.userId && singleUser.id == userId ? <i onClick={async (e) => { e.preventDefault(); await dispatch(deleteACommentThunk(id, comment.id)); setCommDelete(commDelete++) }} className="delete-comment" title='delete' class="fa-solid fa-delete-left"></i> : <></>} */}
                                 {singleUser.id == comment.userId &&
-                                  singleUser.id == userId ? (
+                                singleUser.id == userId ? (
                                   <i
                                     onClick={() => {
                                       setShowModal(true);
@@ -470,10 +470,12 @@ if (allImagesArray && allImagesFiltered.length > 0) {
                 onChange={(event) => setBody(event.target.value)}
                 value={body}
               ></textarea>
-              <div id="submit-container">
-                <button type="submit" id="submit-comment">
-                  Comment
-                </button>
+              <div className="submit-containerParent">
+                <div id="submit-container">
+                  <button type="submit" id="submit-comment">
+                    Comment
+                  </button>
+                </div>
               </div>
             </form>
           </div>
@@ -526,17 +528,18 @@ if (allImagesArray && allImagesFiltered.length > 0) {
                         <div>{tag.body}</div>
                         {allImagesFiltered[0].userId == user.id ? (
                           <div className="DeleteTagButton">
-                          <i
-                            onClick={() => {
-                              setShowModalTagsDelete(true);
-                              setTagState(tag);
-                            }}
-                            className="delete-comment"
-                            id="delete-tag"
-                            title="delete tag"
-                            class="fa-solid fa-xmark"
-                          ></i></div>
-                        ) : ( 
+                            <i
+                              onClick={() => {
+                                setShowModalTagsDelete(true);
+                                setTagState(tag);
+                              }}
+                              className="delete-comment"
+                              id="delete-tag"
+                              title="delete tag"
+                              class="fa-solid fa-xmark"
+                            ></i>
+                          </div>
+                        ) : (
                           <></>
                         )}
                         {showModalTagsDelete && (

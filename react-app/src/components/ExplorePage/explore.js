@@ -67,23 +67,31 @@ const GetAllImages = () => {
 
                     {/* likes and comments section */}
                     <div className="image-likes-container">
-                     
+                    <span className="ExitCommentsSection" onClick={() => setCommentsModal(false)}>
+                            {commentsModal == true &&
+                            imageState.id == image.id ? (
+                              <div className="editArrowComment">
+                              <i class="fa-solid fa-rectangle-xmark"></i> </div>
+                            ) : (
+                              <i class=""></i>
+                            )}
+                          </span>
+
                       <div className="image-likes-section">
                         <div
                           id="star-icon-explore"
                           onClick={() => {
-                            setCommentsModal(!commentsModal);
+                            setCommentsModal(true);
                             setImageState(image);
                           }}
                         >
-                          <div className="editArrowComment">
+
                             {commentsModal == true &&
                             imageState.id == image.id ? (
                               <i class="fa-solid fa-comment"></i>
                             ) : (
-                              <i class="fa-regular fa-comment"></i>
+                              <div className="editArrowComment"><i class="fa-regular fa-comment"></i></div>
                             )}{" "}
-                          </div>
                           <div
                             className={
                               commentsModal && image.id == imageState.id
