@@ -27,14 +27,12 @@ ul.profile-list {
   flex-direction: column;
 
   position: absolute;
-  width: 11em;
+  width: 11.5em;
   height: 8.3em;
   background-color: white;
   border: 1px solid black;
-  border-radius: 2px;
   right: 3.5%;
   padding: 1rem;
-  padding-right: -3px;
   border-radius: .3rem;
 }
 
