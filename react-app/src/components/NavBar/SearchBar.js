@@ -292,41 +292,52 @@ const SearchBar = () => {
             }
           >
             {/* search return map */}
-            {/* <div className="FilteredreturnContainer">
+            <div className="FilteredreturnContainer">
               {filteredImagesArray &&
                 filteredImagesArray.map((image) => {
                   return (
                     <div key={image.id}>
                       {" "}
-                      {filteredTagsArray && filteredTagsArray.map((tag) => {
-                        return (
-                          <div className="SearchImageMappedContainer" key={tag.id}>
-
-                            <Link to={image.id == tag.imageId && tag ? `/images/${image.id}` : ""}>
-                              <img
-                                className="SearchImageIndividual"
-                                src={image.previewImageUrl}
-                                // src={image.id == tag.imageId ? image.previewImageUrl : ""}
-                                alt="preview"
-                              />
-                            </Link>
-                            <NavLink
-                              className="SearchImageNavLinkTitle"
-                              to={image.id == tag.imageId ? `/images/${image.id}` : ""}>
-                              {tag.body}
-                            </NavLink>
-                          </div>
-                        );
-                      })}
+                      {filteredTagsArray &&
+                        filteredTagsArray.map((tag) => {
+                          return (
+                            <div
+                              className="SearchImageMappedContainer"
+                              key={tag.id}
+                            >
+                              <Link
+                                to={
+                                  image.id == tag.imageId && tag
+                                    ? `/images/${image.id}`
+                                    : ""
+                                }
+                              >
+                                <img
+                                  className="SearchImageIndividual"
+                                  src={image.previewImageUrl}
+                                  // src={image.id == tag.imageId ? image.previewImageUrl : ""}
+                                  alt="preview"
+                                />
+                              </Link>
+                              <NavLink
+                                className="SearchImageNavLinkTitle"
+                                to={
+                                  image.id == tag.imageId
+                                    ? `/images/${image.id}`
+                                    : ""
+                                }
+                              >
+                                {tag.body}
+                              </NavLink>
+                            </div>
+                          );
+                        })}
                     </div>
                   );
                 })}
-            </div> */}
+            </div>
 
-
-
-
-            <div className="FilteredreturnContainer">
+            {/* <div className="FilteredreturnContainer">
               {allImagesArray &&
                 allImagesArray.map((image) => {
                   return (
@@ -355,7 +366,7 @@ const SearchBar = () => {
                     </div>
                   );
                 })}
-            </div>
+            </div> */}
           </div>
           <div
             className={
