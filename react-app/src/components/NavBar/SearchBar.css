@@ -1,18 +1,3 @@
-.nav-explore {
-  display: flex;
-  justify-content: space-between;
-  column-gap: 50px;
-  align-items: center;
-  font-size: 22px;
-  background-color: #202023;
-  position: sticky;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 5;
-  height: 64px;
-}
-
 a i {
   color: white;
   margin-right: 2rem;
