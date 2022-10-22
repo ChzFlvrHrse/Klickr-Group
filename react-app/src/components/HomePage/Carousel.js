@@ -118,26 +118,35 @@ export function CarouselSplashPage() {
                 alt="CarouselImageBackground"
               />
             </div>
-            {imageFiltered && (
-              <div
-                className={
-                  index == backgroundImageNumber
-                    ? "ActiveImageCaptionsCarousel"
-                    : "InactiveImageCaptionsCarousel"
-                }
-              >
-                <div className="BackgroundImageCarouselTitle">
-                  <NavLink className="BackgroundImageCarouselTitle" to={`/images/${imageFiltered[0].id}`}>
-                    {image.title}
-                  </NavLink>
+            <div className="ParentofCarouselCaptions">
+              
+              {imageFiltered && (
+                <div
+                  className={
+                    index == backgroundImageNumber
+                      ? "ActiveImageCaptionsCarousel"
+                      : "InactiveImageCaptionsCarousel"
+                  }
+                >
+                  <div className="BackgroundImageCarouselTitle">
+                    <NavLink
+                      className="BackgroundImageCarouselTitle"
+                      to={`/images/${imageFiltered[0].id}`}
+                    >
+                      {image.title}
+                    </NavLink>
+                  </div>
+                  <div className="BackgroundImageCarouselAuthor">
+                    <NavLink
+                      className="BackgroundImageCarouselAuthor"
+                      to={`/users/${imageFiltered[0].userId}`}
+                    >
+                      By {image.author}
+                    </NavLink>
+                  </div>
                 </div>
-                <div className="BackgroundImageCarouselAuthor">
-                  <NavLink className="BackgroundImageCarouselAuthor" to={`/users/${imageFiltered[0].userId}`}>
-                    By {image.author}
-                  </NavLink>
-                </div>
-              </div>
-            )}
+              )}
+            </div>
           </>
         );
       })}

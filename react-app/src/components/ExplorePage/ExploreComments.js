@@ -32,7 +32,7 @@ function ExploreImageComments({
   // useEffect(() => {
   //   dispatch(getImagesThunk());
   // }, [dispatch, showModalDelete, showModalEdit]);
-  console.log(commentsModal)
+
 
   // handle comment submission
   const submitComment = async (e) => {
@@ -94,6 +94,7 @@ function ExploreImageComments({
                             <div className="userContainerExploreEditDelete">
                               {comment.userId == oneUser.id &&
                               comment.userId == user.id ? (
+                                <div className="editArrowComment">
                                 <i
                                   onClick={() => {
                                     setShowModalEdit(true);
@@ -101,7 +102,7 @@ function ExploreImageComments({
                                   className="edit-comment"
                                   title="edit comment"
                                   class="fa-solid fa-pen-to-square"
-                                ></i>
+                                ></i></div>
                               ) : (
                                 ""
                               )}
@@ -120,6 +121,7 @@ function ExploreImageComments({
                               {/* delete modal */}
                               {comment.userId == oneUser.id &&
                               comment.userId == user.id ? (
+                                <div className="editArrowComment">
                                 <i
                                   onClick={() => {
                                     setShowModalDelete(true);
@@ -127,7 +129,7 @@ function ExploreImageComments({
                                   className="delete-comment"
                                   title="delete comment"
                                   class="fa-solid fa-delete-left"
-                                ></i>
+                                ></i></div>
                               ) : (
                                 ""
                               )}

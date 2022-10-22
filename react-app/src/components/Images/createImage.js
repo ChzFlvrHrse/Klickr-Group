@@ -59,10 +59,10 @@ useEffect(() => {
   useEffect(() => {
     const errors = [];
 
-    if (title.length < 1 || title.length > 49)
-      errors.push("Name must be between 1 and 49 characters");
+    if (!title)
+      errors.push("Please provide a title for image");
     if (!description) errors.push("Please provide a description");
-    if (!previewImageUrl) errors.push("Please provide a previewImage");
+    if (!previewImageUrl) errors.push("Please provide a image");
 
     return setErrors(errors);
   }, [title, description, previewImageUrl]);
@@ -120,7 +120,7 @@ useEffect(() => {
                   placeholder="Image URL"
                   value={previewImageUrl}
                   onChange={(e) => setPreviewImageUrl(e.target.value)}
-                  required
+                  // required
                 />
                 <input
                   className="preview-image-input"
@@ -128,7 +128,7 @@ useEffect(() => {
                   placeholder="Title of Image"
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
-                  required
+                  // required
                 />
                 <input
                   className="preview-image-input"
@@ -136,13 +136,13 @@ useEffect(() => {
                   placeholder="Description"
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
-                  required
+                  // required
                 />
                   <select
                     className="preview-image-input"
                     value={albumId}
                     onChange={(e) => setAlbumId(e.target.value)}
-                    required
+                    // required
                   >
                     <option selected disabled value="">
                       Select an Album...

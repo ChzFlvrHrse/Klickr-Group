@@ -1,4 +1,5 @@
 import "./HomePage.css";
+import githubIcon from "../../icons/githubIcon.png";
 import React from "react";
 import { Link } from "react-router-dom";
 import { CarouselSplashPage } from "./Carousel";
@@ -28,7 +29,7 @@ export function HomePage() {
         </div>
       </div>
       <footer>
-    <div class="footer">
+    <div class="footer-home">
       Copyright 2022. Klickr. All Rights Reserved.
     </div>
   </footer>
@@ -45,7 +46,7 @@ export function HomePage() {
             <h1 className="inspiration">Welcome Back {user.first_name}</h1>
 
             <h2 className="first-line">
-              The Flickr community is home to tens of billions of photos and
+              The Klickr community is home to tens of billions of photos and
               2 million groups.
             </h2>
 
@@ -55,12 +56,16 @@ export function HomePage() {
 
           </div>
         </div>
-      </div>
-      <footer>
-    <div class="footer">
-      Copyright 2022. Klickr. All Rights Reserved.
+  <footer className="parentFooter">
+    <div class="footer-home">
+    Copyright 2022. Klickr. All Rights Reserved.  &nbsp; &nbsp; &nbsp;
+    <img className="ourRepo" src={githubIcon} alt="ourRepo"/>
+    <div className="footer-home-wrap-containers">
+      <a className="text-for-github" href="https://github.com/ChzFlvrHrse/Klickr-Group"> https://github.com/ChzFlvrHrse/Klickr-Group</a>
     </div>
+      </div>
   </footer>
+      </div>
     </>
   );
       }

@@ -39,4 +39,9 @@
 .deleteSongButtons button:hover {
     opacity: .8;
     cursor: pointer;
+    transform: scale(1.1);
+}
+
+.deleteSongButtons button:active {
+    transform: scale(.98);
 }

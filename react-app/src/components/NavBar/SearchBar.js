@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { getAlbumsThunk } from "../../store/album";
+import { login } from '../../store/session';
+
 import { getImagesThunk } from "../../store/image";
 import { getAllUsersThunk } from "../../store/AllUsers";
 import { getAllTagsThunk } from "../../store/tags";
@@ -16,9 +18,10 @@ const SearchBar = () => {
 
   // create states to hide and unhide search results container
   const [imageResults, setImageResults] = useState(true);
+
   const [albumResults, setAlbumResults] = useState(true);
-  const [userResults, setUserResults] = useState(false);
   const [tagResults, setTagResults] = useState(false);
+  const [userResults, setUserResults] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -382,11 +385,18 @@ const SearchBar = () => {
     );
   }
   if (!user) {
+
+  const onLogin = async (e) => {
+    e.preventDefault();
+    await dispatch(login('demo@aa.io', 'password'));
+  };
+
+  if (user) {
     return (
       <>
         <div className="upper-middle">
           <input
-            className="search-barNav"
+            className="notsignedin-SB"
             type="search"
             value={searchTitle}
             placeholder={"Search for Images or Users..." || searchTitle}
@@ -397,9 +407,24 @@ const SearchBar = () => {
         <div
           className={searchTitle.length ? "SearchBarContainer" : "HiddenResult"}
         >
+          {/* search by images begins */}
+          <button
+            className="toggleResultsSearch"
+            onClick={() => {
+              setImageResults(!imageResults);
+            }}
+          >
+            {imageResults == true ? (
+              <div>Hide Image Results</div>
+            ) : (
+              <div>Show Image Results</div>
+            )}
+          </button>
           <div
             className={
-              filteredImagesArray.length && searchTitle.length
+              filteredImagesArray.length &&
+              searchTitle.length &&
+              imageResults == true
                 ? "Filteredimages-container"
                 : "HiddenResult"
             }
@@ -410,7 +435,7 @@ const SearchBar = () => {
               {filteredImagesArray &&
                 filteredImagesArray.map((image) => {
                   return (
-                    <div className="SearchImageMappedContainer" key={image.id}>
+                    <div className="SearchImageMappedContainer" key={image.id} onClick={()=> setSearchTitle("")}>
                       <Link to={`/images/${image.id}`}>
                         <img
                           className="SearchImageIndividual"
@@ -433,7 +458,9 @@ const SearchBar = () => {
           </div>
           <div
             className={
-              !filteredImagesArray.length && searchTitle !== ""
+              !filteredImagesArray.length &&
+              searchTitle !== "" &&
+              imageResults == true
                 ? "errorHandlingSearchContainer"
                 : "HiddenResult"
             }
@@ -441,9 +468,23 @@ const SearchBar = () => {
             <div className="errorhandlingSearchmessage">No Images Found</div>
           </div>
 
+          {/* search by user begins */}
+          <button
+            className="toggleResultsSearch"
+            onClick={() => {
+              setUserResults(!userResults);
+            }}
+          >
+            {userResults == true ? (
+              <div>Hide User Results</div>
+            ) : (
+              <div>Show User Results</div>
+            )}
+          </button>
           <div
             className={
-              filteredUsersArray.length && searchTitle.length
+              filteredUsersArray.length && searchTitle.length &&
+              userResults == true
                 ? "Filtereduser-container"
                 : "HiddenResult"
             }
@@ -453,12 +494,12 @@ const SearchBar = () => {
               {filteredUsersArray &&
                 filteredUsersArray.map((user) => {
                   return (
-                    <div className="SearchUserMappedContainer" key={user.id}>
-                      <NavLink to={`/users/${user.id}`}>
+                    <div className="SearchUserMappedContainer" key={user.id} onClick={()=> setSearchTitle("")}>
+                      <NavLink to={`/users/${user.id}` }>
                         <img
                           className="SearchUserImageIndividual"
                           src={user.previewImageUrl}
-                          alt="profile"
+                          alt="profile pic"
                         />
                       </NavLink>
                       <NavLink
@@ -474,7 +515,8 @@ const SearchBar = () => {
           </div>
           <div
             className={
-              !filteredUsersArray.length && searchTitle !== ""
+              !filteredUsersArray.length && searchTitle !== ""  &&
+              userResults == true
                 ? "errorHandlingSearchContainer"
                 : "HiddenResult"
             }
@@ -485,6 +527,35 @@ const SearchBar = () => {
       </>
     );
   }
-};
+  if (!user) {
+    return (
+      <>
+        <div className="upper-middle">
+          <input
+            className="search-barNav"
+            type="search"
+            value={searchTitle}
+            placeholder={"Search for Images or Users..." || searchTitle}
+            onChange={handleSubmit}
+          />
+        </div>
+        {/* search bar return container */}
+        <div
+          className={searchTitle.length ? "SearchBarContainer" : "HiddenResult"}
+        >
+            {/* search return map */}
+            <div className="FilteredreturnContainerDemo">
 
+             <div className="button">
+              <button className='loginform-bttns' onClick={onLogin}>Click here to login as Demo User
+              </button>
+            </div>
+            </div>
+
+        </div>
+      </>
+    );
+  }
+};
+}
 export default SearchBar;

@@ -80,31 +80,49 @@
 
 .user-photos-container{
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 3px;
-
+    flex-direction: row;
+    column-gap: 30px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    height: fit-content;
+    width: fit-content;
     width: 60em;
-    max-width: 60em;
     padding: 15px;
     margin-top: -10px;
     margin-bottom: 20px;
 }
 
-.user-photos-container > * {
-    flex: 1 1 auto;
+.explore-image-bttm-section {
+    display: none;
 }
-.user-singleImgContainer {
-    width: auto;
+
+.user-singleImgContainer:hover .explore-image-bttm-section {
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    height: 4rem;
+    position: absolute;
+    margin-top: -4rem;
+    z-index: 2;
+    background: linear-gradient(to top, rgba(0, 0, 0), rgba(255, 255, 255, 0));
+    flex-wrap: nowrap;
 }
 
 .user-single-img {
-    max-height:220px;
+    max-height: 200px;
     width: 100%;
-    height: auto;
-    max-width:fit-content;
-    margin-right: -10px;
-    margin-top: 5px;
+    margin-right: 10px;
+}
+
+.user-singleImgContainer:hover {
+    transform: scale(1.1);
+    transition: all .3s ease-in-out;
+}
+
+.hide {
+    width:100%;
+    margin-left: 5px;
 }
 
 .user-photo-details-container{

@@ -12,11 +12,9 @@ import { authenticate } from "./store/session";
 import TestingImages from "./components/TestingReduxState/imageTESTING";
 import TestingAlbums from "./components/TestingReduxState/albumTESTING";
 import CreateImageForm from "./components/Images/createImage";
-import TestingLikesFunctions from "./components/TestingReduxState/LikesTESTING";
-import TagsTestingFunction from "./components/TestingReduxState/TagsTESTING";
-import CommentsTestingFunction from "./components/TestingReduxState/CommentsTESTING";
 import GetAllImages from "./components/ExplorePage/explore";
 import { PageNotFound } from "./components/UnknownPage/PageNotFound";
+import { AboutDevs } from "./components/AboutDevsPage/devs";
 
 
 import ImageDetails from './components/ImageDetailsPage/imageDetails'
@@ -43,29 +41,15 @@ function App() {
         <Route path="/" exact={true}>
           <HomePage />
         </Route>
+        <Route path="/devs" exact={true}>
+          <AboutDevs />
+        </Route>
         <Route path="/explore" exact={true}>
           <GetAllImages />
-          </Route>
+        </Route>
         <Route exact path='/images/:id'>
           <ImageDetails />
         </Route>
-        {/* The following routes are for testing only */}
-        <Route path="/:albumId/albums" exact={true}>
-          <TestingAlbums />
-        </Route>
-        <Route path="/:imageId/images" exact={true}>
-          <TestingImages />
-        </Route>
-        <Route path="/:imageId/tags" exact={true}>
-          <TagsTestingFunction />
-        </Route>
-        <Route path="/:imageId/likes" exact={true}>
-          <TestingLikesFunctions />
-        </Route>
-        <Route path="/:imageId/comments" exact={true}>
-          <CommentsTestingFunction />
-        </Route>
-        {/* End of testing section */}
         <Route path="/login" exact={true}>
           <LoginForm />
         </Route>
@@ -85,8 +69,8 @@ function App() {
           <h1>My Home Page</h1>
         </ProtectedRoute>
         <Route>
-            <PageNotFound />
-          </Route>
+          <PageNotFound />
+        </Route>
       </Switch>
     </BrowserRouter>
   );

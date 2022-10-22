@@ -4,12 +4,28 @@
     column-gap: 50px;
     align-items: center;
     font-size: 22px;
-    background-color: black;
+    background-color: #202023;
     position: sticky;
     top: 0;
     left: 0;
     right: 0;
-    z-index: 3;
+    z-index: 5;
+    height: 64px;
+    width: 100%;
+}
+
+.nav-explore-userless {
+    display: flex;
+    justify-content: space-between;
+    column-gap: 50px;
+    align-items: center;
+    font-size: 22px;
+    background-color: #202023;
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 5;
     height: 64px;
     width: 100%;
 }
@@ -60,13 +76,18 @@ a i {
     cursor: pointer;
 }
 
-
+#about-bttn{
+    display: flex;
+    font-size: 16px;
+    width: 50px;
+}
 
 .ExploreButtonNav {
     font-size: 16px;
     font-weight: bold;
     color: white;
     margin-bottom: 1px;
+    width: 80px;
 }
 
 .ExploreButtonNav:hover {
@@ -92,4 +113,12 @@ justify-content: flex-end;
     display: flex;
 width: 100%;
 justify-content: center;
+}
+
+#you-link{
+    margin-right: -60px;
+}
+
+#about-us-link{
+    margin-left: -30px;
 }

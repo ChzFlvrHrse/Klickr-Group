@@ -14,7 +14,7 @@ def validation_errors_to_error_messages(validation_errors):
     errorMessages = []
     for field in validation_errors:
         for error in validation_errors[field]:
-            errorMessages.append(f'{field} : {error}')
+            errorMessages.append(f'{error}')
     return errorMessages
 
 
@@ -64,10 +64,10 @@ def sign_up():
     if form.validate_on_submit():
         user = User(
             username=form.data['username'],
-            email=form.data['email'],
             first_name=form.data['first_name'],
             last_name=form.data['last_name'],
-            previewImageUrl=form.data['previewImageUrl'] or 'https://creazilla-store.fra1.digitaloceanspaces.com/emojis/55737/grinning-face-with-big-eyes-emoji-clipart-xl.png',
+            email=form.data['email'],
+            previewImageUrl=form.data['previewImageUrl'] or "https://creazilla-store.fra1.digitaloceanspaces.com/emojis/55737/grinning-face-with-big-eyes-emoji-clipart-xl.png",
             password=form.data['password']
         )
         db.session.add(user)

@@ -2,6 +2,7 @@
     background: white;
     display:flex;
     justify-content: center;
+    margin-bottom: 10em;
 }
 
 .images-container {
@@ -9,6 +10,7 @@
     flex-direction: column;
     justify-content: center;
     max-width: 100%;
+
 }
 .images-wrapper {
     display: flex;
@@ -24,6 +26,7 @@
     margin-top: -3rem;
     box-sizing: content-box;
     width: 100%;
+    margin-bottom: 23em;
 }
 
     /* new */
@@ -32,8 +35,6 @@
     flex: 1 1 auto;
 }
 
-    /* new */
-    /* new */
 
 
 .singleImgContainer {
@@ -47,7 +48,7 @@
     max-height:220px;
     width: 100%;
     height: auto;
-    /* max-width:fit-content;/ */
+    object-fit: cover;
     margin-right: 5px;
     margin-top: 5px;
     z-index: 1;
@@ -64,7 +65,6 @@
 }
 
 .explore-title {
-    margin-top: 150px;
     font-size: 22px;
     font-weight: 300;
     padding-top: 20px;
@@ -103,7 +103,7 @@
 }
 
 .hide, .image-likes-section {
-    margin-top: 2rem;
+    margin-top: 29px;
     color: white;
     width: 100%;
 }
@@ -141,10 +141,7 @@
 
 /* comments modal */
 
-.commentBox {
 
-
-}
 
 .hiddenComment {
     display: none;
@@ -158,7 +155,7 @@
     flex-direction: row;
     width:fit-content;
     height:100%;
-    margin-top: 2rem;
+    margin-top: 1.82rem;
     color: tomato;
     width: 100%;
 }

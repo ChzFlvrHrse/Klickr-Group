@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 10%; 
+    padding-top: 10%;
 }
 .Image-Container {
     display: flex;
@@ -15,11 +15,23 @@
 
 .create-image-button {
     color: white;
-    background-color: rgb(36, 98, 204);
+    background-color: #348fdc;
     border-radius: .4em;
     height: 35px;
     width: 98%;
-    margin-left: 20px
+    margin-left: 20px;
+    cursor: pointer;
+}
+
+.create-image-button:hover {
+    transform: scale(1.1);
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+.create-image-button:active {
+    transform: scale(.98);
+    cursor: pointer;
 }
 
 .image-input {
@@ -39,9 +51,9 @@
     padding-top: 10px;
     padding-left: 5px;
     margin: 10px;
-    
+
 }
-.header-message { 
+.header-message {
     margin-left: 3rem;
     color: white;
     font-weight: 400;
@@ -49,16 +61,23 @@
     margin-bottom: -5px;;
 }
 
-.header-message3{
-    font-weight: 200;
-    font-size: 20px;
+
+.message-upload{
     border: 2px solid rgb(251, 77, 106);
     background-color: rgb(41, 40, 40);
+    height:3rem;
+
+    font-weight: 200;
+    font-size: 20px;
     color: white;
     margin-left: 65px;
-    width:35rem;
+    width: 40rem;
     display:flex;
     justify-content: center;
+
+    padding-top: 25px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .image-bttn{
@@ -71,6 +90,8 @@
     background-color: rgb(41, 40, 40);
 }
 
-
-
-
+.upload-img-errors-list{
+    color: red;
+    list-style: none;
+    padding-top: 10px;
+}

@@ -166,13 +166,27 @@ def imageLikes(imageId):
 @image_routes.route('/<int:imageId>/likes/new', methods=["POST"])
 @login_required
 def postLike(imageId):
-    newLike = Like(
-    userId=current_user.id,
-    imageId=imageId,
-    )
-    db.session.add(newLike)
-    db.session.commit()
-    return newLike.to_dict()
+   
+        like = Like.query.filter_by(imageId=imageId, userId=current_user.id).first()
+        if like:
+            db.session.delete(like)
+            db.session.commit()
+            return like.to_dict()
+        else:
+            new_like = Like(
+            userId=current_user.id,
+            imageId=imageId
+        )
+        db.session.add(new_like)
+        db.session.commit()
+        return new_like.to_dict()
+    # newLike = Like(
+    # userId=current_user.id,
+    # imageId=imageId,
+    # )
+    # db.session.add(newLike)
+    # db.session.commit()
+    # return newLike.to_dict()
 
 #Delete a comment
 @image_routes.route('/<int:imageId>/likes/<int:id>/delete', methods=['DELETE'])

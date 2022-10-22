@@ -25,17 +25,17 @@ function DeleteImageForm({setShowModal, image }) {
       <form className="DeleteComment-inner" onSubmit={handleSubmit2} autoComplete="off">
         <h4 id="statement">Warning! This will permanently remove the image.</h4>
         <div></div>
-        <h5 id="assurance">Are you sure you want to delete?</h5>
-        <div className="deleteSongButtons">
+        <h5 id="assurance">Are you sure you want to delete this image?</h5>
+        <div className="deleteImageButtons">
           <button
-            className="submitDeleteComment"
+            className="submitDeleteImage"
             onClick={handleSubmit}
             type="submit"
           >
-            Delete image
+            Delete
           </button>
           <button
-            className="cancelDeleteComment"
+            className="cancelDeleteImage"
             onClick={() => setShowModal(false)}
           >
             Cancel

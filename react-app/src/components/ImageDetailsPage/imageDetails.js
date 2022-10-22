@@ -1,49 +1,46 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams, Link, useHistory } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { getImagesThunk } from "../../store/image";
 import EditImageForm from "../ImagesForms/EditImageForm";
 import DeleteImageForm from "../ImagesForms/DeleteImageForm";
 import EditCommentForm from "../Comments/EditCommentForm";
 import DeleteCommentForm from "../Comments/DeleteCommentForm";
 import { getAllUsersThunk } from "../../store/AllUsers";
-import {
-  createACommentThunk,
-  getAllCommentsThunk,
-} from "../../store/comments";
-import {
-  getImageLikesThunk,
-  createLikesThunk,
-  deleteLikesThunk,
-} from "../../store/likes";
+import { createACommentThunk, getAllCommentsThunk } from "../../store/comments";
+import { createLikesThunk, deleteLikesThunk } from "../../store/likes";
 import { Modal } from "../../context/Modal";
-
+import { ImageModal } from "../../context/Modal copy";
+import { useHistory } from "react-router-dom";
 import { getImageTagsThunk } from "../../store/tags";
 import CreateTagForm from "../Tags/CreateTagForm";
-import EditTagForm from "../Tags/EditTagForm";
 import DeleteTagForm from "../Tags/DeleteTagForm";
-
+import klickrLogo from "../../icons/Klickr-logo.png";
+import { authenticate } from "../../store/session";
+import { NavLink } from "react-router-dom";
 import "./imageDetails.css";
 
 function ImageDetails() {
-  const history = useHistory();
+  const history = useHistory()
   const [showModal, setShowModal] = useState(false);
+  const [imageLiked, setImageLiked] = useState(false);
   const [showModalEdit, setShowModalEdit] = useState(false);
   const [commentState, setCommentState] = useState({});
+  const [loaded, setLoaded] = useState(false);
   const [body, setBody] = useState("");
   // keep track of previous image
   const [previousImage, setPreviousImage] = useState(false);
   // keep track of next image
   const [nextImage, setNextImage] = useState(false);
-  const [imageState, setImageState] = useState(false)
+  const [imageState, setImageState] = useState(false);
 
-  let [commDelete, setCommDelete] = useState(1);
+  let [commDelete] = useState(1);
 
   const [showModalImageDelete, setShowModalImageDelete] = useState(false);
   const [showModalImageEdit, setShowModalImageEdit] = useState(false);
 
   const [showModalTagsDelete, setShowModalTagsDelete] = useState(false);
-  const [showModalTagsEdit, setShowModalTagsEdit] = useState(false);
+  const [showModalTagsEdit] = useState(false);
   // to keep track of individual tags
   const [tagState, setTagState] = useState(false);
 
@@ -58,17 +55,34 @@ function ImageDetails() {
   let owner;
   //   keep track of imageNumber in array (zero indexed)
   let filteredIndex;
+  let imageLikedByUser;
 
-
+    // redux states
+    const images = useSelector((state) => state.image);
+    const allusers = useSelector((state) => state.allUsers);
+    const user = useSelector((state) => state.session.user);
+    const likes = useSelector((state) => state.likes);
+    const comment = useSelector((state) => state.comments);
+    const tags = useSelector((state) => state.tags);
   // useEffects
+
+
   useEffect(() => {
     dispatch(getImagesThunk());
-  }, [dispatch, allUsersArray, allImagesArray, showModalImageEdit, showModalImageDelete]);
+  }, [
+    dispatch,
+    allUsersArray,
+    allImagesArray,
+    showModalImageEdit,
+    showModalImageDelete,
+    allImagesFiltered,
+    imageLiked,
+    user, allImagesFiltered, id, images
+  ]);
 
   useEffect(() => {
     dispatch(getAllUsersThunk());
   }, [dispatch, allImagesFiltered, allImagesArray]);
-
 
   useEffect(() => {
     dispatch(getAllCommentsThunk());
@@ -78,28 +92,31 @@ function ImageDetails() {
     dispatch(getImageTagsThunk(id));
   }, [dispatch, tagState, showModalTagsDelete, showModalTagsEdit, id]);
 
-  // redux states
-  const images = useSelector((state) => state.image);
-  const allusers = useSelector((state) => state.allUsers);
-  const user = useSelector((state) => state.session.user);
-  const likes = useSelector((state) => state.likes);
-  const comment = useSelector((state) => state.comments);
-  const tags = useSelector((state) => state.tags);
-  const userId = user.id;
+
+let userId
+
+if(user){
+  userId = user.id
+}
 
   // filters
   allImagesArray = Object.values(images);
   allUsersArray = Object.values(allusers);
 
-  if (allUsersArray && allImagesArray) {
+  if (allUsersArray && allImagesArray && user) {
     allImagesFiltered = allImagesArray.filter(
       (filteredImages, index) => filteredImages.id == id
     );
+    if (allImagesArray && allImagesFiltered.length > 0 && user) {
+      imageLikedByUser = allImagesFiltered[0].likes.filter(
+        (filteredLikes, index) => filteredLikes.userId == user.id
+      );
+    }
   }
 
-//   find index
+  //   find index
   if (allUsersArray && allImagesArray) {
-    filteredIndex = allImagesArray.findIndex(image => image.id == id)
+    filteredIndex = allImagesArray.findIndex((image) => image.id == id);
   }
   const tagsArray = Object.values(tags);
 
@@ -117,7 +134,7 @@ function ImageDetails() {
   );
 
   let nextImageIndex = filteredIndex + 1;
-  let currentImageIndex = filteredIndex
+  let currentImageIndex = filteredIndex;
   let previousImageIndex = filteredIndex - 1;
 
   const userLikeId = filteredLikes[0];
@@ -125,10 +142,12 @@ function ImageDetails() {
   // toggle likes on and off (post and delete)
   const toggleLikes = (e) => {
     e.preventDefault();
-    if (!filteredLikes.length) {
-      dispatch(createLikesThunk(id));
-    } else {
-      dispatch(deleteLikesThunk(userLikeId.id));
+    if (imageLikedByUser.length == 0) {
+      dispatch(createLikesThunk(id)).then(() => setImageLiked(!imageLiked));
+    } else if (imageLikedByUser.length >= 1) {
+      dispatch(deleteLikesThunk(imageLikedByUser[0].id)).then(() =>
+        setImageLiked(!imageLiked)
+      );
     }
   };
 
@@ -146,20 +165,20 @@ function ImageDetails() {
 
   let createdAtDate;
 
-
   // console.log(allImagesFiltered[0].created_at)
   // Image created_at Date formatting
-  if (allImagesFiltered[0]) {
-    const createdAtObject = allImagesFiltered[0].created_at;
+  if (user && allImagesArray) {
+
+    if (allImagesFiltered[0]) {
+      const createdAtObject = allImagesFiltered[0].created_at;
     const createdAtString = JSON.stringify(createdAtObject);
     const date = createdAtString.slice(5, 8);
     const month = createdAtString.slice(9, 12);
     const year = createdAtString.slice(13, 17);
     createdAtDate = `${month} ${date}, ${year}`;
-    // console.log(createdAtDate)
   }
-
-  if (allUsersArray.length && allImagesArray.length) {
+}
+  if (allUsersArray.length && allImagesArray.length && allImagesFiltered.length > 0) {
     imageOwner = allUsersArray.filter(
       (user) => user.id == allImagesFiltered[0].userId
     );
@@ -184,25 +203,29 @@ function ImageDetails() {
     ) {
       setPreviousImage(true);
     } else setPreviousImage(false);
-  }, [
-    dispatch,
-    previousImage,
-    nextImage,
-    allImagesArray,
-    id,
-    filteredIndex,
-  ]);
+  }, [dispatch, previousImage, nextImage, allImagesArray, id, filteredIndex]);
 
-  // if image does not exist
-  if (!allImagesFiltered.length) {
+
+  // useEffect(() => {
+  //   (async () => {
+  //     await dispatch(authenticate());
+  //     setLoaded(true);
+  //   })();
+  // }, [dispatch]);
+
+  // if (!loaded) {
+  //   return null;
+  // }
+
+  if (!user) {
     return (
       <>
-        <div>Sorry this image does not exist!</div>
+        <div>{history.push('/404')}</div>
       </>
     );
   }
 
-  //   else return everything
+else if (allImagesFiltered.length  && allImagesArray && user && allUsersArray) {
   return (
     <>
       <div id="details-image">
@@ -216,47 +239,51 @@ function ImageDetails() {
           <div className="EditDeleteImageSection">
             {/* edit modal */}
             {allImagesFiltered[0].userId == user.id ? (
-              <i
-                onClick={() => {
-                  setShowModalImageEdit(true);
-                  setImageState(allImagesFiltered[0])
-                }}
-                className="edit-comment"
-                title="edit image"
-                class="fa-solid fa-pen-to-square"
-              ></i>
+              <div className="editArrowComment">
+                <i
+                  onClick={() => {
+                    setShowModalImageEdit(true);
+                    setImageState(allImagesFiltered[0]);
+                  }}
+                  className="edit-comment"
+                  title="edit image"
+                  class="fa-solid fa-pen-to-square"
+                ></i>
+              </div>
             ) : (
               <></>
             )}
             {showModalImageEdit && (
-              <Modal onClose={() => setShowModalImageEdit(false)}>
+              <ImageModal onClose={() => setShowModalImageEdit(false)}>
                 <EditImageForm
                   imageId={id}
                   setShowModalEdit={setShowModalImageEdit}
                   oldImage={imageState}
                 />
-              </Modal>
+              </ImageModal>
             )}
             {allImagesFiltered[0].userId == user.id ? (
-              <i
-                onClick={() => {
-                  setShowModalImageDelete(true);
-                }}
-                className="delete-comment"
-                title="delete image"
-                class="fa-solid fa-delete-left"
-              ></i>
+              <div className="editArrowComment">
+                <i
+                  onClick={() => {
+                    setShowModalImageDelete(true);
+                  }}
+                  className="delete-comment"
+                  title="delete image"
+                  class="fa-solid fa-delete-left"
+                ></i>
+              </div>
             ) : (
               <></>
             )}
             {showModalImageDelete && (
-              <Modal onClose={() => setShowModalImageDelete(false)}>
+              <ImageModal onClose={() => setShowModalImageDelete(false)}>
                 <DeleteImageForm
                   imageId={id}
                   setShowModal={setShowModalImageDelete}
                   image={allImagesFiltered[0]}
                 />
-              </Modal>
+              </ImageModal>
             )}
 
             {/* delete modal */}
@@ -264,7 +291,8 @@ function ImageDetails() {
         </div>
 
         <div className="imageContainerImageDetails">
-          {previousImage == true && allImagesArray[previousImageIndex] != undefined? (
+          {previousImage == true &&
+          allImagesArray[previousImageIndex] != undefined ? (
             <Link
               to={`/images/${allImagesArray[previousImageIndex].id}`}
               className="previousImageClick"
@@ -274,22 +302,21 @@ function ImageDetails() {
           ) : (
             <i class=""></i>
           )}
-          <div id="user-image">
-            <img
-              id="user-imageDetails"
-              src={allImagesFiltered[0].previewImageUrl}
-              alt=""
-            />
+          <div id="user-image-details-container">
+            <img src={allImagesFiltered[0].previewImageUrl} alt="" />
           </div>
-          {nextImage == true && allImagesArray[nextImageIndex] != undefined? (
-            <Link to={`/images/${allImagesArray[nextImageIndex].id}`} className="nextImageClick">
+          {nextImage == true && allImagesArray[nextImageIndex] != undefined ? (
+            <Link
+              to={`/images/${allImagesArray[nextImageIndex].id}`}
+              className="nextImageClick"
+            >
               <i class="fa-solid fa-circle-arrow-right"></i>
             </Link>
           ) : (
             <i class=""></i>
           )}
         </div>
-        <div id="star-like">
+        <div className="img-scoll-like-container" id="star-like">
           {/* use this div to center next images */}
           <div className="leftMostDivImageArrayDetails"></div>
           {/* use this div to center next images */}
@@ -315,19 +342,28 @@ function ImageDetails() {
             </div>
           </div>
           <div className="rightMostDivImageArrayDetails">
-            {filteredLikes.length ? (
-              <i class="fa-solid fa-star" onClick={toggleLikes}></i>
+            {/* allImagesFiltered */}
+            {imageLikedByUser.length > 0 ? (
+              <i class="fa-solid fa-star" id="star" onClick={toggleLikes}></i>
             ) : (
-              <i class="fa-regular fa-star" onClick={toggleLikes}></i>
+              <i class="fa-regular fa-star" id="star" onClick={toggleLikes}></i>
             )}
-            <Link to="/upload">
-              <i class="fa-solid fa-download" title="upload photo"></i>
-            </Link>
+            <a
+              href={allImagesArray[currentImageIndex].previewImageUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              download
+            >
+              <i class="fa-solid fa-download" title="download photo"></i>
+            </a>
+            {/* <Link href={allImagesArray[currentImageIndex].previewImageUrl} download>
+              <i class="fa-solid fa-download" title="download photo"></i>
+            </Link> */}
           </div>
         </div>
       </div>
       <div id="image-info">
-        <div>
+        <div className="LeftSideContainerDetails">
           <div className="owner-info-container">
             <div className="owner-profile-img-name">
               {owner && (
@@ -458,10 +494,12 @@ function ImageDetails() {
                 onChange={(event) => setBody(event.target.value)}
                 value={body}
               ></textarea>
-              <div id="submit-container">
-                <button type="submit" id="submit-comment">
-                  Comment
-                </button>
+              <div className="submit-containerParent">
+                <div id="submit-container">
+                  <button type="submit" id="submit-comment">
+                    Comment
+                  </button>
+                </div>
               </div>
             </form>
           </div>
@@ -469,7 +507,7 @@ function ImageDetails() {
         <div className="RightSideContainerDetails">
           <div className="topRightSideContainerDetails">
             <div id="faves">
-              {likesArray.length}
+              {allImagesFiltered[0].likes.length}
               <div className="tag">faves</div>
             </div>
             <div id="comment-talley">
@@ -479,68 +517,72 @@ function ImageDetails() {
             <div id="date">Taken on {`${createdAtDate}`}</div>
           </div>
           <div className="bottom-border"></div>
+          <h4 className="TagsHeader">Tags</h4>
           <div className="bottomRightSideContainerDetails">
-            <h4 className="TagsHeader">Tags</h4>
+            <div className="TagsContainer">
+              {tagsArray &&
+                tagsArray.map((tag, index) => {
+                  return (
+                    <div key={tag.id}>
+                      <div className="tagSingleContainer">
+                        {/* {allImagesFiltered[0].userId == user.id ? (
+                          <i
+                            onClick={() => {
+                              setShowModalTagsEdit(true);
+                              setTagState(tag);
+                            }}
+                            className="edit-comment"
+                            title="edit tag"
+                            class="fa-solid fa-pen-to-square"
+                          ></i>
+                        ) : (
+                          <></>
+                        )}
+                        {showModalTagsEdit && (
+                          <Modal onClose={() => setShowModalTagsEdit(false)}>
+                            <EditTagForm
+                              imageId={id}
+                              userId={userId}
+                              setShowModalEdit={setShowModalTagsEdit}
+                              oldTag={tagState}
+                            />
+                          </Modal>
+                        )} */}
 
-            {tagsArray &&
-              tagsArray.map((tag, index) => {
-                return (
-                  <div key={tag.id} className="TagsContainer">
-                    <div className="tagSingleContainer">
-                      {/* edit modal */}
-                      {allImagesFiltered[0].userId == user.id ? (
-                        <i
-                          onClick={() => {
-                            setShowModalTagsEdit(true);
-                            setTagState(tag);
-                          }}
-                          className="edit-comment"
-                          title="edit tag"
-                          class="fa-solid fa-pen-to-square"
-                        ></i>
-                      ) : (
-                        <></>
-                      )}
-                      {showModalTagsEdit && (
-                        <Modal onClose={() => setShowModalTagsEdit(false)}>
-                          <EditTagForm
-                            imageId={id}
-                            userId={userId}
-                            setShowModalEdit={setShowModalTagsEdit}
-                            oldTag={tagState}
-                          />
-                        </Modal>
-                      )}
+                        <div>{tag.body}</div>
+                        {allImagesFiltered[0].userId == user.id ? (
+                          <div className="DeleteTagButton">
+                            <i
+                              onClick={() => {
+                                setShowModalTagsDelete(true);
+                                setTagState(tag);
+                              }}
+                              className="delete-comment"
+                              id="delete-tag"
+                              title="delete tag"
+                              class="fa-solid fa-xmark"
+                            ></i>
+                          </div>
+                        ) : (
+                          <></>
+                        )}
+                        {showModalTagsDelete && (
+                          <Modal onClose={() => setShowModalTagsDelete(false)}>
+                            <DeleteTagForm
+                              imageId={id}
+                              setShowModal={setShowModalTagsDelete}
+                              tag={tagState}
+                            />
+                          </Modal>
+                        )}
 
-                      <div>{tag.body}</div>
-                      {allImagesFiltered[0].userId == user.id ? (
-                        <i
-                          onClick={() => {
-                            setShowModalTagsDelete(true);
-                            setTagState(tag);
-                          }}
-                          className="delete-comment"
-                          title="delete tag"
-                          class="fa-solid fa-delete-left"
-                        ></i>
-                      ) : (
-                        <></>
-                      )}
-                      {showModalTagsDelete && (
-                        <Modal onClose={() => setShowModalTagsDelete(false)}>
-                          <DeleteTagForm
-                            imageId={id}
-                            setShowModal={setShowModalTagsDelete}
-                            tag={tagState}
-                          />
-                        </Modal>
-                      )}
-
-                      {/* delete modal */}
+                        {/* delete modal */}
+                      </div>
                     </div>
-                  </div>
-                );
-              })}
+                  );
+                })}
+            </div>
+
             {allImagesFiltered[0].userId == user.id && (
               <CreateTagForm userId={userId} imageId={id} />
             )}
@@ -550,6 +592,30 @@ function ImageDetails() {
       </div>
     </>
   );
+}
+ // if image does not exist
+
+else if (!allImagesFiltered.length && allImagesArray && allUsersArray && user) {
+  return (
+    <>
+      <div className="login-containerPNF">
+      <div className="inner-loginPNF">
+        <div id="login-bannerPNF">
+          <div id="circles-containerPNF">
+            <img src={klickrLogo} alt="" id="circlesPNF"></img>
+          </div>
+          <h4 id="to-klickr1">Image Not Found</h4>
+          <div className="linkerror">
+            <NavLink to="/" className='linkerrorText'>Click here to go home</NavLink>
+          </div>
+        </div>
+      </div>
+    </div>
+    </>
+  );
+
+}
+
 }
 
 export default ImageDetails;
