@@ -153,7 +153,8 @@ const SearchBar = () => {
           </div>
           <div
             className={
-              !filteredImagesArray.length && searchTitle !== ""
+              !filteredImagesArray.length && searchTitle !== "" &&
+              imageResults == true
                 ? "errorHandlingSearchContainer"
                 : "HiddenResult"
             }
@@ -209,7 +210,8 @@ const SearchBar = () => {
           </div>
           <div
             className={
-              !filteredAlbumsArray.length && searchTitle !== ""
+              !filteredAlbumsArray.length && searchTitle !== "" &&
+              albumResults == true
                 ? "errorHandlingSearchContainer"
                 : "HiddenResult"
             }
@@ -265,7 +267,8 @@ const SearchBar = () => {
           </div>
           <div
             className={
-              !filteredUsersArray.length && searchTitle !== ""
+              !filteredUsersArray.length && searchTitle !== "" &&
+              userResults == true
                 ? "errorHandlingSearchContainer"
                 : "HiddenResult"
             }
@@ -373,7 +376,8 @@ const SearchBar = () => {
           </div>
           <div
             className={
-              !filteredUsersArray.length && searchTitle !== ""
+              !filteredTagsArray.length && searchTitle !== "" &&
+              tagResults == true
                 ? "errorHandlingSearchContainer"
                 : "HiddenResult"
             }
