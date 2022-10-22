@@ -6,6 +6,7 @@ import NatePic from '../../icons/Nate-Profile-Image.jpeg'
 import defaultPic from '../../icons/default-profile-image.jpeg'
 import githubIcon from '../../icons/githubIcon.png'
 import linkedIcon from '../../icons/linkedin-icon.png'
+import KeanenPic from '../../icons/Keanen Selfie.jpg'
 
 export function AboutDevs() {
     return (
@@ -56,7 +57,7 @@ export function AboutDevs() {
                     </div>
                     <div className="member-container">
                         <div className="member-pic-name">
-                            <img className="dev-profile-pic" src={defaultPic}></img>
+                            <img className="dev-profile-pic" src={KeanenPic}></img>
                             <div className="dev-name">Keanen Bafekr</div>
                         </div>
                         <div className="dev-info-contatiner">
