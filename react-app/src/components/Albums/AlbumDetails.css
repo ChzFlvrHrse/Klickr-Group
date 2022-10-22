@@ -581,3 +581,21 @@ textarea {
     column-gap: 50px;
     color: white;
 }
+.ImageIndividualContainerAlbums {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    height: 100%;
+    width: 100%;
+}
+.imageDetailsforAlbum {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    row-gap: 10px;
+}
+
+.imageTitleAlbums {
+    font-weight: bold;
+    color: black;
+}

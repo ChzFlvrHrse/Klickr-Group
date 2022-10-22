@@ -13,7 +13,7 @@ function DeleteAlbumForm({setShowModal, album }) {
     e.preventDefault();
     await dispatch(deleteAlbumThunk(album.id));
     setShowModal(false);
-    // history.push('/explore')
+    history.push('/explore')
   };
   const handleSubmit2 = async (e) => {
     e.preventDefault();
