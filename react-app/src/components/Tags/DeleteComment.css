@@ -38,7 +38,24 @@
     width: 7rem
 }
 
-.deleteTagButtons button:hover {
+.submitDeleteComment:hover{
     opacity: .8;
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+.cancelDeleteComment:hover {
+    opacity: .8;
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+.submitDeleteComment:active{
+    transform: scale(.98);
+    cursor: pointer;
+}
+
+.cancelDeleteComment:active{
+    transform: scale(.98);
     cursor: pointer;
 }
