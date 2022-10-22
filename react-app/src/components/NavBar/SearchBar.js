@@ -88,9 +88,6 @@ const SearchBar = () => {
     setSearchTitle(e.target.value);
   };
 
-  console.log(allTagsArray);
-  console.log(filteredTagsArray);
-
   if (user) {
     return (
       <>
@@ -136,7 +133,11 @@ const SearchBar = () => {
               {filteredImagesArray &&
                 filteredImagesArray.map((image) => {
                   return (
-                    <div className="SearchImageMappedContainer" key={image.id}>
+                    <div
+                      className="SearchImageMappedContainer"
+                      key={image.id}
+                      onClick={() => setSearchTitle("")}
+                    >
                       <Link to={`/images/${image.id}`}>
                         <img
                           className="SearchImageIndividual"
@@ -194,7 +195,11 @@ const SearchBar = () => {
               {filteredAlbumsArray &&
                 filteredAlbumsArray.map((album) => {
                   return (
-                    <div className="SearchImageMappedContainer" key={album.id}>
+                    <div
+                      className="SearchImageMappedContainer"
+                      key={album.id}
+                      onClick={() => setSearchTitle("")}
+                    >
                       <Link to={`/albums/${album.id}`}>
                         <img
                           className="SearchImageIndividual"
@@ -252,7 +257,11 @@ const SearchBar = () => {
               {filteredUsersArray &&
                 filteredUsersArray.map((user) => {
                   return (
-                    <div className="SearchImageMappedContainer" key={user.id}>
+                    <div
+                      className="SearchImageMappedContainer"
+                      key={user.id}
+                      onClick={() => setSearchTitle("")}
+                    >
                       <Link to={`/users/${user.id}`}>
                         <img
                           className="SearchImageIndividual"
@@ -315,41 +324,44 @@ const SearchBar = () => {
                         allImagesArray.map((image) => {
                           return (
                             <>
-                            {image.id == tag.imageId ?
-                              <div
-                                className="SearchImageMappedContainer"
-                                key={image.id == tag.imageId ? image.id : ""}
-                              >
-                                <Link
-                                  to={
-                                    image.id == tag.imageId
-                                      ? `/images/${image.id}`
-                                      : ""
-                                  }
+                              {image.id == tag.imageId ? (
+                                <div
+                                  className="SearchImageMappedContainer"
+                                  key={image.id == tag.imageId ? image.id : ""}
+                                  onClick={() => setSearchTitle("")}
                                 >
-                                  <img
-                                    className="SearchImageIndividual"
-                                    // src={image.previewImageUrl}
-                                    src={
+                                  <Link
+                                    to={
                                       image.id == tag.imageId
-                                        ? image.previewImageUrl
+                                        ? `/images/${image.id}`
                                         : ""
                                     }
-                                    alt="preview"
-                                  />
-                                </Link>
-                                <NavLink
-                                  className="SearchImageNavLinkTitle"
-                                  to={
-                                    image.id == tag.imageId
-                                      ? `/images/${image.id}`
-                                      : ""
-                                  }
-                                >
-                                  {tag.body}
-                                </NavLink>
-                              </div>
-                              : ""}
+                                  >
+                                    <img
+                                      className="SearchImageIndividual"
+                                      // src={image.previewImageUrl}
+                                      src={
+                                        image.id == tag.imageId
+                                          ? image.previewImageUrl
+                                          : ""
+                                      }
+                                      alt="preview"
+                                    />
+                                  </Link>
+                                  <NavLink
+                                    className="SearchImageNavLinkTitle"
+                                    to={
+                                      image.id == tag.imageId
+                                        ? `/images/${image.id}`
+                                        : ""
+                                    }
+                                  >
+                                    {tag.body}
+                                  </NavLink>
+                                </div>
+                              ) : (
+                                ""
+                              )}
                             </>
                           );
                         })}
@@ -373,160 +385,12 @@ const SearchBar = () => {
       </>
     );
   }
+
   if (!user) {
     const onLogin = async (e) => {
       e.preventDefault();
       await dispatch(login("demo@aa.io", "password"));
     };
-
-    if (user) {
-      return (
-        <>
-          <div className="upper-middle">
-            <input
-              className="notsignedin-SB"
-              type="search"
-              value={searchTitle}
-              placeholder={"Search for Images or Users..." || searchTitle}
-              onChange={handleSubmit}
-            />
-          </div>
-          {/* search bar return container */}
-          <div
-            className={
-              searchTitle.length ? "SearchBarContainer" : "HiddenResult"
-            }
-          >
-            {/* search by images begins */}
-            <button
-              className="toggleResultsSearch"
-              onClick={() => {
-                setImageResults(!imageResults);
-              }}
-            >
-              {imageResults == true ? (
-                <div>Hide Image Results</div>
-              ) : (
-                <div>Show Image Results</div>
-              )}
-            </button>
-            <div
-              className={
-                filteredImagesArray.length &&
-                searchTitle.length &&
-                imageResults == true
-                  ? "Filteredimages-container"
-                  : "HiddenResult"
-              }
-            >
-              {/* search return map */}
-              <div className="FilteredreturnContainer">
-                {/* <div > */}
-                {filteredImagesArray &&
-                  filteredImagesArray.map((image) => {
-                    return (
-                      <div
-                        className="SearchImageMappedContainer"
-                        key={image.id}
-                        onClick={() => setSearchTitle("")}
-                      >
-                        <Link to={`/images/${image.id}`}>
-                          <img
-                            className="SearchImageIndividual"
-                            src={image.previewImageUrl}
-                            alt="preview"
-                            // onClick={() => redirect to image page))}
-                          />
-                        </Link>
-                        <NavLink
-                          className="SearchImageNavLinkTitle"
-                          to={`/images/${image.id}`}
-                        >
-                          {image.title}
-                        </NavLink>
-                      </div>
-                    );
-                  })}
-                {/* </div> */}
-              </div>
-            </div>
-            <div
-              className={
-                !filteredImagesArray.length &&
-                searchTitle !== "" &&
-                imageResults == true
-                  ? "errorHandlingSearchContainer"
-                  : "HiddenResult"
-              }
-            >
-              <div className="errorhandlingSearchmessage">No Images Found</div>
-            </div>
-
-            {/* search by user begins */}
-            <button
-              className="toggleResultsSearch"
-              onClick={() => {
-                setUserResults(!userResults);
-              }}
-            >
-              {userResults == true ? (
-                <div>Hide User Results</div>
-              ) : (
-                <div>Show User Results</div>
-              )}
-            </button>
-            <div
-              className={
-                filteredUsersArray.length &&
-                searchTitle.length &&
-                userResults == true
-                  ? "Filtereduser-container"
-                  : "HiddenResult"
-              }
-            >
-              {/* search return map */}
-              <div className="FilteredUserReturnContainer">
-                {filteredUsersArray &&
-                  filteredUsersArray.map((user) => {
-                    return (
-                      <div
-                        className="SearchUserMappedContainer"
-                        key={user.id}
-                        onClick={() => setSearchTitle("")}
-                      >
-                        <NavLink to={`/users/${user.id}`}>
-                          <img
-                            className="SearchUserImageIndividual"
-                            src={user.previewImageUrl}
-                            alt="profile pic"
-                          />
-                        </NavLink>
-                        <NavLink
-                          className="SearchImageNavLinkTitle"
-                          to={`/users/${user.id}`}
-                        >
-                          {user.username}
-                        </NavLink>
-                      </div>
-                    );
-                  })}
-              </div>
-            </div>
-            <div
-              className={
-                !filteredUsersArray.length &&
-                searchTitle !== "" &&
-                userResults == true
-                  ? "errorHandlingSearchContainer"
-                  : "HiddenResult"
-              }
-            >
-              <div className="errorhandlingSearchmessage">No Users Found</div>
-            </div>
-          </div>
-        </>
-      );
-    }
     if (!user) {
       return (
         <>
