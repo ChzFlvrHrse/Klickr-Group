@@ -35,11 +35,14 @@ NavBar = () => {
           <NavLink to="/">
             <img className="logo" src={klickrImage} alt="logo"/>
           </NavLink>
-          <NavLink className="ExploreButtonNav" to={`/users/${user.id}`}>
+          <NavLink  id="you-link" className="ExploreButtonNav" to={`/users/${user.id}`}>
             You
           </NavLink>
           <NavLink className="ExploreButtonNav" to="/explore">
             Explore
+          </NavLink>
+          <NavLink id="about-us-link" className="ExploreButtonNav" to="/devs">
+            About Us
           </NavLink>
         </div>
         <div className="loggedInNav">
