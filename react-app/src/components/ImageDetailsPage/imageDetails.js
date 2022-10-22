@@ -16,6 +16,7 @@ import { getImageTagsThunk } from "../../store/tags";
 import CreateTagForm from "../Tags/CreateTagForm";
 import DeleteTagForm from "../Tags/DeleteTagForm";
 import klickrLogo from "../../icons/Klickr-logo.png";
+import { authenticate } from "../../store/session";
 import { NavLink } from "react-router-dom";
 import "./imageDetails.css";
 
@@ -25,6 +26,7 @@ function ImageDetails() {
   const [imageLiked, setImageLiked] = useState(false);
   const [showModalEdit, setShowModalEdit] = useState(false);
   const [commentState, setCommentState] = useState({});
+  const [loaded, setLoaded] = useState(false);
   const [body, setBody] = useState("");
   // keep track of previous image
   const [previousImage, setPreviousImage] = useState(false);
@@ -63,6 +65,8 @@ function ImageDetails() {
     const comment = useSelector((state) => state.comments);
     const tags = useSelector((state) => state.tags);
   // useEffects
+
+
   useEffect(() => {
     dispatch(getImagesThunk());
   }, [
@@ -200,6 +204,18 @@ if(user){
       setPreviousImage(true);
     } else setPreviousImage(false);
   }, [dispatch, previousImage, nextImage, allImagesArray, id, filteredIndex]);
+
+
+  // useEffect(() => {
+  //   (async () => {
+  //     await dispatch(authenticate());
+  //     setLoaded(true);
+  //   })();
+  // }, [dispatch]);
+
+  // if (!loaded) {
+  //   return null;
+  // }
 
   if (!user) {
     return (

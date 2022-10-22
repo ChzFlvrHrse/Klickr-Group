@@ -166,7 +166,7 @@ const SearchBar = () => {
               {filteredUsersArray &&
                 filteredUsersArray.map((user) => {
                   return (
-                    <div className="SearchUserMappedContainer" key={user.id}>
+                    <div className="SearchUserMappedContainer" key={user.id} onClick={()=> setSearchTitle("")}>
                       <NavLink to={`/users/${user.id}` }>
                         <img
                           className="SearchUserImageIndividual"
