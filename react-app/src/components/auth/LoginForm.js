@@ -36,7 +36,7 @@ const LoginForm = () => {
     <>
       <div className='login-container'>
         <div className='inner-login'>
-          <form className='login-form' onSubmit={onLogin}>
+          <form className='login-form' onSubmit={onLogin} autoComplete="off">
             <div id='login-banner'>
               <div id="circles-container">
                 <img src={klickrLogo} alt='' id='circles'></img>

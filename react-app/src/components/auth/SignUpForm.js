@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { signUp } from "../../store/session";
@@ -15,24 +15,33 @@ const SignUpForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
+  const [errorValidation, setErrorValidation] = useState([]);
   const user = useSelector((state) => state.session.user);
 
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    let errors = [];
+
+    if (username.length > 40 || username.length < 4) errors.push("Username must be between 4 and 40 characters");
+    if (first_name.length > 25 || first_name.length < 2) errors.push("First name must be between 4 and 25 characters");
+    if (last_name.length > 25 || last_name.length < 2) errors.push("Last name must be between 4 and 25 characters");
+    if (!password.length) errors.push("Password is required");
+    if (!repeatPassword.length) errors.push("Please repeat the password")
+    // if (password !== repeatPassword) errors.push("Passwords do not match");
+
+    setErrorValidation(errors)
+
+  }, [username, first_name, last_name, password, repeatPassword, email])
+
   const onSignUp = async (e) => {
     e.preventDefault();
-    if (previewImageUrl == null || !previewImageUrl.startsWith("http://") || !previewImageUrl.startsWith("https://")) {
-      setPreviewImageUrl(
-        "https://creazilla-store.fra1.digitaloceanspaces.com/emojis/55737/grinning-face-with-big-eyes-emoji-clipart-xl.png"
-      );
-    }
 
     if (!email.includes("@")) {
-      return setErrors(["Please enter a valid email address"]);
+      return setErrorValidation(["Please enter a valid email address"]);
     }
 
     if (password === repeatPassword) {
-      
       const data = await dispatch(
         signUp(
           username,
@@ -44,8 +53,10 @@ const SignUpForm = () => {
         )
       );
       if (data) {
-        setErrors(data);
+        setErrorValidation(data);
       }
+    } else {
+      return setErrorValidation(["Passwords do not match"])
     }
   };
 
@@ -84,15 +95,15 @@ const SignUpForm = () => {
     <>
       <div className="signup-container">
         <div className="inner-signup">
-          <form className="signup-form" onSubmit={onSignUp}>
+          <form autoComplete="off" className="signup-form" onSubmit={onSignUp}>
             <div id="circles-container">
               <img src={klickrLogo} alt="" id="circles"></img>
             </div>
             <h4 id="to-klickr">Sign up for Klickr</h4>
             <div className="signup-form-errors">
-              {errors.length > 0 && (
+              {errorValidation.length > 0 && (
                 <div className="signup-errors-wrapper">
-                  {errors.map((error, idx) => (
+                  {errorValidation.map((error, idx) => (
                     <div key={idx}>{error}</div>
                   ))}
                 </div>
@@ -105,6 +116,8 @@ const SignUpForm = () => {
                 name="username"
                 onChange={updateUsername}
                 value={username}
+                required={true}
+                autoComplete="username"
               ></input>
             </div>
             <div className="label-input">
@@ -114,6 +127,8 @@ const SignUpForm = () => {
                 name="first_name"
                 onChange={updateFirstName}
                 value={first_name}
+                autoComplete="first_name"
+                required={true}
               ></input>
             </div>
             <div className="label-input">
@@ -121,8 +136,10 @@ const SignUpForm = () => {
               <input
                 type="text"
                 name="last_name"
+                autoComplete="last_name"
                 onChange={updateLastName}
                 value={last_name}
+                required={true}
               ></input>
             </div>
             <div className="label-input">
@@ -130,15 +147,18 @@ const SignUpForm = () => {
               <input
                 type="text"
                 name="email"
+                autoComplete="email"
                 onChange={updateEmail}
                 value={email}
+                required={true}
               ></input>
             </div>
             <div className="label-input">
-              <label>Profile Picture</label>
+              <label id="profile-pic">Profile Picture (Optional)</label>
               <input
                 type="text"
                 name="previewImageUrl"
+                autoComplete="previewImageUrl"
                 onChange={updatePreviewImageUrl}
                 value={previewImageUrl}
               ></input>
@@ -150,6 +170,8 @@ const SignUpForm = () => {
                 name="password"
                 onChange={updatePassword}
                 value={password}
+                autoComplete="new-password"
+                required={true}
               ></input>
             </div>
             <div className="label-input">
@@ -159,12 +181,13 @@ const SignUpForm = () => {
                 name="repeat_password"
                 onChange={updateRepeatPassword}
                 value={repeatPassword}
+                autoComplete="off"
                 required={true}
               ></input>
             </div>
 
             <div className="button">
-              <button type="submit">Sign Up</button>
+              <button type="submit" disabled={errorValidation.length}>Sign Up</button>
             </div>
           </form>
         </div>
