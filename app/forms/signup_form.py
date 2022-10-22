@@ -24,12 +24,12 @@ def valid_image(form, field):
     previewImageUrl = field.data
     if previewImageUrl == None or not previewImageUrl.startswith("https://") or not previewImageUrl.startswith("http://"):
         field.data = "https://creazilla-store.fra1.digitaloceanspaces.com/emojis/55737/grinning-face-with-big-eyes-emoji-clipart-xl.png"
-        
+
 
 class SignUpForm(FlaskForm):
     username = StringField('username', validators=[DataRequired(), username_exists])
     first_name = StringField('first_name', validators=[DataRequired()])
     last_name = StringField('last_name', validators=[DataRequired()])
-    email = StringField('email', validators=[DataRequired(), user_exists])
-    previewImageUrl = StringField('previewImageUrl', validators=[DataRequired(), valid_image])
+    email = StringField('email', validators=[DataRequired(), Email(), user_exists])
+    previewImageUrl = StringField('previewImageUrl', validators=[valid_image])
     password = StringField('password', validators=[DataRequired()])
