@@ -77,7 +77,7 @@ function ImageDetails() {
     showModalImageDelete,
     allImagesFiltered,
     imageLiked,
-    user, allImagesFiltered, id, images
+    user, allImagesFiltered, id
   ]);
 
   useEffect(() => {

@@ -55,14 +55,13 @@ function AlbumDetails() {
   }, [
     dispatch,
     allUsersArray,
-    allImagesArray,
+    allAlbumsArray,
     showModalImageEdit,
     showModalImageDelete,
     allImagesFiltered,
     user,
-    allImagesFiltered,
+    allAlbumsFiltered,
     id,
-    images,
   ]);
 
   useEffect(() => {
