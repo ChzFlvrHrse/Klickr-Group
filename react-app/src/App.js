@@ -12,6 +12,7 @@ import { authenticate } from "./store/session";
 import CreateImageForm from "./components/Images/createImage";
 import GetAllImages from "./components/ExplorePage/explore";
 import { PageNotFound } from "./components/UnknownPage/PageNotFound";
+import { AboutDevs } from "./components/AboutDevsPage/devs";
 
 
 import ImageDetails from './components/ImageDetailsPage/imageDetails'
@@ -37,6 +38,9 @@ function App() {
       <Switch>
         <Route path="/" exact={true}>
           <HomePage />
+        </Route>
+        <Route path="/devs" exact={true}>
+          <AboutDevs />
         </Route>
         <Route path="/explore" exact={true}>
           <GetAllImages />
