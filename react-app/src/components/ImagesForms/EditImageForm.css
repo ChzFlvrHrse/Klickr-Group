@@ -54,6 +54,11 @@
 .done-edit-bttn:hover {
     opacity: .8;
     cursor: pointer;
+    transform: scale(1.1);
+}
+
+.done-edit-bttn:active {
+    transform: scale(.98);
 }
 
 #done-edit-cancel-bttn {
