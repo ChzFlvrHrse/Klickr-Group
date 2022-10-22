@@ -13,6 +13,7 @@ import CreateImageForm from "./components/Images/createImage";
 import GetAllImages from "./components/ExplorePage/explore";
 import { PageNotFound } from "./components/UnknownPage/PageNotFound";
 import { AboutDevs } from "./components/AboutDevsPage/devs";
+import AlbumDetails from "./components/Albums/AlbumDetails";
 
 
 import ImageDetails from './components/ImageDetailsPage/imageDetails'
@@ -47,6 +48,9 @@ function App() {
         </Route>
         <Route exact path='/images/:id'>
           <ImageDetails />
+        </Route>
+        <Route exact path='/albums/:id'>
+          <AlbumDetails />
         </Route>
         <Route path="/login" exact={true}>
           <LoginForm />
