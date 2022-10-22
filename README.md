@@ -1,4 +1,4 @@
-Welcome to the Klickr_Clone wiki!
+Welcome to the Klickr_Clone!
 
 Klickr Project is a clone of Flickr that is centered around sharing images and looking at images relatable to you. Users can browse images to find inspiration for themselves or to use images for personal projects.
 
@@ -11,7 +11,9 @@ Link to test out website: https://klickr-group.herokuapp.com/
 * JS
 * HTML
 * CSS
-* DB: SQLAlchemy  
+
+DB:
+* SQLAlchemy  
 
 
 
@@ -56,13 +58,17 @@ JWT_EXPIRES_IN=604800
 
 * We managed to get the images to fit inside the container without compromising on quality, but have different sizes.
 
-## Image Detail's Page
+
 
 
 ## SearchBar
 ![Screen Shot 2022-10-21 at 6 00 14 PM](https://user-images.githubusercontent.com/99216902/197294922-f9e10978-e979-444e-9dfa-78b0602b9e75.png)
 
 * Search Bar was a major victory! It will display by both title and owner name, and you can hide undesired results by category.
+
+
+
+
 
 
 ## Carousel Images on Details

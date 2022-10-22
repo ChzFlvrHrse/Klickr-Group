@@ -68,6 +68,11 @@
 .done-edit:hover {
     opacity: .8;
     cursor: pointer;
+    transform: scale(1.1);
+}
+
+.done-edit:active {
+    transform: scale(.98);
 }
 
 #edit-comment-cancel {
