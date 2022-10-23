@@ -29,24 +29,27 @@ DB:
 
   ``` REACT_APP_BASE_URL=http://localhost:5000 ```
 
-In the terminal under Klickr-group , migrate and seed files as follows:
-``` 
-    flask db upgrade 
-    flask seed all 
-```
+
+## Getting started
+Clone the repository then install dependencies
+
+using ```pipenv install -r requirements.txt ```
+Create a .env file based on the example with proper settings for your development environment
+
+
+ ``` Get into your pipenv run pipenv shell,flask db upgrade, flask seed all, flask run```
+
 
 
 # Environment Info
 ```
-PORT=8000
-DB_FILE=db/dev.db
-JWT_SECRET=«generate_strong_secret_here» 
-JWT_EXPIRES_IN=604800
+DATABASE_URL=sqlite:///dev.db
+FLASK_DEBUG=True
+SECRET_KEY=«generate_strong_secret_here» 
 ```
-## Database Setup
-```
- npx dotenv sequelize db:migrate
- npx dotenv sequelize db:seed:all
+
+``` 
+Inside react-app create another .env and add     REACT_APP_BASE_URL=http://localhost:5000 
 
 ```
 
