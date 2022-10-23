@@ -12,7 +12,7 @@ import { createLikesThunk, deleteLikesThunk } from "../../store/likes";
 import { Modal } from "../../context/Modal";
 import { ImageModal } from "../../context/Modal copy";
 import { useHistory } from "react-router-dom";
-import { getImageTagsThunk } from "../../store/tags";
+import { getAllTagsThunk } from "../../store/tags";
 import CreateTagForm from "../Tags/CreateTagForm";
 import DeleteTagForm from "../Tags/DeleteTagForm";
 import klickrLogo from "../../icons/Klickr-logo.png";
@@ -89,7 +89,7 @@ function ImageDetails() {
   }, [dispatch, showModal, showModalEdit, commentState, commDelete]);
 
   useEffect(() => {
-    dispatch(getImageTagsThunk(id));
+    dispatch(getAllTagsThunk())
   }, [dispatch, tagState, showModalTagsDelete, showModalTagsEdit, id]);
 
 
@@ -118,7 +118,12 @@ if(user){
   if (allUsersArray && allImagesArray) {
     filteredIndex = allImagesArray.findIndex((image) => image.id == id);
   }
-  const tagsArray = Object.values(tags);
+  const alltagsArray = Object.values(tags)
+  let tagsArray
+  if (alltagsArray.length > 0) {
+    tagsArray = alltagsArray.filter((tag, index) => tag.imageId == id)
+  }
+
 
   let likesArray = Object.values(likes);
   let filteredLikes;
