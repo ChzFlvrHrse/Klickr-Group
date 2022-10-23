@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, redirect, render_template, request, request
+from flask import Blueprint, jsonify, redirect, render_template, request
 from flask_login import login_required, current_user
 from .auth_routes import validation_errors_to_error_messages
 
@@ -164,7 +164,7 @@ def imageLikes(imageId):
 @image_routes.route('/<int:imageId>/likes/new', methods=["POST"])
 @login_required
 def postLike(imageId):
-   
+
         like = Like.query.filter_by(imageId=imageId, userId=current_user.id).first()
         if like:
             db.session.delete(like)
