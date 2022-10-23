@@ -56,7 +56,9 @@ function EditCommentFormExplore({ imageId, setShowModalEdit, oldComment, submitt
   };
 
   return (
-    <div className="CreateComment-outer">
+    <div className="create-comment-container">
+      <div className="create-comment-wrapper">
+        <h3 className="edit-comment-title" style={{fontWeight: "300"}}>Edit Comment here:</h3>
       <form
         className="CreateComment-inner"
         onSubmit={handleSubmit2}
@@ -84,11 +86,12 @@ function EditCommentFormExplore({ imageId, setShowModalEdit, oldComment, submitt
           <button className="done-edit" onClick={handleSubmit} type="submit">
             Done
           </button>
-          <button id="cancel" className="done-edit" onClick={() => setShowModalEdit(false)} type="submit">
+          <button id="edit-comment-cancel" className="done-edit" onClick={() => setShowModalEdit(false)} type="submit">
             Cancel
           </button>
         </div>
       </form>
+    </div>
     </div>
   );
 }

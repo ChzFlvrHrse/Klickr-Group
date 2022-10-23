@@ -52,6 +52,7 @@ function EditCommentForm({ imageId, setShowModalEdit, oldComment, submitted, set
         <h3 className="edit-comment-title" style={{fontWeight: "300"}}>Edit Comment here:</h3>
         <div>
           <form
+          className="CreateComment-inner"
             onSubmit={handleSubmit2}
             autoComplete="off"
           >
