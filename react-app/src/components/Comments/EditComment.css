@@ -25,7 +25,7 @@
 
 .errorHandlingContainer{
     display: flex;
-    justify-content: center;
+    justify-content: left;
     margin-right: 30px;
 }
 
@@ -37,7 +37,8 @@
 
 .ErrorPoints{
     color: red;
-
+    margin-left: -30px;
+    margin-bottom: 10px;
 }
 
 .edit-comment-box {

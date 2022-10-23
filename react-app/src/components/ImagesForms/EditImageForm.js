@@ -18,7 +18,7 @@ function EditImageForm({ imageId, setShowModalEdit, oldImage }) {
   useEffect(() => {
     const formValidationErrors = [];
 
-    if (!title) formValidationErrors.push("Please provide a image");
+    if (!title) formValidationErrors.push("Please provide an image title");
     if (!description) formValidationErrors.push("Please provide a description");
     if (!previewImageUrl) formValidationErrors.push("Please provide a image");
 
@@ -57,9 +57,9 @@ function EditImageForm({ imageId, setShowModalEdit, oldImage }) {
           <div className="errorHandlingContainer">
             {errors.length > 0 && (
               <div className="HeaderErrorStyling">
-                <ul className="UlBulletErrorStyling">
+                <ul className="ImageUlBulletErrorStyling">
                   {errors.map((error, idx) => (
-                    <li className="ErrorPoints" key={idx}>
+                    <li className="ImageErrorPoints" key={idx}>
                       {error}
                     </li>
                   ))}

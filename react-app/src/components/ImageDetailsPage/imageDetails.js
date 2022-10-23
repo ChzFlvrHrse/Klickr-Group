@@ -89,7 +89,7 @@ function ImageDetails() {
   }, [dispatch, showModal, showModalEdit, commentState, commDelete]);
 
   useEffect(() => {
-    dispatch(getAllTagsThunk());
+    dispatch(getAllTagsThunk())
   }, [dispatch, tagState, showModalTagsDelete, showModalTagsEdit, id]);
 
 

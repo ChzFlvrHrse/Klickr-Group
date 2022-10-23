@@ -7,6 +7,7 @@ import { login } from "../../store/session";
 
 import { getImagesThunk } from "../../store/image";
 import { getAllUsersThunk } from "../../store/AllUsers";
+
 import { getAllTagsThunk } from "../../store/tags";
 import "./SearchBar.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -23,17 +24,18 @@ const SearchBar = () => {
   const [tagResults, setTagResults] = useState(false);
   const [userResults, setUserResults] = useState(false);
 
+  // tag state
   const dispatch = useDispatch();
 
   let allImagesArray;
   let allAlbumsArray;
-  let allTagsArray;
   let allUsersArray;
+  let allTagsArray;
 
   let filteredImagesArray;
   let filteredAlbumsArray;
-  let filteredTagsArray;
   let filteredUsersArray;
+  let filteredTagsArray;
 
   useEffect(() => {
     dispatch(getImagesThunk());
@@ -48,10 +50,15 @@ const SearchBar = () => {
     dispatch(getAllUsersThunk());
   }, [dispatch]);
 
+  useEffect(() => {
+    dispatch(getAllTagsThunk());
+  }, [dispatch]);
+
   const user = useSelector((state) => state.session.user);
   const images = useSelector((state) => state.image);
   const allusers = useSelector((state) => state.allUsers);
   const albums = useSelector((state) => state.album);
+
   const allTags = useSelector((state) => state.tags);
 
   allImagesArray = Object.values(images);
@@ -82,6 +89,14 @@ const SearchBar = () => {
       filteredValues.username.toLowerCase().includes(searchTitle.toLowerCase())
     );
   } else filteredUsersArray = "";
+
+
+  if (allTagsArray.length > 0) {
+    filteredTagsArray = allTagsArray.filter((filteredValues, index) =>
+      filteredValues.body.toLowerCase().includes(searchTitle.toLowerCase())
+    );
+  } else filteredTagsArray = "";
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -291,7 +306,7 @@ const SearchBar = () => {
           >
             <div className="errorhandlingSearchmessage">No Users Found</div>
           </div>
-          {/* search by tags begins */}
+         {/* search by tags begins */}
           <button
             className="toggleResultsSearch"
             onClick={() => {

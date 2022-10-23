@@ -41,10 +41,22 @@ def seed_tags():
     tag_36 = Tag(userId=12, imageId=24, body="Nature")
     tag_37 = Tag(userId=13, imageId=25, body="Building")
     tag_38 = Tag(userId=14, imageId=25, body="Nature")
+    tag_39 = Tag(userId=5, imageId=17, body="Port")
+    tag_40 = Tag(userId=6, imageId=18, body="Scenic")
+    tag_41 = Tag(userId=7, imageId=19, body="Racing")
+    tag_42 = Tag(userId=8, imageId=20, body="Nature")
+    tag_43 = Tag(userId=9, imageId=21, body="Scenic")
+    tag_44 = Tag(userId=10, imageId=22, body="Waves")
+    tag_45 = Tag(userId=11, imageId=23, body="Fog")
+    tag_46 = Tag(userId=12, imageId=24, body="Landscape")
+    tag_47 = Tag(userId=13, imageId=25, body="Monochrome")
+    tag_48 = Tag(userId=14, imageId=25, body="Work")
+    tag_49 = Tag(userId=5, imageId=17, body="Night")
+    tag_50 = Tag(userId=6, imageId=18, body="Lush")
 
 
 
-    tags = [tag_1, tag_2, tag_3, tag_4,tag_5,tag_6,tag_7,tag_8,tag_9,tag_10,tag_11,tag_12,tag_13,tag_14,tag_15,tag_16,tag_17,tag_18,tag_19,tag_20,tag_21,tag_22,tag_23,tag_24,tag_25,tag_26,tag_27,tag_28,tag_29,tag_30,tag_31,tag_32,tag_33,tag_34,tag_35,tag_36,tag_37,tag_38]
+    tags = [tag_1, tag_2, tag_3, tag_4,tag_5,tag_6,tag_7,tag_8,tag_9,tag_10,tag_11,tag_12,tag_13,tag_14,tag_15,tag_16,tag_17,tag_18,tag_19,tag_20,tag_21,tag_22,tag_23,tag_24,tag_25,tag_26,tag_27,tag_28,tag_29,tag_30,tag_31,tag_32,tag_33,tag_34,tag_35,tag_36,tag_37, tag_38, tag_39,tag_40,tag_41,tag_42,tag_43,tag_44,tag_45,tag_46,tag_47,tag_48,tag_49,tag_50]
 
     for tag in tags:
         db.session.add(tag)

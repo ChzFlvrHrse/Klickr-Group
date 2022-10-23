@@ -16,15 +16,25 @@ def seed_comments():
     comment_11 = Comment(userId=2, imageId=3, body="Hello World")
     comment_12 = Comment(userId=1, imageId=4, body="WOWOWOWOWOWOW")
     comment_13 = Comment(userId=3, imageId=5, body="Cant believe i found this again!")
-    comment_14 = Comment(userId=4, imageId=5, body="This was a horrible pic")
+    comment_14 = Comment(userId=4, imageId=5, body="This was a horrible pic!")
     comment_15 = Comment(userId=3, imageId=6, body="This made me so depressed")
     comment_16 = Comment(userId=2, imageId=7, body="This made me so happy")
     comment_17 = Comment(userId=1, imageId=5, body="I started rethinking about my marriage")
     comment_18 = Comment(userId=4, imageId=4, body="What about that! ")
     comment_19 = Comment(userId=2, imageId=8, body="I'm a bot")
     comment_20 = Comment(userId=1, imageId=2, body="Win Free Money Click Here Now!!!")
+    comment_21 = Comment(userId=6, imageId=3, body="Awesome Photo")
+    comment_22 = Comment(userId=7, imageId=3, body="Where?")
+    comment_23 = Comment(userId=8, imageId=4, body="Anya")
+    comment_24 = Comment(userId=9, imageId=5, body="fake?")
+    comment_25 = Comment(userId=10, imageId=5, body="bark")
+    comment_26 = Comment(userId=11, imageId=6, body="Zzzzzzzzz")
+    comment_27 = Comment(userId=12, imageId=7, body="boring")
+    comment_28 = Comment(userId=13, imageId=5, body="coooool")
+    comment_29 = Comment(userId=14, imageId=4, body="impressive")
+    comment_30 = Comment(userId=13, imageId=8, body="I'm a bot")
 
-    comments = [comment_1, comment_2, comment_3, comment_4,comment_5,comment_6,comment_7,comment_8,comment_9,comment_10,comment_11,comment_12,comment_13,comment_14,comment_15,comment_16,comment_17,comment_18,comment_19,comment_20]
+    comments = [comment_1, comment_2, comment_3, comment_4,comment_5,comment_6,comment_7,comment_8,comment_9,comment_10,comment_11,comment_12,comment_13,comment_14,comment_15,comment_16,comment_17,comment_18,comment_19,comment_20, comment_21, comment_22, comment_23, comment_24,comment_25,comment_26,comment_27,comment_28,comment_29,comment_30]
 
     for comment in comments:
         db.session.add(comment)
