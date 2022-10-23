@@ -17,7 +17,7 @@ function EditImageForm({ imageId, setShowModalEdit, oldImage }) {
   useEffect(() => {
     const formValidationErrors = [];
 
-    if (!title) formValidationErrors.push("Please provide a image");
+    if (!title) formValidationErrors.push("Please provide an image title");
     if (!description) formValidationErrors.push("Please provide a description");
     if (!previewImageUrl) formValidationErrors.push("Please provide a image");
 
