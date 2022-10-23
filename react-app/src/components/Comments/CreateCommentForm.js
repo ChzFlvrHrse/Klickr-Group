@@ -7,9 +7,6 @@ import { createACommentThunk } from "../../store/comments";
 function CreateCommentForm({userId, imageId}) {
   const dispatch = useDispatch();
 
-
-
-
   const [comment, setComment] = useState("");
   const [errors, setErrors] = useState([]);
   useEffect(() => {

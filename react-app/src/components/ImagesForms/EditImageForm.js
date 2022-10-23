@@ -56,9 +56,9 @@ function EditImageForm({ imageId, setShowModalEdit, oldImage }) {
           <div className="errorHandlingContainer">
             {errors.length > 0 && (
               <div className="HeaderErrorStyling">
-                <ul className="UlBulletErrorStyling">
+                <ul className="ImageUlBulletErrorStyling">
                   {errors.map((error, idx) => (
-                    <li className="ErrorPoints" key={idx}>
+                    <li className="ImageErrorPoints" key={idx}>
                       {error}
                     </li>
                   ))}
