@@ -43,4 +43,11 @@
 .deleteImageButtons button:hover {
     opacity: .8;
     cursor: pointer;
+    transform: scale(1.1);
+}
+
+.deleteImageButtons button:active {
+    opacity: .8;
+    cursor: pointer;
+    transform: scale(.98);
 }

@@ -411,6 +411,7 @@ textarea {
     overflow-y: hidden;
     flex-wrap: wrap;
     border-bottom: 0.1em solid #dbdada;
+    scroll-behavior: smooth;
 }
 
 .PhotoArrayImageDetails:hover {
@@ -440,6 +441,7 @@ textarea {
     height: 6em;
     text-align: left;
     overflow-y: hidden;
+    transition: all .5s ease-in-out;
 }
 
 .Filteredsong-container:hover .TrendingsongCard {

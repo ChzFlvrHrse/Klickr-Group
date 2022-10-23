@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { getImagesThunk } from "../../store/image";
 import { Link } from "react-router-dom";
 import { getAllUsersThunk } from "../../store/AllUsers";
@@ -8,6 +9,7 @@ import ExploreImageComments from "./ExploreComments";
 import "./explore.css";
 
 const GetAllImages = () => {
+  const history = useHistory()
   // fix delay on liking image, fix bug where spamming creates more likes (bypasses frontend validation)
   // allow user to exit modal when clicking elsewhere, but user also needs to stay on modal if interacting with it.
   //on click access modal with link active
@@ -45,6 +47,14 @@ const GetAllImages = () => {
 
   allUsersArray = Object.values(allusers);
   allImagesArray = Object.values(images);
+
+  if (!user) {
+    return (
+      <>
+        <div>{history.push('/404')}</div>
+      </>
+    );
+  }
 
   return (
     <div className="explore-container">

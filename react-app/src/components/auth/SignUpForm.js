@@ -24,8 +24,8 @@ const SignUpForm = () => {
     let errors = [];
 
     if (username.length > 40 || username.length < 4) errors.push("Username must be between 4 and 40 characters");
-    if (first_name.length > 25 || first_name.length < 2) errors.push("First name must be between 4 and 25 characters");
-    if (last_name.length > 25 || last_name.length < 2) errors.push("Last name must be between 4 and 25 characters");
+    if (first_name.length > 25 || first_name.length < 1) errors.push("First name must be between 4 and 25 characters");
+    if (last_name.length > 25 || last_name.length < 1) errors.push("Last name must be between 4 and 25 characters");
     if (!password.length) errors.push("Password is required");
     if (!repeatPassword.length) errors.push("Please repeat the password")
     // if (password !== repeatPassword) errors.push("Passwords do not match");

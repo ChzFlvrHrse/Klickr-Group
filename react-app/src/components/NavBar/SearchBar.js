@@ -7,6 +7,7 @@ import { login } from '../../store/session';
 import { getImagesThunk } from "../../store/image";
 import { getAllUsersThunk } from "../../store/AllUsers";
 
+import { getAllTagsThunk } from "../../store/tags";
 import "./SearchBar.css";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -19,13 +20,18 @@ const SearchBar = () => {
   const [imageResults, setImageResults] = useState(true);
   const [userResults, setUserResults] = useState(false);
 
+  // tag state
+  const [tagResults, setTagResults] = useState(false);
+
   const dispatch = useDispatch();
 
   let allImagesArray;
   let allUsersArray;
+  let allTagsArray;
 
   let filteredImagesArray;
   let filteredUsersArray;
+  let filteredTagsArray;
 
   useEffect(() => {
     dispatch(getImagesThunk());
@@ -35,12 +41,19 @@ const SearchBar = () => {
     dispatch(getAllUsersThunk());
   }, [dispatch]);
 
+  useEffect(() => {
+    dispatch(getAllTagsThunk());
+  }, [dispatch]);
+
   const user = useSelector((state) => state.session.user);
   const images = useSelector((state) => state.image);
   const allusers = useSelector((state) => state.allUsers);
 
+  const allTags = useSelector((state) => state.tags);
+
   allImagesArray = Object.values(images);
   allUsersArray = Object.values(allusers);
+  allTagsArray = Object.values(allTags);
 
   if (allImagesArray.length > 0) {
     filteredImagesArray = allImagesArray.filter((filteredValues, index) =>
@@ -53,6 +66,14 @@ const SearchBar = () => {
       filteredValues.username.toLowerCase().includes(searchTitle.toLowerCase())
     );
   } else filteredUsersArray = "";
+
+
+  if (allTagsArray.length > 0) {
+    filteredTagsArray = allTagsArray.filter((filteredValues, index) =>
+      filteredValues.body.toLowerCase().includes(searchTitle.toLowerCase())
+    );
+  } else filteredTagsArray = "";
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -72,7 +93,7 @@ const SearchBar = () => {
             className="notsignedin-SB"
             type="search"
             value={searchTitle}
-            placeholder={"Search for Images or Users..." || searchTitle}
+            placeholder={"Search for Images, Tags, or Users..." || searchTitle}
             onChange={handleSubmit}
           />
         </div>
@@ -166,7 +187,7 @@ const SearchBar = () => {
               {filteredUsersArray &&
                 filteredUsersArray.map((user) => {
                   return (
-                    <div className="SearchUserMappedContainer" key={user.id}>
+                    <div className="SearchUserMappedContainer" key={user.id} onClick={()=> setSearchTitle("")}>
                       <NavLink to={`/users/${user.id}` }>
                         <img
                           className="SearchUserImageIndividual"
@@ -195,10 +216,101 @@ const SearchBar = () => {
           >
             <div className="errorhandlingSearchmessage">No Users Found</div>
           </div>
+         {/* search by tags begins */}
+          <button
+            className="toggleResultsSearch"
+            onClick={() => {
+              setTagResults(!tagResults);
+            }}
+          >
+            {tagResults == true ? (
+              <div>Hide Tag Results</div>
+            ) : (
+              <div>Show Tag Results</div>
+            )}
+          </button>
+          <div
+            className={
+              filteredTagsArray.length &&
+              searchTitle.length &&
+              tagResults == true
+                ? "Filteredimages-container"
+                : "HiddenResult"
+            }
+          >
+            {/* search return map */}
+            <div className="FilteredreturnContainer">
+              {filteredTagsArray &&
+                filteredTagsArray.map((tag) => {
+                  return (
+                    <div key={tag.id}>
+                      {" "}
+                      {allImagesArray &&
+                        allImagesArray.map((image) => {
+                          return (
+                            <>
+                              {image.id == tag.imageId ? (
+                                <div
+                                  className="SearchImageMappedContainer"
+                                  key={image.id == tag.imageId ? image.id : ""}
+                                  onClick={() => setSearchTitle("")}
+                                >
+                                  <Link
+                                    to={
+                                      image.id == tag.imageId
+                                        ? `/images/${image.id}`
+                                        : ""
+                                    }
+                                  >
+                                    <img
+                                      className="SearchImageIndividual"
+                                      // src={image.previewImageUrl}
+                                      src={
+                                        image.id == tag.imageId
+                                          ? image.previewImageUrl
+                                          : ""
+                                      }
+                                      alt="preview"
+                                    />
+                                  </Link>
+                                  <NavLink
+                                    className="SearchImageNavLinkTitle"
+                                    to={
+                                      image.id == tag.imageId
+                                        ? `/images/${image.id}`
+                                        : ""
+                                    }
+                                  >
+                                    {tag.body}
+                                  </NavLink>
+                                </div>
+                              ) : (
+                                ""
+                              )}
+                            </>
+                          );
+                        })}
+                    </div>
+                  );
+                })}
+            </div>
+          </div>
+          <div
+            className={
+              !filteredTagsArray.length &&
+              searchTitle !== "" &&
+              tagResults == true
+                ? "errorHandlingSearchContainer"
+                : "HiddenResult"
+            }
+          >
+            <div className="errorhandlingSearchmessage">No Tags Found</div>
+          </div>
         </div>
       </>
     );
   }
+
   if (!user) {
     return (
       <>

@@ -11,18 +11,22 @@ import { createACommentThunk, getAllCommentsThunk } from "../../store/comments";
 import { createLikesThunk, deleteLikesThunk } from "../../store/likes";
 import { Modal } from "../../context/Modal";
 import { ImageModal } from "../../context/Modal copy";
-
-import { getImageTagsThunk } from "../../store/tags";
+import { useHistory } from "react-router-dom";
+import { getAllTagsThunk } from "../../store/tags";
 import CreateTagForm from "../Tags/CreateTagForm";
 import DeleteTagForm from "../Tags/DeleteTagForm";
-
+import klickrLogo from "../../icons/Klickr-logo.png";
+import { authenticate } from "../../store/session";
+import { NavLink } from "react-router-dom";
 import "./imageDetails.css";
 
 function ImageDetails() {
+  const history = useHistory()
   const [showModal, setShowModal] = useState(false);
   const [imageLiked, setImageLiked] = useState(false);
   const [showModalEdit, setShowModalEdit] = useState(false);
   const [commentState, setCommentState] = useState({});
+  const [loaded, setLoaded] = useState(false);
   const [body, setBody] = useState("");
   // keep track of previous image
   const [previousImage, setPreviousImage] = useState(false);
@@ -53,7 +57,16 @@ function ImageDetails() {
   let filteredIndex;
   let imageLikedByUser;
 
+    // redux states
+    const images = useSelector((state) => state.image);
+    const allusers = useSelector((state) => state.allUsers);
+    const user = useSelector((state) => state.session.user);
+    const likes = useSelector((state) => state.likes);
+    const comment = useSelector((state) => state.comments);
+    const tags = useSelector((state) => state.tags);
   // useEffects
+
+
   useEffect(() => {
     dispatch(getImagesThunk());
   }, [
@@ -64,6 +77,7 @@ function ImageDetails() {
     showModalImageDelete,
     allImagesFiltered,
     imageLiked,
+    user, allImagesFiltered, id
   ]);
 
   useEffect(() => {
@@ -75,27 +89,25 @@ function ImageDetails() {
   }, [dispatch, showModal, showModalEdit, commentState, commDelete]);
 
   useEffect(() => {
-    dispatch(getImageTagsThunk(id));
+    dispatch(getAllTagsThunk())
   }, [dispatch, tagState, showModalTagsDelete, showModalTagsEdit, id]);
 
-  // redux states
-  const images = useSelector((state) => state.image);
-  const allusers = useSelector((state) => state.allUsers);
-  const user = useSelector((state) => state.session.user);
-  const likes = useSelector((state) => state.likes);
-  const comment = useSelector((state) => state.comments);
-  const tags = useSelector((state) => state.tags);
-  const userId = user.id;
+
+let userId
+
+if(user){
+  userId = user.id
+}
 
   // filters
   allImagesArray = Object.values(images);
   allUsersArray = Object.values(allusers);
 
-  if (allUsersArray && allImagesArray) {
+  if (allUsersArray && allImagesArray && user) {
     allImagesFiltered = allImagesArray.filter(
       (filteredImages, index) => filteredImages.id == id
     );
-    if (allImagesArray && allImagesFiltered.length > 0) {
+    if (allImagesArray && allImagesFiltered.length > 0 && user) {
       imageLikedByUser = allImagesFiltered[0].likes.filter(
         (filteredLikes, index) => filteredLikes.userId == user.id
       );
@@ -106,7 +118,12 @@ function ImageDetails() {
   if (allUsersArray && allImagesArray) {
     filteredIndex = allImagesArray.findIndex((image) => image.id == id);
   }
-  const tagsArray = Object.values(tags);
+  const alltagsArray = Object.values(tags)
+  let tagsArray
+  if (alltagsArray.length > 0) {
+    tagsArray = alltagsArray.filter((tag, index) => tag.imageId == id)
+  }
+
 
   let likesArray = Object.values(likes);
   let filteredLikes;
@@ -155,17 +172,18 @@ function ImageDetails() {
 
   // console.log(allImagesFiltered[0].created_at)
   // Image created_at Date formatting
-  if (allImagesFiltered[0]) {
-    const createdAtObject = allImagesFiltered[0].created_at;
+  if (user && allImagesArray) {
+
+    if (allImagesFiltered[0]) {
+      const createdAtObject = allImagesFiltered[0].created_at;
     const createdAtString = JSON.stringify(createdAtObject);
     const date = createdAtString.slice(5, 8);
     const month = createdAtString.slice(9, 12);
     const year = createdAtString.slice(13, 17);
     createdAtDate = `${month} ${date}, ${year}`;
-    // console.log(createdAtDate)
   }
-
-  if (allUsersArray.length && allImagesArray.length) {
+}
+  if (allUsersArray.length && allImagesArray.length && allImagesFiltered.length > 0) {
     imageOwner = allUsersArray.filter(
       (user) => user.id == allImagesFiltered[0].userId
     );
@@ -192,16 +210,27 @@ function ImageDetails() {
     } else setPreviousImage(false);
   }, [dispatch, previousImage, nextImage, allImagesArray, id, filteredIndex]);
 
-  // if image does not exist
-  if (!allImagesFiltered.length) {
+
+  // useEffect(() => {
+  //   (async () => {
+  //     await dispatch(authenticate());
+  //     setLoaded(true);
+  //   })();
+  // }, [dispatch]);
+
+  // if (!loaded) {
+  //   return null;
+  // }
+
+  if (!user) {
     return (
       <>
-        <div>Sorry this image does not exist!</div>
+        <div>{history.push('/404')}</div>
       </>
     );
   }
 
-  //   else return everything
+else if (allImagesFiltered.length  && allImagesArray && user && allUsersArray) {
   return (
     <>
       <div id="details-image">
@@ -568,6 +597,30 @@ function ImageDetails() {
       </div>
     </>
   );
+}
+ // if image does not exist
+
+else if (!allImagesFiltered.length && allImagesArray && allUsersArray && user) {
+  return (
+    <>
+      <div className="login-containerPNF">
+      <div className="inner-loginPNF">
+        <div id="login-bannerPNF">
+          <div id="circles-containerPNF">
+            <img src={klickrLogo} alt="" id="circlesPNF"></img>
+          </div>
+          <h4 id="to-klickr1">Image Not Found</h4>
+          <div className="linkerror">
+            <NavLink to="/" className='linkerrorText'>Click here to go home</NavLink>
+          </div>
+        </div>
+      </div>
+    </div>
+    </>
+  );
+
+}
+
 }
 
 export default ImageDetails;

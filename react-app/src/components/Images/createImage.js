@@ -19,10 +19,10 @@ export default function CreateImageForm() {
   useEffect(() => {
     const errors = [];
 
-    if (title.length < 1 || title.length > 49)
-      errors.push("Name must be between 1 and 49 characters");
+    if (!title)
+      errors.push("Please provide a title for image");
     if (!description) errors.push("Please provide a description");
-    if (!previewImageUrl) errors.push("Please provide a previewImage");
+    if (!previewImageUrl) errors.push("Please provide a image");
 
     return setErrors(errors);
   }, [title, description, previewImageUrl]);
@@ -60,11 +60,11 @@ export default function CreateImageForm() {
         <div className="message-upload">
           Get automatic photo backup on all your devices with Klickr.
         </div>
-        <div className="show-errors">
+        <div className="upload-img-errors">
           {hasSubmitted && errors.length > 0 && (
-            <ul className="errors-list">
+            <ul>
               {errors.map((error) => (
-                <li key={error}>{error}</li>
+                <li className="upload-img-errors-list" key={error}>{error}</li>
               ))}
             </ul>
           )}
@@ -78,7 +78,7 @@ export default function CreateImageForm() {
               placeholder="Image URL"
               value={previewImageUrl}
               onChange={(e) => setPreviewImageUrl(e.target.value)}
-              required
+              // required
             />
             <input
               className="preview-image-input"
@@ -86,7 +86,7 @@ export default function CreateImageForm() {
               placeholder="Title of Image"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              required
+              // required
             />
             <input
               className="preview-image-input"
@@ -94,7 +94,7 @@ export default function CreateImageForm() {
               placeholder="Description"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              required
+              // required
             />
           </div>
           <div className="image-bttn">
