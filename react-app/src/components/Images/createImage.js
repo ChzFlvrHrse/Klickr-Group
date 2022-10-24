@@ -86,8 +86,8 @@ export default function CreateImageForm() {
   useEffect(() => {
     const albumErrors = [];
 
-    if (albumTitle.length < 1 || albumTitle.length > 49)
-      albumErrors.push("Name must be between 1 and 49 characters");
+    if (!albumTitle)
+      albumErrors.push("Please provide a title for album");
     if (!albumDescription) albumErrors.push("Please provide a description");
     if (!albumPreviewImageUrl)
       albumErrors.push("Please provide a previewImage");
@@ -173,11 +173,11 @@ export default function CreateImageForm() {
               <h3 className="header-message3">
                 Get automatic photo backup on all your devices with Klickr.
               </h3>
-              <div className="show-errors">
+              <div className="upload-img-errors">
                 {hasSubmitted && errors.length > 0 && (
                   <ul className="errors-list">
                     {errors.map((error) => (
-                      <li key={error}>{error}</li>
+                      <li className="upload-img-errors-list" key={error}>{error}</li>
                     ))}
                   </ul>
                 )}
@@ -270,11 +270,11 @@ export default function CreateImageForm() {
               <h3 className="header-message3">
                 Get automatic album backup on all your devices with Klickr.
               </h3>
-              <div className="show-errors">
-                {hasSubmittedAlbum && albumErrors.length > 0 && (
+              <div className="upload-img-errors">
+                {hasSubmitted && albumErrors.length > 0 && (
                   <ul className="errors-list">
                     {albumErrors.map((error) => (
-                      <li key={error}>{error}</li>
+                      <li className="upload-img-errors-list" key={error}>{error}</li>
                     ))}
                   </ul>
                 )}
