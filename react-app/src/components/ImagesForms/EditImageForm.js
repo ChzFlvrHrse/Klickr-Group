@@ -8,7 +8,6 @@ import './EditImageForm.css'
 function EditImageForm({ imageId, setShowModalEdit, oldImage }) {
   const dispatch = useDispatch();
   const userId = oldImage.userId
-  const albumId = oldImage.albumId
 
   const [previewImageUrl, setPreviewImageUrl] = useState(oldImage.previewImageUrl);
   const [title, setTitle] = useState(oldImage.title);
@@ -31,8 +30,8 @@ function EditImageForm({ imageId, setShowModalEdit, oldImage }) {
     e.preventDefault();
     if (errors.length <= 0) {
       return dispatch(
-        updateImageThunk(userId, title, description, previewImageUrl, imageId, albumId)
-      ).then(() =>  setShowModalEdit(false)).catch(async (res) => {
+        updateImageThunk(userId, title, description, previewImageUrl, imageId)
+      ).then(() => setShowModalEdit(false)).catch(async (res) => {
         const data = await res.json();
         if (data && data.errors) setErrors(data.errors);
       });

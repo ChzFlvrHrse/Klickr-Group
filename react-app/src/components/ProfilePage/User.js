@@ -146,7 +146,7 @@ function User() {
               <div className="UserShowcaseInnerContainer">
                 {userAlbumArr.map((image) => (
                   <div className="user-singleImgContainer">
-                    <NavLink to={`/images/${image.id}`}>
+                    <NavLink to={`/albums/${image.id}`}>
                       <img
                         className="user-single-img"
                         src={image.previewImageUrl}
