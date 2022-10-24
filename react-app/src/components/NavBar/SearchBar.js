@@ -414,7 +414,7 @@ const SearchBar = () => {
               className="search-barNav"
               type="search"
               value={searchTitle}
-              placeholder={"Search for Images or Users..." || searchTitle}
+              placeholder={"Please login as a user first..." || searchTitle}
               onChange={handleSubmit}
             />
           </div>
