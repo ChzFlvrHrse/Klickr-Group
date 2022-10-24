@@ -4,34 +4,34 @@ from app.models import db, User
 # Adds a demo user, you can add other users here if you want
 def seed_users():
     demo = User(
-        username='DemoUser', first_name='Demo', last_name='User', email='demo@aa.io', previewImageUrl="https://e7.pngegg.com/pngimages/978/397/png-clipart-adelie-penguin-bird-antarctica-emperor-penguin-penguin-animals-animal.png", password='password')
+        username='DemoUser', first_name='Demo', last_name='User', email='demo@aa.io', previewImageUrl="https://combo.staticflickr.com/pw/images/buddyicon02_r.png#1008738@N20", password='password')
     marnie = User(
-        username='MarnieB', first_name='Marnie', last_name='Bay', email='marnie@aa.io', previewImageUrl="https://pngimg.com/uploads/owl/owl_PNG2.png", password='password')
+        username='MadMaggie', first_name='Mad', last_name='Maggie', email='maggie@gmail.com', previewImageUrl="https://bleedingcool.com/wp-content/uploads/2022/01/Mad-Maggie-Apex-Lagends-900x900.jpg", password='password1')
     bobbie = User(
-        username='BobbieK', first_name='Bobbie', last_name='Kohl', email='bobbie@aa.io', previewImageUrl="https://www.pngall.com/wp-content/uploads/5/Black-Dog-PNG.png", password='password')
+        username='LuffyD', first_name='Luffy', last_name='Monkey D', email='luffy@gmail.com', previewImageUrl="https://i.pinimg.com/originals/5e/3a/a5/5e3aa558b3b5211cdf676605c8023805.png", password='password')
     jb = User(
-        username='Jeebz', first_name='JB', last_name='Kam', email='jb@aa.io', previewImageUrl="https://e7.pngegg.com/pngimages/471/1009/png-clipart-lion-graphy-lion-mammal-animals.png", password='password')
+        username='SasukeUch', first_name='Sasuke', last_name='Uchiha', email='sasuke@gmail.com', previewImageUrl="https://2.bp.blogspot.com/-ygcEFx9BXd0/V5zpONow77I/AAAAAAAAHMk/U4o5N9fDeTcNXf4cd50BsHcZl1W5PnqfQCLcB/s1600/3982895-0948645287-Sasuk.jpg", password='password2')
 
     dc = User(
-        username='DanielCheong', first_name='Daniel', last_name='Cheong', email='DanielCheong@aa.io', previewImageUrl="https://i.pinimg.com/originals/dd/e1/af/dde1af87cd468186def4eb68f899f13a.png", password='password')
+        username='JB', first_name='Jeebz', last_name='Kam', email='JB@gmail.com', previewImageUrl="https://pbs.twimg.com/profile_images/1564953421488193537/9b7QYNGg_400x400.jpg", password='password3')
     pr = User(
-        username='PeteRowbottom',first_name='Pete', last_name='Rowbottom', email='PeteRowbottom@aa.io', previewImageUrl="https://i.pinimg.com/originals/cd/de/69/cdde693cbccc4821f0636f1900ebf5d7.png", password='password')
+        username='Raphael',first_name='Raphael', last_name='Yohannes', email='raphael@gmail.com', previewImageUrl="https://i.pinimg.com/originals/53/85/cf/5385cfbaf56eb8d374606aefce52d281.jpg", password='passwor4')
     jgl = User(
-        username='JorgeGuadalupeLizarrága', first_name='Jorge', last_name='Guadalupe-Lizarrága', email='JorgeGuadalupeLizarrága@aa.io', previewImageUrl="https://w7.pngwing.com/pngs/725/70/png-transparent-zebra-zebra-horse-white-mammal-thumbnail.png", password='password')
+        username='JohnWick', first_name='John', last_name='Wick', email='babayaga@gmail.com', previewImageUrl="https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F6%2F2022%2F07%2F15%2FKeanu-Reeves-John-Wick-071522-2.jpg", password='password5')
     ff = User(
-        username='FabianFortmann', first_name='Fabian', last_name='Fortmann', email='FabianFortmann@aa.io', previewImageUrl="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Baseball_%28crop%29_transparent.png/800px-Baseball_%28crop%29_transparent.png", password='password')
+        username='Pho', first_name='Pho', last_name='Tai', email='pho@gmail.com', previewImageUrl="https://phosangs.com/wp-content/uploads/2020/10/sangspho-1-1030x687.jpg", password='password6')
     ag = User(
-        username='AdamGibbs', first_name='Adam', last_name='Gibbs', email='AdamGibbs@aa.io', previewImageUrl="https://www.kindpng.com/picc/m/34-344393_daffy-duck-png-transparent-png.png", password='password')
+        username='Charizard', first_name='Charizard', last_name='Pokemon', email='charizard@gmail.com', previewImageUrl="https://fictionhorizon.com/wp-content/uploads/2020/08/Leon_Charizard.jpg", password='password7')
     ja = User(
-        username='JunjiAoyama', first_name='Junji', last_name='Aoyama', email='JunjiAoyama@aa.io', previewImageUrl="https://i.pinimg.com/736x/0a/19/85/0a1985c684739b55f851ea877a93f35e.jpg", password='password')
+        username='Zelda', first_name='Legend of', last_name='Zelda', email='zelda@gmail.com', previewImageUrl="https://i.pinimg.com/originals/b8/e0/3c/b8e03c82faf317eec2ad0e1e4802d082.jpg", password='password8')
     jbm = User(
-        username='JosBuurmans', first_name='Jos', last_name='Buurmans', email='JosBuurmans@aa.io', previewImageUrl="https://i.pinimg.com/originals/5c/9f/71/5c9f71b2e196ccf71e72eb88b9f75be8.png", password='password')
+        username='JohnLee', first_name='John', last_name='Lee', email='johnlee@gmail.com', previewImageUrl="https://i1.sndcdn.com/artworks-ywcx1pUzUGGvjwmH-BUNWRA-t500x500.jpg", password='password9')
     cf = User(
-        username='ChristophFischer', first_name='Christoph', last_name='Fischer', email='ChristophFischer@aa.io', previewImageUrl="https://oyster.ignimgs.com/mediawiki/apis.ign.com/pokemon-legends/9/99/Cyndaquil.png", password='password')
+        username='Soap', first_name='John', last_name='Mactavish', email='soap@gmail.com', previewImageUrl="https://i5.walmartimages.com/asr/0449934a-07d8-4077-8083-a4030fe004dc_1.3e5c8b2c4f75792583915b786af0e12c.jpeg", password='password10')
     pa = User(
-        username='PeterArn', first_name='Peter', last_name='Arn', email='PeterArn@aa.io', previewImageUrl="https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Earth_Western_Hemisphere_transparent_background.png/1024px-Earth_Western_Hemisphere_transparent_background.png", password='password')
+        username='LarryLobster', first_name='Larry', last_name='Lobster', email='larry@gmail.com', previewImageUrl="https://thespongeclub.com/wp-content/uploads/2022/07/Larry-the-Lobster-Guide.png", password='password11')
     sm = User(
-        username='SkyMatthews', first_name='Sky', last_name='Matthews', email='SkyMatthews@aa.io', previewImageUrl="https://www.kindpng.com/picc/m/326-3267162_apex-legends-octane-apex-legends-octane-png-transparent.png", password='password')
+        username='Batman', first_name='Bruce', last_name='Wayne', email='batman@aa.io', previewImageUrl="https://prd-rteditorial.s3.us-west-2.amazonaws.com/wp-content/uploads/2022/02/28152755/Batman_First_Reviews1.jpg", password='password12')
 
 
     db.session.add(demo)

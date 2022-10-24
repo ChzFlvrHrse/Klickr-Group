@@ -5,7 +5,7 @@ import "./EditComment.css"
 
 // pass in userId and imageId into createComment form so we aren't relying
 // on useParams for imageId (will help when building a comment section for each photo in explore page)
-function EditCommentForm({ imageId, setShowModalEdit, oldComment, submitted, setSubmitted }) {
+function EditCommentForm({ imageId, setShowModalEdit, oldComment}) {
   const dispatch = useDispatch();
   const id = oldComment.id
   const userId = oldComment.userId
@@ -52,6 +52,7 @@ function EditCommentForm({ imageId, setShowModalEdit, oldComment, submitted, set
         <h3 className="edit-comment-title" style={{fontWeight: "300"}}>Edit Comment here:</h3>
         <div>
           <form
+          className="CreateComment-inner"
             onSubmit={handleSubmit2}
             autoComplete="off"
           >
