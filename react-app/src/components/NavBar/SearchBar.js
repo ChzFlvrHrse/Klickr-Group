@@ -84,7 +84,7 @@ const SearchBar = () => {
     );
   } else filteredTagsArray = "";
 
-  if (allUsersArray.length > 0) {
+  if (allUsersArray.length > 0 && allUsersArray.username != null) {
     filteredUsersArray = allUsersArray.filter((filteredValues, index) =>
       filteredValues.username.toLowerCase().includes(searchTitle.toLowerCase())
     );
