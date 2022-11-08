@@ -22,11 +22,11 @@ def seed():
         # Add a truncate command here for every table that will be seeded.
         db.session.commit()
     seed_users()
+    seed_albums()
     seed_images()
     seed_comments()
     seed_likes()
     seed_tags()
-    seed_albums()
     # Add other seed functions here
 
 
