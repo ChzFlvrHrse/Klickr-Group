@@ -1,12 +1,14 @@
 from datetime import datetime
-from .db import db
+from .db import db, environment, SCHEMA, add_prefix_for_prod
 
 
 class Album(db.Model):
     __tablename__ = 'albums'
+    if environment == "production":
+        __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    userId = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+    userId = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
     title = db.Column(db.VARCHAR(100), nullable=False)
     description = db.Column(db.VARCHAR(1000))
     previewImageUrl = db.Column(db.String, nullable=False)

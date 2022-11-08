@@ -1,12 +1,14 @@
 from datetime import datetime
-from .db import db
+from .db import db, environment, SCHEMA, add_prefix_for_prod
 
 class Tag(db.Model):
     __tablename__ = 'tags'
+    if environment == "production":
+        __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    userId = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
-    imageId = db.Column(db.Integer, db.ForeignKey("images.id"), nullable=False)
+    userId = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
+    imageId = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("images.id")), nullable=False)
     body = db.Column(db.VARCHAR(100))
     # timestamps
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
