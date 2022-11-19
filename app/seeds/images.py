@@ -30,7 +30,7 @@ def seed_images():
     image_23 = Image(userId=11, albumId=11, title="Tree and Morning Mist", description="Vast landscape", previewImageUrl="https://combo.staticflickr.com/ap/build/images/sohp/2020-top-25/Tree_and_Morning_Mist_Jos_Buurmans.jpg")
     image_24 = Image(userId=12, albumId=12, title="Desert Beauty", description="Desert shot", previewImageUrl="https://combo.staticflickr.com/ap/build/images/sohp/2020-top-25/Desert_Beauty_Christoph_Fischer.jpg")
     image_25 = Image(userId=13, albumId=13, title="Catwalk am Bahnhof Zürich Oerlikon", description="Where are the cats???", previewImageUrl="https://combo.staticflickr.com/ap/build/images/sohp/2020-top-25/Catwalk_am_Bahnhof_Zurich_Oerlikon_Peter_Arn.jpg")
-    image_26 = Image(userId=14, albumId=1, title="Dawn of Another Day", description="Cool", previewImageUrl="https://combo.staticflickr.com/ap/build/images/sohp/2020-top-25/Dawn_of_Another_Day_Sky_Matthews.jpg")
+    image_26 = Image(userId=14, albumId=14, title="Dawn of Another Day", description="Cool", previewImageUrl="https://combo.staticflickr.com/ap/build/images/sohp/2020-top-25/Dawn_of_Another_Day_Sky_Matthews.jpg")
 
     images = [image_1, image_2, image_3, image_4, image_5, image_6, image_7,image_8,image_9,image_10,image_11,image_12,image_13,image_14,image_15, image_16, image_17, image_18, image_19, image_20, image_21, image_22, image_23, image_24, image_25, image_26]
     for image in images:

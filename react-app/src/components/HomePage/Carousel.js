@@ -119,7 +119,7 @@ export function CarouselSplashPage() {
               />
             </div>
             <div className="ParentofCarouselCaptions">
-              
+
               {imageFiltered && (
                 <div
                   className={
