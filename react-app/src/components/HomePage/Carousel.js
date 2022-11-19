@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 export function CarouselSplashPage() {
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.session.user);
   const [backgroundImageNumber, setBackgroundImageNumber] = useState(0);
   let imageArray;
   let imageFiltered;
@@ -99,8 +100,10 @@ export function CarouselSplashPage() {
       (image) => image.title == images[backgroundImageNumber].title
     );
   }
-  return (
-    <>
+  if (user != null) {
+
+    return (
+      <>
       {images.map((image, index) => {
         return (
           <>
@@ -109,14 +112,14 @@ export function CarouselSplashPage() {
                 index == backgroundImageNumber
                   ? "ActiveImageBackgroundCarousel"
                   : "InactiveImageBackgroundCarousel"
-              }
+                }
               key={index}
-            >
+              >
               <img
                 className="imageCarouselArray"
                 src={image.imageUrl}
                 alt="CarouselImageBackground"
-              />
+                />
             </div>
             <div className="ParentofCarouselCaptions">
 
@@ -124,7 +127,7 @@ export function CarouselSplashPage() {
                 <div
                   className={
                     index == backgroundImageNumber
-                      ? "ActiveImageCaptionsCarousel"
+                    ? "ActiveImageCaptionsCarousel"
                       : "InactiveImageCaptionsCarousel"
                   }
                 >
@@ -152,4 +155,61 @@ export function CarouselSplashPage() {
       })}
     </>
   );
+}
+else {
+  return (
+    <>
+    {images.map((image, index) => {
+      return (
+        <>
+          <div
+            className={
+              index == backgroundImageNumber
+                ? "ActiveImageBackgroundCarousel"
+                : "InactiveImageBackgroundCarousel"
+              }
+            key={index}
+            >
+            <img
+              className="imageCarouselArray"
+              src={image.imageUrl}
+              alt="CarouselImageBackground"
+              />
+          </div>
+          <div className="ParentofCarouselCaptions">
+
+            {imageFiltered && (
+              <div
+                className={
+                  index == backgroundImageNumber
+                  ? "ActiveImageCaptionsCarousel"
+                    : "InactiveImageCaptionsCarousel"
+                }
+              >
+                <div className="BackgroundImageCarouselTitle">
+                  <NavLink
+                    className="BackgroundImageCarouselTitle"
+                    to={`/login`}
+                  >
+                    {image.title}
+                  </NavLink>
+                </div>
+                <div className="BackgroundImageCarouselAuthor">
+                  <NavLink
+                    className="BackgroundImageCarouselAuthor"
+                    to={`/login`}
+                  >
+                    By {image.author}
+                  </NavLink>
+                </div>
+              </div>
+            )}
+          </div>
+        </>
+      );
+    })}
+  </>
+);
+
+}
 }
