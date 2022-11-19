@@ -18,7 +18,7 @@ def all_albums():
 
 # one album
 @album_routes.route('/<int:id>')
-@login_required
+# @login_required
 def get_album(id):
      album = Album.query.get(id)
      if album == None:

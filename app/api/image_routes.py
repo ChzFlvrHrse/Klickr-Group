@@ -79,7 +79,7 @@ def delete_image(id):
 
 # all Comments by imageId
 @image_routes.route('/<int:imageId>/comment', methods=["GET"])
-@login_required
+# @login_required
 def get_commentbyImage(imageId):
     comments = Comment.query.filter_by(imageId=imageId).all()
     if comments == None:
@@ -154,7 +154,7 @@ def delete_comment(imageId, id):
 # Get All Likes by image id (move to images routes)
 # image/comments/imageid
 @image_routes.route('/<int:imageId>/likes')
-@login_required
+# @login_required
 def imageLikes(imageId):
     all_likes = Like.query.filter_by(imageId=imageId).all()
     if all_likes == None:
@@ -206,7 +206,7 @@ def delete_likes(id):
 
 # all tags by imageId
 @image_routes.route('/<int:imageId>/tag', methods=["GET"])
-@login_required
+# @login_required
 def get_tagsbyImage(imageId):
     tags = Tag.query.filter_by(imageId=imageId).all()
     if tags == None:
