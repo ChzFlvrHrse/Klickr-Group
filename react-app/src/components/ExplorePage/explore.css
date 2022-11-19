@@ -159,3 +159,8 @@
     color: tomato;
     width: 100%;
 }
+
+.flexRow {
+    display: flex;
+    flex-direction: row;
+}

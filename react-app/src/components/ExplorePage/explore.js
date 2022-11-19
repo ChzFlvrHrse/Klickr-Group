@@ -67,18 +67,23 @@ const GetAllImages = () => {
     return (
       <div className="explore-container">
         <div className="images-container">
-          <h2 className="explore-title">
+          <h2 className="explore-title flexRow">
             <button
-              className="toggleResultsSearch"
+            className="toggleResultsSearch"
               onClick={() => {
                 setReturnState(!returnState);
               }}
             >
-              {returnState == true ? (
                 <div>Explore Images</div>
-              ) : (
+
+            </button>
+            <button
+              className="toggleResultsInactiveSearch"
+              onClick={() => {
+                setReturnState(!returnState);
+              }}
+            >
                 <div>Explore Albums</div>
-              )}
             </button>
           </h2>
           <div className="images-wrapper">
@@ -180,18 +185,23 @@ const GetAllImages = () => {
     return (
       <div className="explore-container">
         <div className="images-container">
-          <h2 className="explore-title">
+        <h2 className="explore-title flexRow">
+            <button
+            className="toggleResultsInactiveSearch"
+              onClick={() => {
+                setReturnState(!returnState);
+              }}
+            >
+                <div>Explore Images</div>
+
+            </button>
             <button
               className="toggleResultsSearch"
               onClick={() => {
                 setReturnState(!returnState);
               }}
             >
-              {returnState == true ? (
-                <div>Explore Images</div>
-              ) : (
                 <div>Explore Albums</div>
-              )}
             </button>
           </h2>
           <div className="images-wrapper">

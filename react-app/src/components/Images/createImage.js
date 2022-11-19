@@ -86,8 +86,7 @@ export default function CreateImageForm() {
   useEffect(() => {
     const albumErrors = [];
 
-    if (!albumTitle)
-      albumErrors.push("Please provide a title for album");
+    if (!albumTitle) albumErrors.push("Please provide a title for album");
     if (!albumDescription) albumErrors.push("Please provide a description");
     if (!albumPreviewImageUrl)
       albumErrors.push("Please provide a previewImage");
@@ -153,20 +152,24 @@ export default function CreateImageForm() {
         <div className="background-image">
           <div className="Whole-container">
             <div className="Image-Container">
-              <h2 className="explore-title">
-                <button
-                  className="toggleResultsSearch"
-                  onClick={() => {
-                    setReturnState(!returnState);
-                  }}
-                >
-                  {returnState == true ? (
-                    <div>Upload Image</div>
-                  ) : (
-                    <div>Upload Album</div>
-                  )}
-                </button>
-              </h2>
+                <h2 className="explore-title flexRow">
+                  <button
+                    className="toggleResultsSearch"
+                    onClick={() => {
+                      setReturnState(!returnState);
+                    }}
+                  >
+                    <div>Create Image</div>
+                  </button>
+                  <button
+                    className="toggleResultsInactiveSearch"
+                    onClick={() => {
+                      setReturnState(!returnState);
+                    }}
+                  >
+                    <div>Create Album</div>
+                  </button>
+                </h2>
               <h2 className="header-message">
                 You can upload 1000 more photos.
               </h2>
@@ -177,7 +180,9 @@ export default function CreateImageForm() {
                 {hasSubmitted && errors.length > 0 && (
                   <ul className="errors-list">
                     {errors.map((error) => (
-                      <li className="upload-img-errors-list" key={error}>{error}</li>
+                      <li className="upload-img-errors-list" key={error}>
+                        {error}
+                      </li>
                     ))}
                   </ul>
                 )}
@@ -250,20 +255,24 @@ export default function CreateImageForm() {
         <div className="background-image">
           <div className="Whole-container">
             <div className="Image-Container">
-              <h2 className="explore-title">
-                <button
-                  className="toggleResultsSearch"
-                  onClick={() => {
-                    setReturnState(!returnState);
-                  }}
-                >
-                  {returnState == true ? (
-                    <div>Upload Image</div>
-                  ) : (
-                    <div>Upload Album</div>
-                  )}
-                </button>
-              </h2>
+            <h2 className="explore-title flexRow">
+                  <button
+                    className="toggleResultsInactiveSearch"
+                    onClick={() => {
+                      setReturnState(!returnState);
+                    }}
+                  >
+                    <div>Create Image</div>
+                  </button>
+                  <button
+                    className="toggleResultsSearch"
+                    onClick={() => {
+                      setReturnState(!returnState);
+                    }}
+                  >
+                    <div>Create Album</div>
+                  </button>
+                </h2>
               <h2 className="header-message">
                 You can upload 1000 more albums.
               </h2>
@@ -274,7 +283,9 @@ export default function CreateImageForm() {
                 {hasSubmitted && albumErrors.length > 0 && (
                   <ul className="errors-list">
                     {albumErrors.map((error) => (
-                      <li className="upload-img-errors-list" key={error}>{error}</li>
+                      <li className="upload-img-errors-list" key={error}>
+                        {error}
+                      </li>
                     ))}
                   </ul>
                 )}
