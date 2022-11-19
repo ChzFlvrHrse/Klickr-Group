@@ -421,7 +421,7 @@ const SearchBar = () => {
           {/* search bar return container */}
           <div
             className={
-              searchTitle.length ? "SearchBarContainer" : "HiddenResult"
+              searchTitle.length ? "SearchBarContainerLoggedOut" : "HiddenResult"
             }
           >
             {/* search return map */}
