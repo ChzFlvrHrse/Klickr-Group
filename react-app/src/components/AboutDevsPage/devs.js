@@ -6,7 +6,7 @@ import NatePic from '../../icons/Nate-Profile-Image.jpeg'
 import defaultPic from '../../icons/default-profile-image.jpeg'
 import githubIcon from '../../icons/githubIcon.png'
 import linkedIcon from '../../icons/linkedin-icon.png'
-import KeanenPic from '../../icons/Keanen Selfie.jpg'
+import KeanenPic from '../../icons/Keanen-profile-img.png'
 
 export function AboutDevs() {
     return (
