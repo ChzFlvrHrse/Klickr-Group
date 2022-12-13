@@ -9,6 +9,9 @@ import linkedIcon from '../../icons/linkedin-icon.png'
 import KeanenPic from '../../icons/Keanen-profile-img.png'
 
 export function AboutDevs() {
+
+    // TEST RENDER DEPLOYMENT
+
     return (
         <div className="about-devs-container">
             <div className="about-devs-wrapper">
