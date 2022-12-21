@@ -2,7 +2,7 @@ Welcome to the Klickr_Clone!
 
 Klickr Project is a clone of Flickr that is centered around sharing images and looking at images relatable to you. Users can browse images to find inspiration for themselves or to use images for personal projects.
 
-Link to test out website: https://klickr-group.herokuapp.com/
+Link to test out website: [Klickr](https://klickr.onrender.com/)
 
 ## Tech Stack
  Frontend:
