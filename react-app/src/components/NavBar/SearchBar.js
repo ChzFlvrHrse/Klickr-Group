@@ -9,6 +9,7 @@ import { getImagesThunk } from "../../store/image";
 import { getAllUsersThunk } from "../../store/AllUsers";
 
 import { getAllTagsThunk } from "../../store/tags";
+
 import "./SearchBar.css";
 import { useDispatch, useSelector } from "react-redux";
 
