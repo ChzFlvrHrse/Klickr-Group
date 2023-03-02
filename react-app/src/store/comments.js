@@ -93,19 +93,11 @@ const initialState = {}
 export default function reducer(state = initialState, action) {
     switch (action.type) {
       case ALL_COMMENTS: {
-        // const newState = {}
         const newState = {...action.comments}
-        // action.image.likes.forEach((like) => {
-        //     newState[like.id] = like
-        // })
         return newState
       }
       case IMAGE_COMMENTS: {
-        // const newState = {}
         const newState = {...action.imageId}
-        // action.image.likes.forEach((like) => {
-        //     newState[like.id] = like
-        // })
         return newState
       }
       case CREATE_COMMENT: {
@@ -120,7 +112,6 @@ export default function reducer(state = initialState, action) {
       }
       case DELETE_COMMENT: {
         const newState = { ...state }
-        // delete newState[action.id]
         delete newState[action.id]
         return newState
       }
